@@ -3,12 +3,6 @@
  *
  * This generated file contains a sample Kotlin application project to get you started.
  */
-//buildscript {
-//    ext {
-//        set("vertxVersion", "4.0.0-milestone4")
-//        set("jacksonVersion", "2.10.3")
-//    }
-//}
 import java.net.URI
 
 plugins {
@@ -32,10 +26,14 @@ dependencies {
     val vertxVersion = "4.0.0-milestone4"
     val jacksonVersion = "2.10.3"
     val teamCityRestClientVersion = "1.7.27"
+    val guiceVersion = "4.2.3"
     implementation("io.vertx:vertx-web-client:$vertxVersion")
     implementation("io.vertx:vertx-core:$vertxVersion")
     implementation("io.vertx:vertx-web:$vertxVersion")
     implementation("io.vertx:vertx-lang-kotlin:$vertxVersion")
+
+    implementation("com.google.inject:guice:$guiceVersion")
+    implementation("javax.inject:javax.inject:1")
 
     implementation("com.fasterxml.jackson.core:jackson-core:$jacksonVersion")
     implementation("com.fasterxml.jackson.core:jackson-databind:$jacksonVersion")

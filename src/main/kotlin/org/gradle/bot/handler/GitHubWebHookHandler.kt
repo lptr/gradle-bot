@@ -9,6 +9,8 @@ import org.gradle.bot.model.GitHubEvent
 import org.gradle.bot.model.IssueCommentEvent
 import org.gradle.bot.model.PullRequestEvent
 import java.util.logging.Logger
+import javax.inject.Inject
+import javax.inject.Singleton
 
 val logger: Logger = Logger.getLogger(MainVerticle::class.java.name)
 
@@ -20,7 +22,8 @@ val eventTypeToEventClassMap = mapOf(
         "issue_comment" to IssueCommentEvent::class.java
 )
 
-class GitHubWebHookHandler : Handler<RoutingContext> {
+@Singleton
+class GitHubWebHookHandler @Inject constructor() : Handler<RoutingContext> {
     override fun handle(context: RoutingContext?) {
         logger.info("Received webhook to ${GitHubWebHookHandler::class.java.simpleName}")
 

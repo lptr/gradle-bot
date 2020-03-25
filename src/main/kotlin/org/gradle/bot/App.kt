@@ -3,17 +3,23 @@
  */
 package org.gradle.bot
 
+import com.google.inject.AbstractModule
+import com.google.inject.Guice
 import io.vertx.core.AbstractVerticle
-import io.vertx.core.Launcher
 import io.vertx.core.Promise
+import io.vertx.core.Verticle
+import io.vertx.core.Vertx
 import io.vertx.core.http.HttpServerResponse
 import io.vertx.core.json.Json
+import io.vertx.core.spi.VerticleFactory
 import io.vertx.ext.web.Router
 import io.vertx.ext.web.handler.BodyHandler
 import io.vertx.kotlin.core.http.httpServerOptionsOf
 import org.gradle.bot.handler.GitHubWebHookHandler
 import org.gradle.bot.handler.TeamCityWebHookHandler
+import java.util.concurrent.Callable
 import java.util.logging.Logger
+import javax.inject.Inject
 
 
 data class Country(val name: String, val code: String)
@@ -21,13 +27,35 @@ data class Country(val name: String, val code: String)
 data class Island(val name: String, val country: Country)
 
 fun main() {
-    Launcher.main(arrayOf("run", MainVerticle::class.java.name,
-            "--launcher-class=${MainVerticle::class.java.name}"))
+    val vertx = Vertx.vertx()
+    vertx.registerVerticleFactory(GuiceVerticleFactory())
+    vertx.deployVerticle(MainVerticle::class.java.name)
 }
 
-@Suppress("unused")
-class MainVerticle : AbstractVerticle() {
+class GuiceVerticleFactory : VerticleFactory {
+    private val injector = Guice.createInjector(GradleBotAppModule())
+
+    override fun createVerticle(verticleName: String?, classLoader: ClassLoader?, promise: Promise<Callable<Verticle>>?) {
+        try {
+            promise!!.complete(Callable { injector.getInstance(MainVerticle::class.java) })
+        } catch (e: Throwable) {
+            promise!!.fail(e)
+        }
+    }
+
+    override fun prefix() = MainVerticle::class.java.simpleName
+}
+
+class GradleBotAppModule : AbstractModule() {
+    override fun configure() {
+    }
+}
+
+
+class MainVerticle @Inject constructor(private val gitHubWebHookHandler: GitHubWebHookHandler,
+                                       private val teamCityWebHookHandler: TeamCityWebHookHandler) : AbstractVerticle() {
     private val logger: Logger = Logger.getLogger(MainVerticle::class.java.name)
+
     override fun start(startFuture: Promise<Void>) {
         val router = createRouter()
 
@@ -46,8 +74,8 @@ class MainVerticle : AbstractVerticle() {
 
     private fun createRouter() = Router.router(vertx).apply {
         route("/*").handler(BodyHandler.create())
-        post("/github").handler(GitHubWebHookHandler())
-        post("/teamcity").handler(TeamCityWebHookHandler())
+        post("/github").handler(gitHubWebHookHandler)
+        post("/teamcity").handler(teamCityWebHookHandler)
         errorHandler(500) { it?.failure()?.printStackTrace() }
     }
 
