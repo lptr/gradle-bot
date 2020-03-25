@@ -1,5 +1,5 @@
-import java.net.URI
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
+import java.net.URI
 
 plugins {
     id("org.jetbrains.kotlin.jvm") version "1.3.70"
@@ -70,8 +70,10 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>() {
 }
 
 tasks.named("run", JavaExec::class.java) {
-    args = listOf("run", "org.gradle.bot.MainVerticle",
-            "--launcher-class=org.gradle.bot.MainVerticle")
-    main = "io.vertx.core.Launcher"
+    main = "org.gradle.bot.AppKt"
+}
+
+application {
+    mainClassName = "org.gradle.bot.AppKt"
 }
 

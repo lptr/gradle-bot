@@ -6,6 +6,7 @@ package org.gradle.bot
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.google.inject.AbstractModule
 import com.google.inject.Guice
+import com.google.inject.Injector
 import com.google.inject.Provides
 import io.vertx.core.AbstractVerticle
 import io.vertx.core.Promise
@@ -32,14 +33,13 @@ val logger: Logger = LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME)
 
 fun main() {
     val vertx = Vertx.vertx()
+    val injector = Guice.createInjector(GradleBotAppModule(vertx))
     vertx.exceptionHandler { logger.error("", it) }
-    vertx.registerVerticleFactory(GuiceVerticleFactory())
+    vertx.registerVerticleFactory(GuiceVerticleFactory(injector))
     vertx.deployVerticle(MainVerticle::class.java.name)
 }
 
-class GuiceVerticleFactory : VerticleFactory {
-    private val injector = Guice.createInjector(GradleBotAppModule())
-
+class GuiceVerticleFactory(private val injector: Injector) : VerticleFactory {
     override fun createVerticle(verticleName: String?, classLoader: ClassLoader?, promise: Promise<Callable<Verticle>>?) {
         try {
             promise!!.complete(Callable { injector.getInstance(MainVerticle::class.java) })
@@ -52,8 +52,9 @@ class GuiceVerticleFactory : VerticleFactory {
     override fun prefix(): String = MainVerticle::class.java.simpleName
 }
 
-class GradleBotAppModule : AbstractModule() {
+class GradleBotAppModule(private val vertx: Vertx) : AbstractModule() {
     override fun configure() {
+        bind(Vertx::class.java).toInstance(vertx)
     }
 
     @Inject
