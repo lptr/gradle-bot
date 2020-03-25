@@ -43,7 +43,10 @@ dependencies {
     implementation("org.eclipse.mylyn.github:org.eclipse.mylyn.github.core:5.7.0.202003110725-r")
     implementation("org.jetbrains.teamcity:teamcity-rest-client:$teamCityRestClientVersion")
     implementation("com.jcabi:jcabi-github:0.41")
-
+    // Use logback logging
+    implementation("org.apache.logging.log4j:log4j-api:2.11.1")
+    implementation("ch.qos.logback:logback-classic:1.2.3")
+    implementation("ch.qos.logback:logback-core:1.2.3")
 
     // Align versions of all Kotlin components
     implementation(platform("org.jetbrains.kotlin:kotlin-bom"))

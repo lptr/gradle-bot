@@ -17,6 +17,8 @@ import io.vertx.ext.web.handler.BodyHandler
 import io.vertx.kotlin.core.http.httpServerOptionsOf
 import org.gradle.bot.handler.GitHubWebHookHandler
 import org.gradle.bot.handler.TeamCityWebHookHandler
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import java.util.concurrent.Callable
 import java.util.logging.Logger
 import javax.inject.Inject
@@ -32,6 +34,9 @@ fun main() {
     vertx.deployVerticle(MainVerticle::class.java.name)
 }
 
+@Suppress("unused")
+class MainVerticle : AbstractVerticle() {
+    private val logger: Logger = LoggerFactory.getLogger(MainVerticle::class.java.name)
 class GuiceVerticleFactory : VerticleFactory {
     private val injector = Guice.createInjector(GradleBotAppModule())
 
