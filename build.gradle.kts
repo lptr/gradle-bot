@@ -27,6 +27,8 @@ dependencies {
     val jacksonVersion = "2.10.3"
     val teamCityRestClientVersion = "1.7.27"
     val guiceVersion = "4.2.3"
+    val logbackVersion = "1.2.3"
+    val graphQLJavaVersion = "14.0"
     implementation("io.vertx:vertx-web-client:$vertxVersion")
     implementation("io.vertx:vertx-core:$vertxVersion")
     implementation("io.vertx:vertx-web:$vertxVersion")
@@ -44,9 +46,10 @@ dependencies {
     implementation("org.jetbrains.teamcity:teamcity-rest-client:$teamCityRestClientVersion")
     implementation("com.jcabi:jcabi-github:0.41")
     // Use logback logging
-    implementation("org.apache.logging.log4j:log4j-api:2.11.1")
-    implementation("ch.qos.logback:logback-classic:1.2.3")
-    implementation("ch.qos.logback:logback-core:1.2.3")
+    implementation("ch.qos.logback:logback-classic:$logbackVersion")
+    implementation("ch.qos.logback:logback-core:$logbackVersion")
+
+    implementation("com.graphql-java:graphql-java:$graphQLJavaVersion")
 
     // Align versions of all Kotlin components
     implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
