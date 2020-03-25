@@ -28,9 +28,11 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 val objectMapper: ObjectMapper = ObjectMapper()
+val logger: Logger = LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME)
 
 fun main() {
     val vertx = Vertx.vertx()
+    vertx.exceptionHandler { logger.error("", it) }
     vertx.registerVerticleFactory(GuiceVerticleFactory())
     vertx.deployVerticle(MainVerticle::class.java.name)
 }
@@ -42,6 +44,7 @@ class GuiceVerticleFactory : VerticleFactory {
         try {
             promise!!.complete(Callable { injector.getInstance(MainVerticle::class.java) })
         } catch (e: Throwable) {
+            logger.error("", e)
             promise!!.fail(e)
         }
     }
