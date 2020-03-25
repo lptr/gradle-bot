@@ -2,6 +2,17 @@ package org.gradle.bot.model
 
 import com.fasterxml.jackson.annotation.JsonProperty
 
+// https://developer.github.com/v4/enum/commentauthorassociation/
+enum class AuthorAssociation(val admin: Boolean) {
+    COLLABORATOR(true),
+    CONTRIBUTOR(false),
+    FIRST_TIMER(false),
+    FIRST_TIME_CONTRIBUTOR(false),
+    MEMBER(true),
+    NONE(false),
+    OWNER(true)
+}
+
 interface GitHubEvent {
     var repository: Repository
     var organization: Organization

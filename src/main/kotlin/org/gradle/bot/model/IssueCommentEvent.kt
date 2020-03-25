@@ -268,7 +268,7 @@ data class IssueCommentEvent(
             @JsonProperty("assignees")
             var assignees: List<User>,
             @JsonProperty("author_association")
-            var authorAssociation: String,
+            var authorAssociation: AuthorAssociation,
             @JsonProperty("body")
             var body: String,
             @JsonProperty("closed_at")
@@ -344,7 +344,7 @@ data class IssueLabel(
 
 data class IssueComment(
         @JsonProperty("author_association")
-        var authorAssociation: String,
+        var authorAssociation: AuthorAssociation,
         @JsonProperty("body")
         var body: String,
         @JsonProperty("created_at")

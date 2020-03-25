@@ -28,7 +28,6 @@ class GitHubWebHookHandler @Inject constructor() : Handler<RoutingContext> {
         logger.info("Received webhook to ${GitHubWebHookHandler::class.java.simpleName}")
 
         context.parsePayloadEvent()?.apply {
-            println(this)
         } ?: logger.info("Received invalid GitHub webhook, discard.")
     }
 }
