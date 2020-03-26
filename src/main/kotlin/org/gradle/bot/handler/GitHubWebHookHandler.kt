@@ -170,11 +170,16 @@ class IssueCommentEventHandler @Inject constructor(private val gitHubClient: Git
 }
 
 @Singleton
-class GitHubWebHookHandler @Inject constructor(private val eventHandlers: List<GitHubEventHandler<*>>) : Handler<RoutingContext> {
+class GitHubWebHookHandler @Inject constructor(
+//        private val eventHandlers: List<GitHubEventHandler<*>>,
+                                               private val issueCommentEventHandler: IssueCommentEventHandler) : Handler<RoutingContext> {
     override fun handle(context: RoutingContext?) {
         logger.info("Received webhook to ${GitHubWebHookHandler::class.java.simpleName}")
 
         context.parsePayloadEvent()?.apply {
+            if (this is IssueCommentEvent) {
+                issueCommentEventHandler.handle(this)
+            }
         } ?: logger.info("Received invalid GitHub webhook, discard.")
     }
 }

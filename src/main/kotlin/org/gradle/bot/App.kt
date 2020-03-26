@@ -42,7 +42,14 @@ fun main() {
 class GuiceVerticleFactory(private val injector: Injector) : VerticleFactory {
     override fun createVerticle(verticleName: String?, classLoader: ClassLoader?, promise: Promise<Callable<Verticle>>?) {
         try {
-            promise!!.complete(Callable { injector.getInstance(MainVerticle::class.java) })
+            promise!!.complete(Callable {
+                try {
+                    injector.getInstance(MainVerticle::class.java)
+                } catch (e: Throwable) {
+                    logger.error("", e)
+                    throw e
+                }
+            })
         } catch (e: Throwable) {
             logger.error("", e)
             promise!!.fail(e)
