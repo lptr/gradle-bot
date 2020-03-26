@@ -35,7 +35,7 @@ class GitHubClient @Inject constructor(vertx: Vertx) {
     fun comment(subjectId: String, commentBody: String): Future<*> {
         val mutation = """
 mutation {            
-  addComment(input:{subjectId:"MDExOlB1bGxSZXF1ZXN0MzkzNjEwMjA2",body:"${commentBody.replace("\n", "\\n")}"}) {
+  addComment(input:{subjectId:"$subjectId",body:"${commentBody.replace("\n", "\\n")}"}) {
     clientMutationId
     subject {
       id
