@@ -15,17 +15,16 @@ import javax.inject.Singleton
 class TeamCityClient @Inject constructor(private val vertx: Vertx) {
     private val logger = LoggerFactory.getLogger(javaClass)
     private val teamCityRestClient by lazy {
-        val token = System.getenv("TEAMCITY_ACCESS_TOKEN") ?: throw IllegalStateException("Must set env variable GITHUB_ACCESS_TOKEN")
-        TeamCityInstanceFactory.tokenAuth(
-                "https://builds.gradle.org",
-                token)
+        val token = System.getenv("TEAMCITY_ACCESS_TOKEN") ?: throw IllegalStateException("Must set env variable TEAMCITY_ACCESS_TOKEN")
+        TeamCityInstanceFactory.tokenAuth("https://builds.gradle.org", token)
     }
 
     fun triggerBuild(stage: BuildStage, branchName: String): Future<Build> {
         return vertx.executeBlocking { promise: Promise<Build> ->
-            val buildConfiguration = teamCityRestClient.buildConfiguration(BuildConfigurationId("Gradle_Check_CompileAll"))
             try {
-                promise.complete(buildConfiguration.runBuild(logicalBranchName = branchName))
+                val buildConfiguration = teamCityRestClient.buildConfiguration(BuildConfigurationId(stage.buildTypeId))
+                val build = buildConfiguration.runBuild(logicalBranchName = branchName)
+                promise.complete(build)
             } catch (e: Throwable) {
                 logger.error("Error when triggering $stage on $branchName", e)
                 promise.fail(e)
