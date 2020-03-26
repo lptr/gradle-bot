@@ -10,7 +10,11 @@ enum class AuthorAssociation(val admin: Boolean) {
     FIRST_TIME_CONTRIBUTOR(false),
     MEMBER(true),
     NONE(false),
-    OWNER(true)
+    OWNER(true);
+
+    companion object {
+        fun isAdmin(rawValue: String) = valueOf(rawValue).admin
+    }
 }
 
 interface GitHubEvent {

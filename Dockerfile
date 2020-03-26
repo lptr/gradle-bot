@@ -6,9 +6,9 @@ RUN mkdir /gradle-bot
 
 COPY build/install/gradle-bot /gradle-bot
 
-ENV GITHUB_TOKEN="" \
+ENV GITHUB_ACCESS_TOKEN="" \
     GITHUB_WEBHOOK_SECRET="" \
-    TEAMCITY_TOKEN=""
+    TEAMCITY_ACCESS_TOKEN=""
 
 WORKDIR /gradle-bot
 
