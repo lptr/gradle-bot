@@ -113,8 +113,8 @@ Sorry I don't understand what you said, please type `@${gitHubClient.whoAmI()} h
     fun helpMessage() = """Currently I support the following commands:
         
 - `@${gitHubClient.whoAmI()} test {BuildStage} plz` to trigger a build
-  - e.g. `${gitHubClient.whoAmI()} test SanityCheck plz`
-  - {BuildStage} can be `SanityCheck`/`CompileAll`/`QuickFeedbackLinux`/`QuickFeedback`/`ReadyForMerge`/`ReadyForNightly`/`ReadyForRelease`
+  - e.g. `@${gitHubClient.whoAmI()} test SanityCheck plz`
+  - `SanityCheck`/`CompileAll`/`QuickFeedbackLinux`/`QuickFeedback`/`ReadyForMerge`/`ReadyForNightly`/`ReadyForRelease` are supported
   - `SanityCheck` can be abbreviated as `SC`, `ReadyForMerge` as `RFM`, etc.
 - `@${gitHubClient.whoAmI()} help` to display this message
 """
