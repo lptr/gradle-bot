@@ -6,6 +6,7 @@ import org.gradle.bot.client.GitHubClient
 import org.gradle.bot.client.TeamCityClient
 import org.gradle.bot.model.AuthorAssociation
 import org.gradle.bot.model.BuildStage
+import org.gradle.bot.model.CommitStatus
 import org.gradle.bot.model.PullRequestWithComments
 import org.jetbrains.teamcity.rest.Build
 
@@ -56,6 +57,7 @@ class BotNotificationComment(override val id: Int, override val body: String) : 
 class PullRequestContext(private val gitHubClient: GitHubClient,
                          private val teamCityClient: TeamCityClient,
                          private val comments: List<PullRequestComment>,
+                         private val repoName:String,
                          private val branchName: String,
                          private val subjectId: String,
                          private val headRefSha: String) {
@@ -97,6 +99,10 @@ class PullRequestContext(private val gitHubClient: GitHubClient,
         } else {
             teamCityClient.findBuild(commentWithBuildId.getMetadata().teamCityBuildId!!)
         }
+    }
+
+    fun publishPendingStatuses(dependencies: List<String>) {
+        gitHubClient.createCommitStatus(repoName, headRefSha, dependencies, CommitStatus.PENDING)
     }
 }
 

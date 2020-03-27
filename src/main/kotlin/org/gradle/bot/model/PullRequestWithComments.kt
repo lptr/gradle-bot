@@ -4,42 +4,185 @@ import com.fasterxml.jackson.annotation.JsonProperty
 
 
 /*
+
+query {
+  repository(owner:"gradle", name: "gradle") {
+    pullRequest(number: 12595) {
+      body
+
+      url
+
+      headRef {
+        target {
+          oid
+        }
+        repository {
+          isFork
+          owner {
+            login
+          }
+          name
+        }
+        name
+      }
+      baseRefName
+      comments(first: 100) {
+        nodes {
+          databaseId
+          author {
+            login
+          }
+          authorAssociation
+          body
+        }
+      }
+      commits(last: 1) {
+          nodes {
+            commit {
+              commitUrl
+              oid
+              status {
+                state
+
+                contexts {
+                  state
+                  targetUrl
+                  description
+                  context
+                }
+              }
+            }
+          }
+        }
+    }
+  }
+}
+
+
 {
   "data": {
     "repository": {
       "pullRequest": {
-        "body": "This enhance docs around `ivy-component-metadata-rule` to prevent breaking Maven based modules\r\n\r\nIf check for `IvyModuleDescriptor` is not in place, the rule will fail with maven based modules causing issues such as:\r\n\r\n```\r\nExecution failed for task ':compileJava'.\r\n> Could not resolve all files for configuration ':compileClasspath'.\r\n   > Could not resolve com.google.guava:guava:19.0.\r\n     Required by:\r\n         project : > foo:my-core:1.0.0\r\n      > Cannot choose between the following variants of com.google.guava:guava:19.0:\r\n          - apiElements\r\n          - compile\r\n          - runtime\r\n        All of them match the consumer attributes:\r\n          - Variant 'apiElements' capability com.google.guava:guava:19.0:\r\n              - Unmatched attributes:\r\n                  - Required org.gradle.dependency.bundling 'external' but no value provided.\r\n``` \r\n\r\n### Contributor Checklist\r\n- [x] [Review Contribution Guidelines](https://github.com/gradle/gradle/blob/master/CONTRIBUTING.md)\r\n- [x] Make sure that all commits are [signed off](https://git-scm.com/docs/git-commit#git-commit---signoff) to indicate that you agree to the terms of [Developer Certificate of Origin](https://developercertificate.org/).\r\n- [x] Check [\"Allow edit from maintainers\" option](https://help.github.com/articles/allowing-changes-to-a-pull-request-branch-created-from-a-fork/) in pull request so that additional changes can be pushed by Gradle team\r\n- [ ] Provide integration tests (under `<subproject>/src/integTest`) to verify changes from a user perspective\r\n- [ ] Provide unit tests (under `<subproject>/src/test`) to verify logic\r\n- [ ] Update User Guide, DSL Reference, and Javadoc for public-facing changes\r\n- [ ] Ensure that tests pass locally: `./gradlew <changed-subproject>:check`\r\n\r\n### Gradle Core Team Checklist\r\n- [ ] Verify design and implementation \r\n- [ ] Verify test coverage and CI build status\r\n- [ ] Verify documentation\r\n- [ ] Recognize contributor in release notes\r\n",
+        "body": "on a failing build caused by instant execution problems, build failure details problems\r\non a failing build *not* caused by instant execution problems, warning log details problems\r\non a succeeding build, warning log details problems\r\n\r\nin all cases, generate the HTML report if any problem\r\n\r\n----\r\n\r\nMost of the impact on annotated tests can be seen in https://github.com/gradle/gradle/pull/12505 which is based on this very PR.",
+        "url": "https://github.com/gradle/gradle/pull/12595",
         "headRef": {
           "target": {
-            "oid": "b1b94ef77d1b41565c29c1df2b8df2c1fab44aa4"
+            "oid": "2e436a09b8f0b614ee842b18aab89c245addb681"
           },
           "repository": {
-            "isFork": true,
+            "isFork": false,
             "owner": {
-              "login": "rpalcolea"
+              "login": "gradle"
             },
             "name": "gradle"
           },
-          "name": "ivy-component-metadata-rule/check-for-IvyModuleDescriptor"
+          "name": "eskatos/ie/rework-error-problem-handling"
         },
         "baseRefName": "master",
         "comments": {
           "nodes": [
             {
-              "databaseId": 602524371,
+              "databaseId": 604667869,
               "author": {
-                "login": "ljacomet"
+                "login": "eskatos"
               },
               "authorAssociation": "MEMBER",
-              "body": "And in addition, please target `master` for this instead of `release`."
+              "body": "@adammurdoch, @bamboo, this is ready for another round\r\n\r\nPlease consider trying it out locally to experience the error/problems reporting."
             },
             {
-              "databaseId": 602711239,
+              "databaseId": 604713694,
               "author": {
-                "login": "rpalcolea"
+                "login": "eskatos"
               },
-              "authorAssociation": "CONTRIBUTOR",
-              "body": "> And in addition, please target `master` for this instead of `release`.\r\n\r\nHey @ljacomet , added the comments and changed it to target `master`."
+              "authorAssociation": "MEMBER",
+              "body": "False alarm. Turns out it needs a bit more work. There's https://github.com/gradle/gradle/pull/12595#discussion_r398912241 which should also help fix an issue with state discarding vs. `failOnProblems` I just found playing a bit more with it. Moved back to _in progress_.\r\n"
+            }
+          ]
+        },
+        "commits": {
+          "nodes": [
+            {
+              "commit": {
+                "commitUrl": "https://github.com/gradle/gradle/commit/2e436a09b8f0b614ee842b18aab89c245addb681",
+                "oid": "2e436a09b8f0b614ee842b18aab89c245addb681",
+                "status": {
+                  "state": "SUCCESS",
+                  "contexts": [
+                    {
+                      "state": "SUCCESS",
+                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=32991160&buildTypeId=Gradle_Check_BuildDistributions",
+                      "description": "TeamCity build finished",
+                      "context": "Build Distributions (Ready for Merge)"
+                    },
+                    {
+                      "state": "SUCCESS",
+                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=32991056&buildTypeId=Gradle_Check_CompileAll",
+                      "description": "TeamCity build finished",
+                      "context": "Compile All (Quick Feedback - Linux Only)"
+                    },
+                    {
+                      "state": "SUCCESS",
+                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=32991161&buildTypeId=Gradle_Check_Gradleception",
+                      "description": "TeamCity build finished",
+                      "context": "Gradleception - Java8 Linux (Ready for Merge)"
+                    },
+                    {
+                      "state": "SUCCESS",
+                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=32991165&buildTypeId=Gradle_Check_PerformanceTestCoordinator",
+                      "description": "TeamCity build finished",
+                      "context": "Performance Regression Test Coordinator - Linux (Ready for Merge)"
+                    },
+                    {
+                      "state": "SUCCESS",
+                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=32991159&buildTypeId=Gradle_Check_Stage_QuickFeedback_Trigger",
+                      "description": "TeamCity build finished",
+                      "context": "Quick Feedback (Trigger) (Check)"
+                    },
+                    {
+                      "state": "SUCCESS",
+                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=32991108&buildTypeId=Gradle_Check_Stage_QuickFeedbackLinuxOnly_Trigger",
+                      "description": "TeamCity build finished",
+                      "context": "Quick Feedback - Linux Only (Trigger) (Check)"
+                    },
+                    {
+                      "state": "SUCCESS",
+                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=32991316&buildTypeId=Gradle_Check_Stage_ReadyforMerge_Trigger",
+                      "description": "TeamCity build finished",
+                      "context": "Ready for Merge (Trigger) (Check)"
+                    },
+                    {
+                      "state": "SUCCESS",
+                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=32991395&buildTypeId=Gradle_Check_Stage_ReadyforNightly_Trigger",
+                      "description": "TeamCity build finished",
+                      "context": "Ready for Nightly (Trigger) (Check)"
+                    },
+                    {
+                      "state": "SUCCESS",
+                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=32991057&buildTypeId=Gradle_Check_SanityCheck",
+                      "description": "TeamCity build finished",
+                      "context": "Sanity Check (Quick Feedback - Linux Only)"
+                    },
+                    {
+                      "state": "SUCCESS",
+                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=32991163&buildTypeId=Gradle_Check_InstantSmokeTestsJava14",
+                      "description": "TeamCity build finished",
+                      "context": "Smoke Tests with 3rd Party Plugins (instantSmokeTest) - Java14 Linux (Ready for Merge)"
+                    },
+                    {
+                      "state": "SUCCESS",
+                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=32991164&buildTypeId=Gradle_Check_InstantSmokeTestsJava8",
+                      "description": "TeamCity build finished",
+                      "context": "Smoke Tests with 3rd Party Plugins (instantSmokeTest) - Java8 Linux (Ready for Merge)"
+                    },
+                    {
+                      "state": "SUCCESS",
+                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=32991162&buildTypeId=Gradle_Check_SmokeTestsJava14",
+                      "description": "TeamCity build finished",
+                      "context": "Smoke Tests with 3rd Party Plugins (smokeTest) - Java14 Linux (Ready for Merge)"
+                    }
+                  ]
+                }
+              }
             }
           ]
         }
@@ -53,6 +196,8 @@ query {
   repository(owner:"$owner", name: "$name") { 
     pullRequest(number: $number) {
       body 
+      
+      url
       
       headRef {
         target {
@@ -78,11 +223,28 @@ query {
           body
         }
       }
+      commits(last: 1) {
+          nodes {
+            commit {
+              commitUrl
+              oid
+              status {
+                state
+
+                contexts {
+                  state
+                  targetUrl
+                  description
+                  context
+                }
+              }
+            }
+          }
+        }
     }
   }
 }  
 """.trimIndent().replace('\n',' ')
-
 
 data class PullRequestWithComments(
     @JsonProperty("data")
@@ -103,8 +265,12 @@ data class PullRequestWithComments(
                 var body: String,
                 @JsonProperty("comments")
                 var comments: Comments,
+                @JsonProperty("commits")
+                var commits: Commits,
                 @JsonProperty("headRef")
-                var headRef: HeadRef
+                var headRef: HeadRef,
+                @JsonProperty("url")
+                var url: String
             ) {
                 data class Comments(
                     @JsonProperty("nodes")
@@ -124,6 +290,43 @@ data class PullRequestWithComments(
                             @JsonProperty("login")
                             var login: String
                         )
+                    }
+                }
+
+                data class Commits(
+                    @JsonProperty("nodes")
+                    var nodes: List<Node>
+                ) {
+                    data class Node(
+                        @JsonProperty("commit")
+                        var commit: Commit
+                    ) {
+                        data class Commit(
+                            @JsonProperty("commitUrl")
+                            var commitUrl: String,
+                            @JsonProperty("oid")
+                            var oid: String,
+                            @JsonProperty("status")
+                            var status: Status
+                        ) {
+                            data class Status(
+                                @JsonProperty("contexts")
+                                var contexts: List<Context>,
+                                @JsonProperty("state")
+                                var state: String
+                            ) {
+                                data class Context(
+                                    @JsonProperty("context")
+                                    var context: String,
+                                    @JsonProperty("description")
+                                    var description: String,
+                                    @JsonProperty("state")
+                                    var state: String,
+                                    @JsonProperty("targetUrl")
+                                    var targetUrl: String
+                                )
+                            }
+                        }
                     }
                 }
 
@@ -158,3 +361,4 @@ data class PullRequestWithComments(
         }
     }
 }
+

@@ -28,6 +28,7 @@ class TestCommand(private val targetStage: BuildStage, override val sourceCommen
 
     private fun triggerBuild(context: PullRequestContext) {
         context.triggerBuild(targetStage).onSuccess {
+            context.publishPendingStatuses(targetStage.dependencies)
             context.reply(sourceComment,
                     "OK, I've already triggered [${targetStage.fullName} build](${it.getHomeUrl()}) for you.",
                     it.id.stringId)

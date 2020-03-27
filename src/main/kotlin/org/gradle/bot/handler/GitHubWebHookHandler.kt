@@ -67,6 +67,7 @@ class IssueCommentEventHandler @Inject constructor(private val gitHubClient: Git
                     gitHubClient, teamCityClient, it.getComments(gitHubClient.whoAmI()),
                     it.data.repository.pullRequest.headRef.name,
                     event.issue.nodeId,
+                    event.repository.fullName,
                     it.data.repository.pullRequest.headRef.target.oid)
             context.processCommand(event.comment.id)
         }

@@ -1,11 +1,13 @@
 package org.gradle.bot.client
 
+import com.fasterxml.jackson.annotation.JsonProperty
 import io.vertx.core.Future
 import io.vertx.core.Vertx
 import io.vertx.core.buffer.Buffer
 import io.vertx.core.net.ProxyOptions
 import io.vertx.ext.web.client.WebClient
 import io.vertx.ext.web.client.WebClientOptions
+import org.gradle.bot.model.CommitStatus
 import org.gradle.bot.model.PullRequestWithComments
 import org.gradle.bot.model.WhoAmI
 import org.gradle.bot.model.addCommentMutation
@@ -78,5 +80,49 @@ class GitHubClient @Inject constructor(vertx: Vertx) {
 
     private
     fun toQueryJson(query: String) = objectMapper.writeValueAsString(mapOf("query" to query))
+
+    fun createCommitStatus(repoName: String, sha: String, dependencies: List<String>, status: CommitStatus) {
+        // https://developer.github.com/v3/repos/statuses/
+        val url = repoName.split('/').let { "https://api.github.com/repos/${it[0]}/statuses/${it[1]}/$sha" }
+        dependencies.forEach {
+            client.postAbs(url)
+                    .putHeader("Accept", "application/json")
+                    .putHeader("Content-Type", "application/json")
+                    .putHeader("Authorization", authHeader)
+                    .sendBuffer(
+                            Buffer.buffer(
+                                    objectMapper.writeValueAsString(
+                                            CommitStatusObject(it,
+                                                    "TeamCity build finished",
+                                                    status.name.toLowerCase(),
+                                                    "https://builds.gradle.org"))
+                            )
+                    ).onFailure {
+                        logger.error("Error when creating commit status {} to {}", status, url)
+                    }.onSuccess {
+                        logger.info("Successfully created commit status {} to {}", status, url)
+                    }
+        }
+    }
 }
+
+/*
+{
+  "state": "success",
+  "target_url": "https://example.com/build/status",
+  "description": "The build succeeded!",
+  "context": "continuous-integration/jenkins"
+}
+ */
+
+data class CommitStatusObject(
+        @JsonProperty("context")
+        var context: String,
+        @JsonProperty("description")
+        var description: String,
+        @JsonProperty("state")
+        var state: String,
+        @JsonProperty("target_url")
+        var targetUrl: String
+)
 

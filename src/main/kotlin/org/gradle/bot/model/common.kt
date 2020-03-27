@@ -17,6 +17,13 @@ enum class AuthorAssociation(val admin: Boolean) {
     }
 }
 
+enum class CommitStatus {
+        PENDING,
+        ERROR,
+        FAILURE,
+        SUCCESS
+}
+
 interface GitHubEvent {
     var repository: Repository
     var organization: Organization?
