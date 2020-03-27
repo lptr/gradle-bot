@@ -81,6 +81,7 @@ class MainVerticle @Inject constructor(private val gitHubWebHookHandler: GitHubW
                             logger.info("App started.")
                             startFuture.complete()
                         } else {
+                            logger.error("App failed to start.", result.cause())
                             startFuture.fail(result.cause())
                         }
                     }
