@@ -33,7 +33,7 @@ fun main() {
     val injector = Guice.createInjector(GradleBotAppModule(vertx))
     vertx.exceptionHandler { logger.error("", it) }
     vertx.registerVerticleFactory(GuiceVerticleFactory(injector))
-    vertx.deployVerticle(MainVerticle::class.java.name)
+    vertx.deployVerticle(GradleBotVerticle::class.java.name)
 }
 
 class GuiceVerticleFactory(private val injector: Injector) : VerticleFactory {
@@ -41,7 +41,7 @@ class GuiceVerticleFactory(private val injector: Injector) : VerticleFactory {
         try {
             promise!!.complete(Callable {
                 try {
-                    injector.getInstance(MainVerticle::class.java)
+                    injector.getInstance(GradleBotVerticle::class.java)
                 } catch (e: Throwable) {
                     logger.error("", e)
                     throw e
@@ -53,7 +53,7 @@ class GuiceVerticleFactory(private val injector: Injector) : VerticleFactory {
         }
     }
 
-    override fun prefix(): String = MainVerticle::class.java.simpleName
+    override fun prefix(): String = GradleBotVerticle::class.java.simpleName
 }
 
 class GradleBotAppModule(private val vertx: Vertx) : AbstractModule() {
@@ -62,10 +62,13 @@ class GradleBotAppModule(private val vertx: Vertx) : AbstractModule() {
     }
 }
 
-class MainVerticle @Inject constructor(private val gitHubWebHookHandler: GitHubWebHookHandler,
-                                       private val teamCityWebHookHandler: TeamCityWebHookHandler,
-                                       private val gitHubClient: GitHubClient) : AbstractVerticle() {
-    private val logger: Logger = LoggerFactory.getLogger(MainVerticle::class.java.name)
+class GradleBotVerticle @Inject constructor(private val gitHubWebHookHandler: GitHubWebHookHandler,
+                                            private val teamCityWebHookHandler: TeamCityWebHookHandler,
+                                            private val gitHubClient: GitHubClient) : AbstractVerticle() {
+    private val logger: Logger = LoggerFactory.getLogger(GradleBotVerticle::class.java.name)
+    private val port by lazy {
+        System.getenv("HTTP_PORT")?.toInt() ?: 8080
+    }
 
     override fun start(startFuture: Promise<Void>) {
         gitHubClient.init().onSuccess {
@@ -73,7 +76,7 @@ class MainVerticle @Inject constructor(private val gitHubWebHookHandler: GitHubW
 
             val router = createRouter()
 
-            val serverOptions = httpServerOptionsOf(port = 3003, ssl = false, compressionSupported = true)
+            val serverOptions = httpServerOptionsOf(port = port, ssl = false, compressionSupported = true)
             vertx.createHttpServer(serverOptions)
                     .requestHandler(router)
                     .listen { result ->

@@ -12,7 +12,7 @@ import org.gradle.bot.model.GitHubEvent
 import org.gradle.bot.model.IssueCommentEvent
 import org.gradle.bot.model.PullRequestEvent
 import org.gradle.bot.objectMapper
-import org.gradle.bot.utils.GithubKeyChecker.verifySignature
+import org.gradle.bot.security.GithubSignatureChecker
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import java.lang.reflect.ParameterizedType
@@ -79,16 +79,18 @@ class IssueCommentEventHandler @Inject constructor(private val gitHubClient: Git
 
 @Singleton
 class GitHubWebHookHandler @Inject constructor(
-        private val gitHubEventHandler: GitHubEventHandlerComposite) : Handler<RoutingContext> {
+        private val gitHubEventHandler: GitHubEventHandlerComposite,
+        private val githubSignatureChecker: GithubSignatureChecker
+) : Handler<RoutingContext> {
     override fun handle(context: RoutingContext?) {
         logger.info("Received webhook to ${GitHubWebHookHandler::class.java.simpleName}")
 
-        context.parsePayloadEvent()?.apply {
+        context.parsePayloadEvent(githubSignatureChecker)?.apply {
             logger.debug("Start handling $this")
             gitHubEventHandler.handle(this)
         } ?: logger.info("Received invalid GitHub webhook, discard.")
 
-        context?.response()?.endWithJson(emptyMap<String, Object>())
+        context?.response()?.endWithJson(emptyMap<String, Any>())
     }
 }
 
@@ -98,8 +100,14 @@ val eventTypeToEventClassMap = mapOf(
         "issue_comment" to IssueCommentEvent::class.java
 )
 
-private fun RoutingContext?.parsePayloadEvent(): GitHubEvent? {
+private fun RoutingContext?.parsePayloadEvent(githubSignatureChecker: GithubSignatureChecker): GitHubEvent? {
     return this?.let {
+        val signature = request().getHeader("x-hub-signature")
+        if (!githubSignatureChecker.verifySignature(bodyAsString, signature, System.getenv("GITHUB_WEBHOOK_SECRET"))) {
+            logger.warn("Receive request {} with bad signature {}", bodyAsString, signature)
+            return null
+        }
+    }?.let {
         logger.debug("Get GitHub webhook {}", bodyAsString)
         request().getHeader("X-GitHub-Event")
     }?.let {
@@ -109,13 +117,3 @@ private fun RoutingContext?.parsePayloadEvent(): GitHubEvent? {
     }
 }
 
-private fun RoutingContext?.isValidGitHubWebHook(secret: String?): Boolean {
-    return if (this == null) {
-        false
-    } else {
-        // https://developer.github.com/webhooks/
-        request().getHeader("X-GitHub-Event") != null
-                && bodyAsString != null
-                && verifySignature(bodyAsString, request().getHeader("x-hub-signature"), secret)
-    }
-}
