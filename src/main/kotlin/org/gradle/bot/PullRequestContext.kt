@@ -81,8 +81,8 @@ class PullRequestContext(private val gitHubClient: GitHubClient,
 
     fun reply(targetComment: PullRequestComment, content: String, teamCityBuildId: String? = null) {
         reply("""<!-- ${objectMapper.writeValueAsString(CommentMetadata(targetComment.id, teamCityBuildId, headRefSha))} -->
-            $content
-        """.trimIndent())
+            
+$content""")
     }
 
     fun reply(content: String) {
