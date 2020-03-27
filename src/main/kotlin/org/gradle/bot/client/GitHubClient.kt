@@ -7,7 +7,10 @@ import io.vertx.core.net.ProxyOptions
 import io.vertx.ext.web.client.WebClient
 import io.vertx.ext.web.client.WebClientOptions
 import org.gradle.bot.model.PullRequestWithComments
+import org.gradle.bot.model.WhoAmI
+import org.gradle.bot.model.addCommentMutation
 import org.gradle.bot.model.pullRequestsWithCommentsQuery
+import org.gradle.bot.model.whoAmIQuery
 import org.gradle.bot.objectMapper
 import org.slf4j.LoggerFactory
 import javax.inject.Inject
@@ -30,26 +33,24 @@ class GitHubClient @Inject constructor(vertx: Vertx) {
         "bearer $githubToken"
     }
 
-    fun whoAmI() = "blindpirate"
+    private var myself: String? = null
+
+    fun init(): Future<String> {
+        return doQueryOrMutation(WhoAmI::class.java, whoAmIQuery).map {
+            it.data.viewer.login
+        }.onSuccess {
+            myself = it
+        }.onFailure {
+            logger.error("", it)
+        }
+    }
+
+    fun whoAmI(): String {
+        return myself ?: throw IllegalStateException("Not initialized!")
+    }
 
     fun comment(subjectId: String, commentBody: String): Future<*> {
-        val mutation = """
-mutation {            
-  addComment(input:{subjectId:"$subjectId",body:"${commentBody.replace("\n", "\\n")}"}) {
-    clientMutationId
-    subject {
-      id
-    }
-    commentEdge {
-      node {
-        databaseId
-      }
-    }
-  }
-}  
-        """.replace('\n', ' ')
-
-        return doQueryOrMutation(Map::class.java, mutation)
+        return doQueryOrMutation(Map::class.java, addCommentMutation(subjectId, commentBody))
     }
 
     fun getPullRequestWithComments(repo: String, number: Int): Future<PullRequestWithComments> =

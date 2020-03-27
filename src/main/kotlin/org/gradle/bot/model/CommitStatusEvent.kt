@@ -269,7 +269,7 @@ data class CommitStatusEvent(
         @JsonProperty("name")
         var name: String,
         @JsonProperty("organization")
-        override var organization: Organization,
+        override var organization: Organization?,
         @JsonProperty("repository")
         override var repository: Repository,
         @JsonProperty("sender")

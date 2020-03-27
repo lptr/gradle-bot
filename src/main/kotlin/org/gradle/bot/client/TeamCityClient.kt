@@ -6,6 +6,7 @@ import io.vertx.core.Vertx
 import org.gradle.bot.model.BuildStage
 import org.jetbrains.teamcity.rest.Build
 import org.jetbrains.teamcity.rest.BuildConfigurationId
+import org.jetbrains.teamcity.rest.BuildId
 import org.jetbrains.teamcity.rest.TeamCityInstanceFactory
 import org.slf4j.LoggerFactory
 import javax.inject.Inject
@@ -28,6 +29,17 @@ class TeamCityClient @Inject constructor(private val vertx: Vertx) {
             } catch (e: Throwable) {
                 logger.error("Error when triggering $stage on $branchName", e)
                 promise.fail(e)
+            }
+        }
+    }
+
+    fun findBuild(teamCityBuildId: String): Future<Build?> {
+        return vertx.executeBlocking {
+            try {
+                it.complete(teamCityRestClient.build(BuildId(teamCityBuildId)))
+            } catch (e: Throwable) {
+                logger.error("", e)
+                it.fail(e)
             }
         }
     }

@@ -526,7 +526,7 @@ data class PullRequestEvent(
         @JsonProperty("number")
         var number: Int,
         @JsonProperty("organization")
-        override var organization: Organization,
+        override var organization: Organization?,
         @JsonProperty("pull_request")
         var pullRequest: PullRequest,
         @JsonProperty("repository")

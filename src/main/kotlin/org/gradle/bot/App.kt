@@ -7,7 +7,6 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.google.inject.AbstractModule
 import com.google.inject.Guice
 import com.google.inject.Injector
-import com.google.inject.Provides
 import io.vertx.core.AbstractVerticle
 import io.vertx.core.Promise
 import io.vertx.core.Verticle
@@ -18,15 +17,13 @@ import io.vertx.core.spi.VerticleFactory
 import io.vertx.ext.web.Router
 import io.vertx.ext.web.handler.BodyHandler
 import io.vertx.kotlin.core.http.httpServerOptionsOf
-import org.gradle.bot.handler.GitHubEventHandler
+import org.gradle.bot.client.GitHubClient
 import org.gradle.bot.handler.GitHubWebHookHandler
-import org.gradle.bot.handler.IssueCommentEventHandler
 import org.gradle.bot.handler.TeamCityWebHookHandler
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import java.util.concurrent.Callable
 import javax.inject.Inject
-import javax.inject.Singleton
 
 val objectMapper: ObjectMapper = ObjectMapper()
 val logger: Logger = LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME)
@@ -63,35 +60,31 @@ class GradleBotAppModule(private val vertx: Vertx) : AbstractModule() {
     override fun configure() {
         bind(Vertx::class.java).toInstance(vertx)
     }
-
-    @Inject
-    @Provides
-    @Singleton
-    fun githubEventHandlers(issueCommentEventHandler: IssueCommentEventHandler) =
-            listOf<GitHubEventHandler<*>>(
-                    issueCommentEventHandler
-            )
 }
 
-
 class MainVerticle @Inject constructor(private val gitHubWebHookHandler: GitHubWebHookHandler,
-                                       private val teamCityWebHookHandler: TeamCityWebHookHandler) : AbstractVerticle() {
+                                       private val teamCityWebHookHandler: TeamCityWebHookHandler,
+                                       private val gitHubClient: GitHubClient) : AbstractVerticle() {
     private val logger: Logger = LoggerFactory.getLogger(MainVerticle::class.java.name)
 
     override fun start(startFuture: Promise<Void>) {
-        val router = createRouter()
+        gitHubClient.init().onSuccess {
+            logger.info("GitHub client initialized, I am {}", gitHubClient.whoAmI())
 
-        val serverOptions = httpServerOptionsOf(host = "localhost", port = 8080, ssl = false, compressionSupported = true)
-        vertx.createHttpServer(serverOptions)
-                .requestHandler(router)
-                .listen { result ->
-                    logger.info("App start result: ${result.succeeded()}")
-                    if (result.succeeded()) {
-                        startFuture.complete()
-                    } else {
-                        startFuture.fail(result.cause())
+            val router = createRouter()
+
+            val serverOptions = httpServerOptionsOf(host = "localhost", port = 8080, ssl = false, compressionSupported = true)
+            vertx.createHttpServer(serverOptions)
+                    .requestHandler(router)
+                    .listen { result ->
+                        if (result.succeeded()) {
+                            logger.info("App started.")
+                            startFuture.complete()
+                        } else {
+                            startFuture.fail(result.cause())
+                        }
                     }
-                }
+        }
     }
 
     private fun createRouter() = Router.router(vertx).apply {
@@ -104,7 +97,9 @@ class MainVerticle @Inject constructor(private val gitHubWebHookHandler: GitHubW
     /**
      * Extension to the HTTP response to output JSON objects.
      */
-    fun HttpServerResponse.endWithJson(obj: Any) {
-        this.putHeader("Content-Type", "application/json; charset=utf-8").end(Json.encodePrettily(obj))
-    }
+
+}
+
+fun HttpServerResponse.endWithJson(obj: Any) {
+    this.putHeader("Content-Type", "application/json; charset=utf-8").end(Json.encodePrettily(obj))
 }

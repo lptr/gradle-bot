@@ -256,7 +256,7 @@ data class IssueCommentEvent(
         @JsonProperty("issue")
         var issue: Issue,
         @JsonProperty("organization")
-        override var organization: Organization,
+        override var organization: Organization?,
         @JsonProperty("repository")
         override var repository: Repository,
         @JsonProperty("sender")
@@ -272,7 +272,7 @@ data class IssueCommentEvent(
             @JsonProperty("body")
             var body: String,
             @JsonProperty("closed_at")
-            var closedAt: String,
+            var closedAt: String?,
             @JsonProperty("comments")
             var comments: Int,
             @JsonProperty("comments_url")

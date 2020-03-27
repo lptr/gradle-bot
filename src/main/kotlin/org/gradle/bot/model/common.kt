@@ -19,7 +19,7 @@ enum class AuthorAssociation(val admin: Boolean) {
 
 interface GitHubEvent {
     var repository: Repository
-    var organization: Organization
+    var organization: Organization?
     var sender: User
 }
 

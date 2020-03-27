@@ -1,4 +1,5 @@
 package org.gradle.bot.model
+
 import com.fasterxml.jackson.annotation.JsonProperty
 
 
@@ -13,26 +14,28 @@ import com.fasterxml.jackson.annotation.JsonProperty
 }
  */
 
-val whoAmIQuery="""
+val whoAmIQuery = """
+query {    
   viewer {
     login
     name
   } 
-""".trimIndent()
+}  
+""".trimIndent().replace('\n', ' ')
 
 data class WhoAmI(
-    @JsonProperty("data")
-    var `data`: Data
+        @JsonProperty("data")
+        var `data`: Data
 ) {
     data class Data(
-        @JsonProperty("viewer")
-        var viewer: Viewer
+            @JsonProperty("viewer")
+            var viewer: Viewer
     ) {
         data class Viewer(
-            @JsonProperty("login")
-            var login: String,
-            @JsonProperty("name")
-            var name: String
+                @JsonProperty("login")
+                var login: String,
+                @JsonProperty("name")
+                var name: String?
         )
     }
 }

@@ -1,188 +1,98 @@
 package org.gradle.bot.handler
 
-import com.fasterxml.jackson.annotation.JsonProperty
 import io.vertx.core.Handler
 import io.vertx.ext.web.RoutingContext
-import org.gradle.bot.MainVerticle
+import org.gradle.bot.PullRequestContext
 import org.gradle.bot.client.GitHubClient
 import org.gradle.bot.client.TeamCityClient
-import org.gradle.bot.model.AuthorAssociation
-import org.gradle.bot.model.BuildStage
+import org.gradle.bot.endWithJson
+import org.gradle.bot.getComments
 import org.gradle.bot.model.CommitStatusEvent
 import org.gradle.bot.model.GitHubEvent
 import org.gradle.bot.model.IssueCommentEvent
 import org.gradle.bot.model.PullRequestEvent
-import org.gradle.bot.model.PullRequestWithComments
 import org.gradle.bot.objectMapper
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import java.lang.reflect.ParameterizedType
 import javax.inject.Inject
 import javax.inject.Singleton
 
-val logger: Logger = LoggerFactory.getLogger(MainVerticle::class.java.name)
-
-
-val eventTypeToEventClassMap = mapOf(
-        "status" to CommitStatusEvent::class.java,
-        "pull_request" to PullRequestEvent::class.java,
-        "issue_comment" to IssueCommentEvent::class.java
-)
+private val logger: Logger = LoggerFactory.getLogger(GitHubWebHookHandler::class.java.name)
 
 interface GitHubEventHandler<T : GitHubEvent> {
+
+    fun accept(event: GitHubEvent): Boolean
+
     fun handle(event: T)
 }
 
-
-interface PullRequestCommand {
-    fun execute(context: PullRequestContext)
-
-    val sourceComment: PullRequestComment
-}
-
-class TestCommand(private val targetStage: BuildStage, override val sourceComment: PullRequestComment) : PullRequestCommand {
-    override fun execute(context: PullRequestContext) {
-        context.triggerBuild(targetStage).onSuccess {
-            context.reply(sourceComment, "OK, I've already triggered [$targetStage build](${it.getHomeUrl()}) for you.")
-        }
-    }
-}
-
-class UnknownCommand(override val sourceComment: PullRequestComment) : PullRequestCommand {
-    override fun execute(context: PullRequestContext) {
-    }
-}
-
-class TestAndMergeCommand
-
-class StopCommand
-
-class HelpCommand
-
-class NoOpCommand(override val sourceComment: PullRequestComment) : PullRequestCommand {
-    override fun execute(context: PullRequestContext) {}
-}
-
-interface PullRequestComment {
-    val id: Int
-
-    fun getCommand(): PullRequestCommand = NoOpCommand(this)
-}
-
-
-class AdminCommandComment(override val id: Int, commentBody: String) : PullRequestComment {
-    private val adminCommand = parseCommand(commentBody)
-    override fun getCommand() = adminCommand
-
-    private fun parseCommand(commentBody: String): PullRequestCommand {
-        val words = commentBody.split("\\s")
-        val testIndex = words.indexOf("test")
-        return when {
-            testIndex == -1 -> UnknownCommand(this)
-            testIndex == words.size - 1 -> UnknownCommand(this)
-            BuildStage.parseTargetStage(words[testIndex + 1]) == null -> UnknownCommand(this)
-            else -> TestCommand(BuildStage.parseTargetStage(words[testIndex + 1])!!, this)
-        }
-    }
-}
-
-class NonAdminCommandComment(override val id: Int) : PullRequestComment {
-}
-
-class UnrelatedComment(override val id: Int) : PullRequestComment {
-}
-
-class BotReplyAdminCommandComment(override val id: Int, commentBody: String, metadata: CommentMetadata) : PullRequestComment {
-}
-
-class BotNotificationComment(override val id: Int, commentBody: String) : PullRequestComment {
-
-}
-
-class PullRequestContext(private val gitHubClient: GitHubClient,
-                         private val teamCityClient: TeamCityClient,
-                         private val comments: List<PullRequestComment>,
-                         private val branchName: String,
-                         private val subjectId: String) {
-    fun processCommand(commentId: Int) {
-        comments.find { it.id == commentId }?.getCommand()?.execute(this)
+abstract class AbstractGitHubEventHandler<T : GitHubEvent> : GitHubEventHandler<T> {
+    private val supportEventType by lazy {
+        val superClass = javaClass.genericSuperclass
+        (superClass as ParameterizedType).actualTypeArguments[0] as Class<T>
     }
 
-    fun reply(targetComment: PullRequestComment, content: String) {
-        reply("""
-            <!-- ${objectMapper.writeValueAsString(CommentMetadata(targetComment.id))} -->
-            $content
-        """.trimIndent())
-    }
-
-    fun reply(content: String) {
-        gitHubClient.comment(subjectId, content).onSuccess {
-            logger.info("Successfully commented $content")
-        }
-    }
-
-    fun triggerBuild(targetStage: BuildStage) = teamCityClient.triggerBuild(targetStage, branchName)
+    override fun accept(event: GitHubEvent) = supportEventType.isAssignableFrom(event.javaClass)
 }
 
-val myself = "blindpirate"
+@Singleton
+class GitHubEventHandlerComposite @Inject constructor(private val issueCommentEventHandler: IssueCommentEventHandler) :
+        GitHubEventHandler<GitHubEvent> {
+    @Suppress("UNCHECKED_CAST")
+    private val eventHandlers = listOf(issueCommentEventHandler as GitHubEventHandler<GitHubEvent>)
 
-val commentMetadataPattern = "<!-- (.*) -->".toPattern()
+    override fun accept(event: GitHubEvent) = throw UnsupportedOperationException()
 
-data class CommentMetadata(@JsonProperty("replyTargetCommentId") val replyTargetCommentId: Int?) {
-}
-
-// <!-- {"replyTargetCommentId": 123455} -->
-fun getCommentMetadata(commentBody: String): CommentMetadata? {
-    val matcher = commentMetadataPattern.matcher(commentBody)
-    return if (matcher.find()) {
-        objectMapper.readValue(matcher.group(1), CommentMetadata::class.java)
-    } else {
-        null
-    }
-}
-
-fun PullRequestWithComments.getComments(): List<PullRequestComment> {
-    return data.repository.pullRequest.comments.nodes
-            .map {
-                val metadata = getCommentMetadata(it.body)
-                when {
-                    it.author.login == myself && metadata?.replyTargetCommentId != null -> BotReplyAdminCommandComment(it.databaseId, it.body, metadata)
-                    it.author.login == myself -> BotNotificationComment(it.databaseId, it.body)
-                    AuthorAssociation.isAdmin(it.authorAssociation) && it.body.contains("@$myself") -> AdminCommandComment(it.databaseId, it.body)
-                    it.body.contains("@$myself") -> NonAdminCommandComment(it.databaseId)
-                    else -> UnrelatedComment(it.databaseId)
+    override fun handle(event: GitHubEvent) {
+        eventHandlers.forEach {
+            if (it.accept(event)) {
+                try {
+                    it.handle(event)
+                } catch (e: Throwable) {
+                    logger.error("Error handling event $event", e)
                 }
             }
+        }
+    }
 }
 
 @Singleton
 class IssueCommentEventHandler @Inject constructor(private val gitHubClient: GitHubClient,
                                                    private val teamCityClient: TeamCityClient
-) : GitHubEventHandler<IssueCommentEvent> {
+) : AbstractGitHubEventHandler<IssueCommentEvent>() {
     override fun handle(event: IssueCommentEvent) {
         gitHubClient.getPullRequestWithComments(event.repository.fullName, event.issue.number).onSuccess {
             val context = PullRequestContext(
-                    gitHubClient, teamCityClient, it.getComments(),
+                    gitHubClient, teamCityClient, it.getComments(gitHubClient.whoAmI()),
                     it.data.repository.pullRequest.headRef.name,
-                    event.issue.nodeId)
-            context.processCommand(event.issue.id)
+                    event.issue.nodeId,
+                    it.data.repository.pullRequest.headRef.target.oid)
+            context.processCommand(event.comment.id)
         }
     }
 }
 
 @Singleton
 class GitHubWebHookHandler @Inject constructor(
-//        private val eventHandlers: List<GitHubEventHandler<*>>,
-                                               private val issueCommentEventHandler: IssueCommentEventHandler) : Handler<RoutingContext> {
+        private val gitHubEventHandler: GitHubEventHandlerComposite) : Handler<RoutingContext> {
     override fun handle(context: RoutingContext?) {
         logger.info("Received webhook to ${GitHubWebHookHandler::class.java.simpleName}")
 
         context.parsePayloadEvent()?.apply {
-            if (this is IssueCommentEvent) {
-                issueCommentEventHandler.handle(this)
-            }
+            logger.debug("Start handling $this")
+            gitHubEventHandler.handle(this)
         } ?: logger.info("Received invalid GitHub webhook, discard.")
+
+        context?.response()?.endWithJson(emptyMap<String, Object>())
     }
 }
+
+val eventTypeToEventClassMap = mapOf(
+        "status" to CommitStatusEvent::class.java,
+        "pull_request" to PullRequestEvent::class.java,
+        "issue_comment" to IssueCommentEvent::class.java
+)
 
 private fun RoutingContext?.parsePayloadEvent(): GitHubEvent? {
     return this?.let {
