@@ -73,7 +73,7 @@ class MainVerticle @Inject constructor(private val gitHubWebHookHandler: GitHubW
 
             val router = createRouter()
 
-            val serverOptions = httpServerOptionsOf(host = "localhost", port = 8080, ssl = false, compressionSupported = true)
+            val serverOptions = httpServerOptionsOf(host = "localhost", port = 3003, ssl = false, compressionSupported = true)
             vertx.createHttpServer(serverOptions)
                     .requestHandler(router)
                     .listen { result ->
