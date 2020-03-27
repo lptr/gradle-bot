@@ -107,15 +107,16 @@ class PullRequestContext(private val gitHubClient: GitHubClient,
     }
 
     fun iDontUnderstandWhatYouSaid()  = """
-        Sorry I don't understand what you said, please type `@${gitHubClient.whoAmI()} help` to get help.
-    """.trimIndent()
+Sorry I don't understand what you said, please type `@${gitHubClient.whoAmI()} help` to get help.
+"""
 
     fun helpMessage() = """Currently I support the following commands:
-    - `@${gitHubClient.whoAmI()} test {BuildStage} plz`, e.g. `${gitHubClient.whoAmI()} test SanityCheck plz`
-      - {BuildStage} can be `SanityCheck`/`CompileAll`/QuickFeedbackLinux`/`QuickFeedback`/`ReadyForMerge`/`ReadyForNightly`/`ReadyForRelease`
-      - Note that you can abbreviate "SanityCheck" as "SC", "ReadyForMerge" as "RFM", etc.
-    - `@${gitHubClient.whoAmI()} help` to display this message
-""".trimIndent()
+        
+- `@${gitHubClient.whoAmI()} test {BuildStage} plz`, e.g. `${gitHubClient.whoAmI()} test SanityCheck plz`
+  - {BuildStage} can be `SanityCheck`/`CompileAll`/QuickFeedbackLinux`/`QuickFeedback`/`ReadyForMerge`/`ReadyForNightly`/`ReadyForRelease`
+  - Note that you can abbreviate "SanityCheck" as "SC", "ReadyForMerge" as "RFM", etc.
+- `@${gitHubClient.whoAmI()} help` to display this message
+"""
 }
 
 val commentMetadataPattern = "<!-- (.*) -->".toPattern()
