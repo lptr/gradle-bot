@@ -27,6 +27,8 @@ dependencies {
     val guiceVersion = "4.2.3"
     val logbackVersion = "1.2.3"
     val graphQLJavaVersion = "14.0"
+    val junit5Version = "5.6.1"
+
     implementation("io.vertx:vertx-web-client:$vertxVersion")
     implementation("io.vertx:vertx-core:$vertxVersion")
     implementation("io.vertx:vertx-web:$vertxVersion")
@@ -51,8 +53,13 @@ dependencies {
 //    implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
 //    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
-    testImplementation("org.jetbrains.kotlin:kotlin-test")
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
+//    testImplementation("org.jetbrains.kotlin:kotlin-test")
+//    testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
+
+    //junit 5
+    testImplementation("org.junit.jupiter:junit-jupiter-api:$junit5Version")
+    testImplementation("org.junit.jupiter:junit-jupiter-engine:$junit5Version")
+    testImplementation("org.junit.jupiter:junit-jupiter-params:$junit5Version")
 
     "teamCityWorkaroundImplementation"(platform("org.jetbrains.kotlin:kotlin-bom"))
     "teamCityWorkaroundImplementation"("org.jetbrains.kotlin:kotlin-stdlib-jdk8")

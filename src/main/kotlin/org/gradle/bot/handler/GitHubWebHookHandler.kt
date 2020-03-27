@@ -12,6 +12,7 @@ import org.gradle.bot.model.GitHubEvent
 import org.gradle.bot.model.IssueCommentEvent
 import org.gradle.bot.model.PullRequestEvent
 import org.gradle.bot.objectMapper
+import org.gradle.bot.utils.GithubKeyChecker.verifySignature
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import java.lang.reflect.ParameterizedType
@@ -108,12 +109,13 @@ private fun RoutingContext?.parsePayloadEvent(): GitHubEvent? {
     }
 }
 
-private fun RoutingContext?.isValidGitHubWebHook(): Boolean {
+private fun RoutingContext?.isValidGitHubWebHook(secret: String?): Boolean {
     return if (this == null) {
         false
     } else {
         // https://developer.github.com/webhooks/
         request().getHeader("X-GitHub-Event") != null
                 && bodyAsString != null
+                && verifySignature(bodyAsString, request().getHeader("x-hub-signature"), secret)
     }
 }
