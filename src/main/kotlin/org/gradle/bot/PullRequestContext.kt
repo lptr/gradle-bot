@@ -30,7 +30,9 @@ class AdminCommandComment(override val id: Int, override val body: String, priva
     private fun parseCommand(commentBody: String): PullRequestCommand {
         val words = commentBody.split("\\s+".toRegex())
         val testIndex = words.indexOf("test")
+        val helpIndex = words.indexOf("help")
         return when {
+            helpIndex != -1 -> HelpCommand(this)
             testIndex == -1 -> UnknownCommand(this)
             testIndex == words.size - 1 -> UnknownCommand(this)
             BuildStage.parseTargetStage(words[testIndex + 1]) == null -> UnknownCommand(this)

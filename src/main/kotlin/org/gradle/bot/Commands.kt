@@ -40,7 +40,7 @@ class TestCommand(private val targetStage: BuildStage, override val sourceCommen
 
 class UnknownCommand(override val sourceComment: PullRequestComment) : PullRequestCommand {
     override fun execute(context: PullRequestContext) {
-        context.reply(sourceComment, "Sorry I don't understand what you said, please type `@`")
+        context.reply(sourceComment, context.iDontUnderstandWhatYouSaid())
     }
 }
 
