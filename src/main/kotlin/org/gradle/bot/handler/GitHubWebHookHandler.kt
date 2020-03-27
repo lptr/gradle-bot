@@ -64,10 +64,12 @@ class IssueCommentEventHandler @Inject constructor(private val gitHubClient: Git
     override fun handle(event: IssueCommentEvent) {
         gitHubClient.getPullRequestWithComments(event.repository.fullName, event.issue.number).onSuccess {
             val context = PullRequestContext(
-                    gitHubClient, teamCityClient, it.getComments(gitHubClient.whoAmI()),
+                    gitHubClient,
+                    teamCityClient,
+                    it.getComments(gitHubClient.whoAmI()),
+                    event.repository.fullName,
                     it.data.repository.pullRequest.headRef.name,
                     event.issue.nodeId,
-                    event.repository.fullName,
                     it.data.repository.pullRequest.headRef.target.oid)
             context.processCommand(event.comment.id)
         }

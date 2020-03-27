@@ -307,7 +307,7 @@ data class PullRequestWithComments(
                             @JsonProperty("oid")
                             var oid: String,
                             @JsonProperty("status")
-                            var status: Status
+                            var status: Status?
                         ) {
                             data class Status(
                                 @JsonProperty("contexts")

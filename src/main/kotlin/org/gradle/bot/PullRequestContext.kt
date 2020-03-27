@@ -131,7 +131,7 @@ fun PullRequestWithComments.getComments(myself: String): List<PullRequestComment
                 val metadata = getCommentMetadata(comment.body)
                 when {
                     comment.author.login == myself && metadata?.replyTargetCommentId != null -> BotReplyAdminCommandComment(comment.databaseId, comment.body, metadata)
-                    comment.author.login == myself -> BotNotificationComment(comment.databaseId, comment.body)
+//                    comment.author.login == myself -> BotNotificationComment(comment.databaseId, comment.body)
                     AuthorAssociation.isAdmin(comment.authorAssociation) && comment.body.contains("@$myself") -> AdminCommandComment(comment.databaseId, comment.body, metadata)
                     comment.body.contains("@$myself") -> NonAdminCommandComment(comment.databaseId, comment.body)
                     else -> UnrelatedComment(comment.databaseId, comment.body)

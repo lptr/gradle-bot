@@ -83,7 +83,7 @@ class GitHubClient @Inject constructor(vertx: Vertx) {
 
     fun createCommitStatus(repoName: String, sha: String, dependencies: List<String>, status: CommitStatus) {
         // https://developer.github.com/v3/repos/statuses/
-        val url = repoName.split('/').let { "https://api.github.com/repos/${it[0]}/statuses/${it[1]}/$sha" }
+        val url = repoName.split('/').let { "https://api.github.com/repos/${it[0]}/${it[1]}/statuses/$sha" }
         dependencies.forEach {
             client.postAbs(url)
                     .putHeader("Accept", "application/json")
@@ -100,6 +100,7 @@ class GitHubClient @Inject constructor(vertx: Vertx) {
                     ).onFailure {
                         logger.error("Error when creating commit status {} to {}", status, url)
                     }.onSuccess {
+                        logger.info("Get response: {}", it.bodyAsString())
                         logger.info("Successfully created commit status {} to {}", status, url)
                     }
         }
@@ -122,7 +123,7 @@ data class CommitStatusObject(
         var description: String,
         @JsonProperty("state")
         var state: String,
-        @JsonProperty("target_url")
+        @get:JsonProperty("target_url")
         var targetUrl: String
 )
 
