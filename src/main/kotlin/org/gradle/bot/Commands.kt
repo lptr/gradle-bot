@@ -16,7 +16,7 @@ class TestCommand(private val targetStage: BuildStage, override val sourceCommen
                 triggerBuild(context)
             } else if (it.state == BuildState.QUEUED || it.state == BuildState.RUNNING) {
                 context.reply(sourceComment,
-                        "Sorry you have already triggered [a build](${it.getHomeUrl()}), I will not trigger a new one."
+                        "Sorry [the build you've already triggered](${it.getHomeUrl()}) is still running, I will not trigger a new one."
                 )
             } else {
                 triggerBuild(context)
@@ -40,6 +40,7 @@ class TestCommand(private val targetStage: BuildStage, override val sourceCommen
 
 class UnknownCommand(override val sourceComment: PullRequestComment) : PullRequestCommand {
     override fun execute(context: PullRequestContext) {
+        context.reply(sourceComment, "Sorry I don't understand what you said, please type `@`")
     }
 }
 
@@ -47,7 +48,12 @@ class TestAndMergeCommand
 
 class StopCommand
 
-class HelpCommand
+
+class HelpCommand(override val sourceComment: PullRequestComment) : PullRequestCommand {
+    override fun execute(context: PullRequestContext) {
+        context.reply(sourceComment, context.helpMessage())
+    }
+}
 
 class NoOpCommand(override val sourceComment: PullRequestComment) : PullRequestCommand {
     override fun execute(context: PullRequestContext) {}

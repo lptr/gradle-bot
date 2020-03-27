@@ -57,7 +57,7 @@ class BotNotificationComment(override val id: Int, override val body: String) : 
 class PullRequestContext(private val gitHubClient: GitHubClient,
                          private val teamCityClient: TeamCityClient,
                          private val comments: List<PullRequestComment>,
-                         private val repoName:String,
+                         private val repoName: String,
                          private val branchName: String,
                          private val subjectId: String,
                          private val headRefSha: String) {
@@ -104,6 +104,17 @@ class PullRequestContext(private val gitHubClient: GitHubClient,
     fun publishPendingStatuses(dependencies: List<String>) {
         gitHubClient.createCommitStatus(repoName, headRefSha, dependencies, CommitStatus.PENDING)
     }
+
+    fun iDontUnderstandWhatYouSaid()  = """
+        Sorry I don't understand what you said, please type `@${gitHubClient.whoAmI()} help` to get help.
+    """.trimIndent()
+
+    fun helpMessage() = """
+    Currently I support the following commands:
+    - `@${gitHubClient.whoAmI()} test SanityCheck/CompileAll/QuickFeedbackLinux/QuickFeedback/ReadyForMerge/ReadyForNightly/ReadyForRelease plz`
+      - Note that you can abbreviate "SanityCheck" as "SC", "ReadyForMerge" as "RFM", etc.
+    - `@${gitHubClient.whoAmI()} help` to display this message
+""".trimIndent()
 }
 
 val commentMetadataPattern = "<!-- (.*) -->".toPattern()
