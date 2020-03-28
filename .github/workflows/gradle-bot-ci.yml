@@ -33,7 +33,7 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-
     - name: Show Gradle version
-        run: ./gradlew --version
+      run: ./gradlew --version
     - name: Build with Gradle
       run: ./gradlew check
 
