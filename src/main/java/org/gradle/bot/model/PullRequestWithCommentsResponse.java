@@ -735,6 +735,7 @@ public class PullRequestWithCommentsResponse {
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonPropertyOrder({
+        "id",
         "body",
         "url",
         "headRef",
@@ -744,6 +745,8 @@ public class PullRequestWithCommentsResponse {
     })
     public static class PullRequest {
 
+        @JsonProperty("id")
+        private String id;
         @JsonProperty("body")
         private String body;
         @JsonProperty("url")
@@ -772,17 +775,29 @@ public class PullRequestWithCommentsResponse {
          * @param comments
          * @param headRef
          * @param commits
+         * @param id
          * @param body
          * @param url
          */
-        public PullRequest(String body, String url, PullRequestWithCommentsResponse.HeadRef headRef, String baseRefName, PullRequestWithCommentsResponse.Comments comments, PullRequestWithCommentsResponse.Commits commits) {
+        public PullRequest(String id, String body, String url, PullRequestWithCommentsResponse.HeadRef headRef, String baseRefName, PullRequestWithCommentsResponse.Comments comments, PullRequestWithCommentsResponse.Commits commits) {
             super();
+            this.id = id;
             this.body = body;
             this.url = url;
             this.headRef = headRef;
             this.baseRefName = baseRefName;
             this.comments = comments;
             this.commits = commits;
+        }
+
+        @JsonProperty("id")
+        public String getId() {
+            return id;
+        }
+
+        @JsonProperty("id")
+        public void setId(String id) {
+            this.id = id;
         }
 
         @JsonProperty("body")
@@ -859,6 +874,10 @@ public class PullRequestWithCommentsResponse {
         public String toString() {
             StringBuilder sb = new StringBuilder();
             sb.append(PullRequestWithCommentsResponse.PullRequest.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append("id");
+            sb.append('=');
+            sb.append(((this.id == null)?"<null>":this.id));
+            sb.append(',');
             sb.append("body");
             sb.append('=');
             sb.append(((this.body == null)?"<null>":this.body));
@@ -902,6 +921,7 @@ public class PullRequestWithCommentsResponse {
             result = ((result* 31)+((this.comments == null)? 0 :this.comments.hashCode()));
             result = ((result* 31)+((this.headRef == null)? 0 :this.headRef.hashCode()));
             result = ((result* 31)+((this.commits == null)? 0 :this.commits.hashCode()));
+            result = ((result* 31)+((this.id == null)? 0 :this.id.hashCode()));
             result = ((result* 31)+((this.additionalProperties == null)? 0 :this.additionalProperties.hashCode()));
             result = ((result* 31)+((this.body == null)? 0 :this.body.hashCode()));
             result = ((result* 31)+((this.url == null)? 0 :this.url.hashCode()));
@@ -917,17 +937,20 @@ public class PullRequestWithCommentsResponse {
                 return false;
             }
             PullRequestWithCommentsResponse.PullRequest rhs = ((PullRequestWithCommentsResponse.PullRequest) other);
-            return ((((((((this.baseRefName == rhs.baseRefName)||((this.baseRefName!= null)&&this.baseRefName.equals(rhs.baseRefName)))&&((this.comments == rhs.comments)||((this.comments!= null)&&this.comments.equals(rhs.comments))))&&((this.headRef == rhs.headRef)||((this.headRef!= null)&&this.headRef.equals(rhs.headRef))))&&((this.commits == rhs.commits)||((this.commits!= null)&&this.commits.equals(rhs.commits))))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))))&&((this.body == rhs.body)||((this.body!= null)&&this.body.equals(rhs.body))))&&((this.url == rhs.url)||((this.url!= null)&&this.url.equals(rhs.url))));
+            return (((((((((this.baseRefName == rhs.baseRefName)||((this.baseRefName!= null)&&this.baseRefName.equals(rhs.baseRefName)))&&((this.comments == rhs.comments)||((this.comments!= null)&&this.comments.equals(rhs.comments))))&&((this.headRef == rhs.headRef)||((this.headRef!= null)&&this.headRef.equals(rhs.headRef))))&&((this.commits == rhs.commits)||((this.commits!= null)&&this.commits.equals(rhs.commits))))&&((this.id == rhs.id)||((this.id!= null)&&this.id.equals(rhs.id))))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))))&&((this.body == rhs.body)||((this.body!= null)&&this.body.equals(rhs.body))))&&((this.url == rhs.url)||((this.url!= null)&&this.url.equals(rhs.url))));
         }
 
     }
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonPropertyOrder({
+        "nameWithOwner",
         "pullRequest"
     })
     public static class Repository {
 
+        @JsonProperty("nameWithOwner")
+        private String nameWithOwner;
         @JsonProperty("pullRequest")
         private PullRequestWithCommentsResponse.PullRequest pullRequest;
         @JsonIgnore
@@ -942,11 +965,23 @@ public class PullRequestWithCommentsResponse {
 
         /**
          * 
+         * @param nameWithOwner
          * @param pullRequest
          */
-        public Repository(PullRequestWithCommentsResponse.PullRequest pullRequest) {
+        public Repository(String nameWithOwner, PullRequestWithCommentsResponse.PullRequest pullRequest) {
             super();
+            this.nameWithOwner = nameWithOwner;
             this.pullRequest = pullRequest;
+        }
+
+        @JsonProperty("nameWithOwner")
+        public String getNameWithOwner() {
+            return nameWithOwner;
+        }
+
+        @JsonProperty("nameWithOwner")
+        public void setNameWithOwner(String nameWithOwner) {
+            this.nameWithOwner = nameWithOwner;
         }
 
         @JsonProperty("pullRequest")
@@ -973,6 +1008,10 @@ public class PullRequestWithCommentsResponse {
         public String toString() {
             StringBuilder sb = new StringBuilder();
             sb.append(PullRequestWithCommentsResponse.Repository.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append("nameWithOwner");
+            sb.append('=');
+            sb.append(((this.nameWithOwner == null)?"<null>":this.nameWithOwner));
+            sb.append(',');
             sb.append("pullRequest");
             sb.append('=');
             sb.append(((this.pullRequest == null)?"<null>":this.pullRequest));
@@ -992,8 +1031,9 @@ public class PullRequestWithCommentsResponse {
         @Override
         public int hashCode() {
             int result = 1;
-            result = ((result* 31)+((this.pullRequest == null)? 0 :this.pullRequest.hashCode()));
             result = ((result* 31)+((this.additionalProperties == null)? 0 :this.additionalProperties.hashCode()));
+            result = ((result* 31)+((this.nameWithOwner == null)? 0 :this.nameWithOwner.hashCode()));
+            result = ((result* 31)+((this.pullRequest == null)? 0 :this.pullRequest.hashCode()));
             return result;
         }
 
@@ -1006,7 +1046,7 @@ public class PullRequestWithCommentsResponse {
                 return false;
             }
             PullRequestWithCommentsResponse.Repository rhs = ((PullRequestWithCommentsResponse.Repository) other);
-            return (((this.pullRequest == rhs.pullRequest)||((this.pullRequest!= null)&&this.pullRequest.equals(rhs.pullRequest)))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))));
+            return ((((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties)))&&((this.nameWithOwner == rhs.nameWithOwner)||((this.nameWithOwner!= null)&&this.nameWithOwner.equals(rhs.nameWithOwner))))&&((this.pullRequest == rhs.pullRequest)||((this.pullRequest!= null)&&this.pullRequest.equals(rhs.pullRequest))));
         }
 
     }

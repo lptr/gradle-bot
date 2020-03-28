@@ -1,11 +1,10 @@
-package org.gradle.bot.eventhandlers
+package org.gradle.bot.eventhandlers.github
 
 import io.vertx.core.Handler
 import io.vertx.core.eventbus.Message
-import org.gradle.bot.PullRequestContext
 import org.gradle.bot.client.GitHubClient
 import org.gradle.bot.client.TeamCityClient
-import org.gradle.bot.getComments
+import org.gradle.bot.eventhandlers.github.issuecomment.PullRequestContext
 import org.gradle.bot.model.GitHubEvent
 import org.gradle.bot.model.IssueCommentGitHubEvent
 import java.lang.reflect.ParameterizedType
@@ -24,15 +23,7 @@ class IssueCommentEventHandler @Inject constructor(private val gitHubClient: Git
         val event = eventMessage.body()
 
         gitHubClient.getPullRequestWithComments(event.repository.fullName, event.issue.number).onSuccess {
-            val context = PullRequestContext(
-                    gitHubClient,
-                    teamCityClient,
-                    it.getComments(gitHubClient.whoAmI()),
-                    event.repository.fullName,
-                    it.data.repository.pullRequest.headRef.name,
-                    event.issue.nodeId,
-                    it.data.repository.pullRequest.headRef.target.oid)
-            context.processCommand(event.comment.id)
+            PullRequestContext(gitHubClient, teamCityClient, it).processCommand(event.comment.id)
         }
     }
 }

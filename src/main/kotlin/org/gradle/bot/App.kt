@@ -20,13 +20,12 @@ import io.vertx.ext.web.Router
 import io.vertx.ext.web.handler.BodyHandler
 import io.vertx.kotlin.core.http.httpServerOptionsOf
 import org.gradle.bot.client.GitHubClient
-import org.gradle.bot.eventhandlers.GitHubEventHandler
+import org.gradle.bot.eventhandlers.github.GitHubEventHandler
 import org.gradle.bot.model.GitHubEvent
 import org.gradle.bot.webhookhandlers.GitHubWebHookHandler
 import org.gradle.bot.webhookhandlers.TeamCityWebHookHandler
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import java.lang.IllegalStateException
 import java.util.concurrent.Callable
 import javax.inject.Inject
 
@@ -67,7 +66,7 @@ private fun registerEventHandlers(vertx: Vertx, injector: Injector) {
     val packageName = GradleBotVerticle::class.java.`package`.name
     ClassPath.from(GradleBotVerticle::class.java.classLoader).getTopLevelClassesRecursive(packageName).forEach {
         val klass = it.load()
-        if (klass.isAssignableFrom(GitHubEventHandler::class.java)) {
+        if (klass.isAssignableFrom(GitHubEventHandler::class.java) && klass != GitHubEventHandler::class.java) {
             val eventHandler: GitHubEventHandler<GitHubEvent> = injector.getInstance(klass) as GitHubEventHandler<GitHubEvent>
             vertx.eventBus().consumer<GitHubEvent>(eventHandler.eventType(), eventHandler)
         }
@@ -81,7 +80,7 @@ class GradleBotAppModule(private val vertx: Vertx) : AbstractModule() {
     }
 
     private fun bindEnv(envName: String) {
-        val envValue = System.getenv(envName) ?: throw IllegalStateException("Env $envName must be set!")
+        val envValue = System.getenv(envName) ?: "" //throw IllegalStateException("Env $envName must be set!")
         bind(String::class.java).annotatedWith(Names.named(envName)).toInstance(envValue)
     }
 

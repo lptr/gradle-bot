@@ -1,8 +1,17 @@
-package org.gradle.bot
+package org.gradle.bot.eventhandlers.github.issuecomment
 
 import org.gradle.bot.model.BuildStage
 import org.jetbrains.teamcity.rest.BuildState
 
+/**
+ * PullRequestCommand is some commands that administrators send via pull request comments,
+ * for example,
+ *
+ * <pre>
+ * @bot-gradle test this please
+ * @bot-gradle test and merge this please
+ * </pre>
+ */
 interface PullRequestCommand {
     fun execute(context: PullRequestContext)
 
@@ -49,12 +58,12 @@ class TestAndMergeCommand
 class StopCommand
 
 
-class HelpCommand(override val sourceComment: PullRequestComment) : PullRequestCommand {
+class HelpCommand(override val sourceComment: CommandComment) : PullRequestCommand {
     override fun execute(context: PullRequestContext) {
         context.reply(sourceComment, context.helpMessage())
     }
 }
 
-class NoOpCommand(override val sourceComment: PullRequestComment) : PullRequestCommand {
+class NullCommand(override val sourceComment: PullRequestComment) : PullRequestCommand {
     override fun execute(context: PullRequestContext) {}
 }

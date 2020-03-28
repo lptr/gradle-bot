@@ -1,12 +1,14 @@
 {
   "data": {
     "repository": {
+      "nameWithOwner": "gradle/gradle",
       "pullRequest": {
-        "body": "on a failing build caused by instant execution problems, build failure details problems\r\non a failing build *not* caused by instant execution problems, warning log details problems\r\non a succeeding build, warning log details problems\r\n\r\nin all cases, generate the HTML report if any problem\r\n\r\n----\r\n\r\nMost of the impact on annotated tests can be seen in https://github.com/gradle/gradle/pull/12505 which is based on this very PR.",
+        "id": "MDExOlB1bGxSZXF1ZXN0MzkxNjM4MTkw",
+        "body": "on a failing build caused by state serialization errors, state is discarded, error is detailled in build failure and summary of problems seen so far in build output\r\non a failing build caused by instant execution problems, state is discarded and problem summary in build failure\r\non a failing build *not* caused by instant execution problems, problem summary in build output\r\non a succeeding build, problem summary in build output\r\n\r\nin all cases, generate the HTML report if any problem\r\n\r\n----\r\n\r\nMost of the impact on annotated tests can be seen in https://github.com/gradle/gradle/pull/12505 which is based on this very PR.",
         "url": "https://github.com/gradle/gradle/pull/12595",
         "headRef": {
           "target": {
-            "oid": "2e436a09b8f0b614ee842b18aab89c245addb681"
+            "oid": "63aaca68d485c76c4f9c11be9098348746cde04a"
           },
           "repository": {
             "isFork": false,
@@ -35,6 +37,30 @@
               },
               "authorAssociation": "MEMBER",
               "body": "False alarm. Turns out it needs a bit more work. There's https://github.com/gradle/gradle/pull/12595#discussion_r398912241 which should also help fix an issue with state discarding vs. `failOnProblems` I just found playing a bit more with it. Moved back to _in progress_.\r\n"
+            },
+            {
+              "databaseId": 604949496,
+              "author": {
+                "login": "eskatos"
+              },
+              "authorAssociation": "MEMBER",
+              "body": "This time this is ready for another round of review.\r\n"
+            },
+            {
+              "databaseId": 604950261,
+              "author": {
+                "login": "blindpirate"
+              },
+              "authorAssociation": "MEMBER",
+              "body": "@bot-gradle test RFM"
+            },
+            {
+              "databaseId": 604950324,
+              "author": {
+                "login": "bot-gradle"
+              },
+              "authorAssociation": "COLLABORATOR",
+              "body": "<!-- {\"replyTargetCommentId\":604950261,\"teamCityBuildId\":\"33016851\",\"teamCityBuildHeadRef\":\"63aaca68d485c76c4f9c11be9098348746cde04a\"} -->\n            \nOK, I've already triggered [ReadyForMerge build](https://builds.gradle.org/viewLog.html?buildId=33016851) for you."
             }
           ]
         },
@@ -42,80 +68,80 @@
           "nodes": [
             {
               "commit": {
-                "commitUrl": "https://github.com/gradle/gradle/commit/2e436a09b8f0b614ee842b18aab89c245addb681",
-                "oid": "2e436a09b8f0b614ee842b18aab89c245addb681",
+                "commitUrl": "https://github.com/gradle/gradle/commit/63aaca68d485c76c4f9c11be9098348746cde04a",
+                "oid": "63aaca68d485c76c4f9c11be9098348746cde04a",
                 "status": {
                   "state": "SUCCESS",
                   "contexts": [
                     {
                       "state": "SUCCESS",
-                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=32991160&buildTypeId=Gradle_Check_BuildDistributions",
+                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33016695&buildTypeId=Gradle_Check_BuildDistributions",
                       "description": "TeamCity build finished",
                       "context": "Build Distributions (Ready for Merge)"
                     },
                     {
                       "state": "SUCCESS",
-                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=32991056&buildTypeId=Gradle_Check_CompileAll",
+                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33016245&buildTypeId=Gradle_Check_CompileAll",
                       "description": "TeamCity build finished",
                       "context": "Compile All (Quick Feedback - Linux Only)"
                     },
                     {
                       "state": "SUCCESS",
-                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=32991161&buildTypeId=Gradle_Check_Gradleception",
+                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33016696&buildTypeId=Gradle_Check_Gradleception",
                       "description": "TeamCity build finished",
                       "context": "Gradleception - Java8 Linux (Ready for Merge)"
                     },
                     {
                       "state": "SUCCESS",
-                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=32991165&buildTypeId=Gradle_Check_PerformanceTestCoordinator",
+                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33045303&buildTypeId=Gradle_Check_PerformanceTestCoordinator",
                       "description": "TeamCity build finished",
                       "context": "Performance Regression Test Coordinator - Linux (Ready for Merge)"
                     },
                     {
                       "state": "SUCCESS",
-                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=32991159&buildTypeId=Gradle_Check_Stage_QuickFeedback_Trigger",
+                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33016694&buildTypeId=Gradle_Check_Stage_QuickFeedback_Trigger",
                       "description": "TeamCity build finished",
                       "context": "Quick Feedback (Trigger) (Check)"
                     },
                     {
                       "state": "SUCCESS",
-                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=32991108&buildTypeId=Gradle_Check_Stage_QuickFeedbackLinuxOnly_Trigger",
+                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33024504&buildTypeId=Gradle_Check_Stage_QuickFeedbackLinuxOnly_Trigger",
                       "description": "TeamCity build finished",
                       "context": "Quick Feedback - Linux Only (Trigger) (Check)"
                     },
                     {
                       "state": "SUCCESS",
-                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=32991316&buildTypeId=Gradle_Check_Stage_ReadyforMerge_Trigger",
+                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33045454&buildTypeId=Gradle_Check_Stage_ReadyforMerge_Trigger",
                       "description": "TeamCity build finished",
                       "context": "Ready for Merge (Trigger) (Check)"
                     },
                     {
                       "state": "SUCCESS",
-                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=32991395&buildTypeId=Gradle_Check_Stage_ReadyforNightly_Trigger",
+                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33045533&buildTypeId=Gradle_Check_Stage_ReadyforNightly_Trigger",
                       "description": "TeamCity build finished",
                       "context": "Ready for Nightly (Trigger) (Check)"
                     },
                     {
                       "state": "SUCCESS",
-                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=32991057&buildTypeId=Gradle_Check_SanityCheck",
+                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33017418&buildTypeId=Gradle_Check_SanityCheck",
                       "description": "TeamCity build finished",
                       "context": "Sanity Check (Quick Feedback - Linux Only)"
                     },
                     {
                       "state": "SUCCESS",
-                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=32991163&buildTypeId=Gradle_Check_InstantSmokeTestsJava14",
+                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33016698&buildTypeId=Gradle_Check_InstantSmokeTestsJava14",
                       "description": "TeamCity build finished",
                       "context": "Smoke Tests with 3rd Party Plugins (instantSmokeTest) - Java14 Linux (Ready for Merge)"
                     },
                     {
                       "state": "SUCCESS",
-                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=32991164&buildTypeId=Gradle_Check_InstantSmokeTestsJava8",
+                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33016699&buildTypeId=Gradle_Check_InstantSmokeTestsJava8",
                       "description": "TeamCity build finished",
                       "context": "Smoke Tests with 3rd Party Plugins (instantSmokeTest) - Java8 Linux (Ready for Merge)"
                     },
                     {
                       "state": "SUCCESS",
-                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=32991162&buildTypeId=Gradle_Check_SmokeTestsJava14",
+                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33016697&buildTypeId=Gradle_Check_SmokeTestsJava14",
                       "description": "TeamCity build finished",
                       "context": "Smoke Tests with 3rd Party Plugins (smokeTest) - Java14 Linux (Ready for Merge)"
                     }

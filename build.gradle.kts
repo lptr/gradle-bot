@@ -29,6 +29,7 @@ dependencies {
     val logbackVersion = "1.2.3"
     val junit5Version = "5.6.1"
     val guavaVersion = "28.2-jre"
+    val mockitoJUnitVersion = "3.3.3"
 
     implementation("io.vertx:vertx-web-client:$vertxVersion")
     implementation("io.vertx:vertx-core:$vertxVersion")
@@ -52,6 +53,8 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api:$junit5Version")
     testImplementation("org.junit.jupiter:junit-jupiter-engine:$junit5Version")
     testImplementation("org.junit.jupiter:junit-jupiter-params:$junit5Version")
+    testImplementation("org.mockito:mockito-junit-jupiter:$mockitoJUnitVersion")
+
 
     "teamCityWorkaroundImplementation"(platform("org.jetbrains.kotlin:kotlin-bom"))
     "teamCityWorkaroundImplementation"("org.jetbrains.kotlin:kotlin-stdlib-jdk8")

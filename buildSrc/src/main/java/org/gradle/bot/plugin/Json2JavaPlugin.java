@@ -2,23 +2,19 @@ package org.gradle.bot.plugin;
 
 import com.sun.codemodel.JPackage;
 import com.sun.codemodel.JType;
-import org.apache.commons.io.IOUtils;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.tasks.TaskAction;
 import org.gradle.api.tasks.TaskProvider;
 import org.gradle.api.tasks.compile.AbstractCompile;
-import org.jsonschema2pojo.AbstractRuleLogger;
 import org.jsonschema2pojo.DefaultGenerationConfig;
 import org.jsonschema2pojo.GenerationConfig;
 import org.jsonschema2pojo.Jsonschema2Pojo;
 import org.jsonschema2pojo.SourceType;
-import org.jsonschema2pojo.rules.ObjectRule;
 import org.jsonschema2pojo.rules.Rule;
 import org.jsonschema2pojo.rules.RuleFactory;
 import org.jsonschema2pojo.util.ParcelableHelper;
-import org.jsonschema2pojo.util.ReflectionHelper;
 
 import java.io.File;
 import java.io.IOException;

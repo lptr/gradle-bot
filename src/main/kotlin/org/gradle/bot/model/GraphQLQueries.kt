@@ -4,12 +4,12 @@ import org.gradle.bot.objectMapper
 
 /*
 query {
-  repository(owner:"gradle", name: "gradle") {
+  repository(owner: "gradle", name: "gradle") {
+    nameWithOwner
     pullRequest(number: 12595) {
+      id
       body
-
       url
-
       headRef {
         target {
           oid
@@ -35,35 +35,35 @@ query {
         }
       }
       commits(last: 1) {
-          nodes {
-            commit {
-              commitUrl
-              oid
-              status {
+        nodes {
+          commit {
+            commitUrl
+            oid
+            status {
+              state
+              contexts {
                 state
-
-                contexts {
-                  state
-                  targetUrl
-                  description
-                  context
-                }
+                targetUrl
+                description
+                context
               }
             }
           }
         }
+      }
     }
   }
 }
+
  */
 fun pullRequestsWithCommentsQuery(owner: String, name: String, number: Int, maxCommentNum: Int = 100) = """
 query {
-  repository(owner:"$owner", name: "$name") { 
+  repository(owner: "$owner", name: "$name") {
+    nameWithOwner
     pullRequest(number: $number) {
-      body 
-      
+      id
+      body
       url
-      
       headRef {
         target {
           oid
@@ -89,26 +89,26 @@ query {
         }
       }
       commits(last: 1) {
-          nodes {
-            commit {
-              commitUrl
-              oid
-              status {
+        nodes {
+          commit {
+            commitUrl
+            oid
+            status {
+              state
+              contexts {
                 state
-
-                contexts {
-                  state
-                  targetUrl
-                  description
-                  context
-                }
+                targetUrl
+                description
+                context
               }
             }
           }
         }
+      }
     }
   }
-}  
+}
+
 """.trimIndent().replace('\n',' ')
 
 fun addCommentMutation(subjectId: String, commentBody: String) = """
