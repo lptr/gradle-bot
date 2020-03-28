@@ -1,10 +1,24 @@
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 import java.net.URI
+import org.gradle.bot.plugin.Json2JavaPlugin
+
+//buildscript {
+//    repositories { mavenCentral() }
+//    dependencies {
+//        classpath("org.jsonschema2pojo:jsonschema2pojo-gradle-plugin:1.0.2")
+//    }
+//}
 
 plugins {
     id("org.jetbrains.kotlin.jvm") version "1.3.70"
     id("application")
 }
+
+apply(plugin = "json2Java")
+
+extra["json2JavaSourceDir"] = rootDir.resolve("src/jsonModel/resources/json")
+extra["json2JavaTargetDir"] = rootDir.resolve("src/jsonModel/java")
+extra["json2JavaTargetPackage"] = "org.gradle.bot.model"
 
 sourceSets.create("teamCityWorkaround").withConvention(KotlinSourceSet::class) {
     kotlin.srcDirs += file("src/teamCityWorkaround/kotlin")
@@ -13,8 +27,6 @@ sourceSets.create("teamCityWorkaround").withConvention(KotlinSourceSet::class) {
 sourceSets.create("jsonModel")
 
 repositories {
-    // Use jcenter for resolving dependencies.
-    // You can declare any Maven/Ivy/file repository here.
     jcenter()
     mavenCentral()
     maven {
@@ -70,6 +82,7 @@ dependencies {
 
     implementation(sourceSets["teamCityWorkaround"].output)
     implementation(sourceSets["jsonModel"].output)
+    "jsonModelImplementation"("com.fasterxml.jackson.core:jackson-databind:$jacksonVersion")
     configurations["implementation"].extendsFrom(configurations["teamCityWorkaroundImplementation"])
 }
 
@@ -85,3 +98,9 @@ application {
     mainClassName = "org.gradle.bot.AppKt"
 }
 
+//extensions.findByType(JsonSchemaExtension::class.java)?.run {
+//    sourceFiles = listOf(*rootDir.resolve("json").listFiles())
+//    targetDirectory = rootDir.resolve("src/jsonModel/java")
+//    setSourceType("JSON")
+//    useInnerClassBuilders = true
+//}
