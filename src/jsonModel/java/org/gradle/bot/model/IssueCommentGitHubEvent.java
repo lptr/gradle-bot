@@ -21,22 +21,48 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "organization",
     "sender"
 })
-public class IssueCommentEvent {
+public class IssueCommentGitHubEvent implements GitHubEvent {
 
     @JsonProperty("action")
     private String action;
     @JsonProperty("issue")
-    private IssueCommentEvent.Issue issue;
+    private IssueCommentGitHubEvent.Issue issue;
     @JsonProperty("comment")
-    private IssueCommentEvent.Comment comment;
+    private IssueCommentGitHubEvent.Comment comment;
     @JsonProperty("repository")
-    private IssueCommentEvent.Repository repository;
+    private IssueCommentGitHubEvent.Repository repository;
     @JsonProperty("organization")
-    private IssueCommentEvent.Organization organization;
+    private IssueCommentGitHubEvent.Organization organization;
     @JsonProperty("sender")
-    private IssueCommentEvent.Sender sender;
+    private IssueCommentGitHubEvent.Sender sender;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+    /**
+     * No args constructor for use in serialization
+     * 
+     */
+    public IssueCommentGitHubEvent() {
+    }
+
+    /**
+     * 
+     * @param issue
+     * @param sender
+     * @param organization
+     * @param action
+     * @param comment
+     * @param repository
+     */
+    public IssueCommentGitHubEvent(String action, IssueCommentGitHubEvent.Issue issue, IssueCommentGitHubEvent.Comment comment, IssueCommentGitHubEvent.Repository repository, IssueCommentGitHubEvent.Organization organization, IssueCommentGitHubEvent.Sender sender) {
+        super();
+        this.action = action;
+        this.issue = issue;
+        this.comment = comment;
+        this.repository = repository;
+        this.organization = organization;
+        this.sender = sender;
+    }
 
     @JsonProperty("action")
     public String getAction() {
@@ -49,52 +75,52 @@ public class IssueCommentEvent {
     }
 
     @JsonProperty("issue")
-    public IssueCommentEvent.Issue getIssue() {
+    public IssueCommentGitHubEvent.Issue getIssue() {
         return issue;
     }
 
     @JsonProperty("issue")
-    public void setIssue(IssueCommentEvent.Issue issue) {
+    public void setIssue(IssueCommentGitHubEvent.Issue issue) {
         this.issue = issue;
     }
 
     @JsonProperty("comment")
-    public IssueCommentEvent.Comment getComment() {
+    public IssueCommentGitHubEvent.Comment getComment() {
         return comment;
     }
 
     @JsonProperty("comment")
-    public void setComment(IssueCommentEvent.Comment comment) {
+    public void setComment(IssueCommentGitHubEvent.Comment comment) {
         this.comment = comment;
     }
 
     @JsonProperty("repository")
-    public IssueCommentEvent.Repository getRepository() {
+    public IssueCommentGitHubEvent.Repository getRepository() {
         return repository;
     }
 
     @JsonProperty("repository")
-    public void setRepository(IssueCommentEvent.Repository repository) {
+    public void setRepository(IssueCommentGitHubEvent.Repository repository) {
         this.repository = repository;
     }
 
     @JsonProperty("organization")
-    public IssueCommentEvent.Organization getOrganization() {
+    public IssueCommentGitHubEvent.Organization getOrganization() {
         return organization;
     }
 
     @JsonProperty("organization")
-    public void setOrganization(IssueCommentEvent.Organization organization) {
+    public void setOrganization(IssueCommentGitHubEvent.Organization organization) {
         this.organization = organization;
     }
 
     @JsonProperty("sender")
-    public IssueCommentEvent.Sender getSender() {
+    public IssueCommentGitHubEvent.Sender getSender() {
         return sender;
     }
 
     @JsonProperty("sender")
-    public void setSender(IssueCommentEvent.Sender sender) {
+    public void setSender(IssueCommentGitHubEvent.Sender sender) {
         this.sender = sender;
     }
 
@@ -111,7 +137,7 @@ public class IssueCommentEvent {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(IssueCommentEvent.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+        sb.append(IssueCommentGitHubEvent.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
         sb.append("action");
         sb.append('=');
         sb.append(((this.action == null)?"<null>":this.action));
@@ -166,10 +192,10 @@ public class IssueCommentEvent {
         if (other == this) {
             return true;
         }
-        if ((other instanceof IssueCommentEvent) == false) {
+        if ((other instanceof IssueCommentGitHubEvent) == false) {
             return false;
         }
-        IssueCommentEvent rhs = ((IssueCommentEvent) other);
+        IssueCommentGitHubEvent rhs = ((IssueCommentGitHubEvent) other);
         return ((((((((this.issue == rhs.issue)||((this.issue!= null)&&this.issue.equals(rhs.issue)))&&((this.sender == rhs.sender)||((this.sender!= null)&&this.sender.equals(rhs.sender))))&&((this.organization == rhs.organization)||((this.organization!= null)&&this.organization.equals(rhs.organization))))&&((this.action == rhs.action)||((this.action!= null)&&this.action.equals(rhs.action))))&&((this.comment == rhs.comment)||((this.comment!= null)&&this.comment.equals(rhs.comment))))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))))&&((this.repository == rhs.repository)||((this.repository!= null)&&this.repository.equals(rhs.repository))));
     }
 
@@ -199,7 +225,7 @@ public class IssueCommentEvent {
         @JsonProperty("node_id")
         private String nodeId;
         @JsonProperty("user")
-        private IssueCommentEvent.User user;
+        private IssueCommentGitHubEvent.User user;
         @JsonProperty("created_at")
         private String createdAt;
         @JsonProperty("updated_at")
@@ -210,6 +236,40 @@ public class IssueCommentEvent {
         private String body;
         @JsonIgnore
         private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+        /**
+         * No args constructor for use in serialization
+         * 
+         */
+        public Comment() {
+        }
+
+        /**
+         * 
+         * @param createdAt
+         * @param issueUrl
+         * @param htmlUrl
+         * @param id
+         * @param body
+         * @param nodeId
+         * @param user
+         * @param authorAssociation
+         * @param url
+         * @param updatedAt
+         */
+        public Comment(String url, String htmlUrl, String issueUrl, Integer id, String nodeId, IssueCommentGitHubEvent.User user, String createdAt, String updatedAt, String authorAssociation, String body) {
+            super();
+            this.url = url;
+            this.htmlUrl = htmlUrl;
+            this.issueUrl = issueUrl;
+            this.id = id;
+            this.nodeId = nodeId;
+            this.user = user;
+            this.createdAt = createdAt;
+            this.updatedAt = updatedAt;
+            this.authorAssociation = authorAssociation;
+            this.body = body;
+        }
 
         @JsonProperty("url")
         public String getUrl() {
@@ -262,12 +322,12 @@ public class IssueCommentEvent {
         }
 
         @JsonProperty("user")
-        public IssueCommentEvent.User getUser() {
+        public IssueCommentGitHubEvent.User getUser() {
             return user;
         }
 
         @JsonProperty("user")
-        public void setUser(IssueCommentEvent.User user) {
+        public void setUser(IssueCommentGitHubEvent.User user) {
             this.user = user;
         }
 
@@ -324,7 +384,7 @@ public class IssueCommentEvent {
         @Override
         public String toString() {
             StringBuilder sb = new StringBuilder();
-            sb.append(IssueCommentEvent.Comment.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append(IssueCommentGitHubEvent.Comment.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
             sb.append("url");
             sb.append('=');
             sb.append(((this.url == null)?"<null>":this.url));
@@ -399,10 +459,10 @@ public class IssueCommentEvent {
             if (other == this) {
                 return true;
             }
-            if ((other instanceof IssueCommentEvent.Comment) == false) {
+            if ((other instanceof IssueCommentGitHubEvent.Comment) == false) {
                 return false;
             }
-            IssueCommentEvent.Comment rhs = ((IssueCommentEvent.Comment) other);
+            IssueCommentGitHubEvent.Comment rhs = ((IssueCommentGitHubEvent.Comment) other);
             return ((((((((((((this.createdAt == rhs.createdAt)||((this.createdAt!= null)&&this.createdAt.equals(rhs.createdAt)))&&((this.issueUrl == rhs.issueUrl)||((this.issueUrl!= null)&&this.issueUrl.equals(rhs.issueUrl))))&&((this.htmlUrl == rhs.htmlUrl)||((this.htmlUrl!= null)&&this.htmlUrl.equals(rhs.htmlUrl))))&&((this.id == rhs.id)||((this.id!= null)&&this.id.equals(rhs.id))))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))))&&((this.body == rhs.body)||((this.body!= null)&&this.body.equals(rhs.body))))&&((this.nodeId == rhs.nodeId)||((this.nodeId!= null)&&this.nodeId.equals(rhs.nodeId))))&&((this.user == rhs.user)||((this.user!= null)&&this.user.equals(rhs.user))))&&((this.authorAssociation == rhs.authorAssociation)||((this.authorAssociation!= null)&&this.authorAssociation.equals(rhs.authorAssociation))))&&((this.url == rhs.url)||((this.url!= null)&&this.url.equals(rhs.url))))&&((this.updatedAt == rhs.updatedAt)||((this.updatedAt!= null)&&this.updatedAt.equals(rhs.updatedAt))));
         }
 
@@ -458,9 +518,9 @@ public class IssueCommentEvent {
         @JsonProperty("title")
         private String title;
         @JsonProperty("user")
-        private IssueCommentEvent.User user;
+        private IssueCommentGitHubEvent.User user;
         @JsonProperty("labels")
-        private List<IssueCommentEvent.Label> labels = new ArrayList<IssueCommentEvent.Label>();
+        private List<IssueCommentGitHubEvent.Label> labels = new ArrayList<IssueCommentGitHubEvent.Label>();
         @JsonProperty("state")
         private String state;
         @JsonProperty("locked")
@@ -482,11 +542,73 @@ public class IssueCommentEvent {
         @JsonProperty("author_association")
         private String authorAssociation;
         @JsonProperty("pull_request")
-        private IssueCommentEvent.PullRequest pullRequest;
+        private IssueCommentGitHubEvent.PullRequest pullRequest;
         @JsonProperty("body")
         private String body;
         @JsonIgnore
         private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+        /**
+         * No args constructor for use in serialization
+         * 
+         */
+        public Issue() {
+        }
+
+        /**
+         * 
+         * @param comments
+         * @param labelsUrl
+         * @param htmlUrl
+         * @param assignees
+         * @param title
+         * @param body
+         * @param url
+         * @param pullRequest
+         * @param repositoryUrl
+         * @param labels
+         * @param number
+         * @param createdAt
+         * @param commentsUrl
+         * @param milestone
+         * @param eventsUrl
+         * @param id
+         * @param state
+         * @param assignee
+         * @param locked
+         * @param closedAt
+         * @param nodeId
+         * @param user
+         * @param authorAssociation
+         * @param updatedAt
+         */
+        public Issue(String url, String repositoryUrl, String labelsUrl, String commentsUrl, String eventsUrl, String htmlUrl, Integer id, String nodeId, Integer number, String title, IssueCommentGitHubEvent.User user, List<IssueCommentGitHubEvent.Label> labels, String state, Boolean locked, Object assignee, List<Object> assignees, Object milestone, Integer comments, String createdAt, String updatedAt, String closedAt, String authorAssociation, IssueCommentGitHubEvent.PullRequest pullRequest, String body) {
+            super();
+            this.url = url;
+            this.repositoryUrl = repositoryUrl;
+            this.labelsUrl = labelsUrl;
+            this.commentsUrl = commentsUrl;
+            this.eventsUrl = eventsUrl;
+            this.htmlUrl = htmlUrl;
+            this.id = id;
+            this.nodeId = nodeId;
+            this.number = number;
+            this.title = title;
+            this.user = user;
+            this.labels = labels;
+            this.state = state;
+            this.locked = locked;
+            this.assignee = assignee;
+            this.assignees = assignees;
+            this.milestone = milestone;
+            this.comments = comments;
+            this.createdAt = createdAt;
+            this.updatedAt = updatedAt;
+            this.closedAt = closedAt;
+            this.authorAssociation = authorAssociation;
+            this.pullRequest = pullRequest;
+            this.body = body;
+        }
 
         @JsonProperty("url")
         public String getUrl() {
@@ -589,22 +711,22 @@ public class IssueCommentEvent {
         }
 
         @JsonProperty("user")
-        public IssueCommentEvent.User getUser() {
+        public IssueCommentGitHubEvent.User getUser() {
             return user;
         }
 
         @JsonProperty("user")
-        public void setUser(IssueCommentEvent.User user) {
+        public void setUser(IssueCommentGitHubEvent.User user) {
             this.user = user;
         }
 
         @JsonProperty("labels")
-        public List<IssueCommentEvent.Label> getLabels() {
+        public List<IssueCommentGitHubEvent.Label> getLabels() {
             return labels;
         }
 
         @JsonProperty("labels")
-        public void setLabels(List<IssueCommentEvent.Label> labels) {
+        public void setLabels(List<IssueCommentGitHubEvent.Label> labels) {
             this.labels = labels;
         }
 
@@ -709,12 +831,12 @@ public class IssueCommentEvent {
         }
 
         @JsonProperty("pull_request")
-        public IssueCommentEvent.PullRequest getPullRequest() {
+        public IssueCommentGitHubEvent.PullRequest getPullRequest() {
             return pullRequest;
         }
 
         @JsonProperty("pull_request")
-        public void setPullRequest(IssueCommentEvent.PullRequest pullRequest) {
+        public void setPullRequest(IssueCommentGitHubEvent.PullRequest pullRequest) {
             this.pullRequest = pullRequest;
         }
 
@@ -741,7 +863,7 @@ public class IssueCommentEvent {
         @Override
         public String toString() {
             StringBuilder sb = new StringBuilder();
-            sb.append(IssueCommentEvent.Issue.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append(IssueCommentGitHubEvent.Issue.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
             sb.append("url");
             sb.append('=');
             sb.append(((this.url == null)?"<null>":this.url));
@@ -886,10 +1008,10 @@ public class IssueCommentEvent {
             if (other == this) {
                 return true;
             }
-            if ((other instanceof IssueCommentEvent.Issue) == false) {
+            if ((other instanceof IssueCommentGitHubEvent.Issue) == false) {
                 return false;
             }
-            IssueCommentEvent.Issue rhs = ((IssueCommentEvent.Issue) other);
+            IssueCommentGitHubEvent.Issue rhs = ((IssueCommentGitHubEvent.Issue) other);
             return ((((((((((((((((((((((((((this.assignees == rhs.assignees)||((this.assignees!= null)&&this.assignees.equals(rhs.assignees)))&&((this.title == rhs.title)||((this.title!= null)&&this.title.equals(rhs.title))))&&((this.body == rhs.body)||((this.body!= null)&&this.body.equals(rhs.body))))&&((this.pullRequest == rhs.pullRequest)||((this.pullRequest!= null)&&this.pullRequest.equals(rhs.pullRequest))))&&((this.number == rhs.number)||((this.number!= null)&&this.number.equals(rhs.number))))&&((this.createdAt == rhs.createdAt)||((this.createdAt!= null)&&this.createdAt.equals(rhs.createdAt))))&&((this.id == rhs.id)||((this.id!= null)&&this.id.equals(rhs.id))))&&((this.state == rhs.state)||((this.state!= null)&&this.state.equals(rhs.state))))&&((this.locked == rhs.locked)||((this.locked!= null)&&this.locked.equals(rhs.locked))))&&((this.closedAt == rhs.closedAt)||((this.closedAt!= null)&&this.closedAt.equals(rhs.closedAt))))&&((this.authorAssociation == rhs.authorAssociation)||((this.authorAssociation!= null)&&this.authorAssociation.equals(rhs.authorAssociation))))&&((this.updatedAt == rhs.updatedAt)||((this.updatedAt!= null)&&this.updatedAt.equals(rhs.updatedAt))))&&((this.comments == rhs.comments)||((this.comments!= null)&&this.comments.equals(rhs.comments))))&&((this.labelsUrl == rhs.labelsUrl)||((this.labelsUrl!= null)&&this.labelsUrl.equals(rhs.labelsUrl))))&&((this.htmlUrl == rhs.htmlUrl)||((this.htmlUrl!= null)&&this.htmlUrl.equals(rhs.htmlUrl))))&&((this.url == rhs.url)||((this.url!= null)&&this.url.equals(rhs.url))))&&((this.repositoryUrl == rhs.repositoryUrl)||((this.repositoryUrl!= null)&&this.repositoryUrl.equals(rhs.repositoryUrl))))&&((this.labels == rhs.labels)||((this.labels!= null)&&this.labels.equals(rhs.labels))))&&((this.commentsUrl == rhs.commentsUrl)||((this.commentsUrl!= null)&&this.commentsUrl.equals(rhs.commentsUrl))))&&((this.milestone == rhs.milestone)||((this.milestone!= null)&&this.milestone.equals(rhs.milestone))))&&((this.eventsUrl == rhs.eventsUrl)||((this.eventsUrl!= null)&&this.eventsUrl.equals(rhs.eventsUrl))))&&((this.assignee == rhs.assignee)||((this.assignee!= null)&&this.assignee.equals(rhs.assignee))))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))))&&((this.nodeId == rhs.nodeId)||((this.nodeId!= null)&&this.nodeId.equals(rhs.nodeId))))&&((this.user == rhs.user)||((this.user!= null)&&this.user.equals(rhs.user))));
         }
 
@@ -923,6 +1045,34 @@ public class IssueCommentEvent {
         private Object description;
         @JsonIgnore
         private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+        /**
+         * No args constructor for use in serialization
+         * 
+         */
+        public Label() {
+        }
+
+        /**
+         * 
+         * @param _default
+         * @param color
+         * @param name
+         * @param description
+         * @param id
+         * @param nodeId
+         * @param url
+         */
+        public Label(Integer id, String nodeId, String url, String name, String color, Boolean _default, Object description) {
+            super();
+            this.id = id;
+            this.nodeId = nodeId;
+            this.url = url;
+            this.name = name;
+            this.color = color;
+            this._default = _default;
+            this.description = description;
+        }
 
         @JsonProperty("id")
         public Integer getId() {
@@ -1007,7 +1157,7 @@ public class IssueCommentEvent {
         @Override
         public String toString() {
             StringBuilder sb = new StringBuilder();
-            sb.append(IssueCommentEvent.Label.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append(IssueCommentGitHubEvent.Label.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
             sb.append("id");
             sb.append('=');
             sb.append(((this.id == null)?"<null>":this.id));
@@ -1067,10 +1217,10 @@ public class IssueCommentEvent {
             if (other == this) {
                 return true;
             }
-            if ((other instanceof IssueCommentEvent.Label) == false) {
+            if ((other instanceof IssueCommentGitHubEvent.Label) == false) {
                 return false;
             }
-            IssueCommentEvent.Label rhs = ((IssueCommentEvent.Label) other);
+            IssueCommentGitHubEvent.Label rhs = ((IssueCommentGitHubEvent.Label) other);
             return (((((((((this._default == rhs._default)||((this._default!= null)&&this._default.equals(rhs._default)))&&((this.color == rhs.color)||((this.color!= null)&&this.color.equals(rhs.color))))&&((this.name == rhs.name)||((this.name!= null)&&this.name.equals(rhs.name))))&&((this.description == rhs.description)||((this.description!= null)&&this.description.equals(rhs.description))))&&((this.id == rhs.id)||((this.id!= null)&&this.id.equals(rhs.id))))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))))&&((this.nodeId == rhs.nodeId)||((this.nodeId!= null)&&this.nodeId.equals(rhs.nodeId))))&&((this.url == rhs.url)||((this.url!= null)&&this.url.equals(rhs.url))));
         }
 
@@ -1119,6 +1269,44 @@ public class IssueCommentEvent {
         private String description;
         @JsonIgnore
         private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+        /**
+         * No args constructor for use in serialization
+         * 
+         */
+        public Organization() {
+        }
+
+        /**
+         * 
+         * @param issuesUrl
+         * @param reposUrl
+         * @param avatarUrl
+         * @param description
+         * @param id
+         * @param eventsUrl
+         * @param membersUrl
+         * @param login
+         * @param publicMembersUrl
+         * @param nodeId
+         * @param url
+         * @param hooksUrl
+         */
+        public Organization(String login, Integer id, String nodeId, String url, String reposUrl, String eventsUrl, String hooksUrl, String issuesUrl, String membersUrl, String publicMembersUrl, String avatarUrl, String description) {
+            super();
+            this.login = login;
+            this.id = id;
+            this.nodeId = nodeId;
+            this.url = url;
+            this.reposUrl = reposUrl;
+            this.eventsUrl = eventsUrl;
+            this.hooksUrl = hooksUrl;
+            this.issuesUrl = issuesUrl;
+            this.membersUrl = membersUrl;
+            this.publicMembersUrl = publicMembersUrl;
+            this.avatarUrl = avatarUrl;
+            this.description = description;
+        }
 
         @JsonProperty("login")
         public String getLogin() {
@@ -1253,7 +1441,7 @@ public class IssueCommentEvent {
         @Override
         public String toString() {
             StringBuilder sb = new StringBuilder();
-            sb.append(IssueCommentEvent.Organization.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append(IssueCommentGitHubEvent.Organization.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
             sb.append("login");
             sb.append('=');
             sb.append(((this.login == null)?"<null>":this.login));
@@ -1338,10 +1526,10 @@ public class IssueCommentEvent {
             if (other == this) {
                 return true;
             }
-            if ((other instanceof IssueCommentEvent.Organization) == false) {
+            if ((other instanceof IssueCommentGitHubEvent.Organization) == false) {
                 return false;
             }
-            IssueCommentEvent.Organization rhs = ((IssueCommentEvent.Organization) other);
+            IssueCommentGitHubEvent.Organization rhs = ((IssueCommentGitHubEvent.Organization) other);
             return ((((((((((((((this.issuesUrl == rhs.issuesUrl)||((this.issuesUrl!= null)&&this.issuesUrl.equals(rhs.issuesUrl)))&&((this.reposUrl == rhs.reposUrl)||((this.reposUrl!= null)&&this.reposUrl.equals(rhs.reposUrl))))&&((this.avatarUrl == rhs.avatarUrl)||((this.avatarUrl!= null)&&this.avatarUrl.equals(rhs.avatarUrl))))&&((this.description == rhs.description)||((this.description!= null)&&this.description.equals(rhs.description))))&&((this.membersUrl == rhs.membersUrl)||((this.membersUrl!= null)&&this.membersUrl.equals(rhs.membersUrl))))&&((this.login == rhs.login)||((this.login!= null)&&this.login.equals(rhs.login))))&&((this.url == rhs.url)||((this.url!= null)&&this.url.equals(rhs.url))))&&((this.hooksUrl == rhs.hooksUrl)||((this.hooksUrl!= null)&&this.hooksUrl.equals(rhs.hooksUrl))))&&((this.id == rhs.id)||((this.id!= null)&&this.id.equals(rhs.id))))&&((this.eventsUrl == rhs.eventsUrl)||((this.eventsUrl!= null)&&this.eventsUrl.equals(rhs.eventsUrl))))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))))&&((this.publicMembersUrl == rhs.publicMembersUrl)||((this.publicMembersUrl!= null)&&this.publicMembersUrl.equals(rhs.publicMembersUrl))))&&((this.nodeId == rhs.nodeId)||((this.nodeId!= null)&&this.nodeId.equals(rhs.nodeId))));
         }
 
@@ -1408,6 +1596,56 @@ public class IssueCommentEvent {
         private Boolean siteAdmin;
         @JsonIgnore
         private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+        /**
+         * No args constructor for use in serialization
+         * 
+         */
+        public Owner() {
+        }
+
+        /**
+         * 
+         * @param receivedEventsUrl
+         * @param siteAdmin
+         * @param followingUrl
+         * @param gistsUrl
+         * @param avatarUrl
+         * @param organizationsUrl
+         * @param reposUrl
+         * @param htmlUrl
+         * @param subscriptionsUrl
+         * @param login
+         * @param type
+         * @param url
+         * @param starredUrl
+         * @param gravatarId
+         * @param followersUrl
+         * @param id
+         * @param eventsUrl
+         * @param nodeId
+         */
+        public Owner(String login, Integer id, String nodeId, String avatarUrl, String gravatarId, String url, String htmlUrl, String followersUrl, String followingUrl, String gistsUrl, String starredUrl, String subscriptionsUrl, String organizationsUrl, String reposUrl, String eventsUrl, String receivedEventsUrl, String type, Boolean siteAdmin) {
+            super();
+            this.login = login;
+            this.id = id;
+            this.nodeId = nodeId;
+            this.avatarUrl = avatarUrl;
+            this.gravatarId = gravatarId;
+            this.url = url;
+            this.htmlUrl = htmlUrl;
+            this.followersUrl = followersUrl;
+            this.followingUrl = followingUrl;
+            this.gistsUrl = gistsUrl;
+            this.starredUrl = starredUrl;
+            this.subscriptionsUrl = subscriptionsUrl;
+            this.organizationsUrl = organizationsUrl;
+            this.reposUrl = reposUrl;
+            this.eventsUrl = eventsUrl;
+            this.receivedEventsUrl = receivedEventsUrl;
+            this.type = type;
+            this.siteAdmin = siteAdmin;
+        }
 
         @JsonProperty("login")
         public String getLogin() {
@@ -1602,7 +1840,7 @@ public class IssueCommentEvent {
         @Override
         public String toString() {
             StringBuilder sb = new StringBuilder();
-            sb.append(IssueCommentEvent.Owner.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append(IssueCommentGitHubEvent.Owner.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
             sb.append("login");
             sb.append('=');
             sb.append(((this.login == null)?"<null>":this.login));
@@ -1717,10 +1955,10 @@ public class IssueCommentEvent {
             if (other == this) {
                 return true;
             }
-            if ((other instanceof IssueCommentEvent.Owner) == false) {
+            if ((other instanceof IssueCommentGitHubEvent.Owner) == false) {
                 return false;
             }
-            IssueCommentEvent.Owner rhs = ((IssueCommentEvent.Owner) other);
+            IssueCommentGitHubEvent.Owner rhs = ((IssueCommentGitHubEvent.Owner) other);
             return ((((((((((((((((((((this.receivedEventsUrl == rhs.receivedEventsUrl)||((this.receivedEventsUrl!= null)&&this.receivedEventsUrl.equals(rhs.receivedEventsUrl)))&&((this.siteAdmin == rhs.siteAdmin)||((this.siteAdmin!= null)&&this.siteAdmin.equals(rhs.siteAdmin))))&&((this.followingUrl == rhs.followingUrl)||((this.followingUrl!= null)&&this.followingUrl.equals(rhs.followingUrl))))&&((this.gistsUrl == rhs.gistsUrl)||((this.gistsUrl!= null)&&this.gistsUrl.equals(rhs.gistsUrl))))&&((this.avatarUrl == rhs.avatarUrl)||((this.avatarUrl!= null)&&this.avatarUrl.equals(rhs.avatarUrl))))&&((this.organizationsUrl == rhs.organizationsUrl)||((this.organizationsUrl!= null)&&this.organizationsUrl.equals(rhs.organizationsUrl))))&&((this.reposUrl == rhs.reposUrl)||((this.reposUrl!= null)&&this.reposUrl.equals(rhs.reposUrl))))&&((this.htmlUrl == rhs.htmlUrl)||((this.htmlUrl!= null)&&this.htmlUrl.equals(rhs.htmlUrl))))&&((this.subscriptionsUrl == rhs.subscriptionsUrl)||((this.subscriptionsUrl!= null)&&this.subscriptionsUrl.equals(rhs.subscriptionsUrl))))&&((this.login == rhs.login)||((this.login!= null)&&this.login.equals(rhs.login))))&&((this.type == rhs.type)||((this.type!= null)&&this.type.equals(rhs.type))))&&((this.url == rhs.url)||((this.url!= null)&&this.url.equals(rhs.url))))&&((this.starredUrl == rhs.starredUrl)||((this.starredUrl!= null)&&this.starredUrl.equals(rhs.starredUrl))))&&((this.gravatarId == rhs.gravatarId)||((this.gravatarId!= null)&&this.gravatarId.equals(rhs.gravatarId))))&&((this.followersUrl == rhs.followersUrl)||((this.followersUrl!= null)&&this.followersUrl.equals(rhs.followersUrl))))&&((this.id == rhs.id)||((this.id!= null)&&this.id.equals(rhs.id))))&&((this.eventsUrl == rhs.eventsUrl)||((this.eventsUrl!= null)&&this.eventsUrl.equals(rhs.eventsUrl))))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))))&&((this.nodeId == rhs.nodeId)||((this.nodeId!= null)&&this.nodeId.equals(rhs.nodeId))));
         }
 
@@ -1745,6 +1983,28 @@ public class IssueCommentEvent {
         private String patchUrl;
         @JsonIgnore
         private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+        /**
+         * No args constructor for use in serialization
+         * 
+         */
+        public PullRequest() {
+        }
+
+        /**
+         * 
+         * @param patchUrl
+         * @param diffUrl
+         * @param htmlUrl
+         * @param url
+         */
+        public PullRequest(String url, String htmlUrl, String diffUrl, String patchUrl) {
+            super();
+            this.url = url;
+            this.htmlUrl = htmlUrl;
+            this.diffUrl = diffUrl;
+            this.patchUrl = patchUrl;
+        }
 
         @JsonProperty("url")
         public String getUrl() {
@@ -1799,7 +2059,7 @@ public class IssueCommentEvent {
         @Override
         public String toString() {
             StringBuilder sb = new StringBuilder();
-            sb.append(IssueCommentEvent.PullRequest.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append(IssueCommentGitHubEvent.PullRequest.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
             sb.append("url");
             sb.append('=');
             sb.append(((this.url == null)?"<null>":this.url));
@@ -1844,10 +2104,10 @@ public class IssueCommentEvent {
             if (other == this) {
                 return true;
             }
-            if ((other instanceof IssueCommentEvent.PullRequest) == false) {
+            if ((other instanceof IssueCommentGitHubEvent.PullRequest) == false) {
                 return false;
             }
-            IssueCommentEvent.PullRequest rhs = ((IssueCommentEvent.PullRequest) other);
+            IssueCommentGitHubEvent.PullRequest rhs = ((IssueCommentGitHubEvent.PullRequest) other);
             return ((((((this.htmlUrl == rhs.htmlUrl)||((this.htmlUrl!= null)&&this.htmlUrl.equals(rhs.htmlUrl)))&&((this.patchUrl == rhs.patchUrl)||((this.patchUrl!= null)&&this.patchUrl.equals(rhs.patchUrl))))&&((this.diffUrl == rhs.diffUrl)||((this.diffUrl!= null)&&this.diffUrl.equals(rhs.diffUrl))))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))))&&((this.url == rhs.url)||((this.url!= null)&&this.url.equals(rhs.url))));
         }
 
@@ -1942,7 +2202,7 @@ public class IssueCommentEvent {
         @JsonProperty("private")
         private Boolean _private;
         @JsonProperty("owner")
-        private IssueCommentEvent.Owner owner;
+        private IssueCommentGitHubEvent.Owner owner;
         @JsonProperty("html_url")
         private String htmlUrl;
         @JsonProperty("description")
@@ -2080,6 +2340,166 @@ public class IssueCommentEvent {
         @JsonIgnore
         private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
+        /**
+         * No args constructor for use in serialization
+         * 
+         */
+        public Repository() {
+        }
+
+        /**
+         * 
+         * @param sshUrl
+         * @param archiveUrl
+         * @param languagesUrl
+         * @param language
+         * @param assigneesUrl
+         * @param commitsUrl
+         * @param openIssues
+         * @param cloneUrl
+         * @param forksCount
+         * @param subscribersUrl
+         * @param createdAt
+         * @param forksUrl
+         * @param watchersCount
+         * @param _private
+         * @param issueCommentUrl
+         * @param statusesUrl
+         * @param id
+         * @param collaboratorsUrl
+         * @param updatedAt
+         * @param forks
+         * @param labelsUrl
+         * @param defaultBranch
+         * @param keysUrl
+         * @param downloadsUrl
+         * @param contentsUrl
+         * @param pushedAt
+         * @param tagsUrl
+         * @param license
+         * @param commentsUrl
+         * @param size
+         * @param treesUrl
+         * @param name
+         * @param mergesUrl
+         * @param nodeId
+         * @param teamsUrl
+         * @param blobsUrl
+         * @param issueEventsUrl
+         * @param hasPages
+         * @param milestonesUrl
+         * @param issuesUrl
+         * @param releasesUrl
+         * @param description
+         * @param watchers
+         * @param branchesUrl
+         * @param contributorsUrl
+         * @param gitRefsUrl
+         * @param hooksUrl
+         * @param openIssuesCount
+         * @param archived
+         * @param stargazersCount
+         * @param disabled
+         * @param hasIssues
+         * @param owner
+         * @param hasWiki
+         * @param compareUrl
+         * @param gitCommitsUrl
+         * @param htmlUrl
+         * @param stargazersUrl
+         * @param fullName
+         * @param svnUrl
+         * @param url
+         * @param pullsUrl
+         * @param mirrorUrl
+         * @param hasDownloads
+         * @param fork
+         * @param hasProjects
+         * @param deploymentsUrl
+         * @param eventsUrl
+         * @param gitTagsUrl
+         * @param notificationsUrl
+         * @param gitUrl
+         * @param subscriptionUrl
+         * @param homepage
+         */
+        public Repository(Integer id, String nodeId, String name, String fullName, Boolean _private, IssueCommentGitHubEvent.Owner owner, String htmlUrl, String description, Boolean fork, String url, String forksUrl, String keysUrl, String collaboratorsUrl, String teamsUrl, String hooksUrl, String issueEventsUrl, String eventsUrl, String assigneesUrl, String branchesUrl, String tagsUrl, String blobsUrl, String gitTagsUrl, String gitRefsUrl, String treesUrl, String statusesUrl, String languagesUrl, String stargazersUrl, String contributorsUrl, String subscribersUrl, String subscriptionUrl, String commitsUrl, String gitCommitsUrl, String commentsUrl, String issueCommentUrl, String contentsUrl, String compareUrl, String mergesUrl, String archiveUrl, String downloadsUrl, String issuesUrl, String pullsUrl, String milestonesUrl, String notificationsUrl, String labelsUrl, String releasesUrl, String deploymentsUrl, String createdAt, String updatedAt, String pushedAt, String gitUrl, String sshUrl, String cloneUrl, String svnUrl, Object homepage, Integer size, Integer stargazersCount, Integer watchersCount, String language, Boolean hasIssues, Boolean hasProjects, Boolean hasDownloads, Boolean hasWiki, Boolean hasPages, Integer forksCount, Object mirrorUrl, Boolean archived, Boolean disabled, Integer openIssuesCount, Object license, Integer forks, Integer openIssues, Integer watchers, String defaultBranch) {
+            super();
+            this.id = id;
+            this.nodeId = nodeId;
+            this.name = name;
+            this.fullName = fullName;
+            this._private = _private;
+            this.owner = owner;
+            this.htmlUrl = htmlUrl;
+            this.description = description;
+            this.fork = fork;
+            this.url = url;
+            this.forksUrl = forksUrl;
+            this.keysUrl = keysUrl;
+            this.collaboratorsUrl = collaboratorsUrl;
+            this.teamsUrl = teamsUrl;
+            this.hooksUrl = hooksUrl;
+            this.issueEventsUrl = issueEventsUrl;
+            this.eventsUrl = eventsUrl;
+            this.assigneesUrl = assigneesUrl;
+            this.branchesUrl = branchesUrl;
+            this.tagsUrl = tagsUrl;
+            this.blobsUrl = blobsUrl;
+            this.gitTagsUrl = gitTagsUrl;
+            this.gitRefsUrl = gitRefsUrl;
+            this.treesUrl = treesUrl;
+            this.statusesUrl = statusesUrl;
+            this.languagesUrl = languagesUrl;
+            this.stargazersUrl = stargazersUrl;
+            this.contributorsUrl = contributorsUrl;
+            this.subscribersUrl = subscribersUrl;
+            this.subscriptionUrl = subscriptionUrl;
+            this.commitsUrl = commitsUrl;
+            this.gitCommitsUrl = gitCommitsUrl;
+            this.commentsUrl = commentsUrl;
+            this.issueCommentUrl = issueCommentUrl;
+            this.contentsUrl = contentsUrl;
+            this.compareUrl = compareUrl;
+            this.mergesUrl = mergesUrl;
+            this.archiveUrl = archiveUrl;
+            this.downloadsUrl = downloadsUrl;
+            this.issuesUrl = issuesUrl;
+            this.pullsUrl = pullsUrl;
+            this.milestonesUrl = milestonesUrl;
+            this.notificationsUrl = notificationsUrl;
+            this.labelsUrl = labelsUrl;
+            this.releasesUrl = releasesUrl;
+            this.deploymentsUrl = deploymentsUrl;
+            this.createdAt = createdAt;
+            this.updatedAt = updatedAt;
+            this.pushedAt = pushedAt;
+            this.gitUrl = gitUrl;
+            this.sshUrl = sshUrl;
+            this.cloneUrl = cloneUrl;
+            this.svnUrl = svnUrl;
+            this.homepage = homepage;
+            this.size = size;
+            this.stargazersCount = stargazersCount;
+            this.watchersCount = watchersCount;
+            this.language = language;
+            this.hasIssues = hasIssues;
+            this.hasProjects = hasProjects;
+            this.hasDownloads = hasDownloads;
+            this.hasWiki = hasWiki;
+            this.hasPages = hasPages;
+            this.forksCount = forksCount;
+            this.mirrorUrl = mirrorUrl;
+            this.archived = archived;
+            this.disabled = disabled;
+            this.openIssuesCount = openIssuesCount;
+            this.license = license;
+            this.forks = forks;
+            this.openIssues = openIssues;
+            this.watchers = watchers;
+            this.defaultBranch = defaultBranch;
+        }
+
         @JsonProperty("id")
         public Integer getId() {
             return id;
@@ -2131,12 +2551,12 @@ public class IssueCommentEvent {
         }
 
         @JsonProperty("owner")
-        public IssueCommentEvent.Owner getOwner() {
+        public IssueCommentGitHubEvent.Owner getOwner() {
             return owner;
         }
 
         @JsonProperty("owner")
-        public void setOwner(IssueCommentEvent.Owner owner) {
+        public void setOwner(IssueCommentGitHubEvent.Owner owner) {
             this.owner = owner;
         }
 
@@ -2823,7 +3243,7 @@ public class IssueCommentEvent {
         @Override
         public String toString() {
             StringBuilder sb = new StringBuilder();
-            sb.append(IssueCommentEvent.Repository.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append(IssueCommentGitHubEvent.Repository.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
             sb.append("id");
             sb.append('=');
             sb.append(((this.id == null)?"<null>":this.id));
@@ -3213,10 +3633,10 @@ public class IssueCommentEvent {
             if (other == this) {
                 return true;
             }
-            if ((other instanceof IssueCommentEvent.Repository) == false) {
+            if ((other instanceof IssueCommentGitHubEvent.Repository) == false) {
                 return false;
             }
-            IssueCommentEvent.Repository rhs = ((IssueCommentEvent.Repository) other);
+            IssueCommentGitHubEvent.Repository rhs = ((IssueCommentGitHubEvent.Repository) other);
             return (((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((this.sshUrl == rhs.sshUrl)||((this.sshUrl!= null)&&this.sshUrl.equals(rhs.sshUrl)))&&((this.archiveUrl == rhs.archiveUrl)||((this.archiveUrl!= null)&&this.archiveUrl.equals(rhs.archiveUrl))))&&((this.languagesUrl == rhs.languagesUrl)||((this.languagesUrl!= null)&&this.languagesUrl.equals(rhs.languagesUrl))))&&((this.language == rhs.language)||((this.language!= null)&&this.language.equals(rhs.language))))&&((this.assigneesUrl == rhs.assigneesUrl)||((this.assigneesUrl!= null)&&this.assigneesUrl.equals(rhs.assigneesUrl))))&&((this.commitsUrl == rhs.commitsUrl)||((this.commitsUrl!= null)&&this.commitsUrl.equals(rhs.commitsUrl))))&&((this.openIssues == rhs.openIssues)||((this.openIssues!= null)&&this.openIssues.equals(rhs.openIssues))))&&((this.cloneUrl == rhs.cloneUrl)||((this.cloneUrl!= null)&&this.cloneUrl.equals(rhs.cloneUrl))))&&((this.forksCount == rhs.forksCount)||((this.forksCount!= null)&&this.forksCount.equals(rhs.forksCount))))&&((this.subscribersUrl == rhs.subscribersUrl)||((this.subscribersUrl!= null)&&this.subscribersUrl.equals(rhs.subscribersUrl))))&&((this.createdAt == rhs.createdAt)||((this.createdAt!= null)&&this.createdAt.equals(rhs.createdAt))))&&((this.forksUrl == rhs.forksUrl)||((this.forksUrl!= null)&&this.forksUrl.equals(rhs.forksUrl))))&&((this.watchersCount == rhs.watchersCount)||((this.watchersCount!= null)&&this.watchersCount.equals(rhs.watchersCount))))&&((this._private == rhs._private)||((this._private!= null)&&this._private.equals(rhs._private))))&&((this.issueCommentUrl == rhs.issueCommentUrl)||((this.issueCommentUrl!= null)&&this.issueCommentUrl.equals(rhs.issueCommentUrl))))&&((this.statusesUrl == rhs.statusesUrl)||((this.statusesUrl!= null)&&this.statusesUrl.equals(rhs.statusesUrl))))&&((this.id == rhs.id)||((this.id!= null)&&this.id.equals(rhs.id))))&&((this.collaboratorsUrl == rhs.collaboratorsUrl)||((this.collaboratorsUrl!= null)&&this.collaboratorsUrl.equals(rhs.collaboratorsUrl))))&&((this.updatedAt == rhs.updatedAt)||((this.updatedAt!= null)&&this.updatedAt.equals(rhs.updatedAt))))&&((this.forks == rhs.forks)||((this.forks!= null)&&this.forks.equals(rhs.forks))))&&((this.labelsUrl == rhs.labelsUrl)||((this.labelsUrl!= null)&&this.labelsUrl.equals(rhs.labelsUrl))))&&((this.defaultBranch == rhs.defaultBranch)||((this.defaultBranch!= null)&&this.defaultBranch.equals(rhs.defaultBranch))))&&((this.keysUrl == rhs.keysUrl)||((this.keysUrl!= null)&&this.keysUrl.equals(rhs.keysUrl))))&&((this.downloadsUrl == rhs.downloadsUrl)||((this.downloadsUrl!= null)&&this.downloadsUrl.equals(rhs.downloadsUrl))))&&((this.contentsUrl == rhs.contentsUrl)||((this.contentsUrl!= null)&&this.contentsUrl.equals(rhs.contentsUrl))))&&((this.pushedAt == rhs.pushedAt)||((this.pushedAt!= null)&&this.pushedAt.equals(rhs.pushedAt))))&&((this.tagsUrl == rhs.tagsUrl)||((this.tagsUrl!= null)&&this.tagsUrl.equals(rhs.tagsUrl))))&&((this.license == rhs.license)||((this.license!= null)&&this.license.equals(rhs.license))))&&((this.commentsUrl == rhs.commentsUrl)||((this.commentsUrl!= null)&&this.commentsUrl.equals(rhs.commentsUrl))))&&((this.size == rhs.size)||((this.size!= null)&&this.size.equals(rhs.size))))&&((this.treesUrl == rhs.treesUrl)||((this.treesUrl!= null)&&this.treesUrl.equals(rhs.treesUrl))))&&((this.name == rhs.name)||((this.name!= null)&&this.name.equals(rhs.name))))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))))&&((this.mergesUrl == rhs.mergesUrl)||((this.mergesUrl!= null)&&this.mergesUrl.equals(rhs.mergesUrl))))&&((this.nodeId == rhs.nodeId)||((this.nodeId!= null)&&this.nodeId.equals(rhs.nodeId))))&&((this.teamsUrl == rhs.teamsUrl)||((this.teamsUrl!= null)&&this.teamsUrl.equals(rhs.teamsUrl))))&&((this.blobsUrl == rhs.blobsUrl)||((this.blobsUrl!= null)&&this.blobsUrl.equals(rhs.blobsUrl))))&&((this.issueEventsUrl == rhs.issueEventsUrl)||((this.issueEventsUrl!= null)&&this.issueEventsUrl.equals(rhs.issueEventsUrl))))&&((this.hasPages == rhs.hasPages)||((this.hasPages!= null)&&this.hasPages.equals(rhs.hasPages))))&&((this.milestonesUrl == rhs.milestonesUrl)||((this.milestonesUrl!= null)&&this.milestonesUrl.equals(rhs.milestonesUrl))))&&((this.issuesUrl == rhs.issuesUrl)||((this.issuesUrl!= null)&&this.issuesUrl.equals(rhs.issuesUrl))))&&((this.releasesUrl == rhs.releasesUrl)||((this.releasesUrl!= null)&&this.releasesUrl.equals(rhs.releasesUrl))))&&((this.description == rhs.description)||((this.description!= null)&&this.description.equals(rhs.description))))&&((this.watchers == rhs.watchers)||((this.watchers!= null)&&this.watchers.equals(rhs.watchers))))&&((this.branchesUrl == rhs.branchesUrl)||((this.branchesUrl!= null)&&this.branchesUrl.equals(rhs.branchesUrl))))&&((this.contributorsUrl == rhs.contributorsUrl)||((this.contributorsUrl!= null)&&this.contributorsUrl.equals(rhs.contributorsUrl))))&&((this.gitRefsUrl == rhs.gitRefsUrl)||((this.gitRefsUrl!= null)&&this.gitRefsUrl.equals(rhs.gitRefsUrl))))&&((this.hooksUrl == rhs.hooksUrl)||((this.hooksUrl!= null)&&this.hooksUrl.equals(rhs.hooksUrl))))&&((this.openIssuesCount == rhs.openIssuesCount)||((this.openIssuesCount!= null)&&this.openIssuesCount.equals(rhs.openIssuesCount))))&&((this.archived == rhs.archived)||((this.archived!= null)&&this.archived.equals(rhs.archived))))&&((this.stargazersCount == rhs.stargazersCount)||((this.stargazersCount!= null)&&this.stargazersCount.equals(rhs.stargazersCount))))&&((this.disabled == rhs.disabled)||((this.disabled!= null)&&this.disabled.equals(rhs.disabled))))&&((this.hasIssues == rhs.hasIssues)||((this.hasIssues!= null)&&this.hasIssues.equals(rhs.hasIssues))))&&((this.owner == rhs.owner)||((this.owner!= null)&&this.owner.equals(rhs.owner))))&&((this.hasWiki == rhs.hasWiki)||((this.hasWiki!= null)&&this.hasWiki.equals(rhs.hasWiki))))&&((this.compareUrl == rhs.compareUrl)||((this.compareUrl!= null)&&this.compareUrl.equals(rhs.compareUrl))))&&((this.gitCommitsUrl == rhs.gitCommitsUrl)||((this.gitCommitsUrl!= null)&&this.gitCommitsUrl.equals(rhs.gitCommitsUrl))))&&((this.htmlUrl == rhs.htmlUrl)||((this.htmlUrl!= null)&&this.htmlUrl.equals(rhs.htmlUrl))))&&((this.stargazersUrl == rhs.stargazersUrl)||((this.stargazersUrl!= null)&&this.stargazersUrl.equals(rhs.stargazersUrl))))&&((this.fullName == rhs.fullName)||((this.fullName!= null)&&this.fullName.equals(rhs.fullName))))&&((this.svnUrl == rhs.svnUrl)||((this.svnUrl!= null)&&this.svnUrl.equals(rhs.svnUrl))))&&((this.url == rhs.url)||((this.url!= null)&&this.url.equals(rhs.url))))&&((this.pullsUrl == rhs.pullsUrl)||((this.pullsUrl!= null)&&this.pullsUrl.equals(rhs.pullsUrl))))&&((this.mirrorUrl == rhs.mirrorUrl)||((this.mirrorUrl!= null)&&this.mirrorUrl.equals(rhs.mirrorUrl))))&&((this.hasDownloads == rhs.hasDownloads)||((this.hasDownloads!= null)&&this.hasDownloads.equals(rhs.hasDownloads))))&&((this.fork == rhs.fork)||((this.fork!= null)&&this.fork.equals(rhs.fork))))&&((this.hasProjects == rhs.hasProjects)||((this.hasProjects!= null)&&this.hasProjects.equals(rhs.hasProjects))))&&((this.deploymentsUrl == rhs.deploymentsUrl)||((this.deploymentsUrl!= null)&&this.deploymentsUrl.equals(rhs.deploymentsUrl))))&&((this.eventsUrl == rhs.eventsUrl)||((this.eventsUrl!= null)&&this.eventsUrl.equals(rhs.eventsUrl))))&&((this.gitTagsUrl == rhs.gitTagsUrl)||((this.gitTagsUrl!= null)&&this.gitTagsUrl.equals(rhs.gitTagsUrl))))&&((this.notificationsUrl == rhs.notificationsUrl)||((this.notificationsUrl!= null)&&this.notificationsUrl.equals(rhs.notificationsUrl))))&&((this.gitUrl == rhs.gitUrl)||((this.gitUrl!= null)&&this.gitUrl.equals(rhs.gitUrl))))&&((this.subscriptionUrl == rhs.subscriptionUrl)||((this.subscriptionUrl!= null)&&this.subscriptionUrl.equals(rhs.subscriptionUrl))))&&((this.homepage == rhs.homepage)||((this.homepage!= null)&&this.homepage.equals(rhs.homepage))));
         }
 
@@ -3284,6 +3704,56 @@ public class IssueCommentEvent {
         @JsonIgnore
         private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
+        /**
+         * No args constructor for use in serialization
+         * 
+         */
+        public Sender() {
+        }
+
+        /**
+         * 
+         * @param receivedEventsUrl
+         * @param siteAdmin
+         * @param followingUrl
+         * @param gistsUrl
+         * @param avatarUrl
+         * @param organizationsUrl
+         * @param reposUrl
+         * @param htmlUrl
+         * @param subscriptionsUrl
+         * @param login
+         * @param type
+         * @param url
+         * @param starredUrl
+         * @param gravatarId
+         * @param followersUrl
+         * @param id
+         * @param eventsUrl
+         * @param nodeId
+         */
+        public Sender(String login, Integer id, String nodeId, String avatarUrl, String gravatarId, String url, String htmlUrl, String followersUrl, String followingUrl, String gistsUrl, String starredUrl, String subscriptionsUrl, String organizationsUrl, String reposUrl, String eventsUrl, String receivedEventsUrl, String type, Boolean siteAdmin) {
+            super();
+            this.login = login;
+            this.id = id;
+            this.nodeId = nodeId;
+            this.avatarUrl = avatarUrl;
+            this.gravatarId = gravatarId;
+            this.url = url;
+            this.htmlUrl = htmlUrl;
+            this.followersUrl = followersUrl;
+            this.followingUrl = followingUrl;
+            this.gistsUrl = gistsUrl;
+            this.starredUrl = starredUrl;
+            this.subscriptionsUrl = subscriptionsUrl;
+            this.organizationsUrl = organizationsUrl;
+            this.reposUrl = reposUrl;
+            this.eventsUrl = eventsUrl;
+            this.receivedEventsUrl = receivedEventsUrl;
+            this.type = type;
+            this.siteAdmin = siteAdmin;
+        }
+
         @JsonProperty("login")
         public String getLogin() {
             return login;
@@ -3477,7 +3947,7 @@ public class IssueCommentEvent {
         @Override
         public String toString() {
             StringBuilder sb = new StringBuilder();
-            sb.append(IssueCommentEvent.Sender.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append(IssueCommentGitHubEvent.Sender.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
             sb.append("login");
             sb.append('=');
             sb.append(((this.login == null)?"<null>":this.login));
@@ -3592,10 +4062,10 @@ public class IssueCommentEvent {
             if (other == this) {
                 return true;
             }
-            if ((other instanceof IssueCommentEvent.Sender) == false) {
+            if ((other instanceof IssueCommentGitHubEvent.Sender) == false) {
                 return false;
             }
-            IssueCommentEvent.Sender rhs = ((IssueCommentEvent.Sender) other);
+            IssueCommentGitHubEvent.Sender rhs = ((IssueCommentGitHubEvent.Sender) other);
             return ((((((((((((((((((((this.receivedEventsUrl == rhs.receivedEventsUrl)||((this.receivedEventsUrl!= null)&&this.receivedEventsUrl.equals(rhs.receivedEventsUrl)))&&((this.siteAdmin == rhs.siteAdmin)||((this.siteAdmin!= null)&&this.siteAdmin.equals(rhs.siteAdmin))))&&((this.followingUrl == rhs.followingUrl)||((this.followingUrl!= null)&&this.followingUrl.equals(rhs.followingUrl))))&&((this.gistsUrl == rhs.gistsUrl)||((this.gistsUrl!= null)&&this.gistsUrl.equals(rhs.gistsUrl))))&&((this.avatarUrl == rhs.avatarUrl)||((this.avatarUrl!= null)&&this.avatarUrl.equals(rhs.avatarUrl))))&&((this.organizationsUrl == rhs.organizationsUrl)||((this.organizationsUrl!= null)&&this.organizationsUrl.equals(rhs.organizationsUrl))))&&((this.reposUrl == rhs.reposUrl)||((this.reposUrl!= null)&&this.reposUrl.equals(rhs.reposUrl))))&&((this.htmlUrl == rhs.htmlUrl)||((this.htmlUrl!= null)&&this.htmlUrl.equals(rhs.htmlUrl))))&&((this.subscriptionsUrl == rhs.subscriptionsUrl)||((this.subscriptionsUrl!= null)&&this.subscriptionsUrl.equals(rhs.subscriptionsUrl))))&&((this.login == rhs.login)||((this.login!= null)&&this.login.equals(rhs.login))))&&((this.type == rhs.type)||((this.type!= null)&&this.type.equals(rhs.type))))&&((this.url == rhs.url)||((this.url!= null)&&this.url.equals(rhs.url))))&&((this.starredUrl == rhs.starredUrl)||((this.starredUrl!= null)&&this.starredUrl.equals(rhs.starredUrl))))&&((this.gravatarId == rhs.gravatarId)||((this.gravatarId!= null)&&this.gravatarId.equals(rhs.gravatarId))))&&((this.followersUrl == rhs.followersUrl)||((this.followersUrl!= null)&&this.followersUrl.equals(rhs.followersUrl))))&&((this.id == rhs.id)||((this.id!= null)&&this.id.equals(rhs.id))))&&((this.eventsUrl == rhs.eventsUrl)||((this.eventsUrl!= null)&&this.eventsUrl.equals(rhs.eventsUrl))))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))))&&((this.nodeId == rhs.nodeId)||((this.nodeId!= null)&&this.nodeId.equals(rhs.nodeId))));
         }
 
@@ -3663,6 +4133,56 @@ public class IssueCommentEvent {
         @JsonIgnore
         private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
+        /**
+         * No args constructor for use in serialization
+         * 
+         */
+        public User() {
+        }
+
+        /**
+         * 
+         * @param receivedEventsUrl
+         * @param siteAdmin
+         * @param followingUrl
+         * @param gistsUrl
+         * @param avatarUrl
+         * @param organizationsUrl
+         * @param reposUrl
+         * @param htmlUrl
+         * @param subscriptionsUrl
+         * @param login
+         * @param type
+         * @param url
+         * @param starredUrl
+         * @param gravatarId
+         * @param followersUrl
+         * @param id
+         * @param eventsUrl
+         * @param nodeId
+         */
+        public User(String login, Integer id, String nodeId, String avatarUrl, String gravatarId, String url, String htmlUrl, String followersUrl, String followingUrl, String gistsUrl, String starredUrl, String subscriptionsUrl, String organizationsUrl, String reposUrl, String eventsUrl, String receivedEventsUrl, String type, Boolean siteAdmin) {
+            super();
+            this.login = login;
+            this.id = id;
+            this.nodeId = nodeId;
+            this.avatarUrl = avatarUrl;
+            this.gravatarId = gravatarId;
+            this.url = url;
+            this.htmlUrl = htmlUrl;
+            this.followersUrl = followersUrl;
+            this.followingUrl = followingUrl;
+            this.gistsUrl = gistsUrl;
+            this.starredUrl = starredUrl;
+            this.subscriptionsUrl = subscriptionsUrl;
+            this.organizationsUrl = organizationsUrl;
+            this.reposUrl = reposUrl;
+            this.eventsUrl = eventsUrl;
+            this.receivedEventsUrl = receivedEventsUrl;
+            this.type = type;
+            this.siteAdmin = siteAdmin;
+        }
+
         @JsonProperty("login")
         public String getLogin() {
             return login;
@@ -3856,7 +4376,7 @@ public class IssueCommentEvent {
         @Override
         public String toString() {
             StringBuilder sb = new StringBuilder();
-            sb.append(IssueCommentEvent.User.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append(IssueCommentGitHubEvent.User.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
             sb.append("login");
             sb.append('=');
             sb.append(((this.login == null)?"<null>":this.login));
@@ -3971,10 +4491,10 @@ public class IssueCommentEvent {
             if (other == this) {
                 return true;
             }
-            if ((other instanceof IssueCommentEvent.User) == false) {
+            if ((other instanceof IssueCommentGitHubEvent.User) == false) {
                 return false;
             }
-            IssueCommentEvent.User rhs = ((IssueCommentEvent.User) other);
+            IssueCommentGitHubEvent.User rhs = ((IssueCommentGitHubEvent.User) other);
             return ((((((((((((((((((((this.receivedEventsUrl == rhs.receivedEventsUrl)||((this.receivedEventsUrl!= null)&&this.receivedEventsUrl.equals(rhs.receivedEventsUrl)))&&((this.siteAdmin == rhs.siteAdmin)||((this.siteAdmin!= null)&&this.siteAdmin.equals(rhs.siteAdmin))))&&((this.followingUrl == rhs.followingUrl)||((this.followingUrl!= null)&&this.followingUrl.equals(rhs.followingUrl))))&&((this.gistsUrl == rhs.gistsUrl)||((this.gistsUrl!= null)&&this.gistsUrl.equals(rhs.gistsUrl))))&&((this.avatarUrl == rhs.avatarUrl)||((this.avatarUrl!= null)&&this.avatarUrl.equals(rhs.avatarUrl))))&&((this.organizationsUrl == rhs.organizationsUrl)||((this.organizationsUrl!= null)&&this.organizationsUrl.equals(rhs.organizationsUrl))))&&((this.reposUrl == rhs.reposUrl)||((this.reposUrl!= null)&&this.reposUrl.equals(rhs.reposUrl))))&&((this.htmlUrl == rhs.htmlUrl)||((this.htmlUrl!= null)&&this.htmlUrl.equals(rhs.htmlUrl))))&&((this.subscriptionsUrl == rhs.subscriptionsUrl)||((this.subscriptionsUrl!= null)&&this.subscriptionsUrl.equals(rhs.subscriptionsUrl))))&&((this.login == rhs.login)||((this.login!= null)&&this.login.equals(rhs.login))))&&((this.type == rhs.type)||((this.type!= null)&&this.type.equals(rhs.type))))&&((this.url == rhs.url)||((this.url!= null)&&this.url.equals(rhs.url))))&&((this.starredUrl == rhs.starredUrl)||((this.starredUrl!= null)&&this.starredUrl.equals(rhs.starredUrl))))&&((this.gravatarId == rhs.gravatarId)||((this.gravatarId!= null)&&this.gravatarId.equals(rhs.gravatarId))))&&((this.followersUrl == rhs.followersUrl)||((this.followersUrl!= null)&&this.followersUrl.equals(rhs.followersUrl))))&&((this.id == rhs.id)||((this.id!= null)&&this.id.equals(rhs.id))))&&((this.eventsUrl == rhs.eventsUrl)||((this.eventsUrl!= null)&&this.eventsUrl.equals(rhs.eventsUrl))))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))))&&((this.nodeId == rhs.nodeId)||((this.nodeId!= null)&&this.nodeId.equals(rhs.nodeId))));
         }
 

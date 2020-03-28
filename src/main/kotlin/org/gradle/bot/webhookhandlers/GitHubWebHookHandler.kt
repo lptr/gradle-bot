@@ -4,10 +4,10 @@ import io.vertx.core.Handler
 import io.vertx.core.Vertx
 import io.vertx.ext.web.RoutingContext
 import org.gradle.bot.endWithJson
-import org.gradle.bot.eventhandlers.IssueCommentEvent
-import org.gradle.bot.eventhandlers.PullRequestEvent
 import org.gradle.bot.model.CommitStatusEvent
 import org.gradle.bot.model.GitHubEvent
+import org.gradle.bot.model.IssueCommentEvent
+import org.gradle.bot.model.PullRequestEvent
 import org.gradle.bot.objectMapper
 import org.gradle.bot.security.GithubSignatureChecker
 import org.slf4j.Logger

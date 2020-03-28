@@ -1,6 +1,5 @@
 package org.gradle.bot.client
 
-import com.fasterxml.jackson.annotation.JsonProperty
 import io.vertx.core.Future
 import io.vertx.core.Vertx
 import io.vertx.core.buffer.Buffer
@@ -8,8 +7,9 @@ import io.vertx.core.net.ProxyOptions
 import io.vertx.ext.web.client.WebClient
 import io.vertx.ext.web.client.WebClientOptions
 import org.gradle.bot.model.CommitStatus
-import org.gradle.bot.model.PullRequestWithComments
-import org.gradle.bot.model.WhoAmI
+import org.gradle.bot.model.CommitStatusObject
+import org.gradle.bot.model.PullRequestWithCommentsResponse
+import org.gradle.bot.model.WhoAmIResponse
 import org.gradle.bot.model.addCommentMutation
 import org.gradle.bot.model.pullRequestsWithCommentsQuery
 import org.gradle.bot.model.whoAmIQuery
@@ -39,7 +39,7 @@ class GitHubClient @Inject constructor(
     private var myself: String? = null
 
     fun init(): Future<String> {
-        return doQueryOrMutation(WhoAmI::class.java, whoAmIQuery).map {
+        return doQueryOrMutation(WhoAmIResponse::class.java, whoAmIQuery).map {
             it.data.viewer.login
         }.onSuccess {
             myself = it
@@ -56,11 +56,11 @@ class GitHubClient @Inject constructor(
         return doQueryOrMutation(Map::class.java, addCommentMutation(subjectId, commentBody))
     }
 
-    fun getPullRequestWithComments(repo: String, number: Int): Future<PullRequestWithComments> =
+    fun getPullRequestWithComments(repo: String, number: Int): Future<PullRequestWithCommentsResponse> =
             repo.split('/').let {
                 pullRequestsWithCommentsQuery(it[0], it[1], number)
             }.let {
-                doQueryOrMutation(PullRequestWithComments::class.java, it)
+                doQueryOrMutation(PullRequestWithCommentsResponse::class.java, it)
             }
 
     private
@@ -94,37 +94,17 @@ class GitHubClient @Inject constructor(
                             Buffer.buffer(
                                     objectMapper.writeValueAsString(
                                             CommitStatusObject(it,
+                                                    "https://builds.gradle.org",
                                                     "TeamCity build finished",
-                                                    status.name.toLowerCase(),
-                                                    "https://builds.gradle.org"))
-                            )
-                    ).onFailure {
-                        logger.error("Error when creating commit status {} to {}", status, url)
-                    }.onSuccess {
-                        logger.info("Get response: {}", it.bodyAsString())
-                        logger.info("Successfully created commit status {} to {}", status, url)
-                    }
+                                                    status.name.toLowerCase()))
+                                    )
+                            ).onFailure {
+                                logger.error("Error when creating commit status {} to {}", status, url)
+                            }.onSuccess {
+                                logger.info("Get response: {}", it.bodyAsString())
+                                logger.info("Successfully created commit status {} to {}", status, url)
+                            }
         }
     }
 }
-
-/*
-{
-  "state": "success",
-  "target_url": "https://example.com/build/status",
-  "description": "The build succeeded!",
-  "context": "continuous-integration/jenkins"
-}
- */
-
-data class CommitStatusObject(
-        @JsonProperty("context")
-        var context: String,
-        @JsonProperty("description")
-        var description: String,
-        @JsonProperty("state")
-        var state: String,
-        @get:JsonProperty("target_url")
-        var targetUrl: String
-)
 

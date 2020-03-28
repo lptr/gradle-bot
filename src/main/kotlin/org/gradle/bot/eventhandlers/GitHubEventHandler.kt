@@ -7,6 +7,7 @@ import org.gradle.bot.client.GitHubClient
 import org.gradle.bot.client.TeamCityClient
 import org.gradle.bot.getComments
 import org.gradle.bot.model.GitHubEvent
+import org.gradle.bot.model.IssueCommentEvent
 import java.lang.reflect.ParameterizedType
 import javax.inject.Inject
 import javax.inject.Singleton

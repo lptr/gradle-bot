@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "organization",
     "sender"
 })
-public class CommitStatusEvent {
+public class CommitStatusGitHubEvent implements GitHubEvent {
 
     @JsonProperty("id")
     private Integer id;
@@ -49,21 +49,65 @@ public class CommitStatusEvent {
     @JsonProperty("state")
     private String state;
     @JsonProperty("commit")
-    private CommitStatusEvent.Commit commit;
+    private CommitStatusGitHubEvent.Commit commit;
     @JsonProperty("branches")
-    private List<CommitStatusEvent.Branch> branches = new ArrayList<CommitStatusEvent.Branch>();
+    private List<CommitStatusGitHubEvent.Branch> branches = new ArrayList<CommitStatusGitHubEvent.Branch>();
     @JsonProperty("created_at")
     private String createdAt;
     @JsonProperty("updated_at")
     private String updatedAt;
     @JsonProperty("repository")
-    private CommitStatusEvent.Repository repository;
+    private CommitStatusGitHubEvent.Repository repository;
     @JsonProperty("organization")
-    private CommitStatusEvent.Organization organization;
+    private CommitStatusGitHubEvent.Organization organization;
     @JsonProperty("sender")
-    private CommitStatusEvent.Sender sender;
+    private CommitStatusGitHubEvent.Sender sender;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+    /**
+     * No args constructor for use in serialization
+     * 
+     */
+    public CommitStatusGitHubEvent() {
+    }
+
+    /**
+     * 
+     * @param avatarUrl
+     * @param commit
+     * @param description
+     * @param branches
+     * @param repository
+     * @param sha
+     * @param createdAt
+     * @param sender
+     * @param organization
+     * @param name
+     * @param context
+     * @param id
+     * @param state
+     * @param targetUrl
+     * @param updatedAt
+     */
+    public CommitStatusGitHubEvent(Integer id, String sha, String name, String targetUrl, String avatarUrl, String context, String description, String state, CommitStatusGitHubEvent.Commit commit, List<CommitStatusGitHubEvent.Branch> branches, String createdAt, String updatedAt, CommitStatusGitHubEvent.Repository repository, CommitStatusGitHubEvent.Organization organization, CommitStatusGitHubEvent.Sender sender) {
+        super();
+        this.id = id;
+        this.sha = sha;
+        this.name = name;
+        this.targetUrl = targetUrl;
+        this.avatarUrl = avatarUrl;
+        this.context = context;
+        this.description = description;
+        this.state = state;
+        this.commit = commit;
+        this.branches = branches;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.repository = repository;
+        this.organization = organization;
+        this.sender = sender;
+    }
 
     @JsonProperty("id")
     public Integer getId() {
@@ -146,22 +190,22 @@ public class CommitStatusEvent {
     }
 
     @JsonProperty("commit")
-    public CommitStatusEvent.Commit getCommit() {
+    public CommitStatusGitHubEvent.Commit getCommit() {
         return commit;
     }
 
     @JsonProperty("commit")
-    public void setCommit(CommitStatusEvent.Commit commit) {
+    public void setCommit(CommitStatusGitHubEvent.Commit commit) {
         this.commit = commit;
     }
 
     @JsonProperty("branches")
-    public List<CommitStatusEvent.Branch> getBranches() {
+    public List<CommitStatusGitHubEvent.Branch> getBranches() {
         return branches;
     }
 
     @JsonProperty("branches")
-    public void setBranches(List<CommitStatusEvent.Branch> branches) {
+    public void setBranches(List<CommitStatusGitHubEvent.Branch> branches) {
         this.branches = branches;
     }
 
@@ -186,32 +230,32 @@ public class CommitStatusEvent {
     }
 
     @JsonProperty("repository")
-    public CommitStatusEvent.Repository getRepository() {
+    public CommitStatusGitHubEvent.Repository getRepository() {
         return repository;
     }
 
     @JsonProperty("repository")
-    public void setRepository(CommitStatusEvent.Repository repository) {
+    public void setRepository(CommitStatusGitHubEvent.Repository repository) {
         this.repository = repository;
     }
 
     @JsonProperty("organization")
-    public CommitStatusEvent.Organization getOrganization() {
+    public CommitStatusGitHubEvent.Organization getOrganization() {
         return organization;
     }
 
     @JsonProperty("organization")
-    public void setOrganization(CommitStatusEvent.Organization organization) {
+    public void setOrganization(CommitStatusGitHubEvent.Organization organization) {
         this.organization = organization;
     }
 
     @JsonProperty("sender")
-    public CommitStatusEvent.Sender getSender() {
+    public CommitStatusGitHubEvent.Sender getSender() {
         return sender;
     }
 
     @JsonProperty("sender")
-    public void setSender(CommitStatusEvent.Sender sender) {
+    public void setSender(CommitStatusGitHubEvent.Sender sender) {
         this.sender = sender;
     }
 
@@ -228,7 +272,7 @@ public class CommitStatusEvent {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(CommitStatusEvent.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+        sb.append(CommitStatusGitHubEvent.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
         sb.append("id");
         sb.append('=');
         sb.append(((this.id == null)?"<null>":this.id));
@@ -328,10 +372,10 @@ public class CommitStatusEvent {
         if (other == this) {
             return true;
         }
-        if ((other instanceof CommitStatusEvent) == false) {
+        if ((other instanceof CommitStatusGitHubEvent) == false) {
             return false;
         }
-        CommitStatusEvent rhs = ((CommitStatusEvent) other);
+        CommitStatusGitHubEvent rhs = ((CommitStatusGitHubEvent) other);
         return (((((((((((((((((this.avatarUrl == rhs.avatarUrl)||((this.avatarUrl!= null)&&this.avatarUrl.equals(rhs.avatarUrl)))&&((this.commit == rhs.commit)||((this.commit!= null)&&this.commit.equals(rhs.commit))))&&((this.description == rhs.description)||((this.description!= null)&&this.description.equals(rhs.description))))&&((this.branches == rhs.branches)||((this.branches!= null)&&this.branches.equals(rhs.branches))))&&((this.repository == rhs.repository)||((this.repository!= null)&&this.repository.equals(rhs.repository))))&&((this.sha == rhs.sha)||((this.sha!= null)&&this.sha.equals(rhs.sha))))&&((this.createdAt == rhs.createdAt)||((this.createdAt!= null)&&this.createdAt.equals(rhs.createdAt))))&&((this.sender == rhs.sender)||((this.sender!= null)&&this.sender.equals(rhs.sender))))&&((this.organization == rhs.organization)||((this.organization!= null)&&this.organization.equals(rhs.organization))))&&((this.name == rhs.name)||((this.name!= null)&&this.name.equals(rhs.name))))&&((this.context == rhs.context)||((this.context!= null)&&this.context.equals(rhs.context))))&&((this.id == rhs.id)||((this.id!= null)&&this.id.equals(rhs.id))))&&((this.state == rhs.state)||((this.state!= null)&&this.state.equals(rhs.state))))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))))&&((this.targetUrl == rhs.targetUrl)||((this.targetUrl!= null)&&this.targetUrl.equals(rhs.targetUrl))))&&((this.updatedAt == rhs.updatedAt)||((this.updatedAt!= null)&&this.updatedAt.equals(rhs.updatedAt))));
     }
 
@@ -396,6 +440,56 @@ public class CommitStatusEvent {
         private Boolean siteAdmin;
         @JsonIgnore
         private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+        /**
+         * No args constructor for use in serialization
+         * 
+         */
+        public Author() {
+        }
+
+        /**
+         * 
+         * @param receivedEventsUrl
+         * @param siteAdmin
+         * @param followingUrl
+         * @param gistsUrl
+         * @param avatarUrl
+         * @param organizationsUrl
+         * @param reposUrl
+         * @param htmlUrl
+         * @param subscriptionsUrl
+         * @param login
+         * @param type
+         * @param url
+         * @param starredUrl
+         * @param gravatarId
+         * @param followersUrl
+         * @param id
+         * @param eventsUrl
+         * @param nodeId
+         */
+        public Author(String login, Integer id, String nodeId, String avatarUrl, String gravatarId, String url, String htmlUrl, String followersUrl, String followingUrl, String gistsUrl, String starredUrl, String subscriptionsUrl, String organizationsUrl, String reposUrl, String eventsUrl, String receivedEventsUrl, String type, Boolean siteAdmin) {
+            super();
+            this.login = login;
+            this.id = id;
+            this.nodeId = nodeId;
+            this.avatarUrl = avatarUrl;
+            this.gravatarId = gravatarId;
+            this.url = url;
+            this.htmlUrl = htmlUrl;
+            this.followersUrl = followersUrl;
+            this.followingUrl = followingUrl;
+            this.gistsUrl = gistsUrl;
+            this.starredUrl = starredUrl;
+            this.subscriptionsUrl = subscriptionsUrl;
+            this.organizationsUrl = organizationsUrl;
+            this.reposUrl = reposUrl;
+            this.eventsUrl = eventsUrl;
+            this.receivedEventsUrl = receivedEventsUrl;
+            this.type = type;
+            this.siteAdmin = siteAdmin;
+        }
 
         @JsonProperty("login")
         public String getLogin() {
@@ -590,7 +684,7 @@ public class CommitStatusEvent {
         @Override
         public String toString() {
             StringBuilder sb = new StringBuilder();
-            sb.append(CommitStatusEvent.Author.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append(CommitStatusGitHubEvent.Author.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
             sb.append("login");
             sb.append('=');
             sb.append(((this.login == null)?"<null>":this.login));
@@ -705,10 +799,10 @@ public class CommitStatusEvent {
             if (other == this) {
                 return true;
             }
-            if ((other instanceof CommitStatusEvent.Author) == false) {
+            if ((other instanceof CommitStatusGitHubEvent.Author) == false) {
                 return false;
             }
-            CommitStatusEvent.Author rhs = ((CommitStatusEvent.Author) other);
+            CommitStatusGitHubEvent.Author rhs = ((CommitStatusGitHubEvent.Author) other);
             return ((((((((((((((((((((this.receivedEventsUrl == rhs.receivedEventsUrl)||((this.receivedEventsUrl!= null)&&this.receivedEventsUrl.equals(rhs.receivedEventsUrl)))&&((this.siteAdmin == rhs.siteAdmin)||((this.siteAdmin!= null)&&this.siteAdmin.equals(rhs.siteAdmin))))&&((this.followingUrl == rhs.followingUrl)||((this.followingUrl!= null)&&this.followingUrl.equals(rhs.followingUrl))))&&((this.gistsUrl == rhs.gistsUrl)||((this.gistsUrl!= null)&&this.gistsUrl.equals(rhs.gistsUrl))))&&((this.avatarUrl == rhs.avatarUrl)||((this.avatarUrl!= null)&&this.avatarUrl.equals(rhs.avatarUrl))))&&((this.organizationsUrl == rhs.organizationsUrl)||((this.organizationsUrl!= null)&&this.organizationsUrl.equals(rhs.organizationsUrl))))&&((this.reposUrl == rhs.reposUrl)||((this.reposUrl!= null)&&this.reposUrl.equals(rhs.reposUrl))))&&((this.htmlUrl == rhs.htmlUrl)||((this.htmlUrl!= null)&&this.htmlUrl.equals(rhs.htmlUrl))))&&((this.subscriptionsUrl == rhs.subscriptionsUrl)||((this.subscriptionsUrl!= null)&&this.subscriptionsUrl.equals(rhs.subscriptionsUrl))))&&((this.login == rhs.login)||((this.login!= null)&&this.login.equals(rhs.login))))&&((this.type == rhs.type)||((this.type!= null)&&this.type.equals(rhs.type))))&&((this.url == rhs.url)||((this.url!= null)&&this.url.equals(rhs.url))))&&((this.starredUrl == rhs.starredUrl)||((this.starredUrl!= null)&&this.starredUrl.equals(rhs.starredUrl))))&&((this.gravatarId == rhs.gravatarId)||((this.gravatarId!= null)&&this.gravatarId.equals(rhs.gravatarId))))&&((this.followersUrl == rhs.followersUrl)||((this.followersUrl!= null)&&this.followersUrl.equals(rhs.followersUrl))))&&((this.id == rhs.id)||((this.id!= null)&&this.id.equals(rhs.id))))&&((this.eventsUrl == rhs.eventsUrl)||((this.eventsUrl!= null)&&this.eventsUrl.equals(rhs.eventsUrl))))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))))&&((this.nodeId == rhs.nodeId)||((this.nodeId!= null)&&this.nodeId.equals(rhs.nodeId))));
         }
 
@@ -725,11 +819,31 @@ public class CommitStatusEvent {
         @JsonProperty("name")
         private String name;
         @JsonProperty("commit")
-        private CommitStatusEvent.Commit commit;
+        private CommitStatusGitHubEvent.Commit commit;
         @JsonProperty("protected")
         private Boolean _protected;
         @JsonIgnore
         private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+        /**
+         * No args constructor for use in serialization
+         * 
+         */
+        public Branch() {
+        }
+
+        /**
+         * 
+         * @param _protected
+         * @param name
+         * @param commit
+         */
+        public Branch(String name, CommitStatusGitHubEvent.Commit commit, Boolean _protected) {
+            super();
+            this.name = name;
+            this.commit = commit;
+            this._protected = _protected;
+        }
 
         @JsonProperty("name")
         public String getName() {
@@ -742,12 +856,12 @@ public class CommitStatusEvent {
         }
 
         @JsonProperty("commit")
-        public CommitStatusEvent.Commit getCommit() {
+        public CommitStatusGitHubEvent.Commit getCommit() {
             return commit;
         }
 
         @JsonProperty("commit")
-        public void setCommit(CommitStatusEvent.Commit commit) {
+        public void setCommit(CommitStatusGitHubEvent.Commit commit) {
             this.commit = commit;
         }
 
@@ -774,7 +888,7 @@ public class CommitStatusEvent {
         @Override
         public String toString() {
             StringBuilder sb = new StringBuilder();
-            sb.append(CommitStatusEvent.Branch.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append(CommitStatusGitHubEvent.Branch.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
             sb.append("name");
             sb.append('=');
             sb.append(((this.name == null)?"<null>":this.name));
@@ -814,10 +928,10 @@ public class CommitStatusEvent {
             if (other == this) {
                 return true;
             }
-            if ((other instanceof CommitStatusEvent.Branch) == false) {
+            if ((other instanceof CommitStatusGitHubEvent.Branch) == false) {
                 return false;
             }
-            CommitStatusEvent.Branch rhs = ((CommitStatusEvent.Branch) other);
+            CommitStatusGitHubEvent.Branch rhs = ((CommitStatusGitHubEvent.Branch) other);
             return (((((this.name == rhs.name)||((this.name!= null)&&this.name.equals(rhs.name)))&&((this.commit == rhs.commit)||((this.commit!= null)&&this.commit.equals(rhs.commit))))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))))&&((this._protected == rhs._protected)||((this._protected!= null)&&this._protected.equals(rhs._protected))));
         }
 
@@ -842,7 +956,7 @@ public class CommitStatusEvent {
         @JsonProperty("node_id")
         private String nodeId;
         @JsonProperty("commit")
-        private CommitStatusEvent.Commit commit;
+        private CommitStatusGitHubEvent.Commit commit;
         @JsonProperty("url")
         private String url;
         @JsonProperty("html_url")
@@ -850,13 +964,45 @@ public class CommitStatusEvent {
         @JsonProperty("comments_url")
         private String commentsUrl;
         @JsonProperty("author")
-        private CommitStatusEvent.Author author;
+        private CommitStatusGitHubEvent.Author author;
         @JsonProperty("committer")
-        private CommitStatusEvent.Committer committer;
+        private CommitStatusGitHubEvent.Committer committer;
         @JsonProperty("parents")
-        private List<CommitStatusEvent.Parent> parents = new ArrayList<CommitStatusEvent.Parent>();
+        private List<CommitStatusGitHubEvent.Parent> parents = new ArrayList<CommitStatusGitHubEvent.Parent>();
         @JsonIgnore
         private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+        /**
+         * No args constructor for use in serialization
+         * 
+         */
+        public Commit() {
+        }
+
+        /**
+         * 
+         * @param commentsUrl
+         * @param committer
+         * @param author
+         * @param commit
+         * @param htmlUrl
+         * @param sha
+         * @param nodeId
+         * @param url
+         * @param parents
+         */
+        public Commit(String sha, String nodeId, CommitStatusGitHubEvent.Commit commit, String url, String htmlUrl, String commentsUrl, CommitStatusGitHubEvent.Author author, CommitStatusGitHubEvent.Committer committer, List<CommitStatusGitHubEvent.Parent> parents) {
+            super();
+            this.sha = sha;
+            this.nodeId = nodeId;
+            this.commit = commit;
+            this.url = url;
+            this.htmlUrl = htmlUrl;
+            this.commentsUrl = commentsUrl;
+            this.author = author;
+            this.committer = committer;
+            this.parents = parents;
+        }
 
         @JsonProperty("sha")
         public String getSha() {
@@ -879,12 +1025,12 @@ public class CommitStatusEvent {
         }
 
         @JsonProperty("commit")
-        public CommitStatusEvent.Commit getCommit() {
+        public CommitStatusGitHubEvent.Commit getCommit() {
             return commit;
         }
 
         @JsonProperty("commit")
-        public void setCommit(CommitStatusEvent.Commit commit) {
+        public void setCommit(CommitStatusGitHubEvent.Commit commit) {
             this.commit = commit;
         }
 
@@ -919,32 +1065,32 @@ public class CommitStatusEvent {
         }
 
         @JsonProperty("author")
-        public CommitStatusEvent.Author getAuthor() {
+        public CommitStatusGitHubEvent.Author getAuthor() {
             return author;
         }
 
         @JsonProperty("author")
-        public void setAuthor(CommitStatusEvent.Author author) {
+        public void setAuthor(CommitStatusGitHubEvent.Author author) {
             this.author = author;
         }
 
         @JsonProperty("committer")
-        public CommitStatusEvent.Committer getCommitter() {
+        public CommitStatusGitHubEvent.Committer getCommitter() {
             return committer;
         }
 
         @JsonProperty("committer")
-        public void setCommitter(CommitStatusEvent.Committer committer) {
+        public void setCommitter(CommitStatusGitHubEvent.Committer committer) {
             this.committer = committer;
         }
 
         @JsonProperty("parents")
-        public List<CommitStatusEvent.Parent> getParents() {
+        public List<CommitStatusGitHubEvent.Parent> getParents() {
             return parents;
         }
 
         @JsonProperty("parents")
-        public void setParents(List<CommitStatusEvent.Parent> parents) {
+        public void setParents(List<CommitStatusGitHubEvent.Parent> parents) {
             this.parents = parents;
         }
 
@@ -961,7 +1107,7 @@ public class CommitStatusEvent {
         @Override
         public String toString() {
             StringBuilder sb = new StringBuilder();
-            sb.append(CommitStatusEvent.Commit.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append(CommitStatusGitHubEvent.Commit.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
             sb.append("sha");
             sb.append('=');
             sb.append(((this.sha == null)?"<null>":this.sha));
@@ -1031,10 +1177,10 @@ public class CommitStatusEvent {
             if (other == this) {
                 return true;
             }
-            if ((other instanceof CommitStatusEvent.Commit) == false) {
+            if ((other instanceof CommitStatusGitHubEvent.Commit) == false) {
                 return false;
             }
-            CommitStatusEvent.Commit rhs = ((CommitStatusEvent.Commit) other);
+            CommitStatusGitHubEvent.Commit rhs = ((CommitStatusGitHubEvent.Commit) other);
             return (((((((((((this.commentsUrl == rhs.commentsUrl)||((this.commentsUrl!= null)&&this.commentsUrl.equals(rhs.commentsUrl)))&&((this.committer == rhs.committer)||((this.committer!= null)&&this.committer.equals(rhs.committer))))&&((this.author == rhs.author)||((this.author!= null)&&this.author.equals(rhs.author))))&&((this.commit == rhs.commit)||((this.commit!= null)&&this.commit.equals(rhs.commit))))&&((this.htmlUrl == rhs.htmlUrl)||((this.htmlUrl!= null)&&this.htmlUrl.equals(rhs.htmlUrl))))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))))&&((this.sha == rhs.sha)||((this.sha!= null)&&this.sha.equals(rhs.sha))))&&((this.nodeId == rhs.nodeId)||((this.nodeId!= null)&&this.nodeId.equals(rhs.nodeId))))&&((this.url == rhs.url)||((this.url!= null)&&this.url.equals(rhs.url))))&&((this.parents == rhs.parents)||((this.parents!= null)&&this.parents.equals(rhs.parents))));
         }
 
@@ -1101,6 +1247,56 @@ public class CommitStatusEvent {
         private Boolean siteAdmin;
         @JsonIgnore
         private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+        /**
+         * No args constructor for use in serialization
+         * 
+         */
+        public Committer() {
+        }
+
+        /**
+         * 
+         * @param receivedEventsUrl
+         * @param siteAdmin
+         * @param followingUrl
+         * @param gistsUrl
+         * @param avatarUrl
+         * @param organizationsUrl
+         * @param reposUrl
+         * @param htmlUrl
+         * @param subscriptionsUrl
+         * @param login
+         * @param type
+         * @param url
+         * @param starredUrl
+         * @param gravatarId
+         * @param followersUrl
+         * @param id
+         * @param eventsUrl
+         * @param nodeId
+         */
+        public Committer(String login, Integer id, String nodeId, String avatarUrl, String gravatarId, String url, String htmlUrl, String followersUrl, String followingUrl, String gistsUrl, String starredUrl, String subscriptionsUrl, String organizationsUrl, String reposUrl, String eventsUrl, String receivedEventsUrl, String type, Boolean siteAdmin) {
+            super();
+            this.login = login;
+            this.id = id;
+            this.nodeId = nodeId;
+            this.avatarUrl = avatarUrl;
+            this.gravatarId = gravatarId;
+            this.url = url;
+            this.htmlUrl = htmlUrl;
+            this.followersUrl = followersUrl;
+            this.followingUrl = followingUrl;
+            this.gistsUrl = gistsUrl;
+            this.starredUrl = starredUrl;
+            this.subscriptionsUrl = subscriptionsUrl;
+            this.organizationsUrl = organizationsUrl;
+            this.reposUrl = reposUrl;
+            this.eventsUrl = eventsUrl;
+            this.receivedEventsUrl = receivedEventsUrl;
+            this.type = type;
+            this.siteAdmin = siteAdmin;
+        }
 
         @JsonProperty("login")
         public String getLogin() {
@@ -1295,7 +1491,7 @@ public class CommitStatusEvent {
         @Override
         public String toString() {
             StringBuilder sb = new StringBuilder();
-            sb.append(CommitStatusEvent.Committer.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append(CommitStatusGitHubEvent.Committer.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
             sb.append("login");
             sb.append('=');
             sb.append(((this.login == null)?"<null>":this.login));
@@ -1410,10 +1606,10 @@ public class CommitStatusEvent {
             if (other == this) {
                 return true;
             }
-            if ((other instanceof CommitStatusEvent.Committer) == false) {
+            if ((other instanceof CommitStatusGitHubEvent.Committer) == false) {
                 return false;
             }
-            CommitStatusEvent.Committer rhs = ((CommitStatusEvent.Committer) other);
+            CommitStatusGitHubEvent.Committer rhs = ((CommitStatusGitHubEvent.Committer) other);
             return ((((((((((((((((((((this.receivedEventsUrl == rhs.receivedEventsUrl)||((this.receivedEventsUrl!= null)&&this.receivedEventsUrl.equals(rhs.receivedEventsUrl)))&&((this.siteAdmin == rhs.siteAdmin)||((this.siteAdmin!= null)&&this.siteAdmin.equals(rhs.siteAdmin))))&&((this.followingUrl == rhs.followingUrl)||((this.followingUrl!= null)&&this.followingUrl.equals(rhs.followingUrl))))&&((this.gistsUrl == rhs.gistsUrl)||((this.gistsUrl!= null)&&this.gistsUrl.equals(rhs.gistsUrl))))&&((this.avatarUrl == rhs.avatarUrl)||((this.avatarUrl!= null)&&this.avatarUrl.equals(rhs.avatarUrl))))&&((this.organizationsUrl == rhs.organizationsUrl)||((this.organizationsUrl!= null)&&this.organizationsUrl.equals(rhs.organizationsUrl))))&&((this.reposUrl == rhs.reposUrl)||((this.reposUrl!= null)&&this.reposUrl.equals(rhs.reposUrl))))&&((this.htmlUrl == rhs.htmlUrl)||((this.htmlUrl!= null)&&this.htmlUrl.equals(rhs.htmlUrl))))&&((this.subscriptionsUrl == rhs.subscriptionsUrl)||((this.subscriptionsUrl!= null)&&this.subscriptionsUrl.equals(rhs.subscriptionsUrl))))&&((this.login == rhs.login)||((this.login!= null)&&this.login.equals(rhs.login))))&&((this.type == rhs.type)||((this.type!= null)&&this.type.equals(rhs.type))))&&((this.url == rhs.url)||((this.url!= null)&&this.url.equals(rhs.url))))&&((this.starredUrl == rhs.starredUrl)||((this.starredUrl!= null)&&this.starredUrl.equals(rhs.starredUrl))))&&((this.gravatarId == rhs.gravatarId)||((this.gravatarId!= null)&&this.gravatarId.equals(rhs.gravatarId))))&&((this.followersUrl == rhs.followersUrl)||((this.followersUrl!= null)&&this.followersUrl.equals(rhs.followersUrl))))&&((this.id == rhs.id)||((this.id!= null)&&this.id.equals(rhs.id))))&&((this.eventsUrl == rhs.eventsUrl)||((this.eventsUrl!= null)&&this.eventsUrl.equals(rhs.eventsUrl))))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))))&&((this.nodeId == rhs.nodeId)||((this.nodeId!= null)&&this.nodeId.equals(rhs.nodeId))));
         }
 
@@ -1462,6 +1658,44 @@ public class CommitStatusEvent {
         private String description;
         @JsonIgnore
         private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+        /**
+         * No args constructor for use in serialization
+         * 
+         */
+        public Organization() {
+        }
+
+        /**
+         * 
+         * @param issuesUrl
+         * @param reposUrl
+         * @param avatarUrl
+         * @param description
+         * @param id
+         * @param eventsUrl
+         * @param membersUrl
+         * @param login
+         * @param publicMembersUrl
+         * @param nodeId
+         * @param url
+         * @param hooksUrl
+         */
+        public Organization(String login, Integer id, String nodeId, String url, String reposUrl, String eventsUrl, String hooksUrl, String issuesUrl, String membersUrl, String publicMembersUrl, String avatarUrl, String description) {
+            super();
+            this.login = login;
+            this.id = id;
+            this.nodeId = nodeId;
+            this.url = url;
+            this.reposUrl = reposUrl;
+            this.eventsUrl = eventsUrl;
+            this.hooksUrl = hooksUrl;
+            this.issuesUrl = issuesUrl;
+            this.membersUrl = membersUrl;
+            this.publicMembersUrl = publicMembersUrl;
+            this.avatarUrl = avatarUrl;
+            this.description = description;
+        }
 
         @JsonProperty("login")
         public String getLogin() {
@@ -1596,7 +1830,7 @@ public class CommitStatusEvent {
         @Override
         public String toString() {
             StringBuilder sb = new StringBuilder();
-            sb.append(CommitStatusEvent.Organization.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append(CommitStatusGitHubEvent.Organization.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
             sb.append("login");
             sb.append('=');
             sb.append(((this.login == null)?"<null>":this.login));
@@ -1681,10 +1915,10 @@ public class CommitStatusEvent {
             if (other == this) {
                 return true;
             }
-            if ((other instanceof CommitStatusEvent.Organization) == false) {
+            if ((other instanceof CommitStatusGitHubEvent.Organization) == false) {
                 return false;
             }
-            CommitStatusEvent.Organization rhs = ((CommitStatusEvent.Organization) other);
+            CommitStatusGitHubEvent.Organization rhs = ((CommitStatusGitHubEvent.Organization) other);
             return ((((((((((((((this.issuesUrl == rhs.issuesUrl)||((this.issuesUrl!= null)&&this.issuesUrl.equals(rhs.issuesUrl)))&&((this.reposUrl == rhs.reposUrl)||((this.reposUrl!= null)&&this.reposUrl.equals(rhs.reposUrl))))&&((this.avatarUrl == rhs.avatarUrl)||((this.avatarUrl!= null)&&this.avatarUrl.equals(rhs.avatarUrl))))&&((this.description == rhs.description)||((this.description!= null)&&this.description.equals(rhs.description))))&&((this.membersUrl == rhs.membersUrl)||((this.membersUrl!= null)&&this.membersUrl.equals(rhs.membersUrl))))&&((this.login == rhs.login)||((this.login!= null)&&this.login.equals(rhs.login))))&&((this.url == rhs.url)||((this.url!= null)&&this.url.equals(rhs.url))))&&((this.hooksUrl == rhs.hooksUrl)||((this.hooksUrl!= null)&&this.hooksUrl.equals(rhs.hooksUrl))))&&((this.id == rhs.id)||((this.id!= null)&&this.id.equals(rhs.id))))&&((this.eventsUrl == rhs.eventsUrl)||((this.eventsUrl!= null)&&this.eventsUrl.equals(rhs.eventsUrl))))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))))&&((this.publicMembersUrl == rhs.publicMembersUrl)||((this.publicMembersUrl!= null)&&this.publicMembersUrl.equals(rhs.publicMembersUrl))))&&((this.nodeId == rhs.nodeId)||((this.nodeId!= null)&&this.nodeId.equals(rhs.nodeId))));
         }
 
@@ -1751,6 +1985,56 @@ public class CommitStatusEvent {
         private Boolean siteAdmin;
         @JsonIgnore
         private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+        /**
+         * No args constructor for use in serialization
+         * 
+         */
+        public Owner() {
+        }
+
+        /**
+         * 
+         * @param receivedEventsUrl
+         * @param siteAdmin
+         * @param followingUrl
+         * @param gistsUrl
+         * @param avatarUrl
+         * @param organizationsUrl
+         * @param reposUrl
+         * @param htmlUrl
+         * @param subscriptionsUrl
+         * @param login
+         * @param type
+         * @param url
+         * @param starredUrl
+         * @param gravatarId
+         * @param followersUrl
+         * @param id
+         * @param eventsUrl
+         * @param nodeId
+         */
+        public Owner(String login, Integer id, String nodeId, String avatarUrl, String gravatarId, String url, String htmlUrl, String followersUrl, String followingUrl, String gistsUrl, String starredUrl, String subscriptionsUrl, String organizationsUrl, String reposUrl, String eventsUrl, String receivedEventsUrl, String type, Boolean siteAdmin) {
+            super();
+            this.login = login;
+            this.id = id;
+            this.nodeId = nodeId;
+            this.avatarUrl = avatarUrl;
+            this.gravatarId = gravatarId;
+            this.url = url;
+            this.htmlUrl = htmlUrl;
+            this.followersUrl = followersUrl;
+            this.followingUrl = followingUrl;
+            this.gistsUrl = gistsUrl;
+            this.starredUrl = starredUrl;
+            this.subscriptionsUrl = subscriptionsUrl;
+            this.organizationsUrl = organizationsUrl;
+            this.reposUrl = reposUrl;
+            this.eventsUrl = eventsUrl;
+            this.receivedEventsUrl = receivedEventsUrl;
+            this.type = type;
+            this.siteAdmin = siteAdmin;
+        }
 
         @JsonProperty("login")
         public String getLogin() {
@@ -1945,7 +2229,7 @@ public class CommitStatusEvent {
         @Override
         public String toString() {
             StringBuilder sb = new StringBuilder();
-            sb.append(CommitStatusEvent.Owner.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append(CommitStatusGitHubEvent.Owner.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
             sb.append("login");
             sb.append('=');
             sb.append(((this.login == null)?"<null>":this.login));
@@ -2060,10 +2344,10 @@ public class CommitStatusEvent {
             if (other == this) {
                 return true;
             }
-            if ((other instanceof CommitStatusEvent.Owner) == false) {
+            if ((other instanceof CommitStatusGitHubEvent.Owner) == false) {
                 return false;
             }
-            CommitStatusEvent.Owner rhs = ((CommitStatusEvent.Owner) other);
+            CommitStatusGitHubEvent.Owner rhs = ((CommitStatusGitHubEvent.Owner) other);
             return ((((((((((((((((((((this.receivedEventsUrl == rhs.receivedEventsUrl)||((this.receivedEventsUrl!= null)&&this.receivedEventsUrl.equals(rhs.receivedEventsUrl)))&&((this.siteAdmin == rhs.siteAdmin)||((this.siteAdmin!= null)&&this.siteAdmin.equals(rhs.siteAdmin))))&&((this.followingUrl == rhs.followingUrl)||((this.followingUrl!= null)&&this.followingUrl.equals(rhs.followingUrl))))&&((this.gistsUrl == rhs.gistsUrl)||((this.gistsUrl!= null)&&this.gistsUrl.equals(rhs.gistsUrl))))&&((this.avatarUrl == rhs.avatarUrl)||((this.avatarUrl!= null)&&this.avatarUrl.equals(rhs.avatarUrl))))&&((this.organizationsUrl == rhs.organizationsUrl)||((this.organizationsUrl!= null)&&this.organizationsUrl.equals(rhs.organizationsUrl))))&&((this.reposUrl == rhs.reposUrl)||((this.reposUrl!= null)&&this.reposUrl.equals(rhs.reposUrl))))&&((this.htmlUrl == rhs.htmlUrl)||((this.htmlUrl!= null)&&this.htmlUrl.equals(rhs.htmlUrl))))&&((this.subscriptionsUrl == rhs.subscriptionsUrl)||((this.subscriptionsUrl!= null)&&this.subscriptionsUrl.equals(rhs.subscriptionsUrl))))&&((this.login == rhs.login)||((this.login!= null)&&this.login.equals(rhs.login))))&&((this.type == rhs.type)||((this.type!= null)&&this.type.equals(rhs.type))))&&((this.url == rhs.url)||((this.url!= null)&&this.url.equals(rhs.url))))&&((this.starredUrl == rhs.starredUrl)||((this.starredUrl!= null)&&this.starredUrl.equals(rhs.starredUrl))))&&((this.gravatarId == rhs.gravatarId)||((this.gravatarId!= null)&&this.gravatarId.equals(rhs.gravatarId))))&&((this.followersUrl == rhs.followersUrl)||((this.followersUrl!= null)&&this.followersUrl.equals(rhs.followersUrl))))&&((this.id == rhs.id)||((this.id!= null)&&this.id.equals(rhs.id))))&&((this.eventsUrl == rhs.eventsUrl)||((this.eventsUrl!= null)&&this.eventsUrl.equals(rhs.eventsUrl))))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))))&&((this.nodeId == rhs.nodeId)||((this.nodeId!= null)&&this.nodeId.equals(rhs.nodeId))));
         }
 
@@ -2085,6 +2369,26 @@ public class CommitStatusEvent {
         private String htmlUrl;
         @JsonIgnore
         private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+        /**
+         * No args constructor for use in serialization
+         * 
+         */
+        public Parent() {
+        }
+
+        /**
+         * 
+         * @param htmlUrl
+         * @param sha
+         * @param url
+         */
+        public Parent(String sha, String url, String htmlUrl) {
+            super();
+            this.sha = sha;
+            this.url = url;
+            this.htmlUrl = htmlUrl;
+        }
 
         @JsonProperty("sha")
         public String getSha() {
@@ -2129,7 +2433,7 @@ public class CommitStatusEvent {
         @Override
         public String toString() {
             StringBuilder sb = new StringBuilder();
-            sb.append(CommitStatusEvent.Parent.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append(CommitStatusGitHubEvent.Parent.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
             sb.append("sha");
             sb.append('=');
             sb.append(((this.sha == null)?"<null>":this.sha));
@@ -2169,10 +2473,10 @@ public class CommitStatusEvent {
             if (other == this) {
                 return true;
             }
-            if ((other instanceof CommitStatusEvent.Parent) == false) {
+            if ((other instanceof CommitStatusGitHubEvent.Parent) == false) {
                 return false;
             }
-            CommitStatusEvent.Parent rhs = ((CommitStatusEvent.Parent) other);
+            CommitStatusGitHubEvent.Parent rhs = ((CommitStatusGitHubEvent.Parent) other);
             return (((((this.htmlUrl == rhs.htmlUrl)||((this.htmlUrl!= null)&&this.htmlUrl.equals(rhs.htmlUrl)))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))))&&((this.sha == rhs.sha)||((this.sha!= null)&&this.sha.equals(rhs.sha))))&&((this.url == rhs.url)||((this.url!= null)&&this.url.equals(rhs.url))));
         }
 
@@ -2267,7 +2571,7 @@ public class CommitStatusEvent {
         @JsonProperty("private")
         private Boolean _private;
         @JsonProperty("owner")
-        private CommitStatusEvent.Owner owner;
+        private CommitStatusGitHubEvent.Owner owner;
         @JsonProperty("html_url")
         private String htmlUrl;
         @JsonProperty("description")
@@ -2405,6 +2709,166 @@ public class CommitStatusEvent {
         @JsonIgnore
         private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
+        /**
+         * No args constructor for use in serialization
+         * 
+         */
+        public Repository() {
+        }
+
+        /**
+         * 
+         * @param sshUrl
+         * @param archiveUrl
+         * @param languagesUrl
+         * @param language
+         * @param assigneesUrl
+         * @param commitsUrl
+         * @param openIssues
+         * @param cloneUrl
+         * @param forksCount
+         * @param subscribersUrl
+         * @param createdAt
+         * @param forksUrl
+         * @param watchersCount
+         * @param _private
+         * @param issueCommentUrl
+         * @param statusesUrl
+         * @param id
+         * @param collaboratorsUrl
+         * @param updatedAt
+         * @param forks
+         * @param labelsUrl
+         * @param defaultBranch
+         * @param keysUrl
+         * @param downloadsUrl
+         * @param contentsUrl
+         * @param pushedAt
+         * @param tagsUrl
+         * @param license
+         * @param commentsUrl
+         * @param size
+         * @param treesUrl
+         * @param name
+         * @param mergesUrl
+         * @param nodeId
+         * @param teamsUrl
+         * @param blobsUrl
+         * @param issueEventsUrl
+         * @param hasPages
+         * @param milestonesUrl
+         * @param issuesUrl
+         * @param releasesUrl
+         * @param description
+         * @param watchers
+         * @param branchesUrl
+         * @param contributorsUrl
+         * @param gitRefsUrl
+         * @param hooksUrl
+         * @param openIssuesCount
+         * @param archived
+         * @param stargazersCount
+         * @param disabled
+         * @param hasIssues
+         * @param owner
+         * @param hasWiki
+         * @param compareUrl
+         * @param gitCommitsUrl
+         * @param htmlUrl
+         * @param stargazersUrl
+         * @param fullName
+         * @param svnUrl
+         * @param url
+         * @param pullsUrl
+         * @param mirrorUrl
+         * @param hasDownloads
+         * @param fork
+         * @param hasProjects
+         * @param deploymentsUrl
+         * @param eventsUrl
+         * @param gitTagsUrl
+         * @param notificationsUrl
+         * @param gitUrl
+         * @param subscriptionUrl
+         * @param homepage
+         */
+        public Repository(Integer id, String nodeId, String name, String fullName, Boolean _private, CommitStatusGitHubEvent.Owner owner, String htmlUrl, String description, Boolean fork, String url, String forksUrl, String keysUrl, String collaboratorsUrl, String teamsUrl, String hooksUrl, String issueEventsUrl, String eventsUrl, String assigneesUrl, String branchesUrl, String tagsUrl, String blobsUrl, String gitTagsUrl, String gitRefsUrl, String treesUrl, String statusesUrl, String languagesUrl, String stargazersUrl, String contributorsUrl, String subscribersUrl, String subscriptionUrl, String commitsUrl, String gitCommitsUrl, String commentsUrl, String issueCommentUrl, String contentsUrl, String compareUrl, String mergesUrl, String archiveUrl, String downloadsUrl, String issuesUrl, String pullsUrl, String milestonesUrl, String notificationsUrl, String labelsUrl, String releasesUrl, String deploymentsUrl, String createdAt, String updatedAt, String pushedAt, String gitUrl, String sshUrl, String cloneUrl, String svnUrl, Object homepage, Integer size, Integer stargazersCount, Integer watchersCount, String language, Boolean hasIssues, Boolean hasProjects, Boolean hasDownloads, Boolean hasWiki, Boolean hasPages, Integer forksCount, Object mirrorUrl, Boolean archived, Boolean disabled, Integer openIssuesCount, Object license, Integer forks, Integer openIssues, Integer watchers, String defaultBranch) {
+            super();
+            this.id = id;
+            this.nodeId = nodeId;
+            this.name = name;
+            this.fullName = fullName;
+            this._private = _private;
+            this.owner = owner;
+            this.htmlUrl = htmlUrl;
+            this.description = description;
+            this.fork = fork;
+            this.url = url;
+            this.forksUrl = forksUrl;
+            this.keysUrl = keysUrl;
+            this.collaboratorsUrl = collaboratorsUrl;
+            this.teamsUrl = teamsUrl;
+            this.hooksUrl = hooksUrl;
+            this.issueEventsUrl = issueEventsUrl;
+            this.eventsUrl = eventsUrl;
+            this.assigneesUrl = assigneesUrl;
+            this.branchesUrl = branchesUrl;
+            this.tagsUrl = tagsUrl;
+            this.blobsUrl = blobsUrl;
+            this.gitTagsUrl = gitTagsUrl;
+            this.gitRefsUrl = gitRefsUrl;
+            this.treesUrl = treesUrl;
+            this.statusesUrl = statusesUrl;
+            this.languagesUrl = languagesUrl;
+            this.stargazersUrl = stargazersUrl;
+            this.contributorsUrl = contributorsUrl;
+            this.subscribersUrl = subscribersUrl;
+            this.subscriptionUrl = subscriptionUrl;
+            this.commitsUrl = commitsUrl;
+            this.gitCommitsUrl = gitCommitsUrl;
+            this.commentsUrl = commentsUrl;
+            this.issueCommentUrl = issueCommentUrl;
+            this.contentsUrl = contentsUrl;
+            this.compareUrl = compareUrl;
+            this.mergesUrl = mergesUrl;
+            this.archiveUrl = archiveUrl;
+            this.downloadsUrl = downloadsUrl;
+            this.issuesUrl = issuesUrl;
+            this.pullsUrl = pullsUrl;
+            this.milestonesUrl = milestonesUrl;
+            this.notificationsUrl = notificationsUrl;
+            this.labelsUrl = labelsUrl;
+            this.releasesUrl = releasesUrl;
+            this.deploymentsUrl = deploymentsUrl;
+            this.createdAt = createdAt;
+            this.updatedAt = updatedAt;
+            this.pushedAt = pushedAt;
+            this.gitUrl = gitUrl;
+            this.sshUrl = sshUrl;
+            this.cloneUrl = cloneUrl;
+            this.svnUrl = svnUrl;
+            this.homepage = homepage;
+            this.size = size;
+            this.stargazersCount = stargazersCount;
+            this.watchersCount = watchersCount;
+            this.language = language;
+            this.hasIssues = hasIssues;
+            this.hasProjects = hasProjects;
+            this.hasDownloads = hasDownloads;
+            this.hasWiki = hasWiki;
+            this.hasPages = hasPages;
+            this.forksCount = forksCount;
+            this.mirrorUrl = mirrorUrl;
+            this.archived = archived;
+            this.disabled = disabled;
+            this.openIssuesCount = openIssuesCount;
+            this.license = license;
+            this.forks = forks;
+            this.openIssues = openIssues;
+            this.watchers = watchers;
+            this.defaultBranch = defaultBranch;
+        }
+
         @JsonProperty("id")
         public Integer getId() {
             return id;
@@ -2456,12 +2920,12 @@ public class CommitStatusEvent {
         }
 
         @JsonProperty("owner")
-        public CommitStatusEvent.Owner getOwner() {
+        public CommitStatusGitHubEvent.Owner getOwner() {
             return owner;
         }
 
         @JsonProperty("owner")
-        public void setOwner(CommitStatusEvent.Owner owner) {
+        public void setOwner(CommitStatusGitHubEvent.Owner owner) {
             this.owner = owner;
         }
 
@@ -3148,7 +3612,7 @@ public class CommitStatusEvent {
         @Override
         public String toString() {
             StringBuilder sb = new StringBuilder();
-            sb.append(CommitStatusEvent.Repository.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append(CommitStatusGitHubEvent.Repository.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
             sb.append("id");
             sb.append('=');
             sb.append(((this.id == null)?"<null>":this.id));
@@ -3538,10 +4002,10 @@ public class CommitStatusEvent {
             if (other == this) {
                 return true;
             }
-            if ((other instanceof CommitStatusEvent.Repository) == false) {
+            if ((other instanceof CommitStatusGitHubEvent.Repository) == false) {
                 return false;
             }
-            CommitStatusEvent.Repository rhs = ((CommitStatusEvent.Repository) other);
+            CommitStatusGitHubEvent.Repository rhs = ((CommitStatusGitHubEvent.Repository) other);
             return (((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((this.sshUrl == rhs.sshUrl)||((this.sshUrl!= null)&&this.sshUrl.equals(rhs.sshUrl)))&&((this.archiveUrl == rhs.archiveUrl)||((this.archiveUrl!= null)&&this.archiveUrl.equals(rhs.archiveUrl))))&&((this.languagesUrl == rhs.languagesUrl)||((this.languagesUrl!= null)&&this.languagesUrl.equals(rhs.languagesUrl))))&&((this.language == rhs.language)||((this.language!= null)&&this.language.equals(rhs.language))))&&((this.assigneesUrl == rhs.assigneesUrl)||((this.assigneesUrl!= null)&&this.assigneesUrl.equals(rhs.assigneesUrl))))&&((this.commitsUrl == rhs.commitsUrl)||((this.commitsUrl!= null)&&this.commitsUrl.equals(rhs.commitsUrl))))&&((this.openIssues == rhs.openIssues)||((this.openIssues!= null)&&this.openIssues.equals(rhs.openIssues))))&&((this.cloneUrl == rhs.cloneUrl)||((this.cloneUrl!= null)&&this.cloneUrl.equals(rhs.cloneUrl))))&&((this.forksCount == rhs.forksCount)||((this.forksCount!= null)&&this.forksCount.equals(rhs.forksCount))))&&((this.subscribersUrl == rhs.subscribersUrl)||((this.subscribersUrl!= null)&&this.subscribersUrl.equals(rhs.subscribersUrl))))&&((this.createdAt == rhs.createdAt)||((this.createdAt!= null)&&this.createdAt.equals(rhs.createdAt))))&&((this.forksUrl == rhs.forksUrl)||((this.forksUrl!= null)&&this.forksUrl.equals(rhs.forksUrl))))&&((this.watchersCount == rhs.watchersCount)||((this.watchersCount!= null)&&this.watchersCount.equals(rhs.watchersCount))))&&((this._private == rhs._private)||((this._private!= null)&&this._private.equals(rhs._private))))&&((this.issueCommentUrl == rhs.issueCommentUrl)||((this.issueCommentUrl!= null)&&this.issueCommentUrl.equals(rhs.issueCommentUrl))))&&((this.statusesUrl == rhs.statusesUrl)||((this.statusesUrl!= null)&&this.statusesUrl.equals(rhs.statusesUrl))))&&((this.id == rhs.id)||((this.id!= null)&&this.id.equals(rhs.id))))&&((this.collaboratorsUrl == rhs.collaboratorsUrl)||((this.collaboratorsUrl!= null)&&this.collaboratorsUrl.equals(rhs.collaboratorsUrl))))&&((this.updatedAt == rhs.updatedAt)||((this.updatedAt!= null)&&this.updatedAt.equals(rhs.updatedAt))))&&((this.forks == rhs.forks)||((this.forks!= null)&&this.forks.equals(rhs.forks))))&&((this.labelsUrl == rhs.labelsUrl)||((this.labelsUrl!= null)&&this.labelsUrl.equals(rhs.labelsUrl))))&&((this.defaultBranch == rhs.defaultBranch)||((this.defaultBranch!= null)&&this.defaultBranch.equals(rhs.defaultBranch))))&&((this.keysUrl == rhs.keysUrl)||((this.keysUrl!= null)&&this.keysUrl.equals(rhs.keysUrl))))&&((this.downloadsUrl == rhs.downloadsUrl)||((this.downloadsUrl!= null)&&this.downloadsUrl.equals(rhs.downloadsUrl))))&&((this.contentsUrl == rhs.contentsUrl)||((this.contentsUrl!= null)&&this.contentsUrl.equals(rhs.contentsUrl))))&&((this.pushedAt == rhs.pushedAt)||((this.pushedAt!= null)&&this.pushedAt.equals(rhs.pushedAt))))&&((this.tagsUrl == rhs.tagsUrl)||((this.tagsUrl!= null)&&this.tagsUrl.equals(rhs.tagsUrl))))&&((this.license == rhs.license)||((this.license!= null)&&this.license.equals(rhs.license))))&&((this.commentsUrl == rhs.commentsUrl)||((this.commentsUrl!= null)&&this.commentsUrl.equals(rhs.commentsUrl))))&&((this.size == rhs.size)||((this.size!= null)&&this.size.equals(rhs.size))))&&((this.treesUrl == rhs.treesUrl)||((this.treesUrl!= null)&&this.treesUrl.equals(rhs.treesUrl))))&&((this.name == rhs.name)||((this.name!= null)&&this.name.equals(rhs.name))))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))))&&((this.mergesUrl == rhs.mergesUrl)||((this.mergesUrl!= null)&&this.mergesUrl.equals(rhs.mergesUrl))))&&((this.nodeId == rhs.nodeId)||((this.nodeId!= null)&&this.nodeId.equals(rhs.nodeId))))&&((this.teamsUrl == rhs.teamsUrl)||((this.teamsUrl!= null)&&this.teamsUrl.equals(rhs.teamsUrl))))&&((this.blobsUrl == rhs.blobsUrl)||((this.blobsUrl!= null)&&this.blobsUrl.equals(rhs.blobsUrl))))&&((this.issueEventsUrl == rhs.issueEventsUrl)||((this.issueEventsUrl!= null)&&this.issueEventsUrl.equals(rhs.issueEventsUrl))))&&((this.hasPages == rhs.hasPages)||((this.hasPages!= null)&&this.hasPages.equals(rhs.hasPages))))&&((this.milestonesUrl == rhs.milestonesUrl)||((this.milestonesUrl!= null)&&this.milestonesUrl.equals(rhs.milestonesUrl))))&&((this.issuesUrl == rhs.issuesUrl)||((this.issuesUrl!= null)&&this.issuesUrl.equals(rhs.issuesUrl))))&&((this.releasesUrl == rhs.releasesUrl)||((this.releasesUrl!= null)&&this.releasesUrl.equals(rhs.releasesUrl))))&&((this.description == rhs.description)||((this.description!= null)&&this.description.equals(rhs.description))))&&((this.watchers == rhs.watchers)||((this.watchers!= null)&&this.watchers.equals(rhs.watchers))))&&((this.branchesUrl == rhs.branchesUrl)||((this.branchesUrl!= null)&&this.branchesUrl.equals(rhs.branchesUrl))))&&((this.contributorsUrl == rhs.contributorsUrl)||((this.contributorsUrl!= null)&&this.contributorsUrl.equals(rhs.contributorsUrl))))&&((this.gitRefsUrl == rhs.gitRefsUrl)||((this.gitRefsUrl!= null)&&this.gitRefsUrl.equals(rhs.gitRefsUrl))))&&((this.hooksUrl == rhs.hooksUrl)||((this.hooksUrl!= null)&&this.hooksUrl.equals(rhs.hooksUrl))))&&((this.openIssuesCount == rhs.openIssuesCount)||((this.openIssuesCount!= null)&&this.openIssuesCount.equals(rhs.openIssuesCount))))&&((this.archived == rhs.archived)||((this.archived!= null)&&this.archived.equals(rhs.archived))))&&((this.stargazersCount == rhs.stargazersCount)||((this.stargazersCount!= null)&&this.stargazersCount.equals(rhs.stargazersCount))))&&((this.disabled == rhs.disabled)||((this.disabled!= null)&&this.disabled.equals(rhs.disabled))))&&((this.hasIssues == rhs.hasIssues)||((this.hasIssues!= null)&&this.hasIssues.equals(rhs.hasIssues))))&&((this.owner == rhs.owner)||((this.owner!= null)&&this.owner.equals(rhs.owner))))&&((this.hasWiki == rhs.hasWiki)||((this.hasWiki!= null)&&this.hasWiki.equals(rhs.hasWiki))))&&((this.compareUrl == rhs.compareUrl)||((this.compareUrl!= null)&&this.compareUrl.equals(rhs.compareUrl))))&&((this.gitCommitsUrl == rhs.gitCommitsUrl)||((this.gitCommitsUrl!= null)&&this.gitCommitsUrl.equals(rhs.gitCommitsUrl))))&&((this.htmlUrl == rhs.htmlUrl)||((this.htmlUrl!= null)&&this.htmlUrl.equals(rhs.htmlUrl))))&&((this.stargazersUrl == rhs.stargazersUrl)||((this.stargazersUrl!= null)&&this.stargazersUrl.equals(rhs.stargazersUrl))))&&((this.fullName == rhs.fullName)||((this.fullName!= null)&&this.fullName.equals(rhs.fullName))))&&((this.svnUrl == rhs.svnUrl)||((this.svnUrl!= null)&&this.svnUrl.equals(rhs.svnUrl))))&&((this.url == rhs.url)||((this.url!= null)&&this.url.equals(rhs.url))))&&((this.pullsUrl == rhs.pullsUrl)||((this.pullsUrl!= null)&&this.pullsUrl.equals(rhs.pullsUrl))))&&((this.mirrorUrl == rhs.mirrorUrl)||((this.mirrorUrl!= null)&&this.mirrorUrl.equals(rhs.mirrorUrl))))&&((this.hasDownloads == rhs.hasDownloads)||((this.hasDownloads!= null)&&this.hasDownloads.equals(rhs.hasDownloads))))&&((this.fork == rhs.fork)||((this.fork!= null)&&this.fork.equals(rhs.fork))))&&((this.hasProjects == rhs.hasProjects)||((this.hasProjects!= null)&&this.hasProjects.equals(rhs.hasProjects))))&&((this.deploymentsUrl == rhs.deploymentsUrl)||((this.deploymentsUrl!= null)&&this.deploymentsUrl.equals(rhs.deploymentsUrl))))&&((this.eventsUrl == rhs.eventsUrl)||((this.eventsUrl!= null)&&this.eventsUrl.equals(rhs.eventsUrl))))&&((this.gitTagsUrl == rhs.gitTagsUrl)||((this.gitTagsUrl!= null)&&this.gitTagsUrl.equals(rhs.gitTagsUrl))))&&((this.notificationsUrl == rhs.notificationsUrl)||((this.notificationsUrl!= null)&&this.notificationsUrl.equals(rhs.notificationsUrl))))&&((this.gitUrl == rhs.gitUrl)||((this.gitUrl!= null)&&this.gitUrl.equals(rhs.gitUrl))))&&((this.subscriptionUrl == rhs.subscriptionUrl)||((this.subscriptionUrl!= null)&&this.subscriptionUrl.equals(rhs.subscriptionUrl))))&&((this.homepage == rhs.homepage)||((this.homepage!= null)&&this.homepage.equals(rhs.homepage))));
         }
 
@@ -3608,6 +4072,56 @@ public class CommitStatusEvent {
         private Boolean siteAdmin;
         @JsonIgnore
         private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+        /**
+         * No args constructor for use in serialization
+         * 
+         */
+        public Sender() {
+        }
+
+        /**
+         * 
+         * @param receivedEventsUrl
+         * @param siteAdmin
+         * @param followingUrl
+         * @param gistsUrl
+         * @param avatarUrl
+         * @param organizationsUrl
+         * @param reposUrl
+         * @param htmlUrl
+         * @param subscriptionsUrl
+         * @param login
+         * @param type
+         * @param url
+         * @param starredUrl
+         * @param gravatarId
+         * @param followersUrl
+         * @param id
+         * @param eventsUrl
+         * @param nodeId
+         */
+        public Sender(String login, Integer id, String nodeId, String avatarUrl, String gravatarId, String url, String htmlUrl, String followersUrl, String followingUrl, String gistsUrl, String starredUrl, String subscriptionsUrl, String organizationsUrl, String reposUrl, String eventsUrl, String receivedEventsUrl, String type, Boolean siteAdmin) {
+            super();
+            this.login = login;
+            this.id = id;
+            this.nodeId = nodeId;
+            this.avatarUrl = avatarUrl;
+            this.gravatarId = gravatarId;
+            this.url = url;
+            this.htmlUrl = htmlUrl;
+            this.followersUrl = followersUrl;
+            this.followingUrl = followingUrl;
+            this.gistsUrl = gistsUrl;
+            this.starredUrl = starredUrl;
+            this.subscriptionsUrl = subscriptionsUrl;
+            this.organizationsUrl = organizationsUrl;
+            this.reposUrl = reposUrl;
+            this.eventsUrl = eventsUrl;
+            this.receivedEventsUrl = receivedEventsUrl;
+            this.type = type;
+            this.siteAdmin = siteAdmin;
+        }
 
         @JsonProperty("login")
         public String getLogin() {
@@ -3802,7 +4316,7 @@ public class CommitStatusEvent {
         @Override
         public String toString() {
             StringBuilder sb = new StringBuilder();
-            sb.append(CommitStatusEvent.Sender.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append(CommitStatusGitHubEvent.Sender.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
             sb.append("login");
             sb.append('=');
             sb.append(((this.login == null)?"<null>":this.login));
@@ -3917,10 +4431,10 @@ public class CommitStatusEvent {
             if (other == this) {
                 return true;
             }
-            if ((other instanceof CommitStatusEvent.Sender) == false) {
+            if ((other instanceof CommitStatusGitHubEvent.Sender) == false) {
                 return false;
             }
-            CommitStatusEvent.Sender rhs = ((CommitStatusEvent.Sender) other);
+            CommitStatusGitHubEvent.Sender rhs = ((CommitStatusGitHubEvent.Sender) other);
             return ((((((((((((((((((((this.receivedEventsUrl == rhs.receivedEventsUrl)||((this.receivedEventsUrl!= null)&&this.receivedEventsUrl.equals(rhs.receivedEventsUrl)))&&((this.siteAdmin == rhs.siteAdmin)||((this.siteAdmin!= null)&&this.siteAdmin.equals(rhs.siteAdmin))))&&((this.followingUrl == rhs.followingUrl)||((this.followingUrl!= null)&&this.followingUrl.equals(rhs.followingUrl))))&&((this.gistsUrl == rhs.gistsUrl)||((this.gistsUrl!= null)&&this.gistsUrl.equals(rhs.gistsUrl))))&&((this.avatarUrl == rhs.avatarUrl)||((this.avatarUrl!= null)&&this.avatarUrl.equals(rhs.avatarUrl))))&&((this.organizationsUrl == rhs.organizationsUrl)||((this.organizationsUrl!= null)&&this.organizationsUrl.equals(rhs.organizationsUrl))))&&((this.reposUrl == rhs.reposUrl)||((this.reposUrl!= null)&&this.reposUrl.equals(rhs.reposUrl))))&&((this.htmlUrl == rhs.htmlUrl)||((this.htmlUrl!= null)&&this.htmlUrl.equals(rhs.htmlUrl))))&&((this.subscriptionsUrl == rhs.subscriptionsUrl)||((this.subscriptionsUrl!= null)&&this.subscriptionsUrl.equals(rhs.subscriptionsUrl))))&&((this.login == rhs.login)||((this.login!= null)&&this.login.equals(rhs.login))))&&((this.type == rhs.type)||((this.type!= null)&&this.type.equals(rhs.type))))&&((this.url == rhs.url)||((this.url!= null)&&this.url.equals(rhs.url))))&&((this.starredUrl == rhs.starredUrl)||((this.starredUrl!= null)&&this.starredUrl.equals(rhs.starredUrl))))&&((this.gravatarId == rhs.gravatarId)||((this.gravatarId!= null)&&this.gravatarId.equals(rhs.gravatarId))))&&((this.followersUrl == rhs.followersUrl)||((this.followersUrl!= null)&&this.followersUrl.equals(rhs.followersUrl))))&&((this.id == rhs.id)||((this.id!= null)&&this.id.equals(rhs.id))))&&((this.eventsUrl == rhs.eventsUrl)||((this.eventsUrl!= null)&&this.eventsUrl.equals(rhs.eventsUrl))))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))))&&((this.nodeId == rhs.nodeId)||((this.nodeId!= null)&&this.nodeId.equals(rhs.nodeId))));
         }
 

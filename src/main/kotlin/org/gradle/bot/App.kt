@@ -21,6 +21,7 @@ import io.vertx.ext.web.handler.BodyHandler
 import io.vertx.kotlin.core.http.httpServerOptionsOf
 import org.gradle.bot.client.GitHubClient
 import org.gradle.bot.eventhandlers.GitHubEventHandler
+import org.gradle.bot.model.CommitStatusEvent
 import org.gradle.bot.model.GitHubEvent
 import org.gradle.bot.webhookhandlers.GitHubWebHookHandler
 import org.gradle.bot.webhookhandlers.TeamCityWebHookHandler

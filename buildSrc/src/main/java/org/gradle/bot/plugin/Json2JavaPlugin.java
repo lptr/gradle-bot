@@ -2,6 +2,7 @@ package org.gradle.bot.plugin;
 
 import com.sun.codemodel.JPackage;
 import com.sun.codemodel.JType;
+import org.apache.commons.io.IOUtils;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
@@ -23,6 +24,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.stream.Stream;
@@ -78,6 +80,11 @@ public class Json2JavaPlugin implements Plugin<Project> {
                 }
 
                 @Override
+                public boolean isIncludeConstructors() {
+                    return true;
+                }
+
+                @Override
                 public Iterator<URL> getSource() {
                     try {
                         return Arrays.asList(srcJson.toURI().toURL()).iterator();
@@ -89,8 +96,20 @@ public class Json2JavaPlugin implements Plugin<Project> {
 
             try {
                 Jsonschema2Pojo.generate(config, null);
+                makeAllEventsImplementGitHubEventInterface(srcJson, targetDir, targetPackage);
             } catch (IOException e) {
                 throw new RuntimeException(e);
+            }
+        }
+
+        private void makeAllEventsImplementGitHubEventInterface(File srcJson, File targetDir, String targetPackage) throws IOException {
+            // Abc.json -> Abc
+            String baseName = srcJson.getName().substring(0, srcJson.getName().length() - 5);
+            if (baseName.endsWith("GitHubEvent")) {
+                File generatedJava = new File(targetDir, targetPackage.replace('.', '/') + "/" + baseName + ".java");
+                String generatedJavaContent = new String(Files.readAllBytes(generatedJava.toPath()));
+                generatedJavaContent = generatedJavaContent.replace("class " + baseName, "class " + baseName + " implements GitHubEvent");
+                Files.write(generatedJava.toPath(), generatedJavaContent.getBytes());
             }
         }
     }

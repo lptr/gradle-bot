@@ -7,7 +7,7 @@ import org.gradle.bot.client.TeamCityClient
 import org.gradle.bot.model.AuthorAssociation
 import org.gradle.bot.model.BuildStage
 import org.gradle.bot.model.CommitStatus
-import org.gradle.bot.model.PullRequestWithComments
+import org.gradle.bot.model.PullRequestWithCommentsResponse
 import org.jetbrains.teamcity.rest.Build
 
 interface PullRequestComment {
@@ -139,7 +139,7 @@ fun getCommentMetadata(commentBody: String): CommentMetadata? {
     }
 }
 
-fun PullRequestWithComments.getComments(myself: String): List<PullRequestComment> {
+fun PullRequestWithCommentsResponse.getComments(myself: String): List<PullRequestComment> {
     return data.repository.pullRequest.comments.nodes
             .map { comment ->
                 val metadata = getCommentMetadata(comment.body)

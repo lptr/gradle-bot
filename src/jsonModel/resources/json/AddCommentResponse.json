@@ -1,0 +1,15 @@
+{
+  "data": {
+    "addComment": {
+      "clientMutationId": null,
+      "subject": {
+        "id": "MDExOlB1bGxSZXF1ZXN0MzkzNjEwMjA2"
+      },
+      "commentEdge": {
+        "node": {
+          "databaseId": 604768026
+        }
+      }
+    }
+  }
+}
