@@ -4,9 +4,11 @@
 package org.gradle.bot
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.google.common.reflect.ClassPath
 import com.google.inject.AbstractModule
 import com.google.inject.Guice
 import com.google.inject.Injector
+import com.google.inject.name.Names
 import io.vertx.core.AbstractVerticle
 import io.vertx.core.Promise
 import io.vertx.core.Verticle
@@ -18,10 +20,13 @@ import io.vertx.ext.web.Router
 import io.vertx.ext.web.handler.BodyHandler
 import io.vertx.kotlin.core.http.httpServerOptionsOf
 import org.gradle.bot.client.GitHubClient
-import org.gradle.bot.handler.GitHubWebHookHandler
-import org.gradle.bot.handler.TeamCityWebHookHandler
+import org.gradle.bot.eventhandlers.GitHubEventHandler
+import org.gradle.bot.model.GitHubEvent
+import org.gradle.bot.webhookhandlers.GitHubWebHookHandler
+import org.gradle.bot.webhookhandlers.TeamCityWebHookHandler
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import java.lang.IllegalStateException
 import java.util.concurrent.Callable
 import javax.inject.Inject
 
@@ -31,6 +36,7 @@ val logger: Logger = LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME)
 fun main() {
     val vertx = Vertx.vertx()
     val injector = Guice.createInjector(GradleBotAppModule(vertx))
+    registerEventHandlers(vertx, injector)
     vertx.exceptionHandler { logger.error("", it) }
     vertx.registerVerticleFactory(GuiceVerticleFactory(injector))
     vertx.deployVerticle(GradleBotVerticle::class.java.name)
@@ -56,10 +62,28 @@ class GuiceVerticleFactory(private val injector: Injector) : VerticleFactory {
     override fun prefix(): String = GradleBotVerticle::class.java.simpleName
 }
 
+private fun registerEventHandlers(vertx: Vertx, injector: Injector) {
+    val packageName = GradleBotVerticle::class.java.`package`.name
+    ClassPath.from(GradleBotVerticle::class.java.classLoader).getTopLevelClassesRecursive(packageName).forEach {
+        val klass = it.load()
+        if (klass.isAssignableFrom(GitHubEventHandler::class.java)) {
+            val eventHandler: GitHubEventHandler<GitHubEvent> = injector.getInstance(klass) as GitHubEventHandler<GitHubEvent>
+            vertx.eventBus().consumer<GitHubEvent>(eventHandler.eventType(), eventHandler)
+        }
+    }
+}
+
 class GradleBotAppModule(private val vertx: Vertx) : AbstractModule() {
     override fun configure() {
         bind(Vertx::class.java).toInstance(vertx)
+        listOf("GITHUB_ACCESS_TOKEN", "GITHUB_WEBHOOK_SECRET", "TEAMCITY_ACCESS_TOKEN").forEach(this::bindEnv)
     }
+
+    private fun bindEnv(envName: String) {
+        val envValue = System.getenv(envName) ?: throw IllegalStateException("Env $envName must be set!")
+        bind(String::class.java).annotatedWith(Names.named(envName)).toInstance(envValue)
+    }
+
 }
 
 class GradleBotVerticle @Inject constructor(private val gitHubWebHookHandler: GitHubWebHookHandler,

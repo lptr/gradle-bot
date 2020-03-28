@@ -1,4 +1,4 @@
-package org.gradle.bot.handler
+package org.gradle.bot.webhookhandlers
 
 import io.vertx.core.Handler
 import io.vertx.ext.web.RoutingContext

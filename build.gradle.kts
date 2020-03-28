@@ -10,6 +10,8 @@ sourceSets.create("teamCityWorkaround").withConvention(KotlinSourceSet::class) {
     kotlin.srcDirs += file("src/teamCityWorkaround/kotlin")
 }
 
+sourceSets.create("jsonModel")
+
 repositories {
     // Use jcenter for resolving dependencies.
     // You can declare any Maven/Ivy/file repository here.
@@ -26,8 +28,8 @@ dependencies {
     val teamCityRestClientVersion = "1.7.27"
     val guiceVersion = "4.2.3"
     val logbackVersion = "1.2.3"
-    val graphQLJavaVersion = "14.0"
     val junit5Version = "5.6.1"
+    val guavaVersion = "28.2-jre"
 
     implementation("io.vertx:vertx-web-client:$vertxVersion")
     implementation("io.vertx:vertx-core:$vertxVersion")
@@ -48,7 +50,8 @@ dependencies {
     implementation("ch.qos.logback:logback-classic:$logbackVersion")
     implementation("ch.qos.logback:logback-core:$logbackVersion")
 
-    implementation("com.graphql-java:graphql-java:$graphQLJavaVersion")
+    implementation("com.google.guava:guava:$guavaVersion")
+
 
 //    implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
 //    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
@@ -66,6 +69,7 @@ dependencies {
     "teamCityWorkaroundImplementation"("org.slf4j:slf4j-api:1.7.12")
 
     implementation(sourceSets["teamCityWorkaround"].output)
+    implementation(sourceSets["jsonModel"].output)
     configurations["implementation"].extendsFrom(configurations["teamCityWorkaroundImplementation"])
 }
 

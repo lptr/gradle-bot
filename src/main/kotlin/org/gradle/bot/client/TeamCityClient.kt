@@ -10,14 +10,17 @@ import org.jetbrains.teamcity.rest.BuildId
 import org.jetbrains.teamcity.rest.TeamCityInstanceFactory
 import org.slf4j.LoggerFactory
 import javax.inject.Inject
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Singleton
-class TeamCityClient @Inject constructor(private val vertx: Vertx) {
+class TeamCityClient @Inject constructor(
+        private val vertx: Vertx,
+        @Named("TEAMCITY_ACCESS_TOKEN") teamCityToken: String
+) {
     private val logger = LoggerFactory.getLogger(javaClass)
     private val teamCityRestClient by lazy {
-        val token = System.getenv("TEAMCITY_ACCESS_TOKEN") ?: throw IllegalStateException("Must set env variable TEAMCITY_ACCESS_TOKEN")
-        TeamCityInstanceFactory.tokenAuth("https://builds.gradle.org", token)
+        TeamCityInstanceFactory.tokenAuth("https://builds.gradle.org", teamCityToken)
     }
 
     fun triggerBuild(stage: BuildStage, branchName: String): Future<Build> {

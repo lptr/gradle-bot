@@ -16,10 +16,14 @@ import org.gradle.bot.model.whoAmIQuery
 import org.gradle.bot.objectMapper
 import org.slf4j.LoggerFactory
 import javax.inject.Inject
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Singleton
-class GitHubClient @Inject constructor(vertx: Vertx) {
+class GitHubClient @Inject constructor(
+        vertx: Vertx,
+        @Named("GITHUB_ACCESS_TOKEN") githubToken: String
+) {
     private val logger = LoggerFactory.getLogger(javaClass)
     private val client = WebClient.create(vertx,
             WebClientOptions().also { options ->
@@ -30,10 +34,7 @@ class GitHubClient @Inject constructor(vertx: Vertx) {
                     }
                 }
             })
-    private val authHeader by lazy {
-        val githubToken = System.getenv("GITHUB_ACCESS_TOKEN") ?: throw IllegalStateException("Must set env variable GITHUB_ACCESS_TOKEN")
-        "bearer $githubToken"
-    }
+    private val authHeader = "bearer $githubToken"
 
     private var myself: String? = null
 

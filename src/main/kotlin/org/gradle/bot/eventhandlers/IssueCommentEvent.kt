@@ -1,6 +1,11 @@
-package org.gradle.bot.model
+package org.gradle.bot.eventhandlers
 
 import com.fasterxml.jackson.annotation.JsonProperty
+import org.gradle.bot.model.AuthorAssociation
+import org.gradle.bot.model.GitHubEvent
+import org.gradle.bot.model.Organization
+import org.gradle.bot.model.Repository
+import org.gradle.bot.model.User
 
 
 /*
