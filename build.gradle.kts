@@ -8,22 +8,17 @@ plugins {
 
 apply(plugin = "json2Java")
 
-extra["json2JavaSourceDir"] = rootDir.resolve("src/jsonModel/resources/json")
-extra["json2JavaTargetDir"] = rootDir.resolve("src/jsonModel/java")
+extra["json2JavaSourceDir"] = rootDir.resolve("src/main/resources/json")
+extra["json2JavaTargetDir"] = rootDir.resolve("src/main/java")
 extra["json2JavaTargetPackage"] = "org.gradle.bot.model"
 
 sourceSets.create("teamCityWorkaround").withConvention(KotlinSourceSet::class) {
     kotlin.srcDirs += file("src/teamCityWorkaround/kotlin")
 }
 
-sourceSets.create("jsonModel")
-
 repositories {
     jcenter()
     mavenCentral()
-    maven {
-        url = URI("https://repo.eclipse.org/content/repositories/egit-releases/")
-    }
 }
 
 dependencies {
@@ -47,18 +42,11 @@ dependencies {
     implementation("com.fasterxml.jackson.core:jackson-databind:$jacksonVersion")
     implementation("com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion")
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:$jacksonVersion")
-
-    implementation("org.eclipse.mylyn.github:org.eclipse.mylyn.github.core:5.7.0.202003110725-r")
-    implementation("com.jcabi:jcabi-github:0.41")
     // Use logback logging
     implementation("ch.qos.logback:logback-classic:$logbackVersion")
     implementation("ch.qos.logback:logback-core:$logbackVersion")
 
     implementation("com.google.guava:guava:$guavaVersion")
-
-
-//    implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
-//    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
     //junit 5
     testImplementation("org.junit.jupiter:junit-jupiter-api:$junit5Version")
@@ -73,9 +61,6 @@ dependencies {
     "teamCityWorkaroundImplementation"("org.slf4j:slf4j-api:1.7.12")
 
     implementation(sourceSets["teamCityWorkaround"].output)
-    implementation(sourceSets["jsonModel"].output)
-    "jsonModelImplementation"("com.fasterxml.jackson.core:jackson-databind:$jacksonVersion")
-    "jsonModelImplementation"("com.google.guava:guava:$guavaVersion")
     configurations["implementation"].extendsFrom(configurations["teamCityWorkaroundImplementation"])
 }
 
