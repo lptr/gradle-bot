@@ -21,7 +21,6 @@ import io.vertx.ext.web.handler.BodyHandler
 import io.vertx.kotlin.core.http.httpServerOptionsOf
 import org.gradle.bot.client.GitHubClient
 import org.gradle.bot.eventhandlers.GitHubEventHandler
-import org.gradle.bot.model.CommitStatusEvent
 import org.gradle.bot.model.GitHubEvent
 import org.gradle.bot.webhookhandlers.GitHubWebHookHandler
 import org.gradle.bot.webhookhandlers.TeamCityWebHookHandler
@@ -63,6 +62,7 @@ class GuiceVerticleFactory(private val injector: Injector) : VerticleFactory {
     override fun prefix(): String = GradleBotVerticle::class.java.simpleName
 }
 
+@Suppress("UNCHECKED_CAST")
 private fun registerEventHandlers(vertx: Vertx, injector: Injector) {
     val packageName = GradleBotVerticle::class.java.`package`.name
     ClassPath.from(GradleBotVerticle::class.java.classLoader).getTopLevelClassesRecursive(packageName).forEach {

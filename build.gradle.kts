@@ -1,13 +1,5 @@
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 import java.net.URI
-import org.gradle.bot.plugin.Json2JavaPlugin
-
-//buildscript {
-//    repositories { mavenCentral() }
-//    dependencies {
-//        classpath("org.jsonschema2pojo:jsonschema2pojo-gradle-plugin:1.0.2")
-//    }
-//}
 
 plugins {
     id("org.jetbrains.kotlin.jvm") version "1.3.70"
@@ -83,6 +75,7 @@ dependencies {
     implementation(sourceSets["teamCityWorkaround"].output)
     implementation(sourceSets["jsonModel"].output)
     "jsonModelImplementation"("com.fasterxml.jackson.core:jackson-databind:$jacksonVersion")
+    "jsonModelImplementation"("com.google.guava:guava:$guavaVersion")
     configurations["implementation"].extendsFrom(configurations["teamCityWorkaroundImplementation"])
 }
 
@@ -97,10 +90,3 @@ tasks.named("run", JavaExec::class.java) {
 application {
     mainClassName = "org.gradle.bot.AppKt"
 }
-
-//extensions.findByType(JsonSchemaExtension::class.java)?.run {
-//    sourceFiles = listOf(*rootDir.resolve("json").listFiles())
-//    targetDirectory = rootDir.resolve("src/jsonModel/java")
-//    setSourceType("JSON")
-//    useInnerClassBuilders = true
-//}

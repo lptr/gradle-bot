@@ -4,10 +4,7 @@ import io.vertx.core.Handler
 import io.vertx.core.Vertx
 import io.vertx.ext.web.RoutingContext
 import org.gradle.bot.endWithJson
-import org.gradle.bot.model.CommitStatusEvent
 import org.gradle.bot.model.GitHubEvent
-import org.gradle.bot.model.IssueCommentEvent
-import org.gradle.bot.model.PullRequestEvent
 import org.gradle.bot.objectMapper
 import org.gradle.bot.security.GithubSignatureChecker
 import org.slf4j.Logger
@@ -28,18 +25,12 @@ class GitHubWebHookHandler @Inject constructor(
 
         context.parsePayloadEvent(githubSignatureChecker)?.apply {
             logger.debug("Start handling $this")
-            vertx.eventBus().publish(this.javaClass.name, this)
+            vertx.eventBus().publish(eventType, this)
         } ?: logger.info("Received invalid GitHub webhook, discard.")
 
         context?.response()?.endWithJson(emptyMap<String, Any>())
     }
 }
-
-val eventTypeToEventClassMap = mapOf(
-        "status" to CommitStatusEvent::class.java,
-        "pull_request" to PullRequestEvent::class.java,
-        "issue_comment" to IssueCommentEvent::class.java
-)
 
 private fun RoutingContext?.parsePayloadEvent(githubSignatureChecker: GithubSignatureChecker): GitHubEvent? {
     return this?.let {
@@ -52,7 +43,7 @@ private fun RoutingContext?.parsePayloadEvent(githubSignatureChecker: GithubSign
         logger.debug("Get GitHub webhook {}", bodyAsString)
         request().getHeader("X-GitHub-Event")
     }?.let {
-        eventTypeToEventClassMap[it]
+        GitHubEvent.getEventClassByType(it)
     }?.let {
         objectMapper.readValue(bodyAsString, it)
     }

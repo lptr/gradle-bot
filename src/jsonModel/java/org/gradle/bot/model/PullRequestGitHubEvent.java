@@ -21,20 +21,20 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "organization",
     "sender"
 })
-public class PullRequestEvent implements GitHubEvent {
+public class PullRequestGitHubEvent implements GitHubEvent {
 
     @JsonProperty("action")
     private String action;
     @JsonProperty("number")
     private Integer number;
     @JsonProperty("pull_request")
-    private PullRequestEvent.PullRequest pullRequest;
+    private PullRequestGitHubEvent.PullRequest pullRequest;
     @JsonProperty("repository")
-    private PullRequestEvent.Repository repository;
+    private PullRequestGitHubEvent.Repository repository;
     @JsonProperty("organization")
-    private PullRequestEvent.Organization organization;
+    private PullRequestGitHubEvent.Organization organization;
     @JsonProperty("sender")
-    private PullRequestEvent.Sender sender;
+    private PullRequestGitHubEvent.Sender sender;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -42,7 +42,7 @@ public class PullRequestEvent implements GitHubEvent {
      * No args constructor for use in serialization
      * 
      */
-    public PullRequestEvent() {
+    public PullRequestGitHubEvent() {
     }
 
     /**
@@ -54,7 +54,7 @@ public class PullRequestEvent implements GitHubEvent {
      * @param repository
      * @param pullRequest
      */
-    public PullRequestEvent(String action, Integer number, PullRequestEvent.PullRequest pullRequest, PullRequestEvent.Repository repository, PullRequestEvent.Organization organization, PullRequestEvent.Sender sender) {
+    public PullRequestGitHubEvent(String action, Integer number, PullRequestGitHubEvent.PullRequest pullRequest, PullRequestGitHubEvent.Repository repository, PullRequestGitHubEvent.Organization organization, PullRequestGitHubEvent.Sender sender) {
         super();
         this.action = action;
         this.number = number;
@@ -85,42 +85,42 @@ public class PullRequestEvent implements GitHubEvent {
     }
 
     @JsonProperty("pull_request")
-    public PullRequestEvent.PullRequest getPullRequest() {
+    public PullRequestGitHubEvent.PullRequest getPullRequest() {
         return pullRequest;
     }
 
     @JsonProperty("pull_request")
-    public void setPullRequest(PullRequestEvent.PullRequest pullRequest) {
+    public void setPullRequest(PullRequestGitHubEvent.PullRequest pullRequest) {
         this.pullRequest = pullRequest;
     }
 
     @JsonProperty("repository")
-    public PullRequestEvent.Repository getRepository() {
+    public PullRequestGitHubEvent.Repository getRepository() {
         return repository;
     }
 
     @JsonProperty("repository")
-    public void setRepository(PullRequestEvent.Repository repository) {
+    public void setRepository(PullRequestGitHubEvent.Repository repository) {
         this.repository = repository;
     }
 
     @JsonProperty("organization")
-    public PullRequestEvent.Organization getOrganization() {
+    public PullRequestGitHubEvent.Organization getOrganization() {
         return organization;
     }
 
     @JsonProperty("organization")
-    public void setOrganization(PullRequestEvent.Organization organization) {
+    public void setOrganization(PullRequestGitHubEvent.Organization organization) {
         this.organization = organization;
     }
 
     @JsonProperty("sender")
-    public PullRequestEvent.Sender getSender() {
+    public PullRequestGitHubEvent.Sender getSender() {
         return sender;
     }
 
     @JsonProperty("sender")
-    public void setSender(PullRequestEvent.Sender sender) {
+    public void setSender(PullRequestGitHubEvent.Sender sender) {
         this.sender = sender;
     }
 
@@ -137,7 +137,7 @@ public class PullRequestEvent implements GitHubEvent {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(PullRequestEvent.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+        sb.append(PullRequestGitHubEvent.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
         sb.append("action");
         sb.append('=');
         sb.append(((this.action == null)?"<null>":this.action));
@@ -192,10 +192,10 @@ public class PullRequestEvent implements GitHubEvent {
         if (other == this) {
             return true;
         }
-        if ((other instanceof PullRequestEvent) == false) {
+        if ((other instanceof PullRequestGitHubEvent) == false) {
             return false;
         }
-        PullRequestEvent rhs = ((PullRequestEvent) other);
+        PullRequestGitHubEvent rhs = ((PullRequestGitHubEvent) other);
         return ((((((((this.number == rhs.number)||((this.number!= null)&&this.number.equals(rhs.number)))&&((this.sender == rhs.sender)||((this.sender!= null)&&this.sender.equals(rhs.sender))))&&((this.organization == rhs.organization)||((this.organization!= null)&&this.organization.equals(rhs.organization))))&&((this.action == rhs.action)||((this.action!= null)&&this.action.equals(rhs.action))))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))))&&((this.repository == rhs.repository)||((this.repository!= null)&&this.repository.equals(rhs.repository))))&&((this.pullRequest == rhs.pullRequest)||((this.pullRequest!= null)&&this.pullRequest.equals(rhs.pullRequest))));
     }
 
@@ -216,9 +216,9 @@ public class PullRequestEvent implements GitHubEvent {
         @JsonProperty("sha")
         private String sha;
         @JsonProperty("user")
-        private PullRequestEvent.User user;
+        private PullRequestGitHubEvent.User user;
         @JsonProperty("repo")
-        private PullRequestEvent.Repo repo;
+        private PullRequestGitHubEvent.Repo repo;
         @JsonIgnore
         private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -237,7 +237,7 @@ public class PullRequestEvent implements GitHubEvent {
          * @param sha
          * @param user
          */
-        public Base(String label, String ref, String sha, PullRequestEvent.User user, PullRequestEvent.Repo repo) {
+        public Base(String label, String ref, String sha, PullRequestGitHubEvent.User user, PullRequestGitHubEvent.Repo repo) {
             super();
             this.label = label;
             this.ref = ref;
@@ -277,22 +277,22 @@ public class PullRequestEvent implements GitHubEvent {
         }
 
         @JsonProperty("user")
-        public PullRequestEvent.User getUser() {
+        public PullRequestGitHubEvent.User getUser() {
             return user;
         }
 
         @JsonProperty("user")
-        public void setUser(PullRequestEvent.User user) {
+        public void setUser(PullRequestGitHubEvent.User user) {
             this.user = user;
         }
 
         @JsonProperty("repo")
-        public PullRequestEvent.Repo getRepo() {
+        public PullRequestGitHubEvent.Repo getRepo() {
             return repo;
         }
 
         @JsonProperty("repo")
-        public void setRepo(PullRequestEvent.Repo repo) {
+        public void setRepo(PullRequestGitHubEvent.Repo repo) {
             this.repo = repo;
         }
 
@@ -309,7 +309,7 @@ public class PullRequestEvent implements GitHubEvent {
         @Override
         public String toString() {
             StringBuilder sb = new StringBuilder();
-            sb.append(PullRequestEvent.Base.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append(PullRequestGitHubEvent.Base.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
             sb.append("label");
             sb.append('=');
             sb.append(((this.label == null)?"<null>":this.label));
@@ -359,10 +359,10 @@ public class PullRequestEvent implements GitHubEvent {
             if (other == this) {
                 return true;
             }
-            if ((other instanceof PullRequestEvent.Base) == false) {
+            if ((other instanceof PullRequestGitHubEvent.Base) == false) {
                 return false;
             }
-            PullRequestEvent.Base rhs = ((PullRequestEvent.Base) other);
+            PullRequestGitHubEvent.Base rhs = ((PullRequestGitHubEvent.Base) other);
             return (((((((this.ref == rhs.ref)||((this.ref!= null)&&this.ref.equals(rhs.ref)))&&((this.repo == rhs.repo)||((this.repo!= null)&&this.repo.equals(rhs.repo))))&&((this.label == rhs.label)||((this.label!= null)&&this.label.equals(rhs.label))))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))))&&((this.sha == rhs.sha)||((this.sha!= null)&&this.sha.equals(rhs.sha))))&&((this.user == rhs.user)||((this.user!= null)&&this.user.equals(rhs.user))));
         }
 
@@ -418,7 +418,7 @@ public class PullRequestEvent implements GitHubEvent {
         @Override
         public String toString() {
             StringBuilder sb = new StringBuilder();
-            sb.append(PullRequestEvent.Comments.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append(PullRequestGitHubEvent.Comments.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
             sb.append("href");
             sb.append('=');
             sb.append(((this.href == null)?"<null>":this.href));
@@ -448,10 +448,10 @@ public class PullRequestEvent implements GitHubEvent {
             if (other == this) {
                 return true;
             }
-            if ((other instanceof PullRequestEvent.Comments) == false) {
+            if ((other instanceof PullRequestGitHubEvent.Comments) == false) {
                 return false;
             }
-            PullRequestEvent.Comments rhs = ((PullRequestEvent.Comments) other);
+            PullRequestGitHubEvent.Comments rhs = ((PullRequestGitHubEvent.Comments) other);
             return (((this.href == rhs.href)||((this.href!= null)&&this.href.equals(rhs.href)))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))));
         }
 
@@ -507,7 +507,7 @@ public class PullRequestEvent implements GitHubEvent {
         @Override
         public String toString() {
             StringBuilder sb = new StringBuilder();
-            sb.append(PullRequestEvent.Commits.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append(PullRequestGitHubEvent.Commits.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
             sb.append("href");
             sb.append('=');
             sb.append(((this.href == null)?"<null>":this.href));
@@ -537,10 +537,10 @@ public class PullRequestEvent implements GitHubEvent {
             if (other == this) {
                 return true;
             }
-            if ((other instanceof PullRequestEvent.Commits) == false) {
+            if ((other instanceof PullRequestGitHubEvent.Commits) == false) {
                 return false;
             }
-            PullRequestEvent.Commits rhs = ((PullRequestEvent.Commits) other);
+            PullRequestGitHubEvent.Commits rhs = ((PullRequestGitHubEvent.Commits) other);
             return (((this.href == rhs.href)||((this.href!= null)&&this.href.equals(rhs.href)))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))));
         }
 
@@ -563,9 +563,9 @@ public class PullRequestEvent implements GitHubEvent {
         @JsonProperty("sha")
         private String sha;
         @JsonProperty("user")
-        private PullRequestEvent.User user;
+        private PullRequestGitHubEvent.User user;
         @JsonProperty("repo")
-        private PullRequestEvent.Repo repo;
+        private PullRequestGitHubEvent.Repo repo;
         @JsonIgnore
         private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -584,7 +584,7 @@ public class PullRequestEvent implements GitHubEvent {
          * @param sha
          * @param user
          */
-        public Head(String label, String ref, String sha, PullRequestEvent.User user, PullRequestEvent.Repo repo) {
+        public Head(String label, String ref, String sha, PullRequestGitHubEvent.User user, PullRequestGitHubEvent.Repo repo) {
             super();
             this.label = label;
             this.ref = ref;
@@ -624,22 +624,22 @@ public class PullRequestEvent implements GitHubEvent {
         }
 
         @JsonProperty("user")
-        public PullRequestEvent.User getUser() {
+        public PullRequestGitHubEvent.User getUser() {
             return user;
         }
 
         @JsonProperty("user")
-        public void setUser(PullRequestEvent.User user) {
+        public void setUser(PullRequestGitHubEvent.User user) {
             this.user = user;
         }
 
         @JsonProperty("repo")
-        public PullRequestEvent.Repo getRepo() {
+        public PullRequestGitHubEvent.Repo getRepo() {
             return repo;
         }
 
         @JsonProperty("repo")
-        public void setRepo(PullRequestEvent.Repo repo) {
+        public void setRepo(PullRequestGitHubEvent.Repo repo) {
             this.repo = repo;
         }
 
@@ -656,7 +656,7 @@ public class PullRequestEvent implements GitHubEvent {
         @Override
         public String toString() {
             StringBuilder sb = new StringBuilder();
-            sb.append(PullRequestEvent.Head.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append(PullRequestGitHubEvent.Head.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
             sb.append("label");
             sb.append('=');
             sb.append(((this.label == null)?"<null>":this.label));
@@ -706,10 +706,10 @@ public class PullRequestEvent implements GitHubEvent {
             if (other == this) {
                 return true;
             }
-            if ((other instanceof PullRequestEvent.Head) == false) {
+            if ((other instanceof PullRequestGitHubEvent.Head) == false) {
                 return false;
             }
-            PullRequestEvent.Head rhs = ((PullRequestEvent.Head) other);
+            PullRequestGitHubEvent.Head rhs = ((PullRequestGitHubEvent.Head) other);
             return (((((((this.ref == rhs.ref)||((this.ref!= null)&&this.ref.equals(rhs.ref)))&&((this.repo == rhs.repo)||((this.repo!= null)&&this.repo.equals(rhs.repo))))&&((this.label == rhs.label)||((this.label!= null)&&this.label.equals(rhs.label))))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))))&&((this.sha == rhs.sha)||((this.sha!= null)&&this.sha.equals(rhs.sha))))&&((this.user == rhs.user)||((this.user!= null)&&this.user.equals(rhs.user))));
         }
 
@@ -765,7 +765,7 @@ public class PullRequestEvent implements GitHubEvent {
         @Override
         public String toString() {
             StringBuilder sb = new StringBuilder();
-            sb.append(PullRequestEvent.Html.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append(PullRequestGitHubEvent.Html.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
             sb.append("href");
             sb.append('=');
             sb.append(((this.href == null)?"<null>":this.href));
@@ -795,10 +795,10 @@ public class PullRequestEvent implements GitHubEvent {
             if (other == this) {
                 return true;
             }
-            if ((other instanceof PullRequestEvent.Html) == false) {
+            if ((other instanceof PullRequestGitHubEvent.Html) == false) {
                 return false;
             }
-            PullRequestEvent.Html rhs = ((PullRequestEvent.Html) other);
+            PullRequestGitHubEvent.Html rhs = ((PullRequestGitHubEvent.Html) other);
             return (((this.href == rhs.href)||((this.href!= null)&&this.href.equals(rhs.href)))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))));
         }
 
@@ -854,7 +854,7 @@ public class PullRequestEvent implements GitHubEvent {
         @Override
         public String toString() {
             StringBuilder sb = new StringBuilder();
-            sb.append(PullRequestEvent.Issue.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append(PullRequestGitHubEvent.Issue.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
             sb.append("href");
             sb.append('=');
             sb.append(((this.href == null)?"<null>":this.href));
@@ -884,10 +884,10 @@ public class PullRequestEvent implements GitHubEvent {
             if (other == this) {
                 return true;
             }
-            if ((other instanceof PullRequestEvent.Issue) == false) {
+            if ((other instanceof PullRequestGitHubEvent.Issue) == false) {
                 return false;
             }
-            PullRequestEvent.Issue rhs = ((PullRequestEvent.Issue) other);
+            PullRequestGitHubEvent.Issue rhs = ((PullRequestGitHubEvent.Issue) other);
             return (((this.href == rhs.href)||((this.href!= null)&&this.href.equals(rhs.href)))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))));
         }
 
@@ -1033,7 +1033,7 @@ public class PullRequestEvent implements GitHubEvent {
         @Override
         public String toString() {
             StringBuilder sb = new StringBuilder();
-            sb.append(PullRequestEvent.Label.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append(PullRequestGitHubEvent.Label.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
             sb.append("id");
             sb.append('=');
             sb.append(((this.id == null)?"<null>":this.id));
@@ -1093,10 +1093,10 @@ public class PullRequestEvent implements GitHubEvent {
             if (other == this) {
                 return true;
             }
-            if ((other instanceof PullRequestEvent.Label) == false) {
+            if ((other instanceof PullRequestGitHubEvent.Label) == false) {
                 return false;
             }
-            PullRequestEvent.Label rhs = ((PullRequestEvent.Label) other);
+            PullRequestGitHubEvent.Label rhs = ((PullRequestGitHubEvent.Label) other);
             return (((((((((this._default == rhs._default)||((this._default!= null)&&this._default.equals(rhs._default)))&&((this.color == rhs.color)||((this.color!= null)&&this.color.equals(rhs.color))))&&((this.name == rhs.name)||((this.name!= null)&&this.name.equals(rhs.name))))&&((this.description == rhs.description)||((this.description!= null)&&this.description.equals(rhs.description))))&&((this.id == rhs.id)||((this.id!= null)&&this.id.equals(rhs.id))))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))))&&((this.nodeId == rhs.nodeId)||((this.nodeId!= null)&&this.nodeId.equals(rhs.nodeId))))&&((this.url == rhs.url)||((this.url!= null)&&this.url.equals(rhs.url))));
         }
 
@@ -1116,21 +1116,21 @@ public class PullRequestEvent implements GitHubEvent {
     public static class Links {
 
         @JsonProperty("self")
-        private PullRequestEvent.Self self;
+        private PullRequestGitHubEvent.Self self;
         @JsonProperty("html")
-        private PullRequestEvent.Html html;
+        private PullRequestGitHubEvent.Html html;
         @JsonProperty("issue")
-        private PullRequestEvent.Issue issue;
+        private PullRequestGitHubEvent.Issue issue;
         @JsonProperty("comments")
-        private PullRequestEvent.Comments comments;
+        private PullRequestGitHubEvent.Comments comments;
         @JsonProperty("review_comments")
-        private PullRequestEvent.ReviewComments reviewComments;
+        private PullRequestGitHubEvent.ReviewComments reviewComments;
         @JsonProperty("review_comment")
-        private PullRequestEvent.ReviewComment reviewComment;
+        private PullRequestGitHubEvent.ReviewComment reviewComment;
         @JsonProperty("commits")
-        private PullRequestEvent.Commits commits;
+        private PullRequestGitHubEvent.Commits commits;
         @JsonProperty("statuses")
-        private PullRequestEvent.Statuses statuses;
+        private PullRequestGitHubEvent.Statuses statuses;
         @JsonIgnore
         private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -1152,7 +1152,7 @@ public class PullRequestEvent implements GitHubEvent {
          * @param html
          * @param reviewComments
          */
-        public Links(PullRequestEvent.Self self, PullRequestEvent.Html html, PullRequestEvent.Issue issue, PullRequestEvent.Comments comments, PullRequestEvent.ReviewComments reviewComments, PullRequestEvent.ReviewComment reviewComment, PullRequestEvent.Commits commits, PullRequestEvent.Statuses statuses) {
+        public Links(PullRequestGitHubEvent.Self self, PullRequestGitHubEvent.Html html, PullRequestGitHubEvent.Issue issue, PullRequestGitHubEvent.Comments comments, PullRequestGitHubEvent.ReviewComments reviewComments, PullRequestGitHubEvent.ReviewComment reviewComment, PullRequestGitHubEvent.Commits commits, PullRequestGitHubEvent.Statuses statuses) {
             super();
             this.self = self;
             this.html = html;
@@ -1165,82 +1165,82 @@ public class PullRequestEvent implements GitHubEvent {
         }
 
         @JsonProperty("self")
-        public PullRequestEvent.Self getSelf() {
+        public PullRequestGitHubEvent.Self getSelf() {
             return self;
         }
 
         @JsonProperty("self")
-        public void setSelf(PullRequestEvent.Self self) {
+        public void setSelf(PullRequestGitHubEvent.Self self) {
             this.self = self;
         }
 
         @JsonProperty("html")
-        public PullRequestEvent.Html getHtml() {
+        public PullRequestGitHubEvent.Html getHtml() {
             return html;
         }
 
         @JsonProperty("html")
-        public void setHtml(PullRequestEvent.Html html) {
+        public void setHtml(PullRequestGitHubEvent.Html html) {
             this.html = html;
         }
 
         @JsonProperty("issue")
-        public PullRequestEvent.Issue getIssue() {
+        public PullRequestGitHubEvent.Issue getIssue() {
             return issue;
         }
 
         @JsonProperty("issue")
-        public void setIssue(PullRequestEvent.Issue issue) {
+        public void setIssue(PullRequestGitHubEvent.Issue issue) {
             this.issue = issue;
         }
 
         @JsonProperty("comments")
-        public PullRequestEvent.Comments getComments() {
+        public PullRequestGitHubEvent.Comments getComments() {
             return comments;
         }
 
         @JsonProperty("comments")
-        public void setComments(PullRequestEvent.Comments comments) {
+        public void setComments(PullRequestGitHubEvent.Comments comments) {
             this.comments = comments;
         }
 
         @JsonProperty("review_comments")
-        public PullRequestEvent.ReviewComments getReviewComments() {
+        public PullRequestGitHubEvent.ReviewComments getReviewComments() {
             return reviewComments;
         }
 
         @JsonProperty("review_comments")
-        public void setReviewComments(PullRequestEvent.ReviewComments reviewComments) {
+        public void setReviewComments(PullRequestGitHubEvent.ReviewComments reviewComments) {
             this.reviewComments = reviewComments;
         }
 
         @JsonProperty("review_comment")
-        public PullRequestEvent.ReviewComment getReviewComment() {
+        public PullRequestGitHubEvent.ReviewComment getReviewComment() {
             return reviewComment;
         }
 
         @JsonProperty("review_comment")
-        public void setReviewComment(PullRequestEvent.ReviewComment reviewComment) {
+        public void setReviewComment(PullRequestGitHubEvent.ReviewComment reviewComment) {
             this.reviewComment = reviewComment;
         }
 
         @JsonProperty("commits")
-        public PullRequestEvent.Commits getCommits() {
+        public PullRequestGitHubEvent.Commits getCommits() {
             return commits;
         }
 
         @JsonProperty("commits")
-        public void setCommits(PullRequestEvent.Commits commits) {
+        public void setCommits(PullRequestGitHubEvent.Commits commits) {
             this.commits = commits;
         }
 
         @JsonProperty("statuses")
-        public PullRequestEvent.Statuses getStatuses() {
+        public PullRequestGitHubEvent.Statuses getStatuses() {
             return statuses;
         }
 
         @JsonProperty("statuses")
-        public void setStatuses(PullRequestEvent.Statuses statuses) {
+        public void setStatuses(PullRequestGitHubEvent.Statuses statuses) {
             this.statuses = statuses;
         }
 
@@ -1257,7 +1257,7 @@ public class PullRequestEvent implements GitHubEvent {
         @Override
         public String toString() {
             StringBuilder sb = new StringBuilder();
-            sb.append(PullRequestEvent.Links.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append(PullRequestGitHubEvent.Links.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
             sb.append("self");
             sb.append('=');
             sb.append(((this.self == null)?"<null>":this.self));
@@ -1322,10 +1322,10 @@ public class PullRequestEvent implements GitHubEvent {
             if (other == this) {
                 return true;
             }
-            if ((other instanceof PullRequestEvent.Links) == false) {
+            if ((other instanceof PullRequestGitHubEvent.Links) == false) {
                 return false;
             }
-            PullRequestEvent.Links rhs = ((PullRequestEvent.Links) other);
+            PullRequestGitHubEvent.Links rhs = ((PullRequestGitHubEvent.Links) other);
             return ((((((((((this.comments == rhs.comments)||((this.comments!= null)&&this.comments.equals(rhs.comments)))&&((this.issue == rhs.issue)||((this.issue!= null)&&this.issue.equals(rhs.issue))))&&((this.reviewComment == rhs.reviewComment)||((this.reviewComment!= null)&&this.reviewComment.equals(rhs.reviewComment))))&&((this.self == rhs.self)||((this.self!= null)&&this.self.equals(rhs.self))))&&((this.commits == rhs.commits)||((this.commits!= null)&&this.commits.equals(rhs.commits))))&&((this.statuses == rhs.statuses)||((this.statuses!= null)&&this.statuses.equals(rhs.statuses))))&&((this.html == rhs.html)||((this.html!= null)&&this.html.equals(rhs.html))))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))))&&((this.reviewComments == rhs.reviewComments)||((this.reviewComments!= null)&&this.reviewComments.equals(rhs.reviewComments))));
         }
 
@@ -1636,7 +1636,7 @@ public class PullRequestEvent implements GitHubEvent {
         @Override
         public String toString() {
             StringBuilder sb = new StringBuilder();
-            sb.append(PullRequestEvent.MergedBy.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append(PullRequestGitHubEvent.MergedBy.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
             sb.append("login");
             sb.append('=');
             sb.append(((this.login == null)?"<null>":this.login));
@@ -1751,10 +1751,10 @@ public class PullRequestEvent implements GitHubEvent {
             if (other == this) {
                 return true;
             }
-            if ((other instanceof PullRequestEvent.MergedBy) == false) {
+            if ((other instanceof PullRequestGitHubEvent.MergedBy) == false) {
                 return false;
             }
-            PullRequestEvent.MergedBy rhs = ((PullRequestEvent.MergedBy) other);
+            PullRequestGitHubEvent.MergedBy rhs = ((PullRequestGitHubEvent.MergedBy) other);
             return ((((((((((((((((((((this.receivedEventsUrl == rhs.receivedEventsUrl)||((this.receivedEventsUrl!= null)&&this.receivedEventsUrl.equals(rhs.receivedEventsUrl)))&&((this.siteAdmin == rhs.siteAdmin)||((this.siteAdmin!= null)&&this.siteAdmin.equals(rhs.siteAdmin))))&&((this.followingUrl == rhs.followingUrl)||((this.followingUrl!= null)&&this.followingUrl.equals(rhs.followingUrl))))&&((this.gistsUrl == rhs.gistsUrl)||((this.gistsUrl!= null)&&this.gistsUrl.equals(rhs.gistsUrl))))&&((this.avatarUrl == rhs.avatarUrl)||((this.avatarUrl!= null)&&this.avatarUrl.equals(rhs.avatarUrl))))&&((this.organizationsUrl == rhs.organizationsUrl)||((this.organizationsUrl!= null)&&this.organizationsUrl.equals(rhs.organizationsUrl))))&&((this.reposUrl == rhs.reposUrl)||((this.reposUrl!= null)&&this.reposUrl.equals(rhs.reposUrl))))&&((this.htmlUrl == rhs.htmlUrl)||((this.htmlUrl!= null)&&this.htmlUrl.equals(rhs.htmlUrl))))&&((this.subscriptionsUrl == rhs.subscriptionsUrl)||((this.subscriptionsUrl!= null)&&this.subscriptionsUrl.equals(rhs.subscriptionsUrl))))&&((this.login == rhs.login)||((this.login!= null)&&this.login.equals(rhs.login))))&&((this.type == rhs.type)||((this.type!= null)&&this.type.equals(rhs.type))))&&((this.url == rhs.url)||((this.url!= null)&&this.url.equals(rhs.url))))&&((this.starredUrl == rhs.starredUrl)||((this.starredUrl!= null)&&this.starredUrl.equals(rhs.starredUrl))))&&((this.gravatarId == rhs.gravatarId)||((this.gravatarId!= null)&&this.gravatarId.equals(rhs.gravatarId))))&&((this.followersUrl == rhs.followersUrl)||((this.followersUrl!= null)&&this.followersUrl.equals(rhs.followersUrl))))&&((this.id == rhs.id)||((this.id!= null)&&this.id.equals(rhs.id))))&&((this.eventsUrl == rhs.eventsUrl)||((this.eventsUrl!= null)&&this.eventsUrl.equals(rhs.eventsUrl))))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))))&&((this.nodeId == rhs.nodeId)||((this.nodeId!= null)&&this.nodeId.equals(rhs.nodeId))));
         }
 
@@ -1975,7 +1975,7 @@ public class PullRequestEvent implements GitHubEvent {
         @Override
         public String toString() {
             StringBuilder sb = new StringBuilder();
-            sb.append(PullRequestEvent.Organization.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append(PullRequestGitHubEvent.Organization.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
             sb.append("login");
             sb.append('=');
             sb.append(((this.login == null)?"<null>":this.login));
@@ -2060,10 +2060,10 @@ public class PullRequestEvent implements GitHubEvent {
             if (other == this) {
                 return true;
             }
-            if ((other instanceof PullRequestEvent.Organization) == false) {
+            if ((other instanceof PullRequestGitHubEvent.Organization) == false) {
                 return false;
             }
-            PullRequestEvent.Organization rhs = ((PullRequestEvent.Organization) other);
+            PullRequestGitHubEvent.Organization rhs = ((PullRequestGitHubEvent.Organization) other);
             return ((((((((((((((this.issuesUrl == rhs.issuesUrl)||((this.issuesUrl!= null)&&this.issuesUrl.equals(rhs.issuesUrl)))&&((this.reposUrl == rhs.reposUrl)||((this.reposUrl!= null)&&this.reposUrl.equals(rhs.reposUrl))))&&((this.avatarUrl == rhs.avatarUrl)||((this.avatarUrl!= null)&&this.avatarUrl.equals(rhs.avatarUrl))))&&((this.description == rhs.description)||((this.description!= null)&&this.description.equals(rhs.description))))&&((this.membersUrl == rhs.membersUrl)||((this.membersUrl!= null)&&this.membersUrl.equals(rhs.membersUrl))))&&((this.login == rhs.login)||((this.login!= null)&&this.login.equals(rhs.login))))&&((this.url == rhs.url)||((this.url!= null)&&this.url.equals(rhs.url))))&&((this.hooksUrl == rhs.hooksUrl)||((this.hooksUrl!= null)&&this.hooksUrl.equals(rhs.hooksUrl))))&&((this.id == rhs.id)||((this.id!= null)&&this.id.equals(rhs.id))))&&((this.eventsUrl == rhs.eventsUrl)||((this.eventsUrl!= null)&&this.eventsUrl.equals(rhs.eventsUrl))))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))))&&((this.publicMembersUrl == rhs.publicMembersUrl)||((this.publicMembersUrl!= null)&&this.publicMembersUrl.equals(rhs.publicMembersUrl))))&&((this.nodeId == rhs.nodeId)||((this.nodeId!= null)&&this.nodeId.equals(rhs.nodeId))));
         }
 
@@ -2374,7 +2374,7 @@ public class PullRequestEvent implements GitHubEvent {
         @Override
         public String toString() {
             StringBuilder sb = new StringBuilder();
-            sb.append(PullRequestEvent.Owner.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append(PullRequestGitHubEvent.Owner.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
             sb.append("login");
             sb.append('=');
             sb.append(((this.login == null)?"<null>":this.login));
@@ -2489,10 +2489,10 @@ public class PullRequestEvent implements GitHubEvent {
             if (other == this) {
                 return true;
             }
-            if ((other instanceof PullRequestEvent.Owner) == false) {
+            if ((other instanceof PullRequestGitHubEvent.Owner) == false) {
                 return false;
             }
-            PullRequestEvent.Owner rhs = ((PullRequestEvent.Owner) other);
+            PullRequestGitHubEvent.Owner rhs = ((PullRequestGitHubEvent.Owner) other);
             return ((((((((((((((((((((this.receivedEventsUrl == rhs.receivedEventsUrl)||((this.receivedEventsUrl!= null)&&this.receivedEventsUrl.equals(rhs.receivedEventsUrl)))&&((this.siteAdmin == rhs.siteAdmin)||((this.siteAdmin!= null)&&this.siteAdmin.equals(rhs.siteAdmin))))&&((this.followingUrl == rhs.followingUrl)||((this.followingUrl!= null)&&this.followingUrl.equals(rhs.followingUrl))))&&((this.gistsUrl == rhs.gistsUrl)||((this.gistsUrl!= null)&&this.gistsUrl.equals(rhs.gistsUrl))))&&((this.avatarUrl == rhs.avatarUrl)||((this.avatarUrl!= null)&&this.avatarUrl.equals(rhs.avatarUrl))))&&((this.organizationsUrl == rhs.organizationsUrl)||((this.organizationsUrl!= null)&&this.organizationsUrl.equals(rhs.organizationsUrl))))&&((this.reposUrl == rhs.reposUrl)||((this.reposUrl!= null)&&this.reposUrl.equals(rhs.reposUrl))))&&((this.htmlUrl == rhs.htmlUrl)||((this.htmlUrl!= null)&&this.htmlUrl.equals(rhs.htmlUrl))))&&((this.subscriptionsUrl == rhs.subscriptionsUrl)||((this.subscriptionsUrl!= null)&&this.subscriptionsUrl.equals(rhs.subscriptionsUrl))))&&((this.login == rhs.login)||((this.login!= null)&&this.login.equals(rhs.login))))&&((this.type == rhs.type)||((this.type!= null)&&this.type.equals(rhs.type))))&&((this.url == rhs.url)||((this.url!= null)&&this.url.equals(rhs.url))))&&((this.starredUrl == rhs.starredUrl)||((this.starredUrl!= null)&&this.starredUrl.equals(rhs.starredUrl))))&&((this.gravatarId == rhs.gravatarId)||((this.gravatarId!= null)&&this.gravatarId.equals(rhs.gravatarId))))&&((this.followersUrl == rhs.followersUrl)||((this.followersUrl!= null)&&this.followersUrl.equals(rhs.followersUrl))))&&((this.id == rhs.id)||((this.id!= null)&&this.id.equals(rhs.id))))&&((this.eventsUrl == rhs.eventsUrl)||((this.eventsUrl!= null)&&this.eventsUrl.equals(rhs.eventsUrl))))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))))&&((this.nodeId == rhs.nodeId)||((this.nodeId!= null)&&this.nodeId.equals(rhs.nodeId))));
         }
 
@@ -2572,7 +2572,7 @@ public class PullRequestEvent implements GitHubEvent {
         @JsonProperty("title")
         private String title;
         @JsonProperty("user")
-        private PullRequestEvent.User user;
+        private PullRequestGitHubEvent.User user;
         @JsonProperty("body")
         private String body;
         @JsonProperty("created_at")
@@ -2594,7 +2594,7 @@ public class PullRequestEvent implements GitHubEvent {
         @JsonProperty("requested_teams")
         private List<Object> requestedTeams = new ArrayList<Object>();
         @JsonProperty("labels")
-        private List<PullRequestEvent.Label> labels = new ArrayList<PullRequestEvent.Label>();
+        private List<PullRequestGitHubEvent.Label> labels = new ArrayList<PullRequestGitHubEvent.Label>();
         @JsonProperty("milestone")
         private Object milestone;
         @JsonProperty("draft")
@@ -2610,11 +2610,11 @@ public class PullRequestEvent implements GitHubEvent {
         @JsonProperty("statuses_url")
         private String statusesUrl;
         @JsonProperty("head")
-        private PullRequestEvent.Head head;
+        private PullRequestGitHubEvent.Head head;
         @JsonProperty("base")
-        private PullRequestEvent.Base base;
+        private PullRequestGitHubEvent.Base base;
         @JsonProperty("_links")
-        private PullRequestEvent.Links links;
+        private PullRequestGitHubEvent.Links links;
         @JsonProperty("author_association")
         private String authorAssociation;
         @JsonProperty("merged")
@@ -2626,7 +2626,7 @@ public class PullRequestEvent implements GitHubEvent {
         @JsonProperty("mergeable_state")
         private String mergeableState;
         @JsonProperty("merged_by")
-        private PullRequestEvent.MergedBy mergedBy;
+        private PullRequestGitHubEvent.MergedBy mergedBy;
         @JsonProperty("comments")
         private Integer comments;
         @JsonProperty("review_comments")
@@ -2700,7 +2700,7 @@ public class PullRequestEvent implements GitHubEvent {
          * @param user
          * @param base
          */
-        public PullRequest(String url, Integer id, String nodeId, String htmlUrl, String diffUrl, String patchUrl, String issueUrl, Integer number, String state, Boolean locked, String title, PullRequestEvent.User user, String body, String createdAt, String updatedAt, String closedAt, String mergedAt, String mergeCommitSha, Object assignee, List<Object> assignees, List<Object> requestedReviewers, List<Object> requestedTeams, List<PullRequestEvent.Label> labels, Object milestone, Boolean draft, String commitsUrl, String reviewCommentsUrl, String reviewCommentUrl, String commentsUrl, String statusesUrl, PullRequestEvent.Head head, PullRequestEvent.Base base, PullRequestEvent.Links links, String authorAssociation, Boolean merged, Object mergeable, Object rebaseable, String mergeableState, PullRequestEvent.MergedBy mergedBy, Integer comments, Integer reviewComments, Boolean maintainerCanModify, Integer commits, Integer additions, Integer deletions, Integer changedFiles) {
+        public PullRequest(String url, Integer id, String nodeId, String htmlUrl, String diffUrl, String patchUrl, String issueUrl, Integer number, String state, Boolean locked, String title, PullRequestGitHubEvent.User user, String body, String createdAt, String updatedAt, String closedAt, String mergedAt, String mergeCommitSha, Object assignee, List<Object> assignees, List<Object> requestedReviewers, List<Object> requestedTeams, List<PullRequestGitHubEvent.Label> labels, Object milestone, Boolean draft, String commitsUrl, String reviewCommentsUrl, String reviewCommentUrl, String commentsUrl, String statusesUrl, PullRequestGitHubEvent.Head head, PullRequestGitHubEvent.Base base, PullRequestGitHubEvent.Links links, String authorAssociation, Boolean merged, Object mergeable, Object rebaseable, String mergeableState, PullRequestGitHubEvent.MergedBy mergedBy, Integer comments, Integer reviewComments, Boolean maintainerCanModify, Integer commits, Integer additions, Integer deletions, Integer changedFiles) {
             super();
             this.url = url;
             this.id = id;
@@ -2861,12 +2861,12 @@ public class PullRequestEvent implements GitHubEvent {
         }
 
         @JsonProperty("user")
-        public PullRequestEvent.User getUser() {
+        public PullRequestGitHubEvent.User getUser() {
             return user;
         }
 
         @JsonProperty("user")
-        public void setUser(PullRequestEvent.User user) {
+        public void setUser(PullRequestGitHubEvent.User user) {
             this.user = user;
         }
 
@@ -2971,12 +2971,12 @@ public class PullRequestEvent implements GitHubEvent {
         }
 
         @JsonProperty("labels")
-        public List<PullRequestEvent.Label> getLabels() {
+        public List<PullRequestGitHubEvent.Label> getLabels() {
             return labels;
         }
 
         @JsonProperty("labels")
-        public void setLabels(List<PullRequestEvent.Label> labels) {
+        public void setLabels(List<PullRequestGitHubEvent.Label> labels) {
             this.labels = labels;
         }
 
@@ -3051,32 +3051,32 @@ public class PullRequestEvent implements GitHubEvent {
         }
 
         @JsonProperty("head")
-        public PullRequestEvent.Head getHead() {
+        public PullRequestGitHubEvent.Head getHead() {
             return head;
         }
 
         @JsonProperty("head")
-        public void setHead(PullRequestEvent.Head head) {
+        public void setHead(PullRequestGitHubEvent.Head head) {
             this.head = head;
         }
 
         @JsonProperty("base")
-        public PullRequestEvent.Base getBase() {
+        public PullRequestGitHubEvent.Base getBase() {
             return base;
         }
 
         @JsonProperty("base")
-        public void setBase(PullRequestEvent.Base base) {
+        public void setBase(PullRequestGitHubEvent.Base base) {
             this.base = base;
         }
 
         @JsonProperty("_links")
-        public PullRequestEvent.Links getLinks() {
+        public PullRequestGitHubEvent.Links getLinks() {
             return links;
         }
 
         @JsonProperty("_links")
-        public void setLinks(PullRequestEvent.Links links) {
+        public void setLinks(PullRequestGitHubEvent.Links links) {
             this.links = links;
         }
 
@@ -3131,12 +3131,12 @@ public class PullRequestEvent implements GitHubEvent {
         }
 
         @JsonProperty("merged_by")
-        public PullRequestEvent.MergedBy getMergedBy() {
+        public PullRequestGitHubEvent.MergedBy getMergedBy() {
             return mergedBy;
         }
 
         @JsonProperty("merged_by")
-        public void setMergedBy(PullRequestEvent.MergedBy mergedBy) {
+        public void setMergedBy(PullRequestGitHubEvent.MergedBy mergedBy) {
             this.mergedBy = mergedBy;
         }
 
@@ -3223,7 +3223,7 @@ public class PullRequestEvent implements GitHubEvent {
         @Override
         public String toString() {
             StringBuilder sb = new StringBuilder();
-            sb.append(PullRequestEvent.PullRequest.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append(PullRequestGitHubEvent.PullRequest.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
             sb.append("url");
             sb.append('=');
             sb.append(((this.url == null)?"<null>":this.url));
@@ -3478,10 +3478,10 @@ public class PullRequestEvent implements GitHubEvent {
             if (other == this) {
                 return true;
             }
-            if ((other instanceof PullRequestEvent.PullRequest) == false) {
+            if ((other instanceof PullRequestGitHubEvent.PullRequest) == false) {
                 return false;
             }
-            PullRequestEvent.PullRequest rhs = ((PullRequestEvent.PullRequest) other);
+            PullRequestGitHubEvent.PullRequest rhs = ((PullRequestGitHubEvent.PullRequest) other);
             return ((((((((((((((((((((((((((((((((((((((((((((((((this.requestedReviewers == rhs.requestedReviewers)||((this.requestedReviewers!= null)&&this.requestedReviewers.equals(rhs.requestedReviewers)))&&((this.mergeableState == rhs.mergeableState)||((this.mergeableState!= null)&&this.mergeableState.equals(rhs.mergeableState))))&&((this.diffUrl == rhs.diffUrl)||((this.diffUrl!= null)&&this.diffUrl.equals(rhs.diffUrl))))&&((this.rebaseable == rhs.rebaseable)||((this.rebaseable!= null)&&this.rebaseable.equals(rhs.rebaseable))))&&((this.requestedTeams == rhs.requestedTeams)||((this.requestedTeams!= null)&&this.requestedTeams.equals(rhs.requestedTeams))))&&((this.reviewCommentUrl == rhs.reviewCommentUrl)||((this.reviewCommentUrl!= null)&&this.reviewCommentUrl.equals(rhs.reviewCommentUrl))))&&((this.deletions == rhs.deletions)||((this.deletions!= null)&&this.deletions.equals(rhs.deletions))))&&((this.assignees == rhs.assignees)||((this.assignees!= null)&&this.assignees.equals(rhs.assignees))))&&((this.reviewCommentsUrl == rhs.reviewCommentsUrl)||((this.reviewCommentsUrl!= null)&&this.reviewCommentsUrl.equals(rhs.reviewCommentsUrl))))&&((this.title == rhs.title)||((this.title!= null)&&this.title.equals(rhs.title))))&&((this.body == rhs.body)||((this.body!= null)&&this.body.equals(rhs.body))))&&((this.commitsUrl == rhs.commitsUrl)||((this.commitsUrl!= null)&&this.commitsUrl.equals(rhs.commitsUrl))))&&((this.reviewComments == rhs.reviewComments)||((this.reviewComments!= null)&&this.reviewComments.equals(rhs.reviewComments))))&&((this.head == rhs.head)||((this.head!= null)&&this.head.equals(rhs.head))))&&((this.number == rhs.number)||((this.number!= null)&&this.number.equals(rhs.number))))&&((this.createdAt == rhs.createdAt)||((this.createdAt!= null)&&this.createdAt.equals(rhs.createdAt))))&&((this.patchUrl == rhs.patchUrl)||((this.patchUrl!= null)&&this.patchUrl.equals(rhs.patchUrl))))&&((this.mergeable == rhs.mergeable)||((this.mergeable!= null)&&this.mergeable.equals(rhs.mergeable))))&&((this.changedFiles == rhs.changedFiles)||((this.changedFiles!= null)&&this.changedFiles.equals(rhs.changedFiles))))&&((this.mergeCommitSha == rhs.mergeCommitSha)||((this.mergeCommitSha!= null)&&this.mergeCommitSha.equals(rhs.mergeCommitSha))))&&((this.draft == rhs.draft)||((this.draft!= null)&&this.draft.equals(rhs.draft))))&&((this.statusesUrl == rhs.statusesUrl)||((this.statusesUrl!= null)&&this.statusesUrl.equals(rhs.statusesUrl))))&&((this.links == rhs.links)||((this.links!= null)&&this.links.equals(rhs.links))))&&((this.id == rhs.id)||((this.id!= null)&&this.id.equals(rhs.id))))&&((this.state == rhs.state)||((this.state!= null)&&this.state.equals(rhs.state))))&&((this.locked == rhs.locked)||((this.locked!= null)&&this.locked.equals(rhs.locked))))&&((this.closedAt == rhs.closedAt)||((this.closedAt!= null)&&this.closedAt.equals(rhs.closedAt))))&&((this.authorAssociation == rhs.authorAssociation)||((this.authorAssociation!= null)&&this.authorAssociation.equals(rhs.authorAssociation))))&&((this.updatedAt == rhs.updatedAt)||((this.updatedAt!= null)&&this.updatedAt.equals(rhs.updatedAt))))&&((this.comments == rhs.comments)||((this.comments!= null)&&this.comments.equals(rhs.comments))))&&((this.additions == rhs.additions)||((this.additions!= null)&&this.additions.equals(rhs.additions))))&&((this.mergedAt == rhs.mergedAt)||((this.mergedAt!= null)&&this.mergedAt.equals(rhs.mergedAt))))&&((this.htmlUrl == rhs.htmlUrl)||((this.htmlUrl!= null)&&this.htmlUrl.equals(rhs.htmlUrl))))&&((this.merged == rhs.merged)||((this.merged!= null)&&this.merged.equals(rhs.merged))))&&((this.maintainerCanModify == rhs.maintainerCanModify)||((this.maintainerCanModify!= null)&&this.maintainerCanModify.equals(rhs.maintainerCanModify))))&&((this.url == rhs.url)||((this.url!= null)&&this.url.equals(rhs.url))))&&((this.labels == rhs.labels)||((this.labels!= null)&&this.labels.equals(rhs.labels))))&&((this.issueUrl == rhs.issueUrl)||((this.issueUrl!= null)&&this.issueUrl.equals(rhs.issueUrl))))&&((this.milestone == rhs.milestone)||((this.milestone!= null)&&this.milestone.equals(rhs.milestone))))&&((this.commentsUrl == rhs.commentsUrl)||((this.commentsUrl!= null)&&this.commentsUrl.equals(rhs.commentsUrl))))&&((this.commits == rhs.commits)||((this.commits!= null)&&this.commits.equals(rhs.commits))))&&((this.assignee == rhs.assignee)||((this.assignee!= null)&&this.assignee.equals(rhs.assignee))))&&((this.mergedBy == rhs.mergedBy)||((this.mergedBy!= null)&&this.mergedBy.equals(rhs.mergedBy))))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))))&&((this.nodeId == rhs.nodeId)||((this.nodeId!= null)&&this.nodeId.equals(rhs.nodeId))))&&((this.user == rhs.user)||((this.user!= null)&&this.user.equals(rhs.user))))&&((this.base == rhs.base)||((this.base!= null)&&this.base.equals(rhs.base))));
         }
 
@@ -3576,7 +3576,7 @@ public class PullRequestEvent implements GitHubEvent {
         @JsonProperty("private")
         private Boolean _private;
         @JsonProperty("owner")
-        private PullRequestEvent.Owner owner;
+        private PullRequestGitHubEvent.Owner owner;
         @JsonProperty("html_url")
         private String htmlUrl;
         @JsonProperty("description")
@@ -3797,7 +3797,7 @@ public class PullRequestEvent implements GitHubEvent {
          * @param subscriptionUrl
          * @param homepage
          */
-        public Repo(Integer id, String nodeId, String name, String fullName, Boolean _private, PullRequestEvent.Owner owner, String htmlUrl, String description, Boolean fork, String url, String forksUrl, String keysUrl, String collaboratorsUrl, String teamsUrl, String hooksUrl, String issueEventsUrl, String eventsUrl, String assigneesUrl, String branchesUrl, String tagsUrl, String blobsUrl, String gitTagsUrl, String gitRefsUrl, String treesUrl, String statusesUrl, String languagesUrl, String stargazersUrl, String contributorsUrl, String subscribersUrl, String subscriptionUrl, String commitsUrl, String gitCommitsUrl, String commentsUrl, String issueCommentUrl, String contentsUrl, String compareUrl, String mergesUrl, String archiveUrl, String downloadsUrl, String issuesUrl, String pullsUrl, String milestonesUrl, String notificationsUrl, String labelsUrl, String releasesUrl, String deploymentsUrl, String createdAt, String updatedAt, String pushedAt, String gitUrl, String sshUrl, String cloneUrl, String svnUrl, Object homepage, Integer size, Integer stargazersCount, Integer watchersCount, String language, Boolean hasIssues, Boolean hasProjects, Boolean hasDownloads, Boolean hasWiki, Boolean hasPages, Integer forksCount, Object mirrorUrl, Boolean archived, Boolean disabled, Integer openIssuesCount, Object license, Integer forks, Integer openIssues, Integer watchers, String defaultBranch) {
+        public Repo(Integer id, String nodeId, String name, String fullName, Boolean _private, PullRequestGitHubEvent.Owner owner, String htmlUrl, String description, Boolean fork, String url, String forksUrl, String keysUrl, String collaboratorsUrl, String teamsUrl, String hooksUrl, String issueEventsUrl, String eventsUrl, String assigneesUrl, String branchesUrl, String tagsUrl, String blobsUrl, String gitTagsUrl, String gitRefsUrl, String treesUrl, String statusesUrl, String languagesUrl, String stargazersUrl, String contributorsUrl, String subscribersUrl, String subscriptionUrl, String commitsUrl, String gitCommitsUrl, String commentsUrl, String issueCommentUrl, String contentsUrl, String compareUrl, String mergesUrl, String archiveUrl, String downloadsUrl, String issuesUrl, String pullsUrl, String milestonesUrl, String notificationsUrl, String labelsUrl, String releasesUrl, String deploymentsUrl, String createdAt, String updatedAt, String pushedAt, String gitUrl, String sshUrl, String cloneUrl, String svnUrl, Object homepage, Integer size, Integer stargazersCount, Integer watchersCount, String language, Boolean hasIssues, Boolean hasProjects, Boolean hasDownloads, Boolean hasWiki, Boolean hasPages, Integer forksCount, Object mirrorUrl, Boolean archived, Boolean disabled, Integer openIssuesCount, Object license, Integer forks, Integer openIssues, Integer watchers, String defaultBranch) {
             super();
             this.id = id;
             this.nodeId = nodeId;
@@ -3925,12 +3925,12 @@ public class PullRequestEvent implements GitHubEvent {
         }
 
         @JsonProperty("owner")
-        public PullRequestEvent.Owner getOwner() {
+        public PullRequestGitHubEvent.Owner getOwner() {
             return owner;
         }
 
         @JsonProperty("owner")
-        public void setOwner(PullRequestEvent.Owner owner) {
+        public void setOwner(PullRequestGitHubEvent.Owner owner) {
             this.owner = owner;
         }
 
@@ -4617,7 +4617,7 @@ public class PullRequestEvent implements GitHubEvent {
         @Override
         public String toString() {
             StringBuilder sb = new StringBuilder();
-            sb.append(PullRequestEvent.Repo.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append(PullRequestGitHubEvent.Repo.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
             sb.append("id");
             sb.append('=');
             sb.append(((this.id == null)?"<null>":this.id));
@@ -5007,10 +5007,10 @@ public class PullRequestEvent implements GitHubEvent {
             if (other == this) {
                 return true;
             }
-            if ((other instanceof PullRequestEvent.Repo) == false) {
+            if ((other instanceof PullRequestGitHubEvent.Repo) == false) {
                 return false;
             }
-            PullRequestEvent.Repo rhs = ((PullRequestEvent.Repo) other);
+            PullRequestGitHubEvent.Repo rhs = ((PullRequestGitHubEvent.Repo) other);
             return (((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((this.sshUrl == rhs.sshUrl)||((this.sshUrl!= null)&&this.sshUrl.equals(rhs.sshUrl)))&&((this.archiveUrl == rhs.archiveUrl)||((this.archiveUrl!= null)&&this.archiveUrl.equals(rhs.archiveUrl))))&&((this.languagesUrl == rhs.languagesUrl)||((this.languagesUrl!= null)&&this.languagesUrl.equals(rhs.languagesUrl))))&&((this.language == rhs.language)||((this.language!= null)&&this.language.equals(rhs.language))))&&((this.assigneesUrl == rhs.assigneesUrl)||((this.assigneesUrl!= null)&&this.assigneesUrl.equals(rhs.assigneesUrl))))&&((this.commitsUrl == rhs.commitsUrl)||((this.commitsUrl!= null)&&this.commitsUrl.equals(rhs.commitsUrl))))&&((this.openIssues == rhs.openIssues)||((this.openIssues!= null)&&this.openIssues.equals(rhs.openIssues))))&&((this.cloneUrl == rhs.cloneUrl)||((this.cloneUrl!= null)&&this.cloneUrl.equals(rhs.cloneUrl))))&&((this.forksCount == rhs.forksCount)||((this.forksCount!= null)&&this.forksCount.equals(rhs.forksCount))))&&((this.subscribersUrl == rhs.subscribersUrl)||((this.subscribersUrl!= null)&&this.subscribersUrl.equals(rhs.subscribersUrl))))&&((this.createdAt == rhs.createdAt)||((this.createdAt!= null)&&this.createdAt.equals(rhs.createdAt))))&&((this.forksUrl == rhs.forksUrl)||((this.forksUrl!= null)&&this.forksUrl.equals(rhs.forksUrl))))&&((this.watchersCount == rhs.watchersCount)||((this.watchersCount!= null)&&this.watchersCount.equals(rhs.watchersCount))))&&((this._private == rhs._private)||((this._private!= null)&&this._private.equals(rhs._private))))&&((this.issueCommentUrl == rhs.issueCommentUrl)||((this.issueCommentUrl!= null)&&this.issueCommentUrl.equals(rhs.issueCommentUrl))))&&((this.statusesUrl == rhs.statusesUrl)||((this.statusesUrl!= null)&&this.statusesUrl.equals(rhs.statusesUrl))))&&((this.id == rhs.id)||((this.id!= null)&&this.id.equals(rhs.id))))&&((this.collaboratorsUrl == rhs.collaboratorsUrl)||((this.collaboratorsUrl!= null)&&this.collaboratorsUrl.equals(rhs.collaboratorsUrl))))&&((this.updatedAt == rhs.updatedAt)||((this.updatedAt!= null)&&this.updatedAt.equals(rhs.updatedAt))))&&((this.forks == rhs.forks)||((this.forks!= null)&&this.forks.equals(rhs.forks))))&&((this.labelsUrl == rhs.labelsUrl)||((this.labelsUrl!= null)&&this.labelsUrl.equals(rhs.labelsUrl))))&&((this.defaultBranch == rhs.defaultBranch)||((this.defaultBranch!= null)&&this.defaultBranch.equals(rhs.defaultBranch))))&&((this.keysUrl == rhs.keysUrl)||((this.keysUrl!= null)&&this.keysUrl.equals(rhs.keysUrl))))&&((this.downloadsUrl == rhs.downloadsUrl)||((this.downloadsUrl!= null)&&this.downloadsUrl.equals(rhs.downloadsUrl))))&&((this.contentsUrl == rhs.contentsUrl)||((this.contentsUrl!= null)&&this.contentsUrl.equals(rhs.contentsUrl))))&&((this.pushedAt == rhs.pushedAt)||((this.pushedAt!= null)&&this.pushedAt.equals(rhs.pushedAt))))&&((this.tagsUrl == rhs.tagsUrl)||((this.tagsUrl!= null)&&this.tagsUrl.equals(rhs.tagsUrl))))&&((this.license == rhs.license)||((this.license!= null)&&this.license.equals(rhs.license))))&&((this.commentsUrl == rhs.commentsUrl)||((this.commentsUrl!= null)&&this.commentsUrl.equals(rhs.commentsUrl))))&&((this.size == rhs.size)||((this.size!= null)&&this.size.equals(rhs.size))))&&((this.treesUrl == rhs.treesUrl)||((this.treesUrl!= null)&&this.treesUrl.equals(rhs.treesUrl))))&&((this.name == rhs.name)||((this.name!= null)&&this.name.equals(rhs.name))))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))))&&((this.mergesUrl == rhs.mergesUrl)||((this.mergesUrl!= null)&&this.mergesUrl.equals(rhs.mergesUrl))))&&((this.nodeId == rhs.nodeId)||((this.nodeId!= null)&&this.nodeId.equals(rhs.nodeId))))&&((this.teamsUrl == rhs.teamsUrl)||((this.teamsUrl!= null)&&this.teamsUrl.equals(rhs.teamsUrl))))&&((this.blobsUrl == rhs.blobsUrl)||((this.blobsUrl!= null)&&this.blobsUrl.equals(rhs.blobsUrl))))&&((this.issueEventsUrl == rhs.issueEventsUrl)||((this.issueEventsUrl!= null)&&this.issueEventsUrl.equals(rhs.issueEventsUrl))))&&((this.hasPages == rhs.hasPages)||((this.hasPages!= null)&&this.hasPages.equals(rhs.hasPages))))&&((this.milestonesUrl == rhs.milestonesUrl)||((this.milestonesUrl!= null)&&this.milestonesUrl.equals(rhs.milestonesUrl))))&&((this.issuesUrl == rhs.issuesUrl)||((this.issuesUrl!= null)&&this.issuesUrl.equals(rhs.issuesUrl))))&&((this.releasesUrl == rhs.releasesUrl)||((this.releasesUrl!= null)&&this.releasesUrl.equals(rhs.releasesUrl))))&&((this.description == rhs.description)||((this.description!= null)&&this.description.equals(rhs.description))))&&((this.watchers == rhs.watchers)||((this.watchers!= null)&&this.watchers.equals(rhs.watchers))))&&((this.branchesUrl == rhs.branchesUrl)||((this.branchesUrl!= null)&&this.branchesUrl.equals(rhs.branchesUrl))))&&((this.contributorsUrl == rhs.contributorsUrl)||((this.contributorsUrl!= null)&&this.contributorsUrl.equals(rhs.contributorsUrl))))&&((this.gitRefsUrl == rhs.gitRefsUrl)||((this.gitRefsUrl!= null)&&this.gitRefsUrl.equals(rhs.gitRefsUrl))))&&((this.hooksUrl == rhs.hooksUrl)||((this.hooksUrl!= null)&&this.hooksUrl.equals(rhs.hooksUrl))))&&((this.openIssuesCount == rhs.openIssuesCount)||((this.openIssuesCount!= null)&&this.openIssuesCount.equals(rhs.openIssuesCount))))&&((this.archived == rhs.archived)||((this.archived!= null)&&this.archived.equals(rhs.archived))))&&((this.stargazersCount == rhs.stargazersCount)||((this.stargazersCount!= null)&&this.stargazersCount.equals(rhs.stargazersCount))))&&((this.disabled == rhs.disabled)||((this.disabled!= null)&&this.disabled.equals(rhs.disabled))))&&((this.hasIssues == rhs.hasIssues)||((this.hasIssues!= null)&&this.hasIssues.equals(rhs.hasIssues))))&&((this.owner == rhs.owner)||((this.owner!= null)&&this.owner.equals(rhs.owner))))&&((this.hasWiki == rhs.hasWiki)||((this.hasWiki!= null)&&this.hasWiki.equals(rhs.hasWiki))))&&((this.compareUrl == rhs.compareUrl)||((this.compareUrl!= null)&&this.compareUrl.equals(rhs.compareUrl))))&&((this.gitCommitsUrl == rhs.gitCommitsUrl)||((this.gitCommitsUrl!= null)&&this.gitCommitsUrl.equals(rhs.gitCommitsUrl))))&&((this.htmlUrl == rhs.htmlUrl)||((this.htmlUrl!= null)&&this.htmlUrl.equals(rhs.htmlUrl))))&&((this.stargazersUrl == rhs.stargazersUrl)||((this.stargazersUrl!= null)&&this.stargazersUrl.equals(rhs.stargazersUrl))))&&((this.fullName == rhs.fullName)||((this.fullName!= null)&&this.fullName.equals(rhs.fullName))))&&((this.svnUrl == rhs.svnUrl)||((this.svnUrl!= null)&&this.svnUrl.equals(rhs.svnUrl))))&&((this.url == rhs.url)||((this.url!= null)&&this.url.equals(rhs.url))))&&((this.pullsUrl == rhs.pullsUrl)||((this.pullsUrl!= null)&&this.pullsUrl.equals(rhs.pullsUrl))))&&((this.mirrorUrl == rhs.mirrorUrl)||((this.mirrorUrl!= null)&&this.mirrorUrl.equals(rhs.mirrorUrl))))&&((this.hasDownloads == rhs.hasDownloads)||((this.hasDownloads!= null)&&this.hasDownloads.equals(rhs.hasDownloads))))&&((this.fork == rhs.fork)||((this.fork!= null)&&this.fork.equals(rhs.fork))))&&((this.hasProjects == rhs.hasProjects)||((this.hasProjects!= null)&&this.hasProjects.equals(rhs.hasProjects))))&&((this.deploymentsUrl == rhs.deploymentsUrl)||((this.deploymentsUrl!= null)&&this.deploymentsUrl.equals(rhs.deploymentsUrl))))&&((this.eventsUrl == rhs.eventsUrl)||((this.eventsUrl!= null)&&this.eventsUrl.equals(rhs.eventsUrl))))&&((this.gitTagsUrl == rhs.gitTagsUrl)||((this.gitTagsUrl!= null)&&this.gitTagsUrl.equals(rhs.gitTagsUrl))))&&((this.notificationsUrl == rhs.notificationsUrl)||((this.notificationsUrl!= null)&&this.notificationsUrl.equals(rhs.notificationsUrl))))&&((this.gitUrl == rhs.gitUrl)||((this.gitUrl!= null)&&this.gitUrl.equals(rhs.gitUrl))))&&((this.subscriptionUrl == rhs.subscriptionUrl)||((this.subscriptionUrl!= null)&&this.subscriptionUrl.equals(rhs.subscriptionUrl))))&&((this.homepage == rhs.homepage)||((this.homepage!= null)&&this.homepage.equals(rhs.homepage))));
         }
 
@@ -5105,7 +5105,7 @@ public class PullRequestEvent implements GitHubEvent {
         @JsonProperty("private")
         private Boolean _private;
         @JsonProperty("owner")
-        private PullRequestEvent.Owner owner;
+        private PullRequestGitHubEvent.Owner owner;
         @JsonProperty("html_url")
         private String htmlUrl;
         @JsonProperty("description")
@@ -5326,7 +5326,7 @@ public class PullRequestEvent implements GitHubEvent {
          * @param subscriptionUrl
          * @param homepage
          */
-        public Repository(Integer id, String nodeId, String name, String fullName, Boolean _private, PullRequestEvent.Owner owner, String htmlUrl, String description, Boolean fork, String url, String forksUrl, String keysUrl, String collaboratorsUrl, String teamsUrl, String hooksUrl, String issueEventsUrl, String eventsUrl, String assigneesUrl, String branchesUrl, String tagsUrl, String blobsUrl, String gitTagsUrl, String gitRefsUrl, String treesUrl, String statusesUrl, String languagesUrl, String stargazersUrl, String contributorsUrl, String subscribersUrl, String subscriptionUrl, String commitsUrl, String gitCommitsUrl, String commentsUrl, String issueCommentUrl, String contentsUrl, String compareUrl, String mergesUrl, String archiveUrl, String downloadsUrl, String issuesUrl, String pullsUrl, String milestonesUrl, String notificationsUrl, String labelsUrl, String releasesUrl, String deploymentsUrl, String createdAt, String updatedAt, String pushedAt, String gitUrl, String sshUrl, String cloneUrl, String svnUrl, Object homepage, Integer size, Integer stargazersCount, Integer watchersCount, String language, Boolean hasIssues, Boolean hasProjects, Boolean hasDownloads, Boolean hasWiki, Boolean hasPages, Integer forksCount, Object mirrorUrl, Boolean archived, Boolean disabled, Integer openIssuesCount, Object license, Integer forks, Integer openIssues, Integer watchers, String defaultBranch) {
+        public Repository(Integer id, String nodeId, String name, String fullName, Boolean _private, PullRequestGitHubEvent.Owner owner, String htmlUrl, String description, Boolean fork, String url, String forksUrl, String keysUrl, String collaboratorsUrl, String teamsUrl, String hooksUrl, String issueEventsUrl, String eventsUrl, String assigneesUrl, String branchesUrl, String tagsUrl, String blobsUrl, String gitTagsUrl, String gitRefsUrl, String treesUrl, String statusesUrl, String languagesUrl, String stargazersUrl, String contributorsUrl, String subscribersUrl, String subscriptionUrl, String commitsUrl, String gitCommitsUrl, String commentsUrl, String issueCommentUrl, String contentsUrl, String compareUrl, String mergesUrl, String archiveUrl, String downloadsUrl, String issuesUrl, String pullsUrl, String milestonesUrl, String notificationsUrl, String labelsUrl, String releasesUrl, String deploymentsUrl, String createdAt, String updatedAt, String pushedAt, String gitUrl, String sshUrl, String cloneUrl, String svnUrl, Object homepage, Integer size, Integer stargazersCount, Integer watchersCount, String language, Boolean hasIssues, Boolean hasProjects, Boolean hasDownloads, Boolean hasWiki, Boolean hasPages, Integer forksCount, Object mirrorUrl, Boolean archived, Boolean disabled, Integer openIssuesCount, Object license, Integer forks, Integer openIssues, Integer watchers, String defaultBranch) {
             super();
             this.id = id;
             this.nodeId = nodeId;
@@ -5454,12 +5454,12 @@ public class PullRequestEvent implements GitHubEvent {
         }
 
         @JsonProperty("owner")
-        public PullRequestEvent.Owner getOwner() {
+        public PullRequestGitHubEvent.Owner getOwner() {
             return owner;
         }
 
         @JsonProperty("owner")
-        public void setOwner(PullRequestEvent.Owner owner) {
+        public void setOwner(PullRequestGitHubEvent.Owner owner) {
             this.owner = owner;
         }
 
@@ -6146,7 +6146,7 @@ public class PullRequestEvent implements GitHubEvent {
         @Override
         public String toString() {
             StringBuilder sb = new StringBuilder();
-            sb.append(PullRequestEvent.Repository.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append(PullRequestGitHubEvent.Repository.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
             sb.append("id");
             sb.append('=');
             sb.append(((this.id == null)?"<null>":this.id));
@@ -6536,10 +6536,10 @@ public class PullRequestEvent implements GitHubEvent {
             if (other == this) {
                 return true;
             }
-            if ((other instanceof PullRequestEvent.Repository) == false) {
+            if ((other instanceof PullRequestGitHubEvent.Repository) == false) {
                 return false;
             }
-            PullRequestEvent.Repository rhs = ((PullRequestEvent.Repository) other);
+            PullRequestGitHubEvent.Repository rhs = ((PullRequestGitHubEvent.Repository) other);
             return (((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((this.sshUrl == rhs.sshUrl)||((this.sshUrl!= null)&&this.sshUrl.equals(rhs.sshUrl)))&&((this.archiveUrl == rhs.archiveUrl)||((this.archiveUrl!= null)&&this.archiveUrl.equals(rhs.archiveUrl))))&&((this.languagesUrl == rhs.languagesUrl)||((this.languagesUrl!= null)&&this.languagesUrl.equals(rhs.languagesUrl))))&&((this.language == rhs.language)||((this.language!= null)&&this.language.equals(rhs.language))))&&((this.assigneesUrl == rhs.assigneesUrl)||((this.assigneesUrl!= null)&&this.assigneesUrl.equals(rhs.assigneesUrl))))&&((this.commitsUrl == rhs.commitsUrl)||((this.commitsUrl!= null)&&this.commitsUrl.equals(rhs.commitsUrl))))&&((this.openIssues == rhs.openIssues)||((this.openIssues!= null)&&this.openIssues.equals(rhs.openIssues))))&&((this.cloneUrl == rhs.cloneUrl)||((this.cloneUrl!= null)&&this.cloneUrl.equals(rhs.cloneUrl))))&&((this.forksCount == rhs.forksCount)||((this.forksCount!= null)&&this.forksCount.equals(rhs.forksCount))))&&((this.subscribersUrl == rhs.subscribersUrl)||((this.subscribersUrl!= null)&&this.subscribersUrl.equals(rhs.subscribersUrl))))&&((this.createdAt == rhs.createdAt)||((this.createdAt!= null)&&this.createdAt.equals(rhs.createdAt))))&&((this.forksUrl == rhs.forksUrl)||((this.forksUrl!= null)&&this.forksUrl.equals(rhs.forksUrl))))&&((this.watchersCount == rhs.watchersCount)||((this.watchersCount!= null)&&this.watchersCount.equals(rhs.watchersCount))))&&((this._private == rhs._private)||((this._private!= null)&&this._private.equals(rhs._private))))&&((this.issueCommentUrl == rhs.issueCommentUrl)||((this.issueCommentUrl!= null)&&this.issueCommentUrl.equals(rhs.issueCommentUrl))))&&((this.statusesUrl == rhs.statusesUrl)||((this.statusesUrl!= null)&&this.statusesUrl.equals(rhs.statusesUrl))))&&((this.id == rhs.id)||((this.id!= null)&&this.id.equals(rhs.id))))&&((this.collaboratorsUrl == rhs.collaboratorsUrl)||((this.collaboratorsUrl!= null)&&this.collaboratorsUrl.equals(rhs.collaboratorsUrl))))&&((this.updatedAt == rhs.updatedAt)||((this.updatedAt!= null)&&this.updatedAt.equals(rhs.updatedAt))))&&((this.forks == rhs.forks)||((this.forks!= null)&&this.forks.equals(rhs.forks))))&&((this.labelsUrl == rhs.labelsUrl)||((this.labelsUrl!= null)&&this.labelsUrl.equals(rhs.labelsUrl))))&&((this.defaultBranch == rhs.defaultBranch)||((this.defaultBranch!= null)&&this.defaultBranch.equals(rhs.defaultBranch))))&&((this.keysUrl == rhs.keysUrl)||((this.keysUrl!= null)&&this.keysUrl.equals(rhs.keysUrl))))&&((this.downloadsUrl == rhs.downloadsUrl)||((this.downloadsUrl!= null)&&this.downloadsUrl.equals(rhs.downloadsUrl))))&&((this.contentsUrl == rhs.contentsUrl)||((this.contentsUrl!= null)&&this.contentsUrl.equals(rhs.contentsUrl))))&&((this.pushedAt == rhs.pushedAt)||((this.pushedAt!= null)&&this.pushedAt.equals(rhs.pushedAt))))&&((this.tagsUrl == rhs.tagsUrl)||((this.tagsUrl!= null)&&this.tagsUrl.equals(rhs.tagsUrl))))&&((this.license == rhs.license)||((this.license!= null)&&this.license.equals(rhs.license))))&&((this.commentsUrl == rhs.commentsUrl)||((this.commentsUrl!= null)&&this.commentsUrl.equals(rhs.commentsUrl))))&&((this.size == rhs.size)||((this.size!= null)&&this.size.equals(rhs.size))))&&((this.treesUrl == rhs.treesUrl)||((this.treesUrl!= null)&&this.treesUrl.equals(rhs.treesUrl))))&&((this.name == rhs.name)||((this.name!= null)&&this.name.equals(rhs.name))))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))))&&((this.mergesUrl == rhs.mergesUrl)||((this.mergesUrl!= null)&&this.mergesUrl.equals(rhs.mergesUrl))))&&((this.nodeId == rhs.nodeId)||((this.nodeId!= null)&&this.nodeId.equals(rhs.nodeId))))&&((this.teamsUrl == rhs.teamsUrl)||((this.teamsUrl!= null)&&this.teamsUrl.equals(rhs.teamsUrl))))&&((this.blobsUrl == rhs.blobsUrl)||((this.blobsUrl!= null)&&this.blobsUrl.equals(rhs.blobsUrl))))&&((this.issueEventsUrl == rhs.issueEventsUrl)||((this.issueEventsUrl!= null)&&this.issueEventsUrl.equals(rhs.issueEventsUrl))))&&((this.hasPages == rhs.hasPages)||((this.hasPages!= null)&&this.hasPages.equals(rhs.hasPages))))&&((this.milestonesUrl == rhs.milestonesUrl)||((this.milestonesUrl!= null)&&this.milestonesUrl.equals(rhs.milestonesUrl))))&&((this.issuesUrl == rhs.issuesUrl)||((this.issuesUrl!= null)&&this.issuesUrl.equals(rhs.issuesUrl))))&&((this.releasesUrl == rhs.releasesUrl)||((this.releasesUrl!= null)&&this.releasesUrl.equals(rhs.releasesUrl))))&&((this.description == rhs.description)||((this.description!= null)&&this.description.equals(rhs.description))))&&((this.watchers == rhs.watchers)||((this.watchers!= null)&&this.watchers.equals(rhs.watchers))))&&((this.branchesUrl == rhs.branchesUrl)||((this.branchesUrl!= null)&&this.branchesUrl.equals(rhs.branchesUrl))))&&((this.contributorsUrl == rhs.contributorsUrl)||((this.contributorsUrl!= null)&&this.contributorsUrl.equals(rhs.contributorsUrl))))&&((this.gitRefsUrl == rhs.gitRefsUrl)||((this.gitRefsUrl!= null)&&this.gitRefsUrl.equals(rhs.gitRefsUrl))))&&((this.hooksUrl == rhs.hooksUrl)||((this.hooksUrl!= null)&&this.hooksUrl.equals(rhs.hooksUrl))))&&((this.openIssuesCount == rhs.openIssuesCount)||((this.openIssuesCount!= null)&&this.openIssuesCount.equals(rhs.openIssuesCount))))&&((this.archived == rhs.archived)||((this.archived!= null)&&this.archived.equals(rhs.archived))))&&((this.stargazersCount == rhs.stargazersCount)||((this.stargazersCount!= null)&&this.stargazersCount.equals(rhs.stargazersCount))))&&((this.disabled == rhs.disabled)||((this.disabled!= null)&&this.disabled.equals(rhs.disabled))))&&((this.hasIssues == rhs.hasIssues)||((this.hasIssues!= null)&&this.hasIssues.equals(rhs.hasIssues))))&&((this.owner == rhs.owner)||((this.owner!= null)&&this.owner.equals(rhs.owner))))&&((this.hasWiki == rhs.hasWiki)||((this.hasWiki!= null)&&this.hasWiki.equals(rhs.hasWiki))))&&((this.compareUrl == rhs.compareUrl)||((this.compareUrl!= null)&&this.compareUrl.equals(rhs.compareUrl))))&&((this.gitCommitsUrl == rhs.gitCommitsUrl)||((this.gitCommitsUrl!= null)&&this.gitCommitsUrl.equals(rhs.gitCommitsUrl))))&&((this.htmlUrl == rhs.htmlUrl)||((this.htmlUrl!= null)&&this.htmlUrl.equals(rhs.htmlUrl))))&&((this.stargazersUrl == rhs.stargazersUrl)||((this.stargazersUrl!= null)&&this.stargazersUrl.equals(rhs.stargazersUrl))))&&((this.fullName == rhs.fullName)||((this.fullName!= null)&&this.fullName.equals(rhs.fullName))))&&((this.svnUrl == rhs.svnUrl)||((this.svnUrl!= null)&&this.svnUrl.equals(rhs.svnUrl))))&&((this.url == rhs.url)||((this.url!= null)&&this.url.equals(rhs.url))))&&((this.pullsUrl == rhs.pullsUrl)||((this.pullsUrl!= null)&&this.pullsUrl.equals(rhs.pullsUrl))))&&((this.mirrorUrl == rhs.mirrorUrl)||((this.mirrorUrl!= null)&&this.mirrorUrl.equals(rhs.mirrorUrl))))&&((this.hasDownloads == rhs.hasDownloads)||((this.hasDownloads!= null)&&this.hasDownloads.equals(rhs.hasDownloads))))&&((this.fork == rhs.fork)||((this.fork!= null)&&this.fork.equals(rhs.fork))))&&((this.hasProjects == rhs.hasProjects)||((this.hasProjects!= null)&&this.hasProjects.equals(rhs.hasProjects))))&&((this.deploymentsUrl == rhs.deploymentsUrl)||((this.deploymentsUrl!= null)&&this.deploymentsUrl.equals(rhs.deploymentsUrl))))&&((this.eventsUrl == rhs.eventsUrl)||((this.eventsUrl!= null)&&this.eventsUrl.equals(rhs.eventsUrl))))&&((this.gitTagsUrl == rhs.gitTagsUrl)||((this.gitTagsUrl!= null)&&this.gitTagsUrl.equals(rhs.gitTagsUrl))))&&((this.notificationsUrl == rhs.notificationsUrl)||((this.notificationsUrl!= null)&&this.notificationsUrl.equals(rhs.notificationsUrl))))&&((this.gitUrl == rhs.gitUrl)||((this.gitUrl!= null)&&this.gitUrl.equals(rhs.gitUrl))))&&((this.subscriptionUrl == rhs.subscriptionUrl)||((this.subscriptionUrl!= null)&&this.subscriptionUrl.equals(rhs.subscriptionUrl))))&&((this.homepage == rhs.homepage)||((this.homepage!= null)&&this.homepage.equals(rhs.homepage))));
         }
 
@@ -6595,7 +6595,7 @@ public class PullRequestEvent implements GitHubEvent {
         @Override
         public String toString() {
             StringBuilder sb = new StringBuilder();
-            sb.append(PullRequestEvent.ReviewComment.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append(PullRequestGitHubEvent.ReviewComment.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
             sb.append("href");
             sb.append('=');
             sb.append(((this.href == null)?"<null>":this.href));
@@ -6625,10 +6625,10 @@ public class PullRequestEvent implements GitHubEvent {
             if (other == this) {
                 return true;
             }
-            if ((other instanceof PullRequestEvent.ReviewComment) == false) {
+            if ((other instanceof PullRequestGitHubEvent.ReviewComment) == false) {
                 return false;
             }
-            PullRequestEvent.ReviewComment rhs = ((PullRequestEvent.ReviewComment) other);
+            PullRequestGitHubEvent.ReviewComment rhs = ((PullRequestGitHubEvent.ReviewComment) other);
             return (((this.href == rhs.href)||((this.href!= null)&&this.href.equals(rhs.href)))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))));
         }
 
@@ -6684,7 +6684,7 @@ public class PullRequestEvent implements GitHubEvent {
         @Override
         public String toString() {
             StringBuilder sb = new StringBuilder();
-            sb.append(PullRequestEvent.ReviewComments.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append(PullRequestGitHubEvent.ReviewComments.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
             sb.append("href");
             sb.append('=');
             sb.append(((this.href == null)?"<null>":this.href));
@@ -6714,10 +6714,10 @@ public class PullRequestEvent implements GitHubEvent {
             if (other == this) {
                 return true;
             }
-            if ((other instanceof PullRequestEvent.ReviewComments) == false) {
+            if ((other instanceof PullRequestGitHubEvent.ReviewComments) == false) {
                 return false;
             }
-            PullRequestEvent.ReviewComments rhs = ((PullRequestEvent.ReviewComments) other);
+            PullRequestGitHubEvent.ReviewComments rhs = ((PullRequestGitHubEvent.ReviewComments) other);
             return (((this.href == rhs.href)||((this.href!= null)&&this.href.equals(rhs.href)))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))));
         }
 
@@ -6773,7 +6773,7 @@ public class PullRequestEvent implements GitHubEvent {
         @Override
         public String toString() {
             StringBuilder sb = new StringBuilder();
-            sb.append(PullRequestEvent.Self.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append(PullRequestGitHubEvent.Self.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
             sb.append("href");
             sb.append('=');
             sb.append(((this.href == null)?"<null>":this.href));
@@ -6803,10 +6803,10 @@ public class PullRequestEvent implements GitHubEvent {
             if (other == this) {
                 return true;
             }
-            if ((other instanceof PullRequestEvent.Self) == false) {
+            if ((other instanceof PullRequestGitHubEvent.Self) == false) {
                 return false;
             }
-            PullRequestEvent.Self rhs = ((PullRequestEvent.Self) other);
+            PullRequestGitHubEvent.Self rhs = ((PullRequestGitHubEvent.Self) other);
             return (((this.href == rhs.href)||((this.href!= null)&&this.href.equals(rhs.href)))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))));
         }
 
@@ -7117,7 +7117,7 @@ public class PullRequestEvent implements GitHubEvent {
         @Override
         public String toString() {
             StringBuilder sb = new StringBuilder();
-            sb.append(PullRequestEvent.Sender.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append(PullRequestGitHubEvent.Sender.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
             sb.append("login");
             sb.append('=');
             sb.append(((this.login == null)?"<null>":this.login));
@@ -7232,10 +7232,10 @@ public class PullRequestEvent implements GitHubEvent {
             if (other == this) {
                 return true;
             }
-            if ((other instanceof PullRequestEvent.Sender) == false) {
+            if ((other instanceof PullRequestGitHubEvent.Sender) == false) {
                 return false;
             }
-            PullRequestEvent.Sender rhs = ((PullRequestEvent.Sender) other);
+            PullRequestGitHubEvent.Sender rhs = ((PullRequestGitHubEvent.Sender) other);
             return ((((((((((((((((((((this.receivedEventsUrl == rhs.receivedEventsUrl)||((this.receivedEventsUrl!= null)&&this.receivedEventsUrl.equals(rhs.receivedEventsUrl)))&&((this.siteAdmin == rhs.siteAdmin)||((this.siteAdmin!= null)&&this.siteAdmin.equals(rhs.siteAdmin))))&&((this.followingUrl == rhs.followingUrl)||((this.followingUrl!= null)&&this.followingUrl.equals(rhs.followingUrl))))&&((this.gistsUrl == rhs.gistsUrl)||((this.gistsUrl!= null)&&this.gistsUrl.equals(rhs.gistsUrl))))&&((this.avatarUrl == rhs.avatarUrl)||((this.avatarUrl!= null)&&this.avatarUrl.equals(rhs.avatarUrl))))&&((this.organizationsUrl == rhs.organizationsUrl)||((this.organizationsUrl!= null)&&this.organizationsUrl.equals(rhs.organizationsUrl))))&&((this.reposUrl == rhs.reposUrl)||((this.reposUrl!= null)&&this.reposUrl.equals(rhs.reposUrl))))&&((this.htmlUrl == rhs.htmlUrl)||((this.htmlUrl!= null)&&this.htmlUrl.equals(rhs.htmlUrl))))&&((this.subscriptionsUrl == rhs.subscriptionsUrl)||((this.subscriptionsUrl!= null)&&this.subscriptionsUrl.equals(rhs.subscriptionsUrl))))&&((this.login == rhs.login)||((this.login!= null)&&this.login.equals(rhs.login))))&&((this.type == rhs.type)||((this.type!= null)&&this.type.equals(rhs.type))))&&((this.url == rhs.url)||((this.url!= null)&&this.url.equals(rhs.url))))&&((this.starredUrl == rhs.starredUrl)||((this.starredUrl!= null)&&this.starredUrl.equals(rhs.starredUrl))))&&((this.gravatarId == rhs.gravatarId)||((this.gravatarId!= null)&&this.gravatarId.equals(rhs.gravatarId))))&&((this.followersUrl == rhs.followersUrl)||((this.followersUrl!= null)&&this.followersUrl.equals(rhs.followersUrl))))&&((this.id == rhs.id)||((this.id!= null)&&this.id.equals(rhs.id))))&&((this.eventsUrl == rhs.eventsUrl)||((this.eventsUrl!= null)&&this.eventsUrl.equals(rhs.eventsUrl))))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))))&&((this.nodeId == rhs.nodeId)||((this.nodeId!= null)&&this.nodeId.equals(rhs.nodeId))));
         }
 
@@ -7291,7 +7291,7 @@ public class PullRequestEvent implements GitHubEvent {
         @Override
         public String toString() {
             StringBuilder sb = new StringBuilder();
-            sb.append(PullRequestEvent.Statuses.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append(PullRequestGitHubEvent.Statuses.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
             sb.append("href");
             sb.append('=');
             sb.append(((this.href == null)?"<null>":this.href));
@@ -7321,10 +7321,10 @@ public class PullRequestEvent implements GitHubEvent {
             if (other == this) {
                 return true;
             }
-            if ((other instanceof PullRequestEvent.Statuses) == false) {
+            if ((other instanceof PullRequestGitHubEvent.Statuses) == false) {
                 return false;
             }
-            PullRequestEvent.Statuses rhs = ((PullRequestEvent.Statuses) other);
+            PullRequestGitHubEvent.Statuses rhs = ((PullRequestGitHubEvent.Statuses) other);
             return (((this.href == rhs.href)||((this.href!= null)&&this.href.equals(rhs.href)))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))));
         }
 
@@ -7635,7 +7635,7 @@ public class PullRequestEvent implements GitHubEvent {
         @Override
         public String toString() {
             StringBuilder sb = new StringBuilder();
-            sb.append(PullRequestEvent.User.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append(PullRequestGitHubEvent.User.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
             sb.append("login");
             sb.append('=');
             sb.append(((this.login == null)?"<null>":this.login));
@@ -7750,10 +7750,10 @@ public class PullRequestEvent implements GitHubEvent {
             if (other == this) {
                 return true;
             }
-            if ((other instanceof PullRequestEvent.User) == false) {
+            if ((other instanceof PullRequestGitHubEvent.User) == false) {
                 return false;
             }
-            PullRequestEvent.User rhs = ((PullRequestEvent.User) other);
+            PullRequestGitHubEvent.User rhs = ((PullRequestGitHubEvent.User) other);
             return ((((((((((((((((((((this.receivedEventsUrl == rhs.receivedEventsUrl)||((this.receivedEventsUrl!= null)&&this.receivedEventsUrl.equals(rhs.receivedEventsUrl)))&&((this.siteAdmin == rhs.siteAdmin)||((this.siteAdmin!= null)&&this.siteAdmin.equals(rhs.siteAdmin))))&&((this.followingUrl == rhs.followingUrl)||((this.followingUrl!= null)&&this.followingUrl.equals(rhs.followingUrl))))&&((this.gistsUrl == rhs.gistsUrl)||((this.gistsUrl!= null)&&this.gistsUrl.equals(rhs.gistsUrl))))&&((this.avatarUrl == rhs.avatarUrl)||((this.avatarUrl!= null)&&this.avatarUrl.equals(rhs.avatarUrl))))&&((this.organizationsUrl == rhs.organizationsUrl)||((this.organizationsUrl!= null)&&this.organizationsUrl.equals(rhs.organizationsUrl))))&&((this.reposUrl == rhs.reposUrl)||((this.reposUrl!= null)&&this.reposUrl.equals(rhs.reposUrl))))&&((this.htmlUrl == rhs.htmlUrl)||((this.htmlUrl!= null)&&this.htmlUrl.equals(rhs.htmlUrl))))&&((this.subscriptionsUrl == rhs.subscriptionsUrl)||((this.subscriptionsUrl!= null)&&this.subscriptionsUrl.equals(rhs.subscriptionsUrl))))&&((this.login == rhs.login)||((this.login!= null)&&this.login.equals(rhs.login))))&&((this.type == rhs.type)||((this.type!= null)&&this.type.equals(rhs.type))))&&((this.url == rhs.url)||((this.url!= null)&&this.url.equals(rhs.url))))&&((this.starredUrl == rhs.starredUrl)||((this.starredUrl!= null)&&this.starredUrl.equals(rhs.starredUrl))))&&((this.gravatarId == rhs.gravatarId)||((this.gravatarId!= null)&&this.gravatarId.equals(rhs.gravatarId))))&&((this.followersUrl == rhs.followersUrl)||((this.followersUrl!= null)&&this.followersUrl.equals(rhs.followersUrl))))&&((this.id == rhs.id)||((this.id!= null)&&this.id.equals(rhs.id))))&&((this.eventsUrl == rhs.eventsUrl)||((this.eventsUrl!= null)&&this.eventsUrl.equals(rhs.eventsUrl))))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))))&&((this.nodeId == rhs.nodeId)||((this.nodeId!= null)&&this.nodeId.equals(rhs.nodeId))));
         }
 
