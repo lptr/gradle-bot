@@ -1,57 +1,39 @@
-# This workflow will build a Java project with Gradle
-# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
-
 name: gradle-bot-CI
 
 on:
   push:
-    #branches: [ master ]
-    paths-ignore: 
-      - 'doc/**'
+    paths-ignore:
+      - 'docs/**'
       - '**/*.md' 
   pull_request:
-    #branches: [ master ]
-    paths-ignore: 
+    paths-ignore:
       - 'doc/**'
       - '**/*.md'
-  schedule:
-    # daily CI
-    # Runs at 01:00 UTC every day
-    - cron: '0 1 * * ?'
 
 jobs:
   run:
-    
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         java: [8, 11]
         os: [ubuntu-latest, macOS-latest]
-    #fail-fast: false  # cancels all in-progress jobs if any matrix job fails
     steps:
     - uses: actions/checkout@v2
     - name: Set up JDK ${{ matrix.java }}
       uses: actions/setup-java@v1
       with:
         java-version: ${{ matrix.java }}
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
-    - name: Build with Gradle
-      run: ./gradlew install 
-    #- name: Docker
-    #  run: docker build -t gradle-bot:java${{matrix.java}}-${{github.run_id}} .
-      
-  run-on-windows:
-    runs-on: windows-latest
-    strategy:
-      matrix:
-        java: [8, 11]
-    steps:
-    - uses: actions/checkout@v2
-    - name: Set up JDK ${{ matrix.java }}
-      uses: actions/setup-java@v1
+    - name: Cache node modules
+      uses: actions/cache@v1
+      env:
+        cache-name: cache-gradle-user-home
       with:
-        java-version: ${{ matrix.java }}
+        path: ~/.gradle
+        key: ${{ runner.os }}-${{ hashFiles('**/*.gradle.kts') }}
+        restore-keys: |
+          ${{ runner.os }}-
+    - name: Show Gradle version
+        run: ./gradlew --version
     - name: Build with Gradle
-      run: ./gradlew install
+      run: ./gradlew check
 
