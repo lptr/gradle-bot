@@ -35,6 +35,7 @@ dependencies {
     implementation("io.vertx:vertx-core:$vertxVersion")
     implementation("io.vertx:vertx-web:$vertxVersion")
     implementation("io.vertx:vertx-lang-kotlin:$vertxVersion")
+    implementation("io.vertx:vertx-lang-kotlin-coroutines:$vertxVersion")
 
     implementation("com.google.inject:guice:$guiceVersion")
     implementation("javax.inject:javax.inject:1")

@@ -22,6 +22,18 @@ import kotlin.reflect.KClass
 @Retention(AnnotationRetention.RUNTIME)
 annotation class VertxGuiceIntegrationTest(val verticleClass: KClass<out Verticle>)
 
+fun <T> Future<T>.await(): T {
+    val countDownLatch = CountDownLatch(1)
+    onComplete {
+        countDownLatch.countDown()
+    }
+
+    countDownLatch.await()
+
+    return result() ?: throw cause()
+}
+
+
 class TestGradleBotModule(vertx: Vertx) : GradleBotAppModule(vertx) {
     val mockGitHubClient = Mockito.mock(GitHubClient::class.java)
     val mockTeamCityClient = Mockito.mock(TeamCityClient::class.java)
@@ -51,14 +63,7 @@ class VertxGuiceIntegrationTestExtension :
                     ?: throw IllegalStateException("Test class must be annotated with @VertxGuiceIntegrationTest!")
 
     override fun beforeAll(context: ExtensionContext?) {
-        val countDownLatch = CountDownLatch(1)
-        var throwable: Throwable? = null
-        start(context.getVerticleClass().java, TestGradleBotModule::class.java)
-                .onSuccess { injector = it }
-                .onFailure { throwable = it }
-                .onComplete { countDownLatch.countDown() }
-        countDownLatch.await()
-        throwable?.also { throw it }
+        injector = start(context.getVerticleClass().java, TestGradleBotModule::class.java).await()
     }
 
     override fun afterAll(context: ExtensionContext?) {

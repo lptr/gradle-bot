@@ -27,6 +27,7 @@ class IssueCommentEventHandler @Inject constructor(private val gitHubClient: Git
     }
 }
 
+@Suppress("UNCHECKED_CAST")
 abstract class AbstractGitHubEventHandler<T : GitHubEvent> : GitHubEventHandler {
     private val eventClass by lazy {
         val superClass = javaClass.genericSuperclass
