@@ -1,8 +1,6 @@
 package org.gradle.bot.security
 
 import org.apache.commons.codec.digest.HmacUtils
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
 import javax.inject.Named
 import javax.inject.Singleton
 
@@ -10,8 +8,14 @@ interface GithubSignatureChecker {
     fun verifySignature(body: String?, signature: String?): Boolean
 }
 
+enum class LenientGitHubSignatureCheck:GithubSignatureChecker {
+    INSTANCE {
+        override fun verifySignature(body: String?, signature: String?) = true
+    };
+}
+
 @Singleton
-class DefaultGitHubSignatureChecker(
+class Sha1GitHubSignatureChecker(
         @Named("GITHUB_WEBHOOK_SECRET") private val secret: String
 ) : GithubSignatureChecker {
     override fun verifySignature(body: String?, signature: String?): Boolean {

@@ -26,8 +26,9 @@ class PullRequestContext(private val gitHubClient: GitHubClient,
         val targetComment = comments.find { it.id == commentId }
         if (targetComment == null) {
             logger.warn("Comment with id {} not found, skip.", commentId)
+            return
         }
-        if (alreadyReplied(targetComment!!)) {
+        if (alreadyReplied(targetComment)) {
             logger.warn("Comment {} has already been replied, skip.", targetComment.body)
         } else {
             targetComment.command.execute(this)
@@ -71,7 +72,7 @@ Sorry I don't understand what you said, please type `@${gitHubClient.whoAmI()} h
 
     fun helpMessage() = """Currently I support the following commands:
         
-- `@${gitHubClient.whoAmI()} test {BuildStage} plz` to trigger a build
+- `@${gitHubClient.whoAmI()} test {BuildStage}` to trigger a build
   - e.g. `@${gitHubClient.whoAmI()} test SanityCheck plz`
   - `SanityCheck`/`CompileAll`/`QuickFeedbackLinux`/`QuickFeedback`/`ReadyForMerge`/`ReadyForNightly`/`ReadyForRelease` are supported
   - `SanityCheck` can be abbreviated as `SC`, `ReadyForMerge` as `RFM`, etc.

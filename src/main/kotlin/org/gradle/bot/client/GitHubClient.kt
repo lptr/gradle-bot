@@ -44,7 +44,7 @@ class GitHubClient @Inject constructor(
         }.onSuccess {
             myself = it
         }.onFailure {
-            logger.error("", it)
+            logger.error("Can't get bot authentication data", it)
         }
     }
 

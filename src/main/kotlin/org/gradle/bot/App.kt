@@ -8,8 +8,10 @@ import com.google.common.reflect.ClassPath
 import com.google.inject.AbstractModule
 import com.google.inject.Guice
 import com.google.inject.Injector
+import com.google.inject.Module
 import com.google.inject.name.Names
 import io.vertx.core.AbstractVerticle
+import io.vertx.core.Future
 import io.vertx.core.Promise
 import io.vertx.core.Verticle
 import io.vertx.core.Vertx
@@ -22,6 +24,9 @@ import io.vertx.kotlin.core.http.httpServerOptionsOf
 import org.gradle.bot.client.GitHubClient
 import org.gradle.bot.eventhandlers.github.GitHubEventHandler
 import org.gradle.bot.model.GitHubEvent
+import org.gradle.bot.security.Sha1GitHubSignatureChecker
+import org.gradle.bot.security.GithubSignatureChecker
+import org.gradle.bot.security.LenientGitHubSignatureCheck
 import org.gradle.bot.webhookhandlers.GitHubWebHookHandler
 import org.gradle.bot.webhookhandlers.TeamCityWebHookHandler
 import org.slf4j.Logger
@@ -32,21 +37,24 @@ import javax.inject.Inject
 val objectMapper: ObjectMapper = ObjectMapper()
 val logger: Logger = LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME)
 
-fun main() {
+fun start(verticleClass: Class<out Verticle>, guiceModuleClass: Class<out Module>): Future<Injector> {
     val vertx = Vertx.vertx()
-    val injector = Guice.createInjector(GradleBotAppModule(vertx))
-    registerEventHandlers(vertx, injector)
+    val injector = Guice.createInjector(guiceModuleClass.getConstructor(Vertx::class.java).newInstance(vertx))
     vertx.exceptionHandler { logger.error("", it) }
-    vertx.registerVerticleFactory(GuiceVerticleFactory(injector))
-    vertx.deployVerticle(GradleBotVerticle::class.java.name)
+    vertx.registerVerticleFactory(GuiceVerticleFactory(injector, verticleClass))
+    return vertx.deployVerticle(verticleClass.name).map(injector)
 }
 
-class GuiceVerticleFactory(private val injector: Injector) : VerticleFactory {
+fun main() {
+    start(GradleBotVerticle::class.java, GradleBotAppModule::class.java)
+}
+
+class GuiceVerticleFactory(private val injector: Injector, private val verticleClass: Class<out Verticle>) : VerticleFactory {
     override fun createVerticle(verticleName: String?, classLoader: ClassLoader?, promise: Promise<Callable<Verticle>>?) {
         try {
             promise!!.complete(Callable {
                 try {
-                    injector.getInstance(GradleBotVerticle::class.java)
+                    injector.getInstance(verticleClass)
                 } catch (e: Throwable) {
                     logger.error("", e)
                     throw e
@@ -61,37 +69,56 @@ class GuiceVerticleFactory(private val injector: Injector) : VerticleFactory {
     override fun prefix(): String = GradleBotVerticle::class.java.simpleName
 }
 
-@Suppress("UNCHECKED_CAST")
-private fun registerEventHandlers(vertx: Vertx, injector: Injector) {
-    val packageName = GradleBotVerticle::class.java.`package`.name
-    ClassPath.from(GradleBotVerticle::class.java.classLoader).getTopLevelClassesRecursive(packageName).forEach {
-        val klass = it.load()
-        if (klass.isAssignableFrom(GitHubEventHandler::class.java) && klass != GitHubEventHandler::class.java) {
-            val eventHandler: GitHubEventHandler<GitHubEvent> = injector.getInstance(klass) as GitHubEventHandler<GitHubEvent>
-            vertx.eventBus().consumer<GitHubEvent>(eventHandler.eventType(), eventHandler)
-        }
-    }
-}
 
-class GradleBotAppModule(private val vertx: Vertx) : AbstractModule() {
+open class GradleBotAppModule(private val vertx: Vertx) : AbstractModule() {
     override fun configure() {
         bind(Vertx::class.java).toInstance(vertx)
-        listOf("GITHUB_ACCESS_TOKEN", "GITHUB_WEBHOOK_SECRET", "TEAMCITY_ACCESS_TOKEN").forEach(this::bindEnv)
+        bindAccessTokens()
+        bindGitHubSignatureCheckerOnSecret()
+    }
+
+    open fun bindAccessTokens() {
+        listOf("GITHUB_ACCESS_TOKEN", "TEAMCITY_ACCESS_TOKEN").forEach(this::bindEnv)
+    }
+
+    open fun bindGitHubSignatureCheckerOnSecret() {
+        when (System.getenv("GITHUB_WEBHOOK_SECRET")) {
+            null -> bind(GithubSignatureChecker::class.java).toInstance(LenientGitHubSignatureCheck.INSTANCE)
+            else -> bind(GithubSignatureChecker::class.java).to(Sha1GitHubSignatureChecker::class.java)
+        }
     }
 
     private fun bindEnv(envName: String) {
-        val envValue = System.getenv(envName) ?: "" //throw IllegalStateException("Env $envName must be set!")
+        val envValue = System.getenv(envName) ?: throw IllegalStateException("Env $envName must be set!")
         bind(String::class.java).annotatedWith(Names.named(envName)).toInstance(envValue)
     }
 
 }
 
-class GradleBotVerticle @Inject constructor(private val gitHubWebHookHandler: GitHubWebHookHandler,
+class GradleBotVerticle @Inject constructor(private val injector: Injector,
+                                            private val gitHubWebHookHandler: GitHubWebHookHandler,
                                             private val teamCityWebHookHandler: TeamCityWebHookHandler,
                                             private val gitHubClient: GitHubClient) : AbstractVerticle() {
     private val logger: Logger = LoggerFactory.getLogger(GradleBotVerticle::class.java.name)
     private val port by lazy {
         System.getenv("HTTP_PORT")?.toInt() ?: 8080
+    }
+
+    init {
+        registerEventHandlers(injector)
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    private
+    fun registerEventHandlers(injector: Injector) {
+        val packageName = GradleBotVerticle::class.java.`package`.name
+        ClassPath.from(GradleBotVerticle::class.java.classLoader).getTopLevelClassesRecursive(packageName).forEach {
+            val klass = it.load()
+            if (klass.isAssignableFrom(GitHubEventHandler::class.java) && klass != GitHubEventHandler::class.java) {
+                val eventHandler: GitHubEventHandler<GitHubEvent> = injector.getInstance(klass) as GitHubEventHandler<GitHubEvent>
+                vertx.eventBus().consumer<GitHubEvent>(eventHandler.eventType(), eventHandler)
+            }
+        }
     }
 
     override fun start(startFuture: Promise<Void>) {

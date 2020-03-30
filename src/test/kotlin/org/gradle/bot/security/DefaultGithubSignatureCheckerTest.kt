@@ -17,7 +17,7 @@ class DefaultGithubSignatureCheckerTest {
         "null signature,                                             , gradle-bot, false"
     ])
     fun testVerifySignature(desc: String, signature: String?, secret: String, expected: Boolean) {
-        val githubSignatureChecker = DefaultGitHubSignatureChecker(secret)
+        val githubSignatureChecker = Sha1GitHubSignatureChecker(secret)
         assertEquals(expected, githubSignatureChecker.verifySignature(payload, signature))
     }
 }

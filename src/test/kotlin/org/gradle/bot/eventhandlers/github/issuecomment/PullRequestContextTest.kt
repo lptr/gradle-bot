@@ -141,6 +141,11 @@ class PullRequestContextTest {
     @Test
     fun `do nothing if the comment is already replied`() {
     }
+
+    @Test
+    fun `do nothing if the comment is deleted`() {
+
+    }
 }
 
 private fun <T> any(): T {
