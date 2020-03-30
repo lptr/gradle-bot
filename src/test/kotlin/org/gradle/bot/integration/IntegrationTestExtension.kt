@@ -77,6 +77,7 @@ class VertxGuiceIntegrationTestExtension :
                 it.set(testInstance, mockService)
             }
         }
+        injector.injectMembers(testInstance)
     }
 
     override fun beforeEach(context: ExtensionContext?) {

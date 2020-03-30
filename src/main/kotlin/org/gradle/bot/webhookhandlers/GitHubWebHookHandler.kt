@@ -14,7 +14,6 @@ import javax.inject.Singleton
 
 private val logger: Logger = LoggerFactory.getLogger(GitHubWebHookHandler::class.java.name)
 
-
 @Singleton
 class GitHubWebHookHandler @Inject constructor(
         private val vertx: Vertx,
@@ -25,14 +24,14 @@ class GitHubWebHookHandler @Inject constructor(
 
         context.parsePayloadEvent(githubSignatureChecker)?.apply {
             logger.debug("Start handling $this")
-            vertx.eventBus().publish(eventType, this)
+            vertx.eventBus().publish(this.first, this.second)
         } ?: logger.info("Received invalid GitHub webhook, discard.")
 
         context?.response()?.endWithJson(emptyMap<String, Any>())
     }
 }
 
-private fun RoutingContext?.parsePayloadEvent(githubSignatureChecker: GithubSignatureChecker): GitHubEvent? {
+private fun RoutingContext?.parsePayloadEvent(githubSignatureChecker: GithubSignatureChecker): Pair<String, String>? {
     return this?.let {
         val signature = request().getHeader("x-hub-signature")
         if (!githubSignatureChecker.verifySignature(bodyAsString, signature)) {
@@ -43,9 +42,7 @@ private fun RoutingContext?.parsePayloadEvent(githubSignatureChecker: GithubSign
         logger.debug("Get GitHub webhook {}", bodyAsString)
         request().getHeader("X-GitHub-Event")
     }?.let {
-        GitHubEvent.getEventClassByType(it)
-    }?.let {
-        objectMapper.readValue(bodyAsString, it)
+        it to bodyAsString
     }
 }
 

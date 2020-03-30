@@ -1,11 +1,8 @@
 package org.gradle.bot.client
 
 import io.vertx.core.Future
-import io.vertx.core.Vertx
 import io.vertx.core.buffer.Buffer
-import io.vertx.core.net.ProxyOptions
 import io.vertx.ext.web.client.WebClient
-import io.vertx.ext.web.client.WebClientOptions
 import org.gradle.bot.model.CommitStatus
 import org.gradle.bot.model.CommitStatusObject
 import org.gradle.bot.model.PullRequestWithCommentsResponse
@@ -21,19 +18,10 @@ import javax.inject.Singleton
 
 @Singleton
 class GitHubClient @Inject constructor(
-        vertx: Vertx,
-        @Named("GITHUB_ACCESS_TOKEN") githubToken: String
+        @Named("GITHUB_ACCESS_TOKEN") githubToken: String,
+        private val client: WebClient
 ) {
     private val logger = LoggerFactory.getLogger(javaClass)
-    private val client = WebClient.create(vertx,
-            WebClientOptions().also { options ->
-                if (System.getProperty("http.proxyHost") != null && System.getProperty("http.proxyPort") != null) {
-                    options.proxyOptions = ProxyOptions().also {
-                        it.host = System.getProperty("http.proxyHost")
-                        it.port = System.getProperty("http.proxyPort").toInt()
-                    }
-                }
-            })
     private val authHeader = "bearer $githubToken"
 
     private var myself: String? = null
@@ -97,13 +85,13 @@ class GitHubClient @Inject constructor(
                                                     "https://builds.gradle.org",
                                                     "TeamCity build finished",
                                                     status.name.toLowerCase()))
-                                    )
-                            ).onFailure {
-                                logger.error("Error when creating commit status {} to {}", status, url)
-                            }.onSuccess {
-                                logger.info("Get response: {}", it.bodyAsString())
-                                logger.info("Successfully created commit status {} to {}", status, url)
-                            }
+                            )
+                    ).onFailure {
+                        logger.error("Error when creating commit status {} to {}", status, url)
+                    }.onSuccess {
+                        logger.info("Get response: {}", it.bodyAsString())
+                        logger.info("Successfully created commit status {} to {}", status, url)
+                    }
         }
     }
 }

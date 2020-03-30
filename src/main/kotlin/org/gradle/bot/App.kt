@@ -17,20 +17,23 @@ import io.vertx.core.Verticle
 import io.vertx.core.Vertx
 import io.vertx.core.http.HttpServerResponse
 import io.vertx.core.json.Json
+import io.vertx.core.net.ProxyOptions
 import io.vertx.core.spi.VerticleFactory
 import io.vertx.ext.web.Router
+import io.vertx.ext.web.client.WebClient
+import io.vertx.ext.web.client.WebClientOptions
 import io.vertx.ext.web.handler.BodyHandler
 import io.vertx.kotlin.core.http.httpServerOptionsOf
 import org.gradle.bot.client.GitHubClient
 import org.gradle.bot.eventhandlers.github.GitHubEventHandler
-import org.gradle.bot.model.GitHubEvent
-import org.gradle.bot.security.Sha1GitHubSignatureChecker
 import org.gradle.bot.security.GithubSignatureChecker
 import org.gradle.bot.security.LenientGitHubSignatureCheck
+import org.gradle.bot.security.Sha1GitHubSignatureChecker
 import org.gradle.bot.webhookhandlers.GitHubWebHookHandler
 import org.gradle.bot.webhookhandlers.TeamCityWebHookHandler
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import java.lang.reflect.Modifier
 import java.util.concurrent.Callable
 import javax.inject.Inject
 
@@ -71,8 +74,19 @@ class GuiceVerticleFactory(private val injector: Injector, private val verticleC
 
 
 open class GradleBotAppModule(private val vertx: Vertx) : AbstractModule() {
+    private val client = WebClient.create(vertx,
+            WebClientOptions().also { options ->
+                if (System.getProperty("http.proxyHost") != null && System.getProperty("http.proxyPort") != null) {
+                    options.proxyOptions = ProxyOptions().also {
+                        it.host = System.getProperty("http.proxyHost")
+                        it.port = System.getProperty("http.proxyPort").toInt()
+                    }
+                }
+            })
+
     override fun configure() {
         bind(Vertx::class.java).toInstance(vertx)
+        bind(WebClient::class.java).toInstance(client)
         bindAccessTokens()
         bindGitHubSignatureCheckerOnSecret()
     }
@@ -92,7 +106,6 @@ open class GradleBotAppModule(private val vertx: Vertx) : AbstractModule() {
         val envValue = System.getenv(envName) ?: throw IllegalStateException("Env $envName must be set!")
         bind(String::class.java).annotatedWith(Names.named(envName)).toInstance(envValue)
     }
-
 }
 
 class GradleBotVerticle @Inject constructor(private val injector: Injector,
@@ -104,24 +117,21 @@ class GradleBotVerticle @Inject constructor(private val injector: Injector,
         System.getenv("HTTP_PORT")?.toInt() ?: 8080
     }
 
-    init {
-        registerEventHandlers(injector)
-    }
-
     @Suppress("UNCHECKED_CAST")
     private
     fun registerEventHandlers(injector: Injector) {
         val packageName = GradleBotVerticle::class.java.`package`.name
         ClassPath.from(GradleBotVerticle::class.java.classLoader).getTopLevelClassesRecursive(packageName).forEach {
             val klass = it.load()
-            if (klass.isAssignableFrom(GitHubEventHandler::class.java) && klass != GitHubEventHandler::class.java) {
-                val eventHandler: GitHubEventHandler<GitHubEvent> = injector.getInstance(klass) as GitHubEventHandler<GitHubEvent>
-                vertx.eventBus().consumer<GitHubEvent>(eventHandler.eventType(), eventHandler)
+            if (GitHubEventHandler::class.java.isAssignableFrom(klass) && !Modifier.isAbstract(klass.modifiers)) {
+                val eventHandler: GitHubEventHandler = injector.getInstance(klass) as GitHubEventHandler
+                vertx.eventBus().consumer<String>(eventHandler.eventType, eventHandler)
             }
         }
     }
 
     override fun start(startFuture: Promise<Void>) {
+        registerEventHandlers(injector)
         gitHubClient.init().onSuccess {
             logger.info("GitHub client initialized, I am {}", gitHubClient.whoAmI())
 
