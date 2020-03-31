@@ -1,7 +1,11 @@
 package org.gradle.bot.integration
 
+import io.vertx.core.Vertx
 import io.vertx.core.buffer.Buffer
 import io.vertx.core.eventbus.Message
+import io.vertx.core.eventbus.impl.EventBusImpl
+import io.vertx.core.eventbus.impl.HandlerHolder
+import io.vertx.core.impl.utils.ConcurrentCyclicSequence
 import io.vertx.ext.web.client.WebClient
 import org.gradle.bot.GradleBotVerticle
 import org.gradle.bot.client.TeamCityClient
@@ -10,6 +14,7 @@ import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.Mock
+import java.util.concurrent.ConcurrentMap
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -36,6 +41,8 @@ class WebHookIntegrationTest {
     lateinit var webClient: WebClient
     @Inject
     lateinit var testGitHubEventHandler: TestGitHubEventHandler
+    @Inject
+    lateinit var vertx: Vertx
 
     @Test
     fun `can process webhook events`() {
@@ -48,5 +55,16 @@ class WebHookIntegrationTest {
 
         Thread.sleep(1000)
         Assertions.assertEquals(1, testGitHubEventHandler.receivedEvents.size)
+    }
+
+    @Test
+    fun `all handlers have been registered`() {
+        val eventBus = vertx.eventBus() as EventBusImpl
+
+        val field = EventBusImpl::class.java.getDeclaredField("handlerMap")
+        field.isAccessible = true
+        val handlerMap = field.get(eventBus) as ConcurrentMap<String, ConcurrentCyclicSequence<HandlerHolder<*>>>
+
+        Assertions.assertEquals(3, handlerMap.values.flatMap { it }.size)
     }
 }

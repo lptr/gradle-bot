@@ -120,13 +120,18 @@ class GradleBotVerticle @Inject constructor(private val injector: Injector,
     @Suppress("UNCHECKED_CAST")
     private
     fun registerEventHandlers(injector: Injector) {
-        val packageName = GradleBotVerticle::class.java.`package`.name
-        ClassPath.from(GradleBotVerticle::class.java.classLoader).getTopLevelClassesRecursive(packageName).forEach {
-            val klass = it.load()
-            if (GitHubEventHandler::class.java.isAssignableFrom(klass) && !Modifier.isAbstract(klass.modifiers)) {
-                val eventHandler: GitHubEventHandler = injector.getInstance(klass) as GitHubEventHandler
-                vertx.eventBus().consumer<String>(eventHandler.eventType, eventHandler)
+        try {
+            val packageName = GradleBotVerticle::class.java.`package`.name
+            ClassPath.from(GradleBotVerticle::class.java.classLoader).getTopLevelClassesRecursive(packageName).forEach {
+                val klass = it.load()
+                if (GitHubEventHandler::class.java.isAssignableFrom(klass) && !Modifier.isAbstract(klass.modifiers)) {
+                    val eventHandler: GitHubEventHandler = injector.getInstance(klass) as GitHubEventHandler
+                    vertx.eventBus().consumer<String>(eventHandler.eventType, eventHandler)
+                }
             }
+        } catch (e: Throwable) {
+            logger.error("", e)
+            throw e
         }
     }
 

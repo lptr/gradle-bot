@@ -1,5 +1,8 @@
 package org.gradle.bot.model
 
+import org.jetbrains.teamcity.rest.BuildConfigurationId
+import org.jetbrains.teamcity.rest.BuildStatus
+
 // https://developer.github.com/v4/enum/commentauthorassociation/
 enum class AuthorAssociation(val admin: Boolean) {
     COLLABORATOR(true),
@@ -15,11 +18,21 @@ enum class AuthorAssociation(val admin: Boolean) {
     }
 }
 
-enum class CommitStatus {
+enum class CommitStatusState {
     PENDING,
     ERROR,
     FAILURE,
-    SUCCESS
+    SUCCESS;
+
+    companion object {
+        fun fromTeamCityBuildStatus(buildStatus: BuildStatus): CommitStatusState =
+                when (buildStatus) {
+                    BuildStatus.SUCCESS -> SUCCESS
+                    BuildStatus.ERROR -> ERROR
+                    BuildStatus.FAILURE -> FAILURE
+                    BuildStatus.UNKNOWN -> PENDING
+                }
+    }
 }
 
 val allBuildTypes = listOf(
@@ -49,5 +62,7 @@ enum class BuildStage(val fullName: String, val abbr: String, val buildTypeId: S
     companion object {
         fun parseTargetStage(target: String) = values().find { it.fullName.equals(target, true) || it.abbr.equals(target, true) }
     }
+
+    fun toBuildConfigurationId() = BuildConfigurationId(buildTypeId)
 }
 

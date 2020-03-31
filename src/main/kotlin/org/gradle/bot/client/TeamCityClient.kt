@@ -5,8 +5,8 @@ import io.vertx.core.Promise
 import io.vertx.core.Vertx
 import org.gradle.bot.model.BuildStage
 import org.jetbrains.teamcity.rest.Build
-import org.jetbrains.teamcity.rest.BuildConfigurationId
 import org.jetbrains.teamcity.rest.BuildId
+import org.jetbrains.teamcity.rest.BuildState
 import org.jetbrains.teamcity.rest.TeamCityInstanceFactory
 import org.slf4j.LoggerFactory
 import javax.inject.Inject
@@ -26,7 +26,7 @@ class TeamCityClient @Inject constructor(
     fun triggerBuild(stage: BuildStage, branchName: String): Future<Build> {
         return vertx.executeBlocking { promise: Promise<Build> ->
             try {
-                val buildConfiguration = teamCityRestClient.buildConfiguration(BuildConfigurationId(stage.buildTypeId))
+                val buildConfiguration = teamCityRestClient.buildConfiguration(stage.toBuildConfigurationId())
                 val build = buildConfiguration.runBuild(logicalBranchName = branchName)
                 promise.complete(build)
             } catch (e: Throwable) {
@@ -40,6 +40,24 @@ class TeamCityClient @Inject constructor(
         return vertx.executeBlocking {
             try {
                 it.complete(teamCityRestClient.build(BuildId(teamCityBuildId)))
+            } catch (e: Throwable) {
+                logger.error("", e)
+                it.fail(e)
+            }
+        }
+    }
+
+    fun getLatestFinishedBuild(targetBranch: String): Future<Build> {
+        return vertx.executeBlocking {
+            try {
+                val buildConfigurationId = BuildStage.READY_FOR_NIGHTLY.toBuildConfigurationId()
+                val latestFinishedBuild = teamCityRestClient
+                        .builds()
+                        .fromConfiguration(buildConfigurationId)
+                        .withBranch(targetBranch)
+                        .all()
+                        .find { it.state == BuildState.FINISHED }
+                it.complete(latestFinishedBuild!!)
             } catch (e: Throwable) {
                 logger.error("", e)
                 it.fail(e)

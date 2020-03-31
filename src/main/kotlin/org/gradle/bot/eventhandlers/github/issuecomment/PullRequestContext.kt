@@ -7,7 +7,7 @@ import org.gradle.bot.client.TeamCityClient
 import org.gradle.bot.logger
 import org.gradle.bot.model.AuthorAssociation
 import org.gradle.bot.model.BuildStage
-import org.gradle.bot.model.CommitStatus
+import org.gradle.bot.model.CommitStatusState
 import org.gradle.bot.model.PullRequestWithCommentsResponse
 import org.gradle.bot.objectMapper
 import org.jetbrains.teamcity.rest.Build
@@ -63,7 +63,7 @@ $content""")
     }
 
     fun publishPendingStatuses(dependencies: List<String>) {
-        gitHubClient.createCommitStatus(repoName, headRefSha, dependencies, CommitStatus.PENDING)
+        gitHubClient.createCommitStatus(repoName, headRefSha, dependencies, CommitStatusState.PENDING)
     }
 
     fun iDontUnderstandWhatYouSaid() = """

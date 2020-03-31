@@ -4,7 +4,7 @@ import io.vertx.core.Future
 import org.gradle.bot.client.GitHubClient
 import org.gradle.bot.client.TeamCityClient
 import org.gradle.bot.model.BuildStage
-import org.gradle.bot.model.CommitStatus
+import org.gradle.bot.model.CommitStatusState
 import org.gradle.bot.model.PullRequestWithCommentsResponse
 import org.gradle.bot.objectMapper
 import org.jetbrains.teamcity.rest.Build
@@ -105,7 +105,7 @@ class PullRequestContextTest {
         // then
         verify(teamCityClient).findBuild(oldBuildIdString)
         verify(teamCityClient).triggerBuild(BuildStage.READY_FOR_MERGE, pullRequestBranch)
-        verify(gitHubClient).createCommitStatus(repoName, firstTeamCityBuildHeadRef, BuildStage.READY_FOR_MERGE.dependencies, CommitStatus.PENDING)
+        verify(gitHubClient).createCommitStatus(repoName, firstTeamCityBuildHeadRef, BuildStage.READY_FOR_MERGE.dependencies, CommitStatusState.PENDING)
         verify(gitHubClient).comment(captor.capture(), captor.capture())
         assertEquals(pullRequestSubjectId, captor.allValues[0])
 

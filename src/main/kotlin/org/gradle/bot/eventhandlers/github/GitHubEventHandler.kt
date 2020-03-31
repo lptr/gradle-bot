@@ -16,17 +16,6 @@ interface GitHubEventHandler : Handler<Message<String>> {
     val eventType: String
 }
 
-@Singleton
-class IssueCommentEventHandler @Inject constructor(private val gitHubClient: GitHubClient,
-                                                   private val teamCityClient: TeamCityClient
-) : AbstractGitHubEventHandler<IssueCommentGitHubEvent>() {
-    override fun handleEvent(event: IssueCommentGitHubEvent) {
-        gitHubClient.getPullRequestWithComments(event.repository.fullName, event.issue.number).onSuccess {
-            PullRequestContext(gitHubClient, teamCityClient, it).processCommand(event.comment.id)
-        }
-    }
-}
-
 @Suppress("UNCHECKED_CAST")
 abstract class AbstractGitHubEventHandler<T : GitHubEvent> : GitHubEventHandler {
     private val eventClass by lazy {

@@ -3,7 +3,7 @@ package org.gradle.bot.client
 import io.vertx.core.Future
 import io.vertx.core.buffer.Buffer
 import io.vertx.ext.web.client.WebClient
-import org.gradle.bot.model.CommitStatus
+import org.gradle.bot.model.CommitStatusState
 import org.gradle.bot.model.CommitStatusObject
 import org.gradle.bot.model.PullRequestWithCommentsResponse
 import org.gradle.bot.model.WhoAmIResponse
@@ -70,7 +70,26 @@ class GitHubClient @Inject constructor(
     private
     fun toQueryJson(query: String) = objectMapper.writeValueAsString(mapOf("query" to query))
 
-    fun createCommitStatus(repoName: String, sha: String, dependencies: List<String>, status: CommitStatus) {
+    fun createCommitStatus(repoName: String, sha: String, state: CommitStatusState, url: String, desc: String, context: String) {
+        client.postAbs(url)
+                .putHeader("Accept", "application/json")
+                .putHeader("Content-Type", "application/json")
+                .putHeader("Authorization", authHeader)
+                .sendBuffer(
+                        Buffer.buffer(
+                                objectMapper.writeValueAsString(
+                                        CommitStatusObject(state.name.toLowerCase(), url, desc, context)
+                                )
+                        )
+                ).onFailure {
+                    logger.error("Error when creating commit status {} to {}", state, url)
+                }.onSuccess {
+                    logger.info("Get response: {}", it.bodyAsString())
+                    logger.info("Successfully created commit status {} to {}", state, url)
+                }
+    }
+
+    fun createCommitStatus(repoName: String, sha: String, dependencies: List<String>, statusState: CommitStatusState) {
         // https://developer.github.com/v3/repos/statuses/
         val url = repoName.split('/').let { "https://api.github.com/repos/${it[0]}/${it[1]}/statuses/$sha" }
         dependencies.forEach {
@@ -81,16 +100,16 @@ class GitHubClient @Inject constructor(
                     .sendBuffer(
                             Buffer.buffer(
                                     objectMapper.writeValueAsString(
-                                            CommitStatusObject(it,
+                                            CommitStatusObject(statusState.name.toLowerCase(),
                                                     "https://builds.gradle.org",
                                                     "TeamCity build finished",
-                                                    status.name.toLowerCase()))
+                                                    it))
                             )
                     ).onFailure {
-                        logger.error("Error when creating commit status {} to {}", status, url)
+                        logger.error("Error when creating commit status {} to {}", statusState, url)
                     }.onSuccess {
                         logger.info("Get response: {}", it.bodyAsString())
-                        logger.info("Successfully created commit status {} to {}", status, url)
+                        logger.info("Successfully created commit status {} to {}", statusState, url)
                     }
         }
     }

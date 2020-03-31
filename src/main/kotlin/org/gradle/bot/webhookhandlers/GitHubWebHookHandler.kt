@@ -4,21 +4,18 @@ import io.vertx.core.Handler
 import io.vertx.core.Vertx
 import io.vertx.ext.web.RoutingContext
 import org.gradle.bot.endWithJson
-import org.gradle.bot.model.GitHubEvent
-import org.gradle.bot.objectMapper
 import org.gradle.bot.security.GithubSignatureChecker
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import javax.inject.Inject
 import javax.inject.Singleton
 
-val logger: Logger = LoggerFactory.getLogger(GitHubWebHookHandler::class.java.name)
-
 @Singleton
 class GitHubWebHookHandler @Inject constructor(
         private val vertx: Vertx,
         private val githubSignatureChecker: GithubSignatureChecker
 ) : Handler<RoutingContext> {
+    private val logger = LoggerFactory.getLogger(javaClass)
     override fun handle(context: RoutingContext?) {
         logger.info("Received webhook to ${GitHubWebHookHandler::class.java.simpleName}")
 
@@ -31,6 +28,7 @@ class GitHubWebHookHandler @Inject constructor(
     }
 }
 
+val logger: Logger = LoggerFactory.getLogger(RoutingContext::class.java)
 private fun RoutingContext?.parsePayloadEvent(githubSignatureChecker: GithubSignatureChecker): Pair<String, String>? {
     return this?.let {
         val signature = request().getHeader("x-hub-signature")
