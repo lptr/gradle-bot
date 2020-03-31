@@ -19,7 +19,7 @@ import org.gradle.bot.objectMapper
 import org.slf4j.LoggerFactory
 
 @Singleton
-class GitHubClient @Inject constructor(
+open class GitHubClient @Inject constructor(
     @Named("GITHUB_ACCESS_TOKEN") githubToken: String,
     private val client: WebClient
 ) {
@@ -78,7 +78,8 @@ class GitHubClient @Inject constructor(
     private
     fun toQueryJson(query: String) = objectMapper.writeValueAsString(mapOf("query" to query))
 
-    fun createCommitStatus(repoName: String, sha: String, state: CommitStatusState, url: String, desc: String, context: String) {
+    fun createCommitStatus(repoName: String, sha: String, state: CommitStatusState, statusUrl: String, desc: String, context: String) {
+        val url = repoName.split('/').let { "https://api.github.com/repos/${it[0]}/${it[1]}/statuses/$sha" }
         client.postAbs(url)
             .putHeader("Accept", "application/json")
             .putHeader("Content-Type", "application/json")
@@ -86,7 +87,7 @@ class GitHubClient @Inject constructor(
             .sendBuffer(
                 Buffer.buffer(
                     objectMapper.writeValueAsString(
-                        CommitStatusObject(state.name.toLowerCase(), url, desc, context)
+                        CommitStatusObject(state.name.toLowerCase(), statusUrl, desc, context)
                     )
                 )
             ).onFailure {

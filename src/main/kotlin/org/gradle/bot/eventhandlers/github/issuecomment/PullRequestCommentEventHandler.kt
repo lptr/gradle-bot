@@ -17,7 +17,7 @@ class PullRequestCommentEventHandler @Inject constructor(
     private val gitHubClient: GitHubClient,
     private val teamCityClient: TeamCityClient
 ) : AbstractGitHubEventHandler<IssueCommentGitHubEvent>() {
-    val logger = LoggerFactory.getLogger(javaClass)
+    private val logger = LoggerFactory.getLogger(javaClass)
 
     override fun handleEvent(event: IssueCommentGitHubEvent) {
         if (!event.isPullRequest()) {

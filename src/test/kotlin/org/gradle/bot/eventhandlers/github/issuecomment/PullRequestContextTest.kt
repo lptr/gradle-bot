@@ -145,7 +145,7 @@ class PullRequestContextTest {
     }
 }
 
-private fun <T> any(): T {
+fun <T> any(): T {
     return Mockito.any<T>()
 }
 
