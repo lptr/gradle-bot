@@ -83,4 +83,8 @@ tasks.named("run", JavaExec::class.java) {
 
 application {
     mainClassName = "org.gradle.bot.AppKt"
+
+    applicationDistribution.from(sourceSets["teamCityWorkaround"].output) {
+       into("lib/teamCityWorkaround")
+    }
 }
