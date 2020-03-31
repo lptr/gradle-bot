@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory
 import javax.inject.Inject
 import javax.inject.Singleton
 
-private val logger: Logger = LoggerFactory.getLogger(GitHubWebHookHandler::class.java.name)
+val logger: Logger = LoggerFactory.getLogger(GitHubWebHookHandler::class.java.name)
 
 @Singleton
 class GitHubWebHookHandler @Inject constructor(

@@ -2,10 +2,19 @@ package org.gradle.bot.webhookhandlers
 
 import io.vertx.core.Handler
 import io.vertx.ext.web.RoutingContext
+import org.gradle.bot.endWithJson
 import javax.inject.Inject
 
 class TeamCityWebHookHandler @Inject constructor() : Handler<RoutingContext> {
-    override fun handle(event: RoutingContext?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun handle(context: RoutingContext?) {
+        context.parseTeamCityPayload()
+        context?.response()?.endWithJson(emptyMap<String, Any>())
+    }
+}
+
+private fun RoutingContext?.parseTeamCityPayload(): String? {
+    return this?.let {
+        logger.debug("Get GitHub webhook {}", bodyAsString)
+        bodyAsString
     }
 }
