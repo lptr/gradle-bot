@@ -1,9 +1,9 @@
 package org.gradle.bot.security
 
 import com.google.inject.Inject
-import org.apache.commons.codec.digest.HmacUtils
 import javax.inject.Named
 import javax.inject.Singleton
+import org.apache.commons.codec.digest.HmacUtils
 
 interface GithubSignatureChecker {
     fun verifySignature(body: String?, signature: String?): Boolean
