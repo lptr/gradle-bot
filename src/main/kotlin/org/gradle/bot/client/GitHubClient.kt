@@ -12,8 +12,8 @@ import org.gradle.bot.model.ListOpenPullRequestsResponse
 import org.gradle.bot.model.PullRequestWithCommentsResponse
 import org.gradle.bot.model.WhoAmIResponse
 import org.gradle.bot.model.addCommentMutation
-import org.gradle.bot.model.pullRequestsWithCommentsQuery
 import org.gradle.bot.model.listOpenPullRequestsQuery
+import org.gradle.bot.model.pullRequestsWithCommentsQuery
 import org.gradle.bot.model.whoAmIQuery
 import org.gradle.bot.objectMapper
 import org.slf4j.LoggerFactory

@@ -3,12 +3,12 @@ package org.gradle.bot.webhookhandlers
 import io.vertx.core.Handler
 import io.vertx.core.Vertx
 import io.vertx.ext.web.RoutingContext
+import javax.inject.Inject
+import javax.inject.Singleton
 import org.gradle.bot.endWithJson
 import org.gradle.bot.security.GithubSignatureChecker
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import javax.inject.Inject
-import javax.inject.Singleton
 
 @Singleton
 class GitHubWebHookHandler @Inject constructor(

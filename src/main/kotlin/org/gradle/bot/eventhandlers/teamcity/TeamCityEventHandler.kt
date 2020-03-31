@@ -2,14 +2,14 @@ package org.gradle.bot.eventhandlers.teamcity
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import io.vertx.core.eventbus.Message
+import javax.inject.Inject
+import javax.inject.Singleton
 import org.gradle.bot.client.GitHubClient
 import org.gradle.bot.client.TeamCityClient
 import org.gradle.bot.eventhandlers.WebHookEventHandler
 import org.gradle.bot.model.ListOpenPullRequestsResponse
 import org.gradle.bot.objectMapper
 import org.slf4j.LoggerFactory
-import javax.inject.Inject
-import javax.inject.Singleton
 
 interface TeamCityEventHandler : WebHookEventHandler {
     override val eventPrefix: String
@@ -53,7 +53,7 @@ abstract class AbstractTeamCityEventHandler : TeamCityEventHandler {
         try {
             handleEvent(objectMapper.readValue(event?.body(), TeamCityBuildEvent::class.java))
         } catch (e: Throwable) {
-            logger.error(event?.body(), e);
+            logger.error(event?.body(), e)
         }
     }
 

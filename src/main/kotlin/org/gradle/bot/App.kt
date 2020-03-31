@@ -24,6 +24,9 @@ import io.vertx.ext.web.client.WebClient
 import io.vertx.ext.web.client.WebClientOptions
 import io.vertx.ext.web.handler.BodyHandler
 import io.vertx.kotlin.core.http.httpServerOptionsOf
+import java.lang.reflect.Modifier
+import java.util.concurrent.Callable
+import javax.inject.Inject
 import org.gradle.bot.client.GitHubClient
 import org.gradle.bot.eventhandlers.WebHookEventHandler
 import org.gradle.bot.security.GithubSignatureChecker
@@ -33,9 +36,6 @@ import org.gradle.bot.webhookhandlers.GitHubWebHookHandler
 import org.gradle.bot.webhookhandlers.TeamCityWebHookHandler
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import java.lang.reflect.Modifier
-import java.util.concurrent.Callable
-import javax.inject.Inject
 
 val objectMapper: ObjectMapper = ObjectMapper()
 val logger: Logger = LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME)

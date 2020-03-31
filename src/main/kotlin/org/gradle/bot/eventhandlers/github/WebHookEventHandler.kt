@@ -1,10 +1,10 @@
 package org.gradle.bot.eventhandlers.github
 
 import io.vertx.core.eventbus.Message
+import java.lang.reflect.ParameterizedType
 import org.gradle.bot.eventhandlers.WebHookEventHandler
 import org.gradle.bot.model.GitHubEvent
 import org.gradle.bot.objectMapper
-import java.lang.reflect.ParameterizedType
 
 interface GitHubEventHandler : WebHookEventHandler {
     override val eventPrefix: String
