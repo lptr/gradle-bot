@@ -24,11 +24,8 @@ import io.vertx.ext.web.client.WebClient
 import io.vertx.ext.web.client.WebClientOptions
 import io.vertx.ext.web.handler.BodyHandler
 import io.vertx.kotlin.core.http.httpServerOptionsOf
-import java.lang.reflect.Modifier
-import java.util.concurrent.Callable
-import javax.inject.Inject
 import org.gradle.bot.client.GitHubClient
-import org.gradle.bot.eventhandlers.github.GitHubEventHandler
+import org.gradle.bot.eventhandlers.WebHookEventHandler
 import org.gradle.bot.security.GithubSignatureChecker
 import org.gradle.bot.security.LenientGitHubSignatureCheck
 import org.gradle.bot.security.Sha1GitHubSignatureChecker
@@ -36,6 +33,9 @@ import org.gradle.bot.webhookhandlers.GitHubWebHookHandler
 import org.gradle.bot.webhookhandlers.TeamCityWebHookHandler
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import java.lang.reflect.Modifier
+import java.util.concurrent.Callable
+import javax.inject.Inject
 
 val objectMapper: ObjectMapper = ObjectMapper()
 val logger: Logger = LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME)
@@ -128,9 +128,9 @@ class GradleBotVerticle @Inject constructor(
             val packageName = GradleBotVerticle::class.java.`package`.name
             ClassPath.from(GradleBotVerticle::class.java.classLoader).getTopLevelClassesRecursive(packageName).forEach {
                 val klass = it.load()
-                if (GitHubEventHandler::class.java.isAssignableFrom(klass) && !Modifier.isAbstract(klass.modifiers)) {
-                    val eventHandler: GitHubEventHandler = injector.getInstance(klass) as GitHubEventHandler
-                    vertx.eventBus().consumer<String>(eventHandler.eventType, eventHandler)
+                if (WebHookEventHandler::class.java.isAssignableFrom(klass) && !Modifier.isAbstract(klass.modifiers)) {
+                    val eventHandler: WebHookEventHandler = injector.getInstance(klass) as WebHookEventHandler
+                    vertx.eventBus().consumer<String>(eventHandler.eventAddress, eventHandler)
                 }
             }
         } catch (e: Throwable) {

@@ -135,3 +135,50 @@ query {
   } 
 }  
 """.trimIndent().replace('\n', ' ')
+
+fun listOpenPullRequestsQuery(owner: String, name: String, maxPrNum: Int = 100) = """
+query {
+  repository(owner: "$owner", name: "$name") {
+    name
+    pullRequests(states: OPEN, first: $maxPrNum) {
+      nodes {
+        id
+        body
+        url
+        headRef {
+          target {
+            oid
+          }
+          repository {
+            isFork
+            owner {
+              login
+            }
+            name
+          }
+          name
+        }
+        baseRefName
+        commits(last: 1) {
+          nodes {
+            commit {
+              commitUrl
+              oid
+              status {
+                state
+                contexts {
+                  state
+                  targetUrl
+                  description
+                  context
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+""".trimIndent()

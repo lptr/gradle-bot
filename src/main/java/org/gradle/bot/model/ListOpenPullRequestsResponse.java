@@ -1,0 +1,885 @@
+
+package org.gradle.bot.model;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({
+    "data"
+})
+public class ListOpenPullRequestsResponse {
+
+    @JsonProperty("data")
+    private ListOpenPullRequestsResponse.Data data;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+    /**
+     * No args constructor for use in serialization
+     * 
+     */
+    public ListOpenPullRequestsResponse() {
+    }
+
+    /**
+     * 
+     * @param data
+     */
+    public ListOpenPullRequestsResponse(ListOpenPullRequestsResponse.Data data) {
+        super();
+        this.data = data;
+    }
+
+    @JsonProperty("data")
+    public ListOpenPullRequestsResponse.Data getData() {
+        return data;
+    }
+
+    @JsonProperty("data")
+    public void setData(ListOpenPullRequestsResponse.Data data) {
+        this.data = data;
+    }
+
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(ListOpenPullRequestsResponse.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+        sb.append("data");
+        sb.append('=');
+        sb.append(((this.data == null)?"<null>":this.data));
+        sb.append(',');
+        sb.append("additionalProperties");
+        sb.append('=');
+        sb.append(((this.additionalProperties == null)?"<null>":this.additionalProperties));
+        sb.append(',');
+        if (sb.charAt((sb.length()- 1)) == ',') {
+            sb.setCharAt((sb.length()- 1), ']');
+        } else {
+            sb.append(']');
+        }
+        return sb.toString();
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 1;
+        result = ((result* 31)+((this.data == null)? 0 :this.data.hashCode()));
+        result = ((result* 31)+((this.additionalProperties == null)? 0 :this.additionalProperties.hashCode()));
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if ((other instanceof ListOpenPullRequestsResponse) == false) {
+            return false;
+        }
+        ListOpenPullRequestsResponse rhs = ((ListOpenPullRequestsResponse) other);
+        return (((this.data == rhs.data)||((this.data!= null)&&this.data.equals(rhs.data)))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))));
+    }
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonPropertyOrder({
+        "nodes"
+    })
+    public static class Commits {
+
+        @JsonProperty("nodes")
+        private List<ListOpenPullRequestsResponse.Node> nodes = new ArrayList<ListOpenPullRequestsResponse.Node>();
+        @JsonIgnore
+        private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+        /**
+         * No args constructor for use in serialization
+         * 
+         */
+        public Commits() {
+        }
+
+        /**
+         * 
+         * @param nodes
+         */
+        public Commits(List<ListOpenPullRequestsResponse.Node> nodes) {
+            super();
+            this.nodes = nodes;
+        }
+
+        @JsonProperty("nodes")
+        public List<ListOpenPullRequestsResponse.Node> getNodes() {
+            return nodes;
+        }
+
+        @JsonProperty("nodes")
+        public void setNodes(List<ListOpenPullRequestsResponse.Node> nodes) {
+            this.nodes = nodes;
+        }
+
+        @JsonAnyGetter
+        public Map<String, Object> getAdditionalProperties() {
+            return this.additionalProperties;
+        }
+
+        @JsonAnySetter
+        public void setAdditionalProperty(String name, Object value) {
+            this.additionalProperties.put(name, value);
+        }
+
+        @Override
+        public String toString() {
+            StringBuilder sb = new StringBuilder();
+            sb.append(ListOpenPullRequestsResponse.Commits.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append("nodes");
+            sb.append('=');
+            sb.append(((this.nodes == null)?"<null>":this.nodes));
+            sb.append(',');
+            sb.append("additionalProperties");
+            sb.append('=');
+            sb.append(((this.additionalProperties == null)?"<null>":this.additionalProperties));
+            sb.append(',');
+            if (sb.charAt((sb.length()- 1)) == ',') {
+                sb.setCharAt((sb.length()- 1), ']');
+            } else {
+                sb.append(']');
+            }
+            return sb.toString();
+        }
+
+        @Override
+        public int hashCode() {
+            int result = 1;
+            result = ((result* 31)+((this.nodes == null)? 0 :this.nodes.hashCode()));
+            result = ((result* 31)+((this.additionalProperties == null)? 0 :this.additionalProperties.hashCode()));
+            return result;
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            if (other == this) {
+                return true;
+            }
+            if ((other instanceof ListOpenPullRequestsResponse.Commits) == false) {
+                return false;
+            }
+            ListOpenPullRequestsResponse.Commits rhs = ((ListOpenPullRequestsResponse.Commits) other);
+            return (((this.nodes == rhs.nodes)||((this.nodes!= null)&&this.nodes.equals(rhs.nodes)))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))));
+        }
+
+    }
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonPropertyOrder({
+        "repository"
+    })
+    public static class Data {
+
+        @JsonProperty("repository")
+        private ListOpenPullRequestsResponse.Repository repository;
+        @JsonIgnore
+        private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+        /**
+         * No args constructor for use in serialization
+         * 
+         */
+        public Data() {
+        }
+
+        /**
+         * 
+         * @param repository
+         */
+        public Data(ListOpenPullRequestsResponse.Repository repository) {
+            super();
+            this.repository = repository;
+        }
+
+        @JsonProperty("repository")
+        public ListOpenPullRequestsResponse.Repository getRepository() {
+            return repository;
+        }
+
+        @JsonProperty("repository")
+        public void setRepository(ListOpenPullRequestsResponse.Repository repository) {
+            this.repository = repository;
+        }
+
+        @JsonAnyGetter
+        public Map<String, Object> getAdditionalProperties() {
+            return this.additionalProperties;
+        }
+
+        @JsonAnySetter
+        public void setAdditionalProperty(String name, Object value) {
+            this.additionalProperties.put(name, value);
+        }
+
+        @Override
+        public String toString() {
+            StringBuilder sb = new StringBuilder();
+            sb.append(ListOpenPullRequestsResponse.Data.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append("repository");
+            sb.append('=');
+            sb.append(((this.repository == null)?"<null>":this.repository));
+            sb.append(',');
+            sb.append("additionalProperties");
+            sb.append('=');
+            sb.append(((this.additionalProperties == null)?"<null>":this.additionalProperties));
+            sb.append(',');
+            if (sb.charAt((sb.length()- 1)) == ',') {
+                sb.setCharAt((sb.length()- 1), ']');
+            } else {
+                sb.append(']');
+            }
+            return sb.toString();
+        }
+
+        @Override
+        public int hashCode() {
+            int result = 1;
+            result = ((result* 31)+((this.repository == null)? 0 :this.repository.hashCode()));
+            result = ((result* 31)+((this.additionalProperties == null)? 0 :this.additionalProperties.hashCode()));
+            return result;
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            if (other == this) {
+                return true;
+            }
+            if ((other instanceof ListOpenPullRequestsResponse.Data) == false) {
+                return false;
+            }
+            ListOpenPullRequestsResponse.Data rhs = ((ListOpenPullRequestsResponse.Data) other);
+            return (((this.repository == rhs.repository)||((this.repository!= null)&&this.repository.equals(rhs.repository)))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))));
+        }
+
+    }
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonPropertyOrder({
+        "target",
+        "repository",
+        "name"
+    })
+    public static class HeadRef {
+
+        @JsonProperty("target")
+        private ListOpenPullRequestsResponse.Target target;
+        @JsonProperty("repository")
+        private ListOpenPullRequestsResponse.Repository repository;
+        @JsonProperty("name")
+        private String name;
+        @JsonIgnore
+        private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+        /**
+         * No args constructor for use in serialization
+         * 
+         */
+        public HeadRef() {
+        }
+
+        /**
+         * 
+         * @param name
+         * @param repository
+         * @param target
+         */
+        public HeadRef(ListOpenPullRequestsResponse.Target target, ListOpenPullRequestsResponse.Repository repository, String name) {
+            super();
+            this.target = target;
+            this.repository = repository;
+            this.name = name;
+        }
+
+        @JsonProperty("target")
+        public ListOpenPullRequestsResponse.Target getTarget() {
+            return target;
+        }
+
+        @JsonProperty("target")
+        public void setTarget(ListOpenPullRequestsResponse.Target target) {
+            this.target = target;
+        }
+
+        @JsonProperty("repository")
+        public ListOpenPullRequestsResponse.Repository getRepository() {
+            return repository;
+        }
+
+        @JsonProperty("repository")
+        public void setRepository(ListOpenPullRequestsResponse.Repository repository) {
+            this.repository = repository;
+        }
+
+        @JsonProperty("name")
+        public String getName() {
+            return name;
+        }
+
+        @JsonProperty("name")
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        @JsonAnyGetter
+        public Map<String, Object> getAdditionalProperties() {
+            return this.additionalProperties;
+        }
+
+        @JsonAnySetter
+        public void setAdditionalProperty(String name, Object value) {
+            this.additionalProperties.put(name, value);
+        }
+
+        @Override
+        public String toString() {
+            StringBuilder sb = new StringBuilder();
+            sb.append(ListOpenPullRequestsResponse.HeadRef.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append("target");
+            sb.append('=');
+            sb.append(((this.target == null)?"<null>":this.target));
+            sb.append(',');
+            sb.append("repository");
+            sb.append('=');
+            sb.append(((this.repository == null)?"<null>":this.repository));
+            sb.append(',');
+            sb.append("name");
+            sb.append('=');
+            sb.append(((this.name == null)?"<null>":this.name));
+            sb.append(',');
+            sb.append("additionalProperties");
+            sb.append('=');
+            sb.append(((this.additionalProperties == null)?"<null>":this.additionalProperties));
+            sb.append(',');
+            if (sb.charAt((sb.length()- 1)) == ',') {
+                sb.setCharAt((sb.length()- 1), ']');
+            } else {
+                sb.append(']');
+            }
+            return sb.toString();
+        }
+
+        @Override
+        public int hashCode() {
+            int result = 1;
+            result = ((result* 31)+((this.name == null)? 0 :this.name.hashCode()));
+            result = ((result* 31)+((this.additionalProperties == null)? 0 :this.additionalProperties.hashCode()));
+            result = ((result* 31)+((this.repository == null)? 0 :this.repository.hashCode()));
+            result = ((result* 31)+((this.target == null)? 0 :this.target.hashCode()));
+            return result;
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            if (other == this) {
+                return true;
+            }
+            if ((other instanceof ListOpenPullRequestsResponse.HeadRef) == false) {
+                return false;
+            }
+            ListOpenPullRequestsResponse.HeadRef rhs = ((ListOpenPullRequestsResponse.HeadRef) other);
+            return (((((this.name == rhs.name)||((this.name!= null)&&this.name.equals(rhs.name)))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))))&&((this.repository == rhs.repository)||((this.repository!= null)&&this.repository.equals(rhs.repository))))&&((this.target == rhs.target)||((this.target!= null)&&this.target.equals(rhs.target))));
+        }
+
+    }
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonPropertyOrder({
+        "id",
+        "body",
+        "url",
+        "headRef",
+        "baseRefName",
+        "commits"
+    })
+    public static class Node {
+
+        @JsonProperty("id")
+        private String id;
+        @JsonProperty("body")
+        private String body;
+        @JsonProperty("url")
+        private String url;
+        @JsonProperty("headRef")
+        private ListOpenPullRequestsResponse.HeadRef headRef;
+        @JsonProperty("baseRefName")
+        private String baseRefName;
+        @JsonProperty("commits")
+        private ListOpenPullRequestsResponse.Commits commits;
+        @JsonIgnore
+        private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+        /**
+         * No args constructor for use in serialization
+         * 
+         */
+        public Node() {
+        }
+
+        /**
+         * 
+         * @param baseRefName
+         * @param headRef
+         * @param commits
+         * @param id
+         * @param body
+         * @param url
+         */
+        public Node(String id, String body, String url, ListOpenPullRequestsResponse.HeadRef headRef, String baseRefName, ListOpenPullRequestsResponse.Commits commits) {
+            super();
+            this.id = id;
+            this.body = body;
+            this.url = url;
+            this.headRef = headRef;
+            this.baseRefName = baseRefName;
+            this.commits = commits;
+        }
+
+        @JsonProperty("id")
+        public String getId() {
+            return id;
+        }
+
+        @JsonProperty("id")
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        @JsonProperty("body")
+        public String getBody() {
+            return body;
+        }
+
+        @JsonProperty("body")
+        public void setBody(String body) {
+            this.body = body;
+        }
+
+        @JsonProperty("url")
+        public String getUrl() {
+            return url;
+        }
+
+        @JsonProperty("url")
+        public void setUrl(String url) {
+            this.url = url;
+        }
+
+        @JsonProperty("headRef")
+        public ListOpenPullRequestsResponse.HeadRef getHeadRef() {
+            return headRef;
+        }
+
+        @JsonProperty("headRef")
+        public void setHeadRef(ListOpenPullRequestsResponse.HeadRef headRef) {
+            this.headRef = headRef;
+        }
+
+        @JsonProperty("baseRefName")
+        public String getBaseRefName() {
+            return baseRefName;
+        }
+
+        @JsonProperty("baseRefName")
+        public void setBaseRefName(String baseRefName) {
+            this.baseRefName = baseRefName;
+        }
+
+        @JsonProperty("commits")
+        public ListOpenPullRequestsResponse.Commits getCommits() {
+            return commits;
+        }
+
+        @JsonProperty("commits")
+        public void setCommits(ListOpenPullRequestsResponse.Commits commits) {
+            this.commits = commits;
+        }
+
+        @JsonAnyGetter
+        public Map<String, Object> getAdditionalProperties() {
+            return this.additionalProperties;
+        }
+
+        @JsonAnySetter
+        public void setAdditionalProperty(String name, Object value) {
+            this.additionalProperties.put(name, value);
+        }
+
+        @Override
+        public String toString() {
+            StringBuilder sb = new StringBuilder();
+            sb.append(ListOpenPullRequestsResponse.Node.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append("id");
+            sb.append('=');
+            sb.append(((this.id == null)?"<null>":this.id));
+            sb.append(',');
+            sb.append("body");
+            sb.append('=');
+            sb.append(((this.body == null)?"<null>":this.body));
+            sb.append(',');
+            sb.append("url");
+            sb.append('=');
+            sb.append(((this.url == null)?"<null>":this.url));
+            sb.append(',');
+            sb.append("headRef");
+            sb.append('=');
+            sb.append(((this.headRef == null)?"<null>":this.headRef));
+            sb.append(',');
+            sb.append("baseRefName");
+            sb.append('=');
+            sb.append(((this.baseRefName == null)?"<null>":this.baseRefName));
+            sb.append(',');
+            sb.append("commits");
+            sb.append('=');
+            sb.append(((this.commits == null)?"<null>":this.commits));
+            sb.append(',');
+            sb.append("additionalProperties");
+            sb.append('=');
+            sb.append(((this.additionalProperties == null)?"<null>":this.additionalProperties));
+            sb.append(',');
+            if (sb.charAt((sb.length()- 1)) == ',') {
+                sb.setCharAt((sb.length()- 1), ']');
+            } else {
+                sb.append(']');
+            }
+            return sb.toString();
+        }
+
+        @Override
+        public int hashCode() {
+            int result = 1;
+            result = ((result* 31)+((this.baseRefName == null)? 0 :this.baseRefName.hashCode()));
+            result = ((result* 31)+((this.headRef == null)? 0 :this.headRef.hashCode()));
+            result = ((result* 31)+((this.commits == null)? 0 :this.commits.hashCode()));
+            result = ((result* 31)+((this.id == null)? 0 :this.id.hashCode()));
+            result = ((result* 31)+((this.additionalProperties == null)? 0 :this.additionalProperties.hashCode()));
+            result = ((result* 31)+((this.body == null)? 0 :this.body.hashCode()));
+            result = ((result* 31)+((this.url == null)? 0 :this.url.hashCode()));
+            return result;
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            if (other == this) {
+                return true;
+            }
+            if ((other instanceof ListOpenPullRequestsResponse.Node) == false) {
+                return false;
+            }
+            ListOpenPullRequestsResponse.Node rhs = ((ListOpenPullRequestsResponse.Node) other);
+            return ((((((((this.baseRefName == rhs.baseRefName)||((this.baseRefName!= null)&&this.baseRefName.equals(rhs.baseRefName)))&&((this.headRef == rhs.headRef)||((this.headRef!= null)&&this.headRef.equals(rhs.headRef))))&&((this.commits == rhs.commits)||((this.commits!= null)&&this.commits.equals(rhs.commits))))&&((this.id == rhs.id)||((this.id!= null)&&this.id.equals(rhs.id))))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))))&&((this.body == rhs.body)||((this.body!= null)&&this.body.equals(rhs.body))))&&((this.url == rhs.url)||((this.url!= null)&&this.url.equals(rhs.url))));
+        }
+
+    }
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonPropertyOrder({
+        "nodes"
+    })
+    public static class PullRequests {
+
+        @JsonProperty("nodes")
+        private List<ListOpenPullRequestsResponse.Node> nodes = new ArrayList<ListOpenPullRequestsResponse.Node>();
+        @JsonIgnore
+        private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+        /**
+         * No args constructor for use in serialization
+         * 
+         */
+        public PullRequests() {
+        }
+
+        /**
+         * 
+         * @param nodes
+         */
+        public PullRequests(List<ListOpenPullRequestsResponse.Node> nodes) {
+            super();
+            this.nodes = nodes;
+        }
+
+        @JsonProperty("nodes")
+        public List<ListOpenPullRequestsResponse.Node> getNodes() {
+            return nodes;
+        }
+
+        @JsonProperty("nodes")
+        public void setNodes(List<ListOpenPullRequestsResponse.Node> nodes) {
+            this.nodes = nodes;
+        }
+
+        @JsonAnyGetter
+        public Map<String, Object> getAdditionalProperties() {
+            return this.additionalProperties;
+        }
+
+        @JsonAnySetter
+        public void setAdditionalProperty(String name, Object value) {
+            this.additionalProperties.put(name, value);
+        }
+
+        @Override
+        public String toString() {
+            StringBuilder sb = new StringBuilder();
+            sb.append(ListOpenPullRequestsResponse.PullRequests.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append("nodes");
+            sb.append('=');
+            sb.append(((this.nodes == null)?"<null>":this.nodes));
+            sb.append(',');
+            sb.append("additionalProperties");
+            sb.append('=');
+            sb.append(((this.additionalProperties == null)?"<null>":this.additionalProperties));
+            sb.append(',');
+            if (sb.charAt((sb.length()- 1)) == ',') {
+                sb.setCharAt((sb.length()- 1), ']');
+            } else {
+                sb.append(']');
+            }
+            return sb.toString();
+        }
+
+        @Override
+        public int hashCode() {
+            int result = 1;
+            result = ((result* 31)+((this.nodes == null)? 0 :this.nodes.hashCode()));
+            result = ((result* 31)+((this.additionalProperties == null)? 0 :this.additionalProperties.hashCode()));
+            return result;
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            if (other == this) {
+                return true;
+            }
+            if ((other instanceof ListOpenPullRequestsResponse.PullRequests) == false) {
+                return false;
+            }
+            ListOpenPullRequestsResponse.PullRequests rhs = ((ListOpenPullRequestsResponse.PullRequests) other);
+            return (((this.nodes == rhs.nodes)||((this.nodes!= null)&&this.nodes.equals(rhs.nodes)))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))));
+        }
+
+    }
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonPropertyOrder({
+        "name",
+        "pullRequests"
+    })
+    public static class Repository {
+
+        @JsonProperty("name")
+        private String name;
+        @JsonProperty("pullRequests")
+        private ListOpenPullRequestsResponse.PullRequests pullRequests;
+        @JsonIgnore
+        private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+        /**
+         * No args constructor for use in serialization
+         * 
+         */
+        public Repository() {
+        }
+
+        /**
+         * 
+         * @param name
+         * @param pullRequests
+         */
+        public Repository(String name, ListOpenPullRequestsResponse.PullRequests pullRequests) {
+            super();
+            this.name = name;
+            this.pullRequests = pullRequests;
+        }
+
+        @JsonProperty("name")
+        public String getName() {
+            return name;
+        }
+
+        @JsonProperty("name")
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        @JsonProperty("pullRequests")
+        public ListOpenPullRequestsResponse.PullRequests getPullRequests() {
+            return pullRequests;
+        }
+
+        @JsonProperty("pullRequests")
+        public void setPullRequests(ListOpenPullRequestsResponse.PullRequests pullRequests) {
+            this.pullRequests = pullRequests;
+        }
+
+        @JsonAnyGetter
+        public Map<String, Object> getAdditionalProperties() {
+            return this.additionalProperties;
+        }
+
+        @JsonAnySetter
+        public void setAdditionalProperty(String name, Object value) {
+            this.additionalProperties.put(name, value);
+        }
+
+        @Override
+        public String toString() {
+            StringBuilder sb = new StringBuilder();
+            sb.append(ListOpenPullRequestsResponse.Repository.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append("name");
+            sb.append('=');
+            sb.append(((this.name == null)?"<null>":this.name));
+            sb.append(',');
+            sb.append("pullRequests");
+            sb.append('=');
+            sb.append(((this.pullRequests == null)?"<null>":this.pullRequests));
+            sb.append(',');
+            sb.append("additionalProperties");
+            sb.append('=');
+            sb.append(((this.additionalProperties == null)?"<null>":this.additionalProperties));
+            sb.append(',');
+            if (sb.charAt((sb.length()- 1)) == ',') {
+                sb.setCharAt((sb.length()- 1), ']');
+            } else {
+                sb.append(']');
+            }
+            return sb.toString();
+        }
+
+        @Override
+        public int hashCode() {
+            int result = 1;
+            result = ((result* 31)+((this.name == null)? 0 :this.name.hashCode()));
+            result = ((result* 31)+((this.pullRequests == null)? 0 :this.pullRequests.hashCode()));
+            result = ((result* 31)+((this.additionalProperties == null)? 0 :this.additionalProperties.hashCode()));
+            return result;
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            if (other == this) {
+                return true;
+            }
+            if ((other instanceof ListOpenPullRequestsResponse.Repository) == false) {
+                return false;
+            }
+            ListOpenPullRequestsResponse.Repository rhs = ((ListOpenPullRequestsResponse.Repository) other);
+            return ((((this.name == rhs.name)||((this.name!= null)&&this.name.equals(rhs.name)))&&((this.pullRequests == rhs.pullRequests)||((this.pullRequests!= null)&&this.pullRequests.equals(rhs.pullRequests))))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))));
+        }
+
+    }
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonPropertyOrder({
+        "oid"
+    })
+    public static class Target {
+
+        @JsonProperty("oid")
+        private String oid;
+        @JsonIgnore
+        private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+        /**
+         * No args constructor for use in serialization
+         * 
+         */
+        public Target() {
+        }
+
+        /**
+         * 
+         * @param oid
+         */
+        public Target(String oid) {
+            super();
+            this.oid = oid;
+        }
+
+        @JsonProperty("oid")
+        public String getOid() {
+            return oid;
+        }
+
+        @JsonProperty("oid")
+        public void setOid(String oid) {
+            this.oid = oid;
+        }
+
+        @JsonAnyGetter
+        public Map<String, Object> getAdditionalProperties() {
+            return this.additionalProperties;
+        }
+
+        @JsonAnySetter
+        public void setAdditionalProperty(String name, Object value) {
+            this.additionalProperties.put(name, value);
+        }
+
+        @Override
+        public String toString() {
+            StringBuilder sb = new StringBuilder();
+            sb.append(ListOpenPullRequestsResponse.Target.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append("oid");
+            sb.append('=');
+            sb.append(((this.oid == null)?"<null>":this.oid));
+            sb.append(',');
+            sb.append("additionalProperties");
+            sb.append('=');
+            sb.append(((this.additionalProperties == null)?"<null>":this.additionalProperties));
+            sb.append(',');
+            if (sb.charAt((sb.length()- 1)) == ',') {
+                sb.setCharAt((sb.length()- 1), ']');
+            } else {
+                sb.append(']');
+            }
+            return sb.toString();
+        }
+
+        @Override
+        public int hashCode() {
+            int result = 1;
+            result = ((result* 31)+((this.oid == null)? 0 :this.oid.hashCode()));
+            result = ((result* 31)+((this.additionalProperties == null)? 0 :this.additionalProperties.hashCode()));
+            return result;
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            if (other == this) {
+                return true;
+            }
+            if ((other instanceof ListOpenPullRequestsResponse.Target) == false) {
+                return false;
+            }
+            ListOpenPullRequestsResponse.Target rhs = ((ListOpenPullRequestsResponse.Target) other);
+            return (((this.oid == rhs.oid)||((this.oid!= null)&&this.oid.equals(rhs.oid)))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))));
+        }
+
+    }
+
+}
