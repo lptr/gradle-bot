@@ -221,7 +221,7 @@ public class IssueCommentGitHubEvent implements GitHubEvent {
         @JsonProperty("issue_url")
         private String issueUrl;
         @JsonProperty("id")
-        private Integer id;
+        private Long id;
         @JsonProperty("node_id")
         private String nodeId;
         @JsonProperty("user")
@@ -257,7 +257,7 @@ public class IssueCommentGitHubEvent implements GitHubEvent {
          * @param url
          * @param updatedAt
          */
-        public Comment(String url, String htmlUrl, String issueUrl, Integer id, String nodeId, IssueCommentGitHubEvent.User user, String createdAt, String updatedAt, String authorAssociation, String body) {
+        public Comment(String url, String htmlUrl, String issueUrl, Long id, String nodeId, IssueCommentGitHubEvent.User user, String createdAt, String updatedAt, String authorAssociation, String body) {
             super();
             this.url = url;
             this.htmlUrl = htmlUrl;
@@ -302,12 +302,12 @@ public class IssueCommentGitHubEvent implements GitHubEvent {
         }
 
         @JsonProperty("id")
-        public Integer getId() {
+        public Long getId() {
             return id;
         }
 
         @JsonProperty("id")
-        public void setId(Integer id) {
+        public void setId(Long id) {
             this.id = id;
         }
 
@@ -510,11 +510,11 @@ public class IssueCommentGitHubEvent implements GitHubEvent {
         @JsonProperty("html_url")
         private String htmlUrl;
         @JsonProperty("id")
-        private Integer id;
+        private Long id;
         @JsonProperty("node_id")
         private String nodeId;
         @JsonProperty("number")
-        private Integer number;
+        private Long number;
         @JsonProperty("title")
         private String title;
         @JsonProperty("user")
@@ -532,7 +532,7 @@ public class IssueCommentGitHubEvent implements GitHubEvent {
         @JsonProperty("milestone")
         private Object milestone;
         @JsonProperty("comments")
-        private Integer comments;
+        private Long comments;
         @JsonProperty("created_at")
         private String createdAt;
         @JsonProperty("updated_at")
@@ -582,7 +582,7 @@ public class IssueCommentGitHubEvent implements GitHubEvent {
          * @param authorAssociation
          * @param updatedAt
          */
-        public Issue(String url, String repositoryUrl, String labelsUrl, String commentsUrl, String eventsUrl, String htmlUrl, Integer id, String nodeId, Integer number, String title, IssueCommentGitHubEvent.User user, List<IssueCommentGitHubEvent.Label> labels, String state, Boolean locked, Object assignee, List<Object> assignees, Object milestone, Integer comments, String createdAt, String updatedAt, String closedAt, String authorAssociation, IssueCommentGitHubEvent.PullRequest pullRequest, String body) {
+        public Issue(String url, String repositoryUrl, String labelsUrl, String commentsUrl, String eventsUrl, String htmlUrl, Long id, String nodeId, Long number, String title, IssueCommentGitHubEvent.User user, List<IssueCommentGitHubEvent.Label> labels, String state, Boolean locked, Object assignee, List<Object> assignees, Object milestone, Long comments, String createdAt, String updatedAt, String closedAt, String authorAssociation, IssueCommentGitHubEvent.PullRequest pullRequest, String body) {
             super();
             this.url = url;
             this.repositoryUrl = repositoryUrl;
@@ -671,12 +671,12 @@ public class IssueCommentGitHubEvent implements GitHubEvent {
         }
 
         @JsonProperty("id")
-        public Integer getId() {
+        public Long getId() {
             return id;
         }
 
         @JsonProperty("id")
-        public void setId(Integer id) {
+        public void setId(Long id) {
             this.id = id;
         }
 
@@ -691,12 +691,12 @@ public class IssueCommentGitHubEvent implements GitHubEvent {
         }
 
         @JsonProperty("number")
-        public Integer getNumber() {
+        public Long getNumber() {
             return number;
         }
 
         @JsonProperty("number")
-        public void setNumber(Integer number) {
+        public void setNumber(Long number) {
             this.number = number;
         }
 
@@ -781,12 +781,12 @@ public class IssueCommentGitHubEvent implements GitHubEvent {
         }
 
         @JsonProperty("comments")
-        public Integer getComments() {
+        public Long getComments() {
             return comments;
         }
 
         @JsonProperty("comments")
-        public void setComments(Integer comments) {
+        public void setComments(Long comments) {
             this.comments = comments;
         }
 
@@ -1030,7 +1030,7 @@ public class IssueCommentGitHubEvent implements GitHubEvent {
     public static class Label {
 
         @JsonProperty("id")
-        private Integer id;
+        private Long id;
         @JsonProperty("node_id")
         private String nodeId;
         @JsonProperty("url")
@@ -1063,7 +1063,7 @@ public class IssueCommentGitHubEvent implements GitHubEvent {
          * @param nodeId
          * @param url
          */
-        public Label(Integer id, String nodeId, String url, String name, String color, Boolean _default, Object description) {
+        public Label(Long id, String nodeId, String url, String name, String color, Boolean _default, Object description) {
             super();
             this.id = id;
             this.nodeId = nodeId;
@@ -1075,12 +1075,12 @@ public class IssueCommentGitHubEvent implements GitHubEvent {
         }
 
         @JsonProperty("id")
-        public Integer getId() {
+        public Long getId() {
             return id;
         }
 
         @JsonProperty("id")
-        public void setId(Integer id) {
+        public void setId(Long id) {
             this.id = id;
         }
 
@@ -1246,7 +1246,7 @@ public class IssueCommentGitHubEvent implements GitHubEvent {
         @JsonProperty("login")
         private String login;
         @JsonProperty("id")
-        private Integer id;
+        private Long id;
         @JsonProperty("node_id")
         private String nodeId;
         @JsonProperty("url")
@@ -1292,7 +1292,7 @@ public class IssueCommentGitHubEvent implements GitHubEvent {
          * @param url
          * @param hooksUrl
          */
-        public Organization(String login, Integer id, String nodeId, String url, String reposUrl, String eventsUrl, String hooksUrl, String issuesUrl, String membersUrl, String publicMembersUrl, String avatarUrl, String description) {
+        public Organization(String login, Long id, String nodeId, String url, String reposUrl, String eventsUrl, String hooksUrl, String issuesUrl, String membersUrl, String publicMembersUrl, String avatarUrl, String description) {
             super();
             this.login = login;
             this.id = id;
@@ -1319,12 +1319,12 @@ public class IssueCommentGitHubEvent implements GitHubEvent {
         }
 
         @JsonProperty("id")
-        public Integer getId() {
+        public Long getId() {
             return id;
         }
 
         @JsonProperty("id")
-        public void setId(Integer id) {
+        public void setId(Long id) {
             this.id = id;
         }
 
@@ -1561,7 +1561,7 @@ public class IssueCommentGitHubEvent implements GitHubEvent {
         @JsonProperty("login")
         private String login;
         @JsonProperty("id")
-        private Integer id;
+        private Long id;
         @JsonProperty("node_id")
         private String nodeId;
         @JsonProperty("avatar_url")
@@ -1625,7 +1625,7 @@ public class IssueCommentGitHubEvent implements GitHubEvent {
          * @param eventsUrl
          * @param nodeId
          */
-        public Owner(String login, Integer id, String nodeId, String avatarUrl, String gravatarId, String url, String htmlUrl, String followersUrl, String followingUrl, String gistsUrl, String starredUrl, String subscriptionsUrl, String organizationsUrl, String reposUrl, String eventsUrl, String receivedEventsUrl, String type, Boolean siteAdmin) {
+        public Owner(String login, Long id, String nodeId, String avatarUrl, String gravatarId, String url, String htmlUrl, String followersUrl, String followingUrl, String gistsUrl, String starredUrl, String subscriptionsUrl, String organizationsUrl, String reposUrl, String eventsUrl, String receivedEventsUrl, String type, Boolean siteAdmin) {
             super();
             this.login = login;
             this.id = id;
@@ -1658,12 +1658,12 @@ public class IssueCommentGitHubEvent implements GitHubEvent {
         }
 
         @JsonProperty("id")
-        public Integer getId() {
+        public Long getId() {
             return id;
         }
 
         @JsonProperty("id")
-        public void setId(Integer id) {
+        public void setId(Long id) {
             this.id = id;
         }
 
@@ -2192,7 +2192,7 @@ public class IssueCommentGitHubEvent implements GitHubEvent {
     public static class Repository {
 
         @JsonProperty("id")
-        private Integer id;
+        private Long id;
         @JsonProperty("node_id")
         private String nodeId;
         @JsonProperty("name")
@@ -2300,11 +2300,11 @@ public class IssueCommentGitHubEvent implements GitHubEvent {
         @JsonProperty("homepage")
         private Object homepage;
         @JsonProperty("size")
-        private Integer size;
+        private Long size;
         @JsonProperty("stargazers_count")
-        private Integer stargazersCount;
+        private Long stargazersCount;
         @JsonProperty("watchers_count")
-        private Integer watchersCount;
+        private Long watchersCount;
         @JsonProperty("language")
         private String language;
         @JsonProperty("has_issues")
@@ -2318,7 +2318,7 @@ public class IssueCommentGitHubEvent implements GitHubEvent {
         @JsonProperty("has_pages")
         private Boolean hasPages;
         @JsonProperty("forks_count")
-        private Integer forksCount;
+        private Long forksCount;
         @JsonProperty("mirror_url")
         private Object mirrorUrl;
         @JsonProperty("archived")
@@ -2326,15 +2326,15 @@ public class IssueCommentGitHubEvent implements GitHubEvent {
         @JsonProperty("disabled")
         private Boolean disabled;
         @JsonProperty("open_issues_count")
-        private Integer openIssuesCount;
+        private Long openIssuesCount;
         @JsonProperty("license")
         private Object license;
         @JsonProperty("forks")
-        private Integer forks;
+        private Long forks;
         @JsonProperty("open_issues")
-        private Integer openIssues;
+        private Long openIssues;
         @JsonProperty("watchers")
-        private Integer watchers;
+        private Long watchers;
         @JsonProperty("default_branch")
         private String defaultBranch;
         @JsonIgnore
@@ -2423,7 +2423,7 @@ public class IssueCommentGitHubEvent implements GitHubEvent {
          * @param subscriptionUrl
          * @param homepage
          */
-        public Repository(Integer id, String nodeId, String name, String fullName, Boolean _private, IssueCommentGitHubEvent.Owner owner, String htmlUrl, String description, Boolean fork, String url, String forksUrl, String keysUrl, String collaboratorsUrl, String teamsUrl, String hooksUrl, String issueEventsUrl, String eventsUrl, String assigneesUrl, String branchesUrl, String tagsUrl, String blobsUrl, String gitTagsUrl, String gitRefsUrl, String treesUrl, String statusesUrl, String languagesUrl, String stargazersUrl, String contributorsUrl, String subscribersUrl, String subscriptionUrl, String commitsUrl, String gitCommitsUrl, String commentsUrl, String issueCommentUrl, String contentsUrl, String compareUrl, String mergesUrl, String archiveUrl, String downloadsUrl, String issuesUrl, String pullsUrl, String milestonesUrl, String notificationsUrl, String labelsUrl, String releasesUrl, String deploymentsUrl, String createdAt, String updatedAt, String pushedAt, String gitUrl, String sshUrl, String cloneUrl, String svnUrl, Object homepage, Integer size, Integer stargazersCount, Integer watchersCount, String language, Boolean hasIssues, Boolean hasProjects, Boolean hasDownloads, Boolean hasWiki, Boolean hasPages, Integer forksCount, Object mirrorUrl, Boolean archived, Boolean disabled, Integer openIssuesCount, Object license, Integer forks, Integer openIssues, Integer watchers, String defaultBranch) {
+        public Repository(Long id, String nodeId, String name, String fullName, Boolean _private, IssueCommentGitHubEvent.Owner owner, String htmlUrl, String description, Boolean fork, String url, String forksUrl, String keysUrl, String collaboratorsUrl, String teamsUrl, String hooksUrl, String issueEventsUrl, String eventsUrl, String assigneesUrl, String branchesUrl, String tagsUrl, String blobsUrl, String gitTagsUrl, String gitRefsUrl, String treesUrl, String statusesUrl, String languagesUrl, String stargazersUrl, String contributorsUrl, String subscribersUrl, String subscriptionUrl, String commitsUrl, String gitCommitsUrl, String commentsUrl, String issueCommentUrl, String contentsUrl, String compareUrl, String mergesUrl, String archiveUrl, String downloadsUrl, String issuesUrl, String pullsUrl, String milestonesUrl, String notificationsUrl, String labelsUrl, String releasesUrl, String deploymentsUrl, String createdAt, String updatedAt, String pushedAt, String gitUrl, String sshUrl, String cloneUrl, String svnUrl, Object homepage, Long size, Long stargazersCount, Long watchersCount, String language, Boolean hasIssues, Boolean hasProjects, Boolean hasDownloads, Boolean hasWiki, Boolean hasPages, Long forksCount, Object mirrorUrl, Boolean archived, Boolean disabled, Long openIssuesCount, Object license, Long forks, Long openIssues, Long watchers, String defaultBranch) {
             super();
             this.id = id;
             this.nodeId = nodeId;
@@ -2501,12 +2501,12 @@ public class IssueCommentGitHubEvent implements GitHubEvent {
         }
 
         @JsonProperty("id")
-        public Integer getId() {
+        public Long getId() {
             return id;
         }
 
         @JsonProperty("id")
-        public void setId(Integer id) {
+        public void setId(Long id) {
             this.id = id;
         }
 
@@ -3041,32 +3041,32 @@ public class IssueCommentGitHubEvent implements GitHubEvent {
         }
 
         @JsonProperty("size")
-        public Integer getSize() {
+        public Long getSize() {
             return size;
         }
 
         @JsonProperty("size")
-        public void setSize(Integer size) {
+        public void setSize(Long size) {
             this.size = size;
         }
 
         @JsonProperty("stargazers_count")
-        public Integer getStargazersCount() {
+        public Long getStargazersCount() {
             return stargazersCount;
         }
 
         @JsonProperty("stargazers_count")
-        public void setStargazersCount(Integer stargazersCount) {
+        public void setStargazersCount(Long stargazersCount) {
             this.stargazersCount = stargazersCount;
         }
 
         @JsonProperty("watchers_count")
-        public Integer getWatchersCount() {
+        public Long getWatchersCount() {
             return watchersCount;
         }
 
         @JsonProperty("watchers_count")
-        public void setWatchersCount(Integer watchersCount) {
+        public void setWatchersCount(Long watchersCount) {
             this.watchersCount = watchersCount;
         }
 
@@ -3131,12 +3131,12 @@ public class IssueCommentGitHubEvent implements GitHubEvent {
         }
 
         @JsonProperty("forks_count")
-        public Integer getForksCount() {
+        public Long getForksCount() {
             return forksCount;
         }
 
         @JsonProperty("forks_count")
-        public void setForksCount(Integer forksCount) {
+        public void setForksCount(Long forksCount) {
             this.forksCount = forksCount;
         }
 
@@ -3171,12 +3171,12 @@ public class IssueCommentGitHubEvent implements GitHubEvent {
         }
 
         @JsonProperty("open_issues_count")
-        public Integer getOpenIssuesCount() {
+        public Long getOpenIssuesCount() {
             return openIssuesCount;
         }
 
         @JsonProperty("open_issues_count")
-        public void setOpenIssuesCount(Integer openIssuesCount) {
+        public void setOpenIssuesCount(Long openIssuesCount) {
             this.openIssuesCount = openIssuesCount;
         }
 
@@ -3191,32 +3191,32 @@ public class IssueCommentGitHubEvent implements GitHubEvent {
         }
 
         @JsonProperty("forks")
-        public Integer getForks() {
+        public Long getForks() {
             return forks;
         }
 
         @JsonProperty("forks")
-        public void setForks(Integer forks) {
+        public void setForks(Long forks) {
             this.forks = forks;
         }
 
         @JsonProperty("open_issues")
-        public Integer getOpenIssues() {
+        public Long getOpenIssues() {
             return openIssues;
         }
 
         @JsonProperty("open_issues")
-        public void setOpenIssues(Integer openIssues) {
+        public void setOpenIssues(Long openIssues) {
             this.openIssues = openIssues;
         }
 
         @JsonProperty("watchers")
-        public Integer getWatchers() {
+        public Long getWatchers() {
             return watchers;
         }
 
         @JsonProperty("watchers")
-        public void setWatchers(Integer watchers) {
+        public void setWatchers(Long watchers) {
             this.watchers = watchers;
         }
 
@@ -3668,7 +3668,7 @@ public class IssueCommentGitHubEvent implements GitHubEvent {
         @JsonProperty("login")
         private String login;
         @JsonProperty("id")
-        private Integer id;
+        private Long id;
         @JsonProperty("node_id")
         private String nodeId;
         @JsonProperty("avatar_url")
@@ -3732,7 +3732,7 @@ public class IssueCommentGitHubEvent implements GitHubEvent {
          * @param eventsUrl
          * @param nodeId
          */
-        public Sender(String login, Integer id, String nodeId, String avatarUrl, String gravatarId, String url, String htmlUrl, String followersUrl, String followingUrl, String gistsUrl, String starredUrl, String subscriptionsUrl, String organizationsUrl, String reposUrl, String eventsUrl, String receivedEventsUrl, String type, Boolean siteAdmin) {
+        public Sender(String login, Long id, String nodeId, String avatarUrl, String gravatarId, String url, String htmlUrl, String followersUrl, String followingUrl, String gistsUrl, String starredUrl, String subscriptionsUrl, String organizationsUrl, String reposUrl, String eventsUrl, String receivedEventsUrl, String type, Boolean siteAdmin) {
             super();
             this.login = login;
             this.id = id;
@@ -3765,12 +3765,12 @@ public class IssueCommentGitHubEvent implements GitHubEvent {
         }
 
         @JsonProperty("id")
-        public Integer getId() {
+        public Long getId() {
             return id;
         }
 
         @JsonProperty("id")
-        public void setId(Integer id) {
+        public void setId(Long id) {
             this.id = id;
         }
 
@@ -4097,7 +4097,7 @@ public class IssueCommentGitHubEvent implements GitHubEvent {
         @JsonProperty("login")
         private String login;
         @JsonProperty("id")
-        private Integer id;
+        private Long id;
         @JsonProperty("node_id")
         private String nodeId;
         @JsonProperty("avatar_url")
@@ -4161,7 +4161,7 @@ public class IssueCommentGitHubEvent implements GitHubEvent {
          * @param eventsUrl
          * @param nodeId
          */
-        public User(String login, Integer id, String nodeId, String avatarUrl, String gravatarId, String url, String htmlUrl, String followersUrl, String followingUrl, String gistsUrl, String starredUrl, String subscriptionsUrl, String organizationsUrl, String reposUrl, String eventsUrl, String receivedEventsUrl, String type, Boolean siteAdmin) {
+        public User(String login, Long id, String nodeId, String avatarUrl, String gravatarId, String url, String htmlUrl, String followersUrl, String followingUrl, String gistsUrl, String starredUrl, String subscriptionsUrl, String organizationsUrl, String reposUrl, String eventsUrl, String receivedEventsUrl, String type, Boolean siteAdmin) {
             super();
             this.login = login;
             this.id = id;
@@ -4194,12 +4194,12 @@ public class IssueCommentGitHubEvent implements GitHubEvent {
         }
 
         @JsonProperty("id")
-        public Integer getId() {
+        public Long getId() {
             return id;
         }
 
         @JsonProperty("id")
-        public void setId(Integer id) {
+        public void setId(Long id) {
             this.id = id;
         }
 

@@ -56,7 +56,7 @@ query {
 }
 
  */
-fun pullRequestsWithCommentsQuery(owner: String, name: String, number: Int, maxCommentNum: Int = 100) = """
+fun pullRequestsWithCommentsQuery(owner: String, name: String, number: Long, maxCommentNum: Int = 100) = """
 query {
   repository(owner: "$owner", name: "$name") {
     nameWithOwner

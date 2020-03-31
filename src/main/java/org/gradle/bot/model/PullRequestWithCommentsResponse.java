@@ -594,7 +594,7 @@ public class PullRequestWithCommentsResponse {
     public static class Node {
 
         @JsonProperty("databaseId")
-        private Integer databaseId;
+        private Long databaseId;
         @JsonProperty("author")
         private PullRequestWithCommentsResponse.Author author;
         @JsonProperty("authorAssociation")
@@ -618,7 +618,7 @@ public class PullRequestWithCommentsResponse {
          * @param body
          * @param authorAssociation
          */
-        public Node(Integer databaseId, PullRequestWithCommentsResponse.Author author, String authorAssociation, String body) {
+        public Node(Long databaseId, PullRequestWithCommentsResponse.Author author, String authorAssociation, String body) {
             super();
             this.databaseId = databaseId;
             this.author = author;
@@ -627,12 +627,12 @@ public class PullRequestWithCommentsResponse {
         }
 
         @JsonProperty("databaseId")
-        public Integer getDatabaseId() {
+        public Long getDatabaseId() {
             return databaseId;
         }
 
         @JsonProperty("databaseId")
-        public void setDatabaseId(Integer databaseId) {
+        public void setDatabaseId(Long databaseId) {
             this.databaseId = databaseId;
         }
 

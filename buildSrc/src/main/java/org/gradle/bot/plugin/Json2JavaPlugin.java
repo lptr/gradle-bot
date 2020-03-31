@@ -81,6 +81,11 @@ public class Json2JavaPlugin implements Plugin<Project> {
                 }
 
                 @Override
+                public boolean isUseLongIntegers() {
+                    return true;
+                }
+
+                @Override
                 public Iterator<URL> getSource() {
                     try {
                         return Arrays.asList(srcJson.toURI().toURL()).iterator();

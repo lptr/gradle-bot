@@ -22,7 +22,7 @@ class PullRequestContext(private val gitHubClient: GitHubClient,
     val subjectId: String = pullRequestWithCommentsResponse.data.repository.pullRequest.id
     val headRefSha: String = pullRequestWithCommentsResponse.data.repository.pullRequest.headRef.target.oid
 
-    fun processCommand(commentId: Int) {
+    fun processCommand(commentId: Long) {
         val targetComment = comments.find { it.id == commentId }
         if (targetComment == null) {
             logger.warn("Comment with id {} not found, skip.", commentId)
@@ -81,7 +81,7 @@ Sorry I don't understand what you said, please type `@${gitHubClient.whoAmI()} h
 }
 
 data class CommentMetadata(
-        @JsonProperty("replyTargetCommentId") val replyTargetCommentId: Int?,
+        @JsonProperty("replyTargetCommentId") val replyTargetCommentId: Long?,
         @JsonProperty("teamCityBuildId") val teamCityBuildId: String?,
         @JsonProperty("teamCityBuildHeadRef") val teamCityBuildHeadRef: String?
 ) {
@@ -109,7 +109,7 @@ interface PullRequestComment {
     /**
      * The global database id of the comment
      */
-    val id: Int
+    val id: Long
 
     /**
      * The comment body
@@ -129,7 +129,7 @@ interface PullRequestComment {
 }
 
 
-class CommandComment(override val id: Int, override val body: String, override val metadata: CommentMetadata, val isAdmin: Boolean) : PullRequestComment {
+class CommandComment(override val id: Long, override val body: String, override val metadata: CommentMetadata, val isAdmin: Boolean) : PullRequestComment {
     override val command by lazy {
         parseCommand(body)
     }
@@ -150,11 +150,11 @@ class CommandComment(override val id: Int, override val body: String, override v
     }
 }
 
-class UnrelatedComment(override val id: Int, override val body: String, override val metadata: CommentMetadata) : PullRequestComment
+class UnrelatedComment(override val id: Long, override val body: String, override val metadata: CommentMetadata) : PullRequestComment
 
-class BotReplyCommandComment(override val id: Int, override val body: String, override val metadata: CommentMetadata) : PullRequestComment
+class BotReplyCommandComment(override val id: Long, override val body: String, override val metadata: CommentMetadata) : PullRequestComment
 
-class BotNotificationComment(override val id: Int, override val body: String, override val metadata: CommentMetadata) : PullRequestComment
+class BotNotificationComment(override val id: Long, override val body: String, override val metadata: CommentMetadata) : PullRequestComment
 
 fun PullRequestWithCommentsResponse.getComments(botName: String): List<PullRequestComment> {
     return data.repository.pullRequest.comments.nodes

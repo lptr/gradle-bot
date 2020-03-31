@@ -26,7 +26,7 @@ public class PullRequestGitHubEvent implements GitHubEvent {
     @JsonProperty("action")
     private String action;
     @JsonProperty("number")
-    private Integer number;
+    private Long number;
     @JsonProperty("pull_request")
     private PullRequestGitHubEvent.PullRequest pullRequest;
     @JsonProperty("repository")
@@ -54,7 +54,7 @@ public class PullRequestGitHubEvent implements GitHubEvent {
      * @param repository
      * @param pullRequest
      */
-    public PullRequestGitHubEvent(String action, Integer number, PullRequestGitHubEvent.PullRequest pullRequest, PullRequestGitHubEvent.Repository repository, PullRequestGitHubEvent.Organization organization, PullRequestGitHubEvent.Sender sender) {
+    public PullRequestGitHubEvent(String action, Long number, PullRequestGitHubEvent.PullRequest pullRequest, PullRequestGitHubEvent.Repository repository, PullRequestGitHubEvent.Organization organization, PullRequestGitHubEvent.Sender sender) {
         super();
         this.action = action;
         this.number = number;
@@ -75,12 +75,12 @@ public class PullRequestGitHubEvent implements GitHubEvent {
     }
 
     @JsonProperty("number")
-    public Integer getNumber() {
+    public Long getNumber() {
         return number;
     }
 
     @JsonProperty("number")
-    public void setNumber(Integer number) {
+    public void setNumber(Long number) {
         this.number = number;
     }
 
@@ -906,7 +906,7 @@ public class PullRequestGitHubEvent implements GitHubEvent {
     public static class Label {
 
         @JsonProperty("id")
-        private Integer id;
+        private Long id;
         @JsonProperty("node_id")
         private String nodeId;
         @JsonProperty("url")
@@ -939,7 +939,7 @@ public class PullRequestGitHubEvent implements GitHubEvent {
          * @param nodeId
          * @param url
          */
-        public Label(Integer id, String nodeId, String url, String name, String color, Boolean _default, Object description) {
+        public Label(Long id, String nodeId, String url, String name, String color, Boolean _default, Object description) {
             super();
             this.id = id;
             this.nodeId = nodeId;
@@ -951,12 +951,12 @@ public class PullRequestGitHubEvent implements GitHubEvent {
         }
 
         @JsonProperty("id")
-        public Integer getId() {
+        public Long getId() {
             return id;
         }
 
         @JsonProperty("id")
-        public void setId(Integer id) {
+        public void setId(Long id) {
             this.id = id;
         }
 
@@ -1357,7 +1357,7 @@ public class PullRequestGitHubEvent implements GitHubEvent {
         @JsonProperty("login")
         private String login;
         @JsonProperty("id")
-        private Integer id;
+        private Long id;
         @JsonProperty("node_id")
         private String nodeId;
         @JsonProperty("avatar_url")
@@ -1421,7 +1421,7 @@ public class PullRequestGitHubEvent implements GitHubEvent {
          * @param eventsUrl
          * @param nodeId
          */
-        public MergedBy(String login, Integer id, String nodeId, String avatarUrl, String gravatarId, String url, String htmlUrl, String followersUrl, String followingUrl, String gistsUrl, String starredUrl, String subscriptionsUrl, String organizationsUrl, String reposUrl, String eventsUrl, String receivedEventsUrl, String type, Boolean siteAdmin) {
+        public MergedBy(String login, Long id, String nodeId, String avatarUrl, String gravatarId, String url, String htmlUrl, String followersUrl, String followingUrl, String gistsUrl, String starredUrl, String subscriptionsUrl, String organizationsUrl, String reposUrl, String eventsUrl, String receivedEventsUrl, String type, Boolean siteAdmin) {
             super();
             this.login = login;
             this.id = id;
@@ -1454,12 +1454,12 @@ public class PullRequestGitHubEvent implements GitHubEvent {
         }
 
         @JsonProperty("id")
-        public Integer getId() {
+        public Long getId() {
             return id;
         }
 
         @JsonProperty("id")
-        public void setId(Integer id) {
+        public void setId(Long id) {
             this.id = id;
         }
 
@@ -1780,7 +1780,7 @@ public class PullRequestGitHubEvent implements GitHubEvent {
         @JsonProperty("login")
         private String login;
         @JsonProperty("id")
-        private Integer id;
+        private Long id;
         @JsonProperty("node_id")
         private String nodeId;
         @JsonProperty("url")
@@ -1826,7 +1826,7 @@ public class PullRequestGitHubEvent implements GitHubEvent {
          * @param url
          * @param hooksUrl
          */
-        public Organization(String login, Integer id, String nodeId, String url, String reposUrl, String eventsUrl, String hooksUrl, String issuesUrl, String membersUrl, String publicMembersUrl, String avatarUrl, String description) {
+        public Organization(String login, Long id, String nodeId, String url, String reposUrl, String eventsUrl, String hooksUrl, String issuesUrl, String membersUrl, String publicMembersUrl, String avatarUrl, String description) {
             super();
             this.login = login;
             this.id = id;
@@ -1853,12 +1853,12 @@ public class PullRequestGitHubEvent implements GitHubEvent {
         }
 
         @JsonProperty("id")
-        public Integer getId() {
+        public Long getId() {
             return id;
         }
 
         @JsonProperty("id")
-        public void setId(Integer id) {
+        public void setId(Long id) {
             this.id = id;
         }
 
@@ -2095,7 +2095,7 @@ public class PullRequestGitHubEvent implements GitHubEvent {
         @JsonProperty("login")
         private String login;
         @JsonProperty("id")
-        private Integer id;
+        private Long id;
         @JsonProperty("node_id")
         private String nodeId;
         @JsonProperty("avatar_url")
@@ -2159,7 +2159,7 @@ public class PullRequestGitHubEvent implements GitHubEvent {
          * @param eventsUrl
          * @param nodeId
          */
-        public Owner(String login, Integer id, String nodeId, String avatarUrl, String gravatarId, String url, String htmlUrl, String followersUrl, String followingUrl, String gistsUrl, String starredUrl, String subscriptionsUrl, String organizationsUrl, String reposUrl, String eventsUrl, String receivedEventsUrl, String type, Boolean siteAdmin) {
+        public Owner(String login, Long id, String nodeId, String avatarUrl, String gravatarId, String url, String htmlUrl, String followersUrl, String followingUrl, String gistsUrl, String starredUrl, String subscriptionsUrl, String organizationsUrl, String reposUrl, String eventsUrl, String receivedEventsUrl, String type, Boolean siteAdmin) {
             super();
             this.login = login;
             this.id = id;
@@ -2192,12 +2192,12 @@ public class PullRequestGitHubEvent implements GitHubEvent {
         }
 
         @JsonProperty("id")
-        public Integer getId() {
+        public Long getId() {
             return id;
         }
 
         @JsonProperty("id")
-        public void setId(Integer id) {
+        public void setId(Long id) {
             this.id = id;
         }
 
@@ -2552,7 +2552,7 @@ public class PullRequestGitHubEvent implements GitHubEvent {
         @JsonProperty("url")
         private String url;
         @JsonProperty("id")
-        private Integer id;
+        private Long id;
         @JsonProperty("node_id")
         private String nodeId;
         @JsonProperty("html_url")
@@ -2564,7 +2564,7 @@ public class PullRequestGitHubEvent implements GitHubEvent {
         @JsonProperty("issue_url")
         private String issueUrl;
         @JsonProperty("number")
-        private Integer number;
+        private Long number;
         @JsonProperty("state")
         private String state;
         @JsonProperty("locked")
@@ -2628,19 +2628,19 @@ public class PullRequestGitHubEvent implements GitHubEvent {
         @JsonProperty("merged_by")
         private PullRequestGitHubEvent.MergedBy mergedBy;
         @JsonProperty("comments")
-        private Integer comments;
+        private Long comments;
         @JsonProperty("review_comments")
-        private Integer reviewComments;
+        private Long reviewComments;
         @JsonProperty("maintainer_can_modify")
         private Boolean maintainerCanModify;
         @JsonProperty("commits")
-        private Integer commits;
+        private Long commits;
         @JsonProperty("additions")
-        private Integer additions;
+        private Long additions;
         @JsonProperty("deletions")
-        private Integer deletions;
+        private Long deletions;
         @JsonProperty("changed_files")
-        private Integer changedFiles;
+        private Long changedFiles;
         @JsonIgnore
         private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -2700,7 +2700,7 @@ public class PullRequestGitHubEvent implements GitHubEvent {
          * @param user
          * @param base
          */
-        public PullRequest(String url, Integer id, String nodeId, String htmlUrl, String diffUrl, String patchUrl, String issueUrl, Integer number, String state, Boolean locked, String title, PullRequestGitHubEvent.User user, String body, String createdAt, String updatedAt, String closedAt, String mergedAt, String mergeCommitSha, Object assignee, List<Object> assignees, List<Object> requestedReviewers, List<Object> requestedTeams, List<PullRequestGitHubEvent.Label> labels, Object milestone, Boolean draft, String commitsUrl, String reviewCommentsUrl, String reviewCommentUrl, String commentsUrl, String statusesUrl, PullRequestGitHubEvent.Head head, PullRequestGitHubEvent.Base base, PullRequestGitHubEvent.Links links, String authorAssociation, Boolean merged, Object mergeable, Object rebaseable, String mergeableState, PullRequestGitHubEvent.MergedBy mergedBy, Integer comments, Integer reviewComments, Boolean maintainerCanModify, Integer commits, Integer additions, Integer deletions, Integer changedFiles) {
+        public PullRequest(String url, Long id, String nodeId, String htmlUrl, String diffUrl, String patchUrl, String issueUrl, Long number, String state, Boolean locked, String title, PullRequestGitHubEvent.User user, String body, String createdAt, String updatedAt, String closedAt, String mergedAt, String mergeCommitSha, Object assignee, List<Object> assignees, List<Object> requestedReviewers, List<Object> requestedTeams, List<PullRequestGitHubEvent.Label> labels, Object milestone, Boolean draft, String commitsUrl, String reviewCommentsUrl, String reviewCommentUrl, String commentsUrl, String statusesUrl, PullRequestGitHubEvent.Head head, PullRequestGitHubEvent.Base base, PullRequestGitHubEvent.Links links, String authorAssociation, Boolean merged, Object mergeable, Object rebaseable, String mergeableState, PullRequestGitHubEvent.MergedBy mergedBy, Long comments, Long reviewComments, Boolean maintainerCanModify, Long commits, Long additions, Long deletions, Long changedFiles) {
             super();
             this.url = url;
             this.id = id;
@@ -2761,12 +2761,12 @@ public class PullRequestGitHubEvent implements GitHubEvent {
         }
 
         @JsonProperty("id")
-        public Integer getId() {
+        public Long getId() {
             return id;
         }
 
         @JsonProperty("id")
-        public void setId(Integer id) {
+        public void setId(Long id) {
             this.id = id;
         }
 
@@ -2821,12 +2821,12 @@ public class PullRequestGitHubEvent implements GitHubEvent {
         }
 
         @JsonProperty("number")
-        public Integer getNumber() {
+        public Long getNumber() {
             return number;
         }
 
         @JsonProperty("number")
-        public void setNumber(Integer number) {
+        public void setNumber(Long number) {
             this.number = number;
         }
 
@@ -3141,22 +3141,22 @@ public class PullRequestGitHubEvent implements GitHubEvent {
         }
 
         @JsonProperty("comments")
-        public Integer getComments() {
+        public Long getComments() {
             return comments;
         }
 
         @JsonProperty("comments")
-        public void setComments(Integer comments) {
+        public void setComments(Long comments) {
             this.comments = comments;
         }
 
         @JsonProperty("review_comments")
-        public Integer getReviewComments() {
+        public Long getReviewComments() {
             return reviewComments;
         }
 
         @JsonProperty("review_comments")
-        public void setReviewComments(Integer reviewComments) {
+        public void setReviewComments(Long reviewComments) {
             this.reviewComments = reviewComments;
         }
 
@@ -3171,42 +3171,42 @@ public class PullRequestGitHubEvent implements GitHubEvent {
         }
 
         @JsonProperty("commits")
-        public Integer getCommits() {
+        public Long getCommits() {
             return commits;
         }
 
         @JsonProperty("commits")
-        public void setCommits(Integer commits) {
+        public void setCommits(Long commits) {
             this.commits = commits;
         }
 
         @JsonProperty("additions")
-        public Integer getAdditions() {
+        public Long getAdditions() {
             return additions;
         }
 
         @JsonProperty("additions")
-        public void setAdditions(Integer additions) {
+        public void setAdditions(Long additions) {
             this.additions = additions;
         }
 
         @JsonProperty("deletions")
-        public Integer getDeletions() {
+        public Long getDeletions() {
             return deletions;
         }
 
         @JsonProperty("deletions")
-        public void setDeletions(Integer deletions) {
+        public void setDeletions(Long deletions) {
             this.deletions = deletions;
         }
 
         @JsonProperty("changed_files")
-        public Integer getChangedFiles() {
+        public Long getChangedFiles() {
             return changedFiles;
         }
 
         @JsonProperty("changed_files")
-        public void setChangedFiles(Integer changedFiles) {
+        public void setChangedFiles(Long changedFiles) {
             this.changedFiles = changedFiles;
         }
 
@@ -3566,7 +3566,7 @@ public class PullRequestGitHubEvent implements GitHubEvent {
     public static class Repo {
 
         @JsonProperty("id")
-        private Integer id;
+        private Long id;
         @JsonProperty("node_id")
         private String nodeId;
         @JsonProperty("name")
@@ -3674,11 +3674,11 @@ public class PullRequestGitHubEvent implements GitHubEvent {
         @JsonProperty("homepage")
         private Object homepage;
         @JsonProperty("size")
-        private Integer size;
+        private Long size;
         @JsonProperty("stargazers_count")
-        private Integer stargazersCount;
+        private Long stargazersCount;
         @JsonProperty("watchers_count")
-        private Integer watchersCount;
+        private Long watchersCount;
         @JsonProperty("language")
         private String language;
         @JsonProperty("has_issues")
@@ -3692,7 +3692,7 @@ public class PullRequestGitHubEvent implements GitHubEvent {
         @JsonProperty("has_pages")
         private Boolean hasPages;
         @JsonProperty("forks_count")
-        private Integer forksCount;
+        private Long forksCount;
         @JsonProperty("mirror_url")
         private Object mirrorUrl;
         @JsonProperty("archived")
@@ -3700,15 +3700,15 @@ public class PullRequestGitHubEvent implements GitHubEvent {
         @JsonProperty("disabled")
         private Boolean disabled;
         @JsonProperty("open_issues_count")
-        private Integer openIssuesCount;
+        private Long openIssuesCount;
         @JsonProperty("license")
         private Object license;
         @JsonProperty("forks")
-        private Integer forks;
+        private Long forks;
         @JsonProperty("open_issues")
-        private Integer openIssues;
+        private Long openIssues;
         @JsonProperty("watchers")
-        private Integer watchers;
+        private Long watchers;
         @JsonProperty("default_branch")
         private String defaultBranch;
         @JsonIgnore
@@ -3797,7 +3797,7 @@ public class PullRequestGitHubEvent implements GitHubEvent {
          * @param subscriptionUrl
          * @param homepage
          */
-        public Repo(Integer id, String nodeId, String name, String fullName, Boolean _private, PullRequestGitHubEvent.Owner owner, String htmlUrl, String description, Boolean fork, String url, String forksUrl, String keysUrl, String collaboratorsUrl, String teamsUrl, String hooksUrl, String issueEventsUrl, String eventsUrl, String assigneesUrl, String branchesUrl, String tagsUrl, String blobsUrl, String gitTagsUrl, String gitRefsUrl, String treesUrl, String statusesUrl, String languagesUrl, String stargazersUrl, String contributorsUrl, String subscribersUrl, String subscriptionUrl, String commitsUrl, String gitCommitsUrl, String commentsUrl, String issueCommentUrl, String contentsUrl, String compareUrl, String mergesUrl, String archiveUrl, String downloadsUrl, String issuesUrl, String pullsUrl, String milestonesUrl, String notificationsUrl, String labelsUrl, String releasesUrl, String deploymentsUrl, String createdAt, String updatedAt, String pushedAt, String gitUrl, String sshUrl, String cloneUrl, String svnUrl, Object homepage, Integer size, Integer stargazersCount, Integer watchersCount, String language, Boolean hasIssues, Boolean hasProjects, Boolean hasDownloads, Boolean hasWiki, Boolean hasPages, Integer forksCount, Object mirrorUrl, Boolean archived, Boolean disabled, Integer openIssuesCount, Object license, Integer forks, Integer openIssues, Integer watchers, String defaultBranch) {
+        public Repo(Long id, String nodeId, String name, String fullName, Boolean _private, PullRequestGitHubEvent.Owner owner, String htmlUrl, String description, Boolean fork, String url, String forksUrl, String keysUrl, String collaboratorsUrl, String teamsUrl, String hooksUrl, String issueEventsUrl, String eventsUrl, String assigneesUrl, String branchesUrl, String tagsUrl, String blobsUrl, String gitTagsUrl, String gitRefsUrl, String treesUrl, String statusesUrl, String languagesUrl, String stargazersUrl, String contributorsUrl, String subscribersUrl, String subscriptionUrl, String commitsUrl, String gitCommitsUrl, String commentsUrl, String issueCommentUrl, String contentsUrl, String compareUrl, String mergesUrl, String archiveUrl, String downloadsUrl, String issuesUrl, String pullsUrl, String milestonesUrl, String notificationsUrl, String labelsUrl, String releasesUrl, String deploymentsUrl, String createdAt, String updatedAt, String pushedAt, String gitUrl, String sshUrl, String cloneUrl, String svnUrl, Object homepage, Long size, Long stargazersCount, Long watchersCount, String language, Boolean hasIssues, Boolean hasProjects, Boolean hasDownloads, Boolean hasWiki, Boolean hasPages, Long forksCount, Object mirrorUrl, Boolean archived, Boolean disabled, Long openIssuesCount, Object license, Long forks, Long openIssues, Long watchers, String defaultBranch) {
             super();
             this.id = id;
             this.nodeId = nodeId;
@@ -3875,12 +3875,12 @@ public class PullRequestGitHubEvent implements GitHubEvent {
         }
 
         @JsonProperty("id")
-        public Integer getId() {
+        public Long getId() {
             return id;
         }
 
         @JsonProperty("id")
-        public void setId(Integer id) {
+        public void setId(Long id) {
             this.id = id;
         }
 
@@ -4415,32 +4415,32 @@ public class PullRequestGitHubEvent implements GitHubEvent {
         }
 
         @JsonProperty("size")
-        public Integer getSize() {
+        public Long getSize() {
             return size;
         }
 
         @JsonProperty("size")
-        public void setSize(Integer size) {
+        public void setSize(Long size) {
             this.size = size;
         }
 
         @JsonProperty("stargazers_count")
-        public Integer getStargazersCount() {
+        public Long getStargazersCount() {
             return stargazersCount;
         }
 
         @JsonProperty("stargazers_count")
-        public void setStargazersCount(Integer stargazersCount) {
+        public void setStargazersCount(Long stargazersCount) {
             this.stargazersCount = stargazersCount;
         }
 
         @JsonProperty("watchers_count")
-        public Integer getWatchersCount() {
+        public Long getWatchersCount() {
             return watchersCount;
         }
 
         @JsonProperty("watchers_count")
-        public void setWatchersCount(Integer watchersCount) {
+        public void setWatchersCount(Long watchersCount) {
             this.watchersCount = watchersCount;
         }
 
@@ -4505,12 +4505,12 @@ public class PullRequestGitHubEvent implements GitHubEvent {
         }
 
         @JsonProperty("forks_count")
-        public Integer getForksCount() {
+        public Long getForksCount() {
             return forksCount;
         }
 
         @JsonProperty("forks_count")
-        public void setForksCount(Integer forksCount) {
+        public void setForksCount(Long forksCount) {
             this.forksCount = forksCount;
         }
 
@@ -4545,12 +4545,12 @@ public class PullRequestGitHubEvent implements GitHubEvent {
         }
 
         @JsonProperty("open_issues_count")
-        public Integer getOpenIssuesCount() {
+        public Long getOpenIssuesCount() {
             return openIssuesCount;
         }
 
         @JsonProperty("open_issues_count")
-        public void setOpenIssuesCount(Integer openIssuesCount) {
+        public void setOpenIssuesCount(Long openIssuesCount) {
             this.openIssuesCount = openIssuesCount;
         }
 
@@ -4565,32 +4565,32 @@ public class PullRequestGitHubEvent implements GitHubEvent {
         }
 
         @JsonProperty("forks")
-        public Integer getForks() {
+        public Long getForks() {
             return forks;
         }
 
         @JsonProperty("forks")
-        public void setForks(Integer forks) {
+        public void setForks(Long forks) {
             this.forks = forks;
         }
 
         @JsonProperty("open_issues")
-        public Integer getOpenIssues() {
+        public Long getOpenIssues() {
             return openIssues;
         }
 
         @JsonProperty("open_issues")
-        public void setOpenIssues(Integer openIssues) {
+        public void setOpenIssues(Long openIssues) {
             this.openIssues = openIssues;
         }
 
         @JsonProperty("watchers")
-        public Integer getWatchers() {
+        public Long getWatchers() {
             return watchers;
         }
 
         @JsonProperty("watchers")
-        public void setWatchers(Integer watchers) {
+        public void setWatchers(Long watchers) {
             this.watchers = watchers;
         }
 
@@ -5095,7 +5095,7 @@ public class PullRequestGitHubEvent implements GitHubEvent {
     public static class Repository {
 
         @JsonProperty("id")
-        private Integer id;
+        private Long id;
         @JsonProperty("node_id")
         private String nodeId;
         @JsonProperty("name")
@@ -5203,11 +5203,11 @@ public class PullRequestGitHubEvent implements GitHubEvent {
         @JsonProperty("homepage")
         private Object homepage;
         @JsonProperty("size")
-        private Integer size;
+        private Long size;
         @JsonProperty("stargazers_count")
-        private Integer stargazersCount;
+        private Long stargazersCount;
         @JsonProperty("watchers_count")
-        private Integer watchersCount;
+        private Long watchersCount;
         @JsonProperty("language")
         private String language;
         @JsonProperty("has_issues")
@@ -5221,7 +5221,7 @@ public class PullRequestGitHubEvent implements GitHubEvent {
         @JsonProperty("has_pages")
         private Boolean hasPages;
         @JsonProperty("forks_count")
-        private Integer forksCount;
+        private Long forksCount;
         @JsonProperty("mirror_url")
         private Object mirrorUrl;
         @JsonProperty("archived")
@@ -5229,15 +5229,15 @@ public class PullRequestGitHubEvent implements GitHubEvent {
         @JsonProperty("disabled")
         private Boolean disabled;
         @JsonProperty("open_issues_count")
-        private Integer openIssuesCount;
+        private Long openIssuesCount;
         @JsonProperty("license")
         private Object license;
         @JsonProperty("forks")
-        private Integer forks;
+        private Long forks;
         @JsonProperty("open_issues")
-        private Integer openIssues;
+        private Long openIssues;
         @JsonProperty("watchers")
-        private Integer watchers;
+        private Long watchers;
         @JsonProperty("default_branch")
         private String defaultBranch;
         @JsonIgnore
@@ -5326,7 +5326,7 @@ public class PullRequestGitHubEvent implements GitHubEvent {
          * @param subscriptionUrl
          * @param homepage
          */
-        public Repository(Integer id, String nodeId, String name, String fullName, Boolean _private, PullRequestGitHubEvent.Owner owner, String htmlUrl, String description, Boolean fork, String url, String forksUrl, String keysUrl, String collaboratorsUrl, String teamsUrl, String hooksUrl, String issueEventsUrl, String eventsUrl, String assigneesUrl, String branchesUrl, String tagsUrl, String blobsUrl, String gitTagsUrl, String gitRefsUrl, String treesUrl, String statusesUrl, String languagesUrl, String stargazersUrl, String contributorsUrl, String subscribersUrl, String subscriptionUrl, String commitsUrl, String gitCommitsUrl, String commentsUrl, String issueCommentUrl, String contentsUrl, String compareUrl, String mergesUrl, String archiveUrl, String downloadsUrl, String issuesUrl, String pullsUrl, String milestonesUrl, String notificationsUrl, String labelsUrl, String releasesUrl, String deploymentsUrl, String createdAt, String updatedAt, String pushedAt, String gitUrl, String sshUrl, String cloneUrl, String svnUrl, Object homepage, Integer size, Integer stargazersCount, Integer watchersCount, String language, Boolean hasIssues, Boolean hasProjects, Boolean hasDownloads, Boolean hasWiki, Boolean hasPages, Integer forksCount, Object mirrorUrl, Boolean archived, Boolean disabled, Integer openIssuesCount, Object license, Integer forks, Integer openIssues, Integer watchers, String defaultBranch) {
+        public Repository(Long id, String nodeId, String name, String fullName, Boolean _private, PullRequestGitHubEvent.Owner owner, String htmlUrl, String description, Boolean fork, String url, String forksUrl, String keysUrl, String collaboratorsUrl, String teamsUrl, String hooksUrl, String issueEventsUrl, String eventsUrl, String assigneesUrl, String branchesUrl, String tagsUrl, String blobsUrl, String gitTagsUrl, String gitRefsUrl, String treesUrl, String statusesUrl, String languagesUrl, String stargazersUrl, String contributorsUrl, String subscribersUrl, String subscriptionUrl, String commitsUrl, String gitCommitsUrl, String commentsUrl, String issueCommentUrl, String contentsUrl, String compareUrl, String mergesUrl, String archiveUrl, String downloadsUrl, String issuesUrl, String pullsUrl, String milestonesUrl, String notificationsUrl, String labelsUrl, String releasesUrl, String deploymentsUrl, String createdAt, String updatedAt, String pushedAt, String gitUrl, String sshUrl, String cloneUrl, String svnUrl, Object homepage, Long size, Long stargazersCount, Long watchersCount, String language, Boolean hasIssues, Boolean hasProjects, Boolean hasDownloads, Boolean hasWiki, Boolean hasPages, Long forksCount, Object mirrorUrl, Boolean archived, Boolean disabled, Long openIssuesCount, Object license, Long forks, Long openIssues, Long watchers, String defaultBranch) {
             super();
             this.id = id;
             this.nodeId = nodeId;
@@ -5404,12 +5404,12 @@ public class PullRequestGitHubEvent implements GitHubEvent {
         }
 
         @JsonProperty("id")
-        public Integer getId() {
+        public Long getId() {
             return id;
         }
 
         @JsonProperty("id")
-        public void setId(Integer id) {
+        public void setId(Long id) {
             this.id = id;
         }
 
@@ -5944,32 +5944,32 @@ public class PullRequestGitHubEvent implements GitHubEvent {
         }
 
         @JsonProperty("size")
-        public Integer getSize() {
+        public Long getSize() {
             return size;
         }
 
         @JsonProperty("size")
-        public void setSize(Integer size) {
+        public void setSize(Long size) {
             this.size = size;
         }
 
         @JsonProperty("stargazers_count")
-        public Integer getStargazersCount() {
+        public Long getStargazersCount() {
             return stargazersCount;
         }
 
         @JsonProperty("stargazers_count")
-        public void setStargazersCount(Integer stargazersCount) {
+        public void setStargazersCount(Long stargazersCount) {
             this.stargazersCount = stargazersCount;
         }
 
         @JsonProperty("watchers_count")
-        public Integer getWatchersCount() {
+        public Long getWatchersCount() {
             return watchersCount;
         }
 
         @JsonProperty("watchers_count")
-        public void setWatchersCount(Integer watchersCount) {
+        public void setWatchersCount(Long watchersCount) {
             this.watchersCount = watchersCount;
         }
 
@@ -6034,12 +6034,12 @@ public class PullRequestGitHubEvent implements GitHubEvent {
         }
 
         @JsonProperty("forks_count")
-        public Integer getForksCount() {
+        public Long getForksCount() {
             return forksCount;
         }
 
         @JsonProperty("forks_count")
-        public void setForksCount(Integer forksCount) {
+        public void setForksCount(Long forksCount) {
             this.forksCount = forksCount;
         }
 
@@ -6074,12 +6074,12 @@ public class PullRequestGitHubEvent implements GitHubEvent {
         }
 
         @JsonProperty("open_issues_count")
-        public Integer getOpenIssuesCount() {
+        public Long getOpenIssuesCount() {
             return openIssuesCount;
         }
 
         @JsonProperty("open_issues_count")
-        public void setOpenIssuesCount(Integer openIssuesCount) {
+        public void setOpenIssuesCount(Long openIssuesCount) {
             this.openIssuesCount = openIssuesCount;
         }
 
@@ -6094,32 +6094,32 @@ public class PullRequestGitHubEvent implements GitHubEvent {
         }
 
         @JsonProperty("forks")
-        public Integer getForks() {
+        public Long getForks() {
             return forks;
         }
 
         @JsonProperty("forks")
-        public void setForks(Integer forks) {
+        public void setForks(Long forks) {
             this.forks = forks;
         }
 
         @JsonProperty("open_issues")
-        public Integer getOpenIssues() {
+        public Long getOpenIssues() {
             return openIssues;
         }
 
         @JsonProperty("open_issues")
-        public void setOpenIssues(Integer openIssues) {
+        public void setOpenIssues(Long openIssues) {
             this.openIssues = openIssues;
         }
 
         @JsonProperty("watchers")
-        public Integer getWatchers() {
+        public Long getWatchers() {
             return watchers;
         }
 
         @JsonProperty("watchers")
-        public void setWatchers(Integer watchers) {
+        public void setWatchers(Long watchers) {
             this.watchers = watchers;
         }
 
@@ -6838,7 +6838,7 @@ public class PullRequestGitHubEvent implements GitHubEvent {
         @JsonProperty("login")
         private String login;
         @JsonProperty("id")
-        private Integer id;
+        private Long id;
         @JsonProperty("node_id")
         private String nodeId;
         @JsonProperty("avatar_url")
@@ -6902,7 +6902,7 @@ public class PullRequestGitHubEvent implements GitHubEvent {
          * @param eventsUrl
          * @param nodeId
          */
-        public Sender(String login, Integer id, String nodeId, String avatarUrl, String gravatarId, String url, String htmlUrl, String followersUrl, String followingUrl, String gistsUrl, String starredUrl, String subscriptionsUrl, String organizationsUrl, String reposUrl, String eventsUrl, String receivedEventsUrl, String type, Boolean siteAdmin) {
+        public Sender(String login, Long id, String nodeId, String avatarUrl, String gravatarId, String url, String htmlUrl, String followersUrl, String followingUrl, String gistsUrl, String starredUrl, String subscriptionsUrl, String organizationsUrl, String reposUrl, String eventsUrl, String receivedEventsUrl, String type, Boolean siteAdmin) {
             super();
             this.login = login;
             this.id = id;
@@ -6935,12 +6935,12 @@ public class PullRequestGitHubEvent implements GitHubEvent {
         }
 
         @JsonProperty("id")
-        public Integer getId() {
+        public Long getId() {
             return id;
         }
 
         @JsonProperty("id")
-        public void setId(Integer id) {
+        public void setId(Long id) {
             this.id = id;
         }
 
@@ -7356,7 +7356,7 @@ public class PullRequestGitHubEvent implements GitHubEvent {
         @JsonProperty("login")
         private String login;
         @JsonProperty("id")
-        private Integer id;
+        private Long id;
         @JsonProperty("node_id")
         private String nodeId;
         @JsonProperty("avatar_url")
@@ -7420,7 +7420,7 @@ public class PullRequestGitHubEvent implements GitHubEvent {
          * @param eventsUrl
          * @param nodeId
          */
-        public User(String login, Integer id, String nodeId, String avatarUrl, String gravatarId, String url, String htmlUrl, String followersUrl, String followingUrl, String gistsUrl, String starredUrl, String subscriptionsUrl, String organizationsUrl, String reposUrl, String eventsUrl, String receivedEventsUrl, String type, Boolean siteAdmin) {
+        public User(String login, Long id, String nodeId, String avatarUrl, String gravatarId, String url, String htmlUrl, String followersUrl, String followingUrl, String gistsUrl, String starredUrl, String subscriptionsUrl, String organizationsUrl, String reposUrl, String eventsUrl, String receivedEventsUrl, String type, Boolean siteAdmin) {
             super();
             this.login = login;
             this.id = id;
@@ -7453,12 +7453,12 @@ public class PullRequestGitHubEvent implements GitHubEvent {
         }
 
         @JsonProperty("id")
-        public Integer getId() {
+        public Long getId() {
             return id;
         }
 
         @JsonProperty("id")
-        public void setId(Integer id) {
+        public void setId(Long id) {
             this.id = id;
         }
 

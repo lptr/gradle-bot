@@ -44,7 +44,7 @@ class GitHubClient @Inject constructor(
         return doQueryOrMutation(Map::class.java, addCommentMutation(subjectId, commentBody))
     }
 
-    fun getPullRequestWithComments(repo: String, number: Int): Future<PullRequestWithCommentsResponse> =
+    fun getPullRequestWithComments(repo: String, number: Long): Future<PullRequestWithCommentsResponse> =
             repo.split('/').let {
                 pullRequestsWithCommentsQuery(it[0], it[1], number)
             }.let {

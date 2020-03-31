@@ -411,7 +411,7 @@ public class AddCommentResponse {
     public static class Node {
 
         @JsonProperty("databaseId")
-        private Integer databaseId;
+        private Long databaseId;
         @JsonIgnore
         private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -426,18 +426,18 @@ public class AddCommentResponse {
          * 
          * @param databaseId
          */
-        public Node(Integer databaseId) {
+        public Node(Long databaseId) {
             super();
             this.databaseId = databaseId;
         }
 
         @JsonProperty("databaseId")
-        public Integer getDatabaseId() {
+        public Long getDatabaseId() {
             return databaseId;
         }
 
         @JsonProperty("databaseId")
-        public void setDatabaseId(Integer databaseId) {
+        public void setDatabaseId(Long databaseId) {
             this.databaseId = databaseId;
         }
 
