@@ -65,4 +65,3 @@ enum class BuildStage(val fullName: String, val abbr: String, val buildTypeId: S
 
     fun toBuildConfigurationId() = BuildConfigurationId(buildTypeId)
 }
-

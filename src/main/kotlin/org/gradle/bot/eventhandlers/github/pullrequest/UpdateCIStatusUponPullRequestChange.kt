@@ -1,14 +1,14 @@
 package org.gradle.bot.eventhandlers.github.pullrequest
 
+import java.time.format.DateTimeFormatter
+import javax.inject.Inject
+import javax.inject.Singleton
 import org.gradle.bot.client.GitHubClient
 import org.gradle.bot.client.TeamCityClient
 import org.gradle.bot.eventhandlers.github.AbstractGitHubEventHandler
 import org.gradle.bot.model.CommitStatusState
 import org.gradle.bot.model.PullRequestGitHubEvent
 import org.slf4j.LoggerFactory
-import java.time.format.DateTimeFormatter
-import javax.inject.Inject
-import javax.inject.Singleton
 
 val ciStatusContext = "CI Status"
 
@@ -35,9 +35,11 @@ fun PullRequestGitHubEvent.getTargetBranch() = pullRequest.base.ref
  * so the developer can see the latest CI status directly from PR page.
  */
 @Singleton
-class UpdateCIStatusUponPullRequestChange @Inject constructor(private val githubClient: GitHubClient,
-                                                              private val teamCityClient: TeamCityClient)
-    : AbstractGitHubEventHandler<PullRequestGitHubEvent>() {
+class UpdateCIStatusUponPullRequestChange @Inject constructor(
+    private val githubClient: GitHubClient,
+    private val teamCityClient: TeamCityClient
+) :
+        AbstractGitHubEventHandler<PullRequestGitHubEvent>() {
     private val logger = LoggerFactory.getLogger(javaClass)
     override fun handleEvent(event: PullRequestGitHubEvent) {
         if (PullRequestAction.of(event.action).let { it != PullRequestAction.OPENED && it != PullRequestAction.SYNCHRONIZE }) {

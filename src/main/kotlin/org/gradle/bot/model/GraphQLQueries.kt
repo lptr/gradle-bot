@@ -109,7 +109,7 @@ query {
   }
 }
 
-""".trimIndent().replace('\n',' ')
+""".trimIndent().replace('\n', ' ')
 
 fun addCommentMutation(subjectId: String, commentBody: String) = """
 mutation {            

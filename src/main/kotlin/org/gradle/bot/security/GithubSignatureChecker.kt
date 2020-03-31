@@ -9,7 +9,7 @@ interface GithubSignatureChecker {
     fun verifySignature(body: String?, signature: String?): Boolean
 }
 
-enum class LenientGitHubSignatureCheck:GithubSignatureChecker {
+enum class LenientGitHubSignatureCheck : GithubSignatureChecker {
     INSTANCE {
         override fun verifySignature(body: String?, signature: String?) = true
     };
@@ -17,7 +17,7 @@ enum class LenientGitHubSignatureCheck:GithubSignatureChecker {
 
 @Singleton
 class Sha1GitHubSignatureChecker @Inject constructor(
-        @Named("GITHUB_WEBHOOK_SECRET") private val secret: String
+    @Named("GITHUB_WEBHOOK_SECRET") private val secret: String
 ) : GithubSignatureChecker {
     override fun verifySignature(body: String?, signature: String?): Boolean {
         body ?: return false

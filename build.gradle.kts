@@ -16,6 +16,8 @@ sourceSets.create("teamCityWorkaround").withConvention(KotlinSourceSet::class) {
     kotlin.srcDirs += file("src/teamCityWorkaround/kotlin")
 }
 
+configurations.create("ktlint")
+
 repositories {
     jcenter()
     mavenCentral()
@@ -30,6 +32,7 @@ dependencies {
     val junit5Version = "5.6.1"
     val guavaVersion = "28.2-jre"
     val mockitoJUnitVersion = "3.3.3"
+    val ktlintVersion = "0.36.0"
 
     implementation("io.vertx:vertx-web-client:$vertxVersion")
     implementation("io.vertx:vertx-core:$vertxVersion")
@@ -64,6 +67,8 @@ dependencies {
     "teamCityWorkaroundImplementation"("com.jakewharton.retrofit:retrofit1-okhttp3-client:1.1.0")
     "teamCityWorkaroundImplementation"("org.slf4j:slf4j-api:1.7.12")
 
+    "ktlint"("com.pinterest:ktlint:$ktlintVersion")
+
     implementation(sourceSets["teamCityWorkaround"].output)
     configurations["implementation"].extendsFrom(configurations["teamCityWorkaroundImplementation"])
 }
@@ -85,6 +90,24 @@ application {
     mainClassName = "org.gradle.bot.AppKt"
 
     applicationDistribution.from(sourceSets["teamCityWorkaround"].output) {
-       into("lib/teamCityWorkaround")
+        into("lib/teamCityWorkaround")
     }
+}
+
+val ktlintTask = tasks.register<JavaExec>("ktlint") {
+    group = "verification"
+    description = "Check Kotlin code style"
+    classpath = configurations["ktlint"]
+    main = "com.pinterest.ktlint.Main"
+    args("src/main/**/*.kt", "src/test/**/*.kt")
+}
+
+tasks.named("check").configure { dependsOn(ktlintTask) }
+
+tasks.register<JavaExec>("ktlintFormat") {
+    group = "formatting"
+    description = "Fix Kotlin code style deviations"
+    classpath = configurations["ktlint"]
+    main = "com.pinterest.ktlint.Main"
+    args("-F", "src/main/**/*.kt", "src/test/**/*.kt")
 }

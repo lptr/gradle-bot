@@ -1,10 +1,10 @@
 package org.gradle.bot.model
 
+import java.io.File
 import org.gradle.bot.objectMapper
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.DynamicTest
 import org.junit.jupiter.api.TestFactory
-import java.io.File
 
 class GitHubEventDeserializationTest {
     private val events = listOf(

@@ -2,15 +2,9 @@ package org.gradle.bot.eventhandlers.github
 
 import io.vertx.core.Handler
 import io.vertx.core.eventbus.Message
-import org.gradle.bot.client.GitHubClient
-import org.gradle.bot.client.TeamCityClient
-import org.gradle.bot.eventhandlers.github.issuecomment.PullRequestContext
-import org.gradle.bot.model.GitHubEvent
-import org.gradle.bot.model.IssueCommentGitHubEvent
-import org.gradle.bot.objectMapper
 import java.lang.reflect.ParameterizedType
-import javax.inject.Inject
-import javax.inject.Singleton
+import org.gradle.bot.model.GitHubEvent
+import org.gradle.bot.objectMapper
 
 interface GitHubEventHandler : Handler<Message<String>> {
     val eventType: String

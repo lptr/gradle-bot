@@ -101,7 +101,6 @@ class PullRequestContextTest {
         // Command from admin
         context.processCommand(7)
 
-
         // then
         verify(teamCityClient).findBuild(oldBuildIdString)
         verify(teamCityClient).triggerBuild(BuildStage.READY_FOR_MERGE, pullRequestBranch)
@@ -112,7 +111,7 @@ class PullRequestContextTest {
         println(captor.allValues[1])
 
         assertTrue(captor.allValues[1].contains("""<!-- {"replyTargetCommentId":7,"teamCityBuildId":"newBuildId","teamCityBuildHeadRef":"018c8a143d536666e189ad662746f1103b778c02"} -->"""))
-        assertTrue(captor.allValues[1].contains("OK, I've already triggered [${BuildStage.READY_FOR_MERGE.fullName} build](${newBuildHomeUrl}) for you."))
+        assertTrue(captor.allValues[1].contains("OK, I've already triggered [${BuildStage.READY_FOR_MERGE.fullName} build]($newBuildHomeUrl) for you."))
     }
 
     @Test
@@ -123,7 +122,6 @@ class PullRequestContextTest {
 
     @Test
     fun `reply contact administrator upon errors`() {
-
     }
 
     @Test
@@ -144,7 +142,6 @@ class PullRequestContextTest {
 
     @Test
     fun `do nothing if the comment is deleted`() {
-
     }
 }
 
@@ -252,7 +249,6 @@ private val pullRequestWithCommentsResponse = objectMapper.readValue("""
 }
     """, PullRequestWithCommentsResponse::class.java)
 
-
 class MyArgumentCaptor<T>(private val delegate: ArgumentCaptor<T>) {
     companion object {
         fun <T> forClass(clazz: Class<T>): MyArgumentCaptor<T> {
@@ -267,6 +263,6 @@ class MyArgumentCaptor<T>(private val delegate: ArgumentCaptor<T>) {
         get() = delegate.allValues
 }
 
-//inline fun <reified T : Any> argumentCaptor() = ArgumentCaptor.forClass(T::class.java)
+// inline fun <reified T : Any> argumentCaptor() = ArgumentCaptor.forClass(T::class.java)
 //
-//private fun <T> uninitialized(): T = null as T
+// private fun <T> uninitialized(): T = null as T

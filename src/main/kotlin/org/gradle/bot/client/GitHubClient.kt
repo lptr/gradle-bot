@@ -3,8 +3,11 @@ package org.gradle.bot.client
 import io.vertx.core.Future
 import io.vertx.core.buffer.Buffer
 import io.vertx.ext.web.client.WebClient
-import org.gradle.bot.model.CommitStatusState
+import javax.inject.Inject
+import javax.inject.Named
+import javax.inject.Singleton
 import org.gradle.bot.model.CommitStatusObject
+import org.gradle.bot.model.CommitStatusState
 import org.gradle.bot.model.PullRequestWithCommentsResponse
 import org.gradle.bot.model.WhoAmIResponse
 import org.gradle.bot.model.addCommentMutation
@@ -12,14 +15,11 @@ import org.gradle.bot.model.pullRequestsWithCommentsQuery
 import org.gradle.bot.model.whoAmIQuery
 import org.gradle.bot.objectMapper
 import org.slf4j.LoggerFactory
-import javax.inject.Inject
-import javax.inject.Named
-import javax.inject.Singleton
 
 @Singleton
 class GitHubClient @Inject constructor(
-        @Named("GITHUB_ACCESS_TOKEN") githubToken: String,
-        private val client: WebClient
+    @Named("GITHUB_ACCESS_TOKEN") githubToken: String,
+    private val client: WebClient
 ) {
     private val logger = LoggerFactory.getLogger(javaClass)
     private val authHeader = "bearer $githubToken"
@@ -114,4 +114,3 @@ class GitHubClient @Inject constructor(
         }
     }
 }
-

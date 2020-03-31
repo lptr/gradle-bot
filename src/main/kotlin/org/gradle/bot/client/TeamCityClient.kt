@@ -3,20 +3,20 @@ package org.gradle.bot.client
 import io.vertx.core.Future
 import io.vertx.core.Promise
 import io.vertx.core.Vertx
+import javax.inject.Inject
+import javax.inject.Named
+import javax.inject.Singleton
 import org.gradle.bot.model.BuildStage
 import org.jetbrains.teamcity.rest.Build
 import org.jetbrains.teamcity.rest.BuildId
 import org.jetbrains.teamcity.rest.BuildState
 import org.jetbrains.teamcity.rest.TeamCityInstanceFactory
 import org.slf4j.LoggerFactory
-import javax.inject.Inject
-import javax.inject.Named
-import javax.inject.Singleton
 
 @Singleton
 class TeamCityClient @Inject constructor(
-        private val vertx: Vertx,
-        @Named("TEAMCITY_ACCESS_TOKEN") teamCityToken: String
+    private val vertx: Vertx,
+    @Named("TEAMCITY_ACCESS_TOKEN") teamCityToken: String
 ) {
     private val logger = LoggerFactory.getLogger(javaClass)
     private val teamCityRestClient by lazy {

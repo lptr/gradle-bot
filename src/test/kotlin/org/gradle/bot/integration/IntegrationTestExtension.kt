@@ -4,6 +4,8 @@ import com.google.inject.Injector
 import io.vertx.core.Future
 import io.vertx.core.Verticle
 import io.vertx.core.Vertx
+import java.util.concurrent.CountDownLatch
+import kotlin.reflect.KClass
 import org.gradle.bot.GradleBotAppModule
 import org.gradle.bot.client.GitHubClient
 import org.gradle.bot.client.TeamCityClient
@@ -15,8 +17,6 @@ import org.junit.jupiter.api.extension.ExtensionContext
 import org.junit.jupiter.api.extension.TestInstancePostProcessor
 import org.mockito.Mock
 import org.mockito.Mockito
-import java.util.concurrent.CountDownLatch
-import kotlin.reflect.KClass
 
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.RUNTIME)
@@ -32,7 +32,6 @@ fun <T> Future<T>.await(): T {
 
     return result() ?: throw cause()
 }
-
 
 class TestGradleBotModule(vertx: Vertx) : GradleBotAppModule(vertx) {
     val mockGitHubClient = Mockito.mock(GitHubClient::class.java)

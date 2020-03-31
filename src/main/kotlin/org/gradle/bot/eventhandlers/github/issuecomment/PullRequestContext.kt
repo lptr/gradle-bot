@@ -12,10 +12,11 @@ import org.gradle.bot.model.PullRequestWithCommentsResponse
 import org.gradle.bot.objectMapper
 import org.jetbrains.teamcity.rest.Build
 
-
-class PullRequestContext(private val gitHubClient: GitHubClient,
-                         private val teamCityClient: TeamCityClient,
-                         pullRequestWithCommentsResponse: PullRequestWithCommentsResponse) {
+class PullRequestContext(
+    private val gitHubClient: GitHubClient,
+    private val teamCityClient: TeamCityClient,
+    pullRequestWithCommentsResponse: PullRequestWithCommentsResponse
+) {
     val comments: List<PullRequestComment> = pullRequestWithCommentsResponse.getComments(gitHubClient.whoAmI())
     val repoName: String = pullRequestWithCommentsResponse.data.repository.nameWithOwner
     val branchName: String = pullRequestWithCommentsResponse.data.repository.pullRequest.headRef.name
@@ -81,9 +82,9 @@ Sorry I don't understand what you said, please type `@${gitHubClient.whoAmI()} h
 }
 
 data class CommentMetadata(
-        @JsonProperty("replyTargetCommentId") val replyTargetCommentId: Long?,
-        @JsonProperty("teamCityBuildId") val teamCityBuildId: String?,
-        @JsonProperty("teamCityBuildHeadRef") val teamCityBuildHeadRef: String?
+    @JsonProperty("replyTargetCommentId") val replyTargetCommentId: Long?,
+    @JsonProperty("teamCityBuildId") val teamCityBuildId: String?,
+    @JsonProperty("teamCityBuildHeadRef") val teamCityBuildHeadRef: String?
 ) {
     companion object {
         // The comment metadata are hidden tag in the comment, for example
@@ -127,7 +128,6 @@ interface PullRequestComment {
      */
     val metadata: CommentMetadata
 }
-
 
 class CommandComment(override val id: Long, override val body: String, override val metadata: CommentMetadata, val isAdmin: Boolean) : PullRequestComment {
     override val command by lazy {

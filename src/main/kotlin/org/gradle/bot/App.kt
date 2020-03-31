@@ -24,6 +24,9 @@ import io.vertx.ext.web.client.WebClient
 import io.vertx.ext.web.client.WebClientOptions
 import io.vertx.ext.web.handler.BodyHandler
 import io.vertx.kotlin.core.http.httpServerOptionsOf
+import java.lang.reflect.Modifier
+import java.util.concurrent.Callable
+import javax.inject.Inject
 import org.gradle.bot.client.GitHubClient
 import org.gradle.bot.eventhandlers.github.GitHubEventHandler
 import org.gradle.bot.security.GithubSignatureChecker
@@ -33,9 +36,6 @@ import org.gradle.bot.webhookhandlers.GitHubWebHookHandler
 import org.gradle.bot.webhookhandlers.TeamCityWebHookHandler
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import java.lang.reflect.Modifier
-import java.util.concurrent.Callable
-import javax.inject.Inject
 
 val objectMapper: ObjectMapper = ObjectMapper()
 val logger: Logger = LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME)
@@ -72,17 +72,16 @@ class GuiceVerticleFactory(private val injector: Injector, private val verticleC
     override fun prefix(): String = GradleBotVerticle::class.java.simpleName
 }
 
-
 open class GradleBotAppModule(private val vertx: Vertx) : AbstractModule() {
     private val client = WebClient.create(vertx,
-            WebClientOptions().also { options ->
-                if (System.getProperty("http.proxyHost") != null && System.getProperty("http.proxyPort") != null) {
-                    options.proxyOptions = ProxyOptions().also {
-                        it.host = System.getProperty("http.proxyHost")
-                        it.port = System.getProperty("http.proxyPort").toInt()
-                    }
+        WebClientOptions().also { options ->
+            if (System.getProperty("http.proxyHost") != null && System.getProperty("http.proxyPort") != null) {
+                options.proxyOptions = ProxyOptions().also {
+                    it.host = System.getProperty("http.proxyHost")
+                    it.port = System.getProperty("http.proxyPort").toInt()
                 }
-            })
+            }
+        })
 
     override fun configure() {
         bind(Vertx::class.java).toInstance(vertx)
@@ -111,10 +110,12 @@ open class GradleBotAppModule(private val vertx: Vertx) : AbstractModule() {
     }
 }
 
-class GradleBotVerticle @Inject constructor(private val injector: Injector,
-                                            private val gitHubWebHookHandler: GitHubWebHookHandler,
-                                            private val teamCityWebHookHandler: TeamCityWebHookHandler,
-                                            private val gitHubClient: GitHubClient) : AbstractVerticle() {
+class GradleBotVerticle @Inject constructor(
+    private val injector: Injector,
+    private val gitHubWebHookHandler: GitHubWebHookHandler,
+    private val teamCityWebHookHandler: TeamCityWebHookHandler,
+    private val gitHubClient: GitHubClient
+) : AbstractVerticle() {
     private val logger: Logger = LoggerFactory.getLogger(GradleBotVerticle::class.java.name)
     private val port by lazy {
         System.getenv("HTTP_PORT")?.toInt() ?: 8080
@@ -147,16 +148,16 @@ class GradleBotVerticle @Inject constructor(private val injector: Injector,
 
             val serverOptions = httpServerOptionsOf(port = port, ssl = false, compressionSupported = true)
             vertx.createHttpServer(serverOptions)
-                    .requestHandler(router)
-                    .listen { result ->
-                        if (result.succeeded()) {
-                            logger.info("App started.")
-                            startFuture.complete()
-                        } else {
-                            logger.error("App failed to start.", result.cause())
-                            startFuture.fail(result.cause())
-                        }
+                .requestHandler(router)
+                .listen { result ->
+                    if (result.succeeded()) {
+                        logger.info("App started.")
+                        startFuture.complete()
+                    } else {
+                        logger.error("App failed to start.", result.cause())
+                        startFuture.fail(result.cause())
                     }
+                }
         }
     }
 
@@ -170,7 +171,6 @@ class GradleBotVerticle @Inject constructor(private val injector: Injector,
     /**
      * Extension to the HTTP response to output JSON objects.
      */
-
 }
 
 fun HttpServerResponse.endWithJson(obj: Any) {

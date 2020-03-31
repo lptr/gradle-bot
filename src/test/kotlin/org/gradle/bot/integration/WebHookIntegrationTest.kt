@@ -7,6 +7,9 @@ import io.vertx.core.eventbus.impl.EventBusImpl
 import io.vertx.core.eventbus.impl.HandlerHolder
 import io.vertx.core.impl.utils.ConcurrentCyclicSequence
 import io.vertx.ext.web.client.WebClient
+import java.util.concurrent.ConcurrentMap
+import javax.inject.Inject
+import javax.inject.Singleton
 import org.gradle.bot.GradleBotVerticle
 import org.gradle.bot.client.TeamCityClient
 import org.gradle.bot.eventhandlers.github.GitHubEventHandler
@@ -14,10 +17,6 @@ import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.Mock
-import java.util.concurrent.ConcurrentMap
-import javax.inject.Inject
-import javax.inject.Singleton
-
 
 val testEventType = "TestEvent"
 

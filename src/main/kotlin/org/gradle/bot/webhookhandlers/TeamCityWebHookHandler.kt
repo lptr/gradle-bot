@@ -2,9 +2,9 @@ package org.gradle.bot.webhookhandlers
 
 import io.vertx.core.Handler
 import io.vertx.ext.web.RoutingContext
-import org.gradle.bot.endWithJson
 import javax.inject.Inject
 import javax.inject.Singleton
+import org.gradle.bot.endWithJson
 
 @Singleton
 class TeamCityWebHookHandler @Inject constructor() : Handler<RoutingContext> {
