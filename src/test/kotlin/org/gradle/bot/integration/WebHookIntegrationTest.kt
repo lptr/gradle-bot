@@ -65,6 +65,9 @@ class WebHookIntegrationTest {
         field.isAccessible = true
         val handlerMap = field.get(eventBus) as ConcurrentMap<String, ConcurrentCyclicSequence<HandlerHolder<*>>>
 
+        // IssueCommentEventHandler
+        // UpdateCIStatusUponPullRequestChange
+        // TestGitHubEventHandler
         Assertions.assertEquals(3, handlerMap.values.flatMap { it }.size)
     }
 }
