@@ -98,7 +98,10 @@ open class GradleBotAppModule(private val vertx: Vertx) : AbstractModule() {
     open fun bindGitHubSignatureCheckerOnSecret() {
         when (System.getenv("GITHUB_WEBHOOK_SECRET")) {
             null -> bind(GithubSignatureChecker::class.java).toInstance(LenientGitHubSignatureCheck.INSTANCE)
-            else -> bind(GithubSignatureChecker::class.java).to(Sha1GitHubSignatureChecker::class.java)
+            else -> {
+                bindEnv("GITHUB_WEBHOOK_SECRET")
+                bind(GithubSignatureChecker::class.java).to(Sha1GitHubSignatureChecker::class.java)
+            }
         }
     }
 

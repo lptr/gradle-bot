@@ -1,5 +1,6 @@
 package org.gradle.bot.security
 
+import com.google.inject.Inject
 import org.apache.commons.codec.digest.HmacUtils
 import javax.inject.Named
 import javax.inject.Singleton
@@ -15,7 +16,7 @@ enum class LenientGitHubSignatureCheck:GithubSignatureChecker {
 }
 
 @Singleton
-class Sha1GitHubSignatureChecker(
+class Sha1GitHubSignatureChecker @Inject constructor(
         @Named("GITHUB_WEBHOOK_SECRET") private val secret: String
 ) : GithubSignatureChecker {
     override fun verifySignature(body: String?, signature: String?): Boolean {
