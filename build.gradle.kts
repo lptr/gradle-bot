@@ -72,6 +72,11 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>() {
     kotlinOptions.jvmTarget = "1.8"
 }
 
+
+tasks.named("test", Test::class.java) {
+    useJUnitPlatform()
+}
+
 tasks.named("run", JavaExec::class.java) {
     main = "org.gradle.bot.AppKt"
 }

@@ -87,7 +87,7 @@ class PullRequestContextTest {
                 context.comments.map { it.javaClass.kotlin }
         )
 
-        assertEquals(listOf(1, 2, 3, 4, 5, 6, 7), context.comments.map { it.id })
+        assertEquals(listOf(1L, 2L, 3L, 4L, 5L, 6L, 7L), context.comments.map { it.id })
         assertTrue((context.comments[0] as CommandComment).isAdmin)
         assertEquals(CommentMetadata(1, oldBuildIdString, firstTeamCityBuildHeadRef), context.comments[1].metadata)
         context.comments.filterIndexed { index, _ -> index != 1 }.forEach { assertEquals(CommentMetadata(null, null, null), it.metadata) }
