@@ -279,12 +279,141 @@ public class PullRequestWithCommentsResponse {
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonPropertyOrder({
+        "commitUrl",
+        "oid",
+        "status"
+    })
+    public static class Commit {
+
+        @JsonProperty("commitUrl")
+        private String commitUrl;
+        @JsonProperty("oid")
+        private String oid;
+        @JsonProperty("status")
+        private PullRequestWithCommentsResponse.Status status;
+        @JsonIgnore
+        private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+        /**
+         * No args constructor for use in serialization
+         * 
+         */
+        public Commit() {
+        }
+
+        /**
+         * 
+         * @param commitUrl
+         * @param oid
+         * @param status
+         */
+        public Commit(String commitUrl, String oid, PullRequestWithCommentsResponse.Status status) {
+            super();
+            this.commitUrl = commitUrl;
+            this.oid = oid;
+            this.status = status;
+        }
+
+        @JsonProperty("commitUrl")
+        public String getCommitUrl() {
+            return commitUrl;
+        }
+
+        @JsonProperty("commitUrl")
+        public void setCommitUrl(String commitUrl) {
+            this.commitUrl = commitUrl;
+        }
+
+        @JsonProperty("oid")
+        public String getOid() {
+            return oid;
+        }
+
+        @JsonProperty("oid")
+        public void setOid(String oid) {
+            this.oid = oid;
+        }
+
+        @JsonProperty("status")
+        public PullRequestWithCommentsResponse.Status getStatus() {
+            return status;
+        }
+
+        @JsonProperty("status")
+        public void setStatus(PullRequestWithCommentsResponse.Status status) {
+            this.status = status;
+        }
+
+        @JsonAnyGetter
+        public Map<String, Object> getAdditionalProperties() {
+            return this.additionalProperties;
+        }
+
+        @JsonAnySetter
+        public void setAdditionalProperty(String name, Object value) {
+            this.additionalProperties.put(name, value);
+        }
+
+        @Override
+        public String toString() {
+            StringBuilder sb = new StringBuilder();
+            sb.append(PullRequestWithCommentsResponse.Commit.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append("commitUrl");
+            sb.append('=');
+            sb.append(((this.commitUrl == null)?"<null>":this.commitUrl));
+            sb.append(',');
+            sb.append("oid");
+            sb.append('=');
+            sb.append(((this.oid == null)?"<null>":this.oid));
+            sb.append(',');
+            sb.append("status");
+            sb.append('=');
+            sb.append(((this.status == null)?"<null>":this.status));
+            sb.append(',');
+            sb.append("additionalProperties");
+            sb.append('=');
+            sb.append(((this.additionalProperties == null)?"<null>":this.additionalProperties));
+            sb.append(',');
+            if (sb.charAt((sb.length()- 1)) == ',') {
+                sb.setCharAt((sb.length()- 1), ']');
+            } else {
+                sb.append(']');
+            }
+            return sb.toString();
+        }
+
+        @Override
+        public int hashCode() {
+            int result = 1;
+            result = ((result* 31)+((this.oid == null)? 0 :this.oid.hashCode()));
+            result = ((result* 31)+((this.additionalProperties == null)? 0 :this.additionalProperties.hashCode()));
+            result = ((result* 31)+((this.commitUrl == null)? 0 :this.commitUrl.hashCode()));
+            result = ((result* 31)+((this.status == null)? 0 :this.status.hashCode()));
+            return result;
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            if (other == this) {
+                return true;
+            }
+            if ((other instanceof PullRequestWithCommentsResponse.Commit) == false) {
+                return false;
+            }
+            PullRequestWithCommentsResponse.Commit rhs = ((PullRequestWithCommentsResponse.Commit) other);
+            return (((((this.oid == rhs.oid)||((this.oid!= null)&&this.oid.equals(rhs.oid)))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))))&&((this.commitUrl == rhs.commitUrl)||((this.commitUrl!= null)&&this.commitUrl.equals(rhs.commitUrl))))&&((this.status == rhs.status)||((this.status!= null)&&this.status.equals(rhs.status))));
+        }
+
+    }
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonPropertyOrder({
         "nodes"
     })
     public static class Commits {
 
         @JsonProperty("nodes")
-        private List<PullRequestWithCommentsResponse.Node> nodes = new ArrayList<PullRequestWithCommentsResponse.Node>();
+        private List<PullRequestWithCommentsResponse.Node2> nodes = new ArrayList<PullRequestWithCommentsResponse.Node2>();
         @JsonIgnore
         private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -299,18 +428,18 @@ public class PullRequestWithCommentsResponse {
          * 
          * @param nodes
          */
-        public Commits(List<PullRequestWithCommentsResponse.Node> nodes) {
+        public Commits(List<PullRequestWithCommentsResponse.Node2> nodes) {
             super();
             this.nodes = nodes;
         }
 
         @JsonProperty("nodes")
-        public List<PullRequestWithCommentsResponse.Node> getNodes() {
+        public List<PullRequestWithCommentsResponse.Node2> getNodes() {
             return nodes;
         }
 
         @JsonProperty("nodes")
-        public void setNodes(List<PullRequestWithCommentsResponse.Node> nodes) {
+        public void setNodes(List<PullRequestWithCommentsResponse.Node2> nodes) {
             this.nodes = nodes;
         }
 
@@ -362,6 +491,155 @@ public class PullRequestWithCommentsResponse {
             }
             PullRequestWithCommentsResponse.Commits rhs = ((PullRequestWithCommentsResponse.Commits) other);
             return (((this.nodes == rhs.nodes)||((this.nodes!= null)&&this.nodes.equals(rhs.nodes)))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))));
+        }
+
+    }
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonPropertyOrder({
+        "state",
+        "targetUrl",
+        "description",
+        "context"
+    })
+    public static class Context {
+
+        @JsonProperty("state")
+        private String state;
+        @JsonProperty("targetUrl")
+        private String targetUrl;
+        @JsonProperty("description")
+        private String description;
+        @JsonProperty("context")
+        private String context;
+        @JsonIgnore
+        private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+        /**
+         * No args constructor for use in serialization
+         * 
+         */
+        public Context() {
+        }
+
+        /**
+         * 
+         * @param context
+         * @param description
+         * @param state
+         * @param targetUrl
+         */
+        public Context(String state, String targetUrl, String description, String context) {
+            super();
+            this.state = state;
+            this.targetUrl = targetUrl;
+            this.description = description;
+            this.context = context;
+        }
+
+        @JsonProperty("state")
+        public String getState() {
+            return state;
+        }
+
+        @JsonProperty("state")
+        public void setState(String state) {
+            this.state = state;
+        }
+
+        @JsonProperty("targetUrl")
+        public String getTargetUrl() {
+            return targetUrl;
+        }
+
+        @JsonProperty("targetUrl")
+        public void setTargetUrl(String targetUrl) {
+            this.targetUrl = targetUrl;
+        }
+
+        @JsonProperty("description")
+        public String getDescription() {
+            return description;
+        }
+
+        @JsonProperty("description")
+        public void setDescription(String description) {
+            this.description = description;
+        }
+
+        @JsonProperty("context")
+        public String getContext() {
+            return context;
+        }
+
+        @JsonProperty("context")
+        public void setContext(String context) {
+            this.context = context;
+        }
+
+        @JsonAnyGetter
+        public Map<String, Object> getAdditionalProperties() {
+            return this.additionalProperties;
+        }
+
+        @JsonAnySetter
+        public void setAdditionalProperty(String name, Object value) {
+            this.additionalProperties.put(name, value);
+        }
+
+        @Override
+        public String toString() {
+            StringBuilder sb = new StringBuilder();
+            sb.append(PullRequestWithCommentsResponse.Context.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append("state");
+            sb.append('=');
+            sb.append(((this.state == null)?"<null>":this.state));
+            sb.append(',');
+            sb.append("targetUrl");
+            sb.append('=');
+            sb.append(((this.targetUrl == null)?"<null>":this.targetUrl));
+            sb.append(',');
+            sb.append("description");
+            sb.append('=');
+            sb.append(((this.description == null)?"<null>":this.description));
+            sb.append(',');
+            sb.append("context");
+            sb.append('=');
+            sb.append(((this.context == null)?"<null>":this.context));
+            sb.append(',');
+            sb.append("additionalProperties");
+            sb.append('=');
+            sb.append(((this.additionalProperties == null)?"<null>":this.additionalProperties));
+            sb.append(',');
+            if (sb.charAt((sb.length()- 1)) == ',') {
+                sb.setCharAt((sb.length()- 1), ']');
+            } else {
+                sb.append(']');
+            }
+            return sb.toString();
+        }
+
+        @Override
+        public int hashCode() {
+            int result = 1;
+            result = ((result* 31)+((this.context == null)? 0 :this.context.hashCode()));
+            result = ((result* 31)+((this.description == null)? 0 :this.description.hashCode()));
+            result = ((result* 31)+((this.state == null)? 0 :this.state.hashCode()));
+            result = ((result* 31)+((this.additionalProperties == null)? 0 :this.additionalProperties.hashCode()));
+            result = ((result* 31)+((this.targetUrl == null)? 0 :this.targetUrl.hashCode()));
+            return result;
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            if (other == this) {
+                return true;
+            }
+            if ((other instanceof PullRequestWithCommentsResponse.Context) == false) {
+                return false;
+            }
+            PullRequestWithCommentsResponse.Context rhs = ((PullRequestWithCommentsResponse.Context) other);
+            return ((((((this.context == rhs.context)||((this.context!= null)&&this.context.equals(rhs.context)))&&((this.description == rhs.description)||((this.description!= null)&&this.description.equals(rhs.description))))&&((this.state == rhs.state)||((this.state!= null)&&this.state.equals(rhs.state))))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))))&&((this.targetUrl == rhs.targetUrl)||((this.targetUrl!= null)&&this.targetUrl.equals(rhs.targetUrl))));
         }
 
     }
@@ -466,7 +744,7 @@ public class PullRequestWithCommentsResponse {
         @JsonProperty("target")
         private PullRequestWithCommentsResponse.Target target;
         @JsonProperty("repository")
-        private PullRequestWithCommentsResponse.Repository repository;
+        private PullRequestWithCommentsResponse.Repository2 repository;
         @JsonProperty("name")
         private String name;
         @JsonIgnore
@@ -485,7 +763,7 @@ public class PullRequestWithCommentsResponse {
          * @param repository
          * @param target
          */
-        public HeadRef(PullRequestWithCommentsResponse.Target target, PullRequestWithCommentsResponse.Repository repository, String name) {
+        public HeadRef(PullRequestWithCommentsResponse.Target target, PullRequestWithCommentsResponse.Repository2 repository, String name) {
             super();
             this.target = target;
             this.repository = repository;
@@ -503,12 +781,12 @@ public class PullRequestWithCommentsResponse {
         }
 
         @JsonProperty("repository")
-        public PullRequestWithCommentsResponse.Repository getRepository() {
+        public PullRequestWithCommentsResponse.Repository2 getRepository() {
             return repository;
         }
 
         @JsonProperty("repository")
-        public void setRepository(PullRequestWithCommentsResponse.Repository repository) {
+        public void setRepository(PullRequestWithCommentsResponse.Repository2 repository) {
             this.repository = repository;
         }
 
@@ -729,6 +1007,184 @@ public class PullRequestWithCommentsResponse {
             }
             PullRequestWithCommentsResponse.Node rhs = ((PullRequestWithCommentsResponse.Node) other);
             return ((((((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties)))&&((this.databaseId == rhs.databaseId)||((this.databaseId!= null)&&this.databaseId.equals(rhs.databaseId))))&&((this.body == rhs.body)||((this.body!= null)&&this.body.equals(rhs.body))))&&((this.authorAssociation == rhs.authorAssociation)||((this.authorAssociation!= null)&&this.authorAssociation.equals(rhs.authorAssociation))))&&((this.author == rhs.author)||((this.author!= null)&&this.author.equals(rhs.author))));
+        }
+
+    }
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonPropertyOrder({
+        "commit"
+    })
+    public static class Node2 {
+
+        @JsonProperty("commit")
+        private PullRequestWithCommentsResponse.Commit commit;
+        @JsonIgnore
+        private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+        /**
+         * No args constructor for use in serialization
+         * 
+         */
+        public Node2() {
+        }
+
+        /**
+         * 
+         * @param commit
+         */
+        public Node2(PullRequestWithCommentsResponse.Commit commit) {
+            super();
+            this.commit = commit;
+        }
+
+        @JsonProperty("commit")
+        public PullRequestWithCommentsResponse.Commit getCommit() {
+            return commit;
+        }
+
+        @JsonProperty("commit")
+        public void setCommit(PullRequestWithCommentsResponse.Commit commit) {
+            this.commit = commit;
+        }
+
+        @JsonAnyGetter
+        public Map<String, Object> getAdditionalProperties() {
+            return this.additionalProperties;
+        }
+
+        @JsonAnySetter
+        public void setAdditionalProperty(String name, Object value) {
+            this.additionalProperties.put(name, value);
+        }
+
+        @Override
+        public String toString() {
+            StringBuilder sb = new StringBuilder();
+            sb.append(PullRequestWithCommentsResponse.Node2 .class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append("commit");
+            sb.append('=');
+            sb.append(((this.commit == null)?"<null>":this.commit));
+            sb.append(',');
+            sb.append("additionalProperties");
+            sb.append('=');
+            sb.append(((this.additionalProperties == null)?"<null>":this.additionalProperties));
+            sb.append(',');
+            if (sb.charAt((sb.length()- 1)) == ',') {
+                sb.setCharAt((sb.length()- 1), ']');
+            } else {
+                sb.append(']');
+            }
+            return sb.toString();
+        }
+
+        @Override
+        public int hashCode() {
+            int result = 1;
+            result = ((result* 31)+((this.commit == null)? 0 :this.commit.hashCode()));
+            result = ((result* 31)+((this.additionalProperties == null)? 0 :this.additionalProperties.hashCode()));
+            return result;
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            if (other == this) {
+                return true;
+            }
+            if ((other instanceof PullRequestWithCommentsResponse.Node2) == false) {
+                return false;
+            }
+            PullRequestWithCommentsResponse.Node2 rhs = ((PullRequestWithCommentsResponse.Node2) other);
+            return (((this.commit == rhs.commit)||((this.commit!= null)&&this.commit.equals(rhs.commit)))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))));
+        }
+
+    }
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonPropertyOrder({
+        "login"
+    })
+    public static class Owner {
+
+        @JsonProperty("login")
+        private String login;
+        @JsonIgnore
+        private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+        /**
+         * No args constructor for use in serialization
+         * 
+         */
+        public Owner() {
+        }
+
+        /**
+         * 
+         * @param login
+         */
+        public Owner(String login) {
+            super();
+            this.login = login;
+        }
+
+        @JsonProperty("login")
+        public String getLogin() {
+            return login;
+        }
+
+        @JsonProperty("login")
+        public void setLogin(String login) {
+            this.login = login;
+        }
+
+        @JsonAnyGetter
+        public Map<String, Object> getAdditionalProperties() {
+            return this.additionalProperties;
+        }
+
+        @JsonAnySetter
+        public void setAdditionalProperty(String name, Object value) {
+            this.additionalProperties.put(name, value);
+        }
+
+        @Override
+        public String toString() {
+            StringBuilder sb = new StringBuilder();
+            sb.append(PullRequestWithCommentsResponse.Owner.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append("login");
+            sb.append('=');
+            sb.append(((this.login == null)?"<null>":this.login));
+            sb.append(',');
+            sb.append("additionalProperties");
+            sb.append('=');
+            sb.append(((this.additionalProperties == null)?"<null>":this.additionalProperties));
+            sb.append(',');
+            if (sb.charAt((sb.length()- 1)) == ',') {
+                sb.setCharAt((sb.length()- 1), ']');
+            } else {
+                sb.append(']');
+            }
+            return sb.toString();
+        }
+
+        @Override
+        public int hashCode() {
+            int result = 1;
+            result = ((result* 31)+((this.login == null)? 0 :this.login.hashCode()));
+            result = ((result* 31)+((this.additionalProperties == null)? 0 :this.additionalProperties.hashCode()));
+            return result;
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            if (other == this) {
+                return true;
+            }
+            if ((other instanceof PullRequestWithCommentsResponse.Owner) == false) {
+                return false;
+            }
+            PullRequestWithCommentsResponse.Owner rhs = ((PullRequestWithCommentsResponse.Owner) other);
+            return (((this.login == rhs.login)||((this.login!= null)&&this.login.equals(rhs.login)))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))));
         }
 
     }
@@ -1047,6 +1503,244 @@ public class PullRequestWithCommentsResponse {
             }
             PullRequestWithCommentsResponse.Repository rhs = ((PullRequestWithCommentsResponse.Repository) other);
             return ((((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties)))&&((this.nameWithOwner == rhs.nameWithOwner)||((this.nameWithOwner!= null)&&this.nameWithOwner.equals(rhs.nameWithOwner))))&&((this.pullRequest == rhs.pullRequest)||((this.pullRequest!= null)&&this.pullRequest.equals(rhs.pullRequest))));
+        }
+
+    }
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonPropertyOrder({
+        "isFork",
+        "owner",
+        "name"
+    })
+    public static class Repository2 {
+
+        @JsonProperty("isFork")
+        private Boolean isFork;
+        @JsonProperty("owner")
+        private PullRequestWithCommentsResponse.Owner owner;
+        @JsonProperty("name")
+        private String name;
+        @JsonIgnore
+        private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+        /**
+         * No args constructor for use in serialization
+         * 
+         */
+        public Repository2() {
+        }
+
+        /**
+         * 
+         * @param owner
+         * @param name
+         * @param isFork
+         */
+        public Repository2(Boolean isFork, PullRequestWithCommentsResponse.Owner owner, String name) {
+            super();
+            this.isFork = isFork;
+            this.owner = owner;
+            this.name = name;
+        }
+
+        @JsonProperty("isFork")
+        public Boolean getIsFork() {
+            return isFork;
+        }
+
+        @JsonProperty("isFork")
+        public void setIsFork(Boolean isFork) {
+            this.isFork = isFork;
+        }
+
+        @JsonProperty("owner")
+        public PullRequestWithCommentsResponse.Owner getOwner() {
+            return owner;
+        }
+
+        @JsonProperty("owner")
+        public void setOwner(PullRequestWithCommentsResponse.Owner owner) {
+            this.owner = owner;
+        }
+
+        @JsonProperty("name")
+        public String getName() {
+            return name;
+        }
+
+        @JsonProperty("name")
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        @JsonAnyGetter
+        public Map<String, Object> getAdditionalProperties() {
+            return this.additionalProperties;
+        }
+
+        @JsonAnySetter
+        public void setAdditionalProperty(String name, Object value) {
+            this.additionalProperties.put(name, value);
+        }
+
+        @Override
+        public String toString() {
+            StringBuilder sb = new StringBuilder();
+            sb.append(PullRequestWithCommentsResponse.Repository2 .class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append("isFork");
+            sb.append('=');
+            sb.append(((this.isFork == null)?"<null>":this.isFork));
+            sb.append(',');
+            sb.append("owner");
+            sb.append('=');
+            sb.append(((this.owner == null)?"<null>":this.owner));
+            sb.append(',');
+            sb.append("name");
+            sb.append('=');
+            sb.append(((this.name == null)?"<null>":this.name));
+            sb.append(',');
+            sb.append("additionalProperties");
+            sb.append('=');
+            sb.append(((this.additionalProperties == null)?"<null>":this.additionalProperties));
+            sb.append(',');
+            if (sb.charAt((sb.length()- 1)) == ',') {
+                sb.setCharAt((sb.length()- 1), ']');
+            } else {
+                sb.append(']');
+            }
+            return sb.toString();
+        }
+
+        @Override
+        public int hashCode() {
+            int result = 1;
+            result = ((result* 31)+((this.owner == null)? 0 :this.owner.hashCode()));
+            result = ((result* 31)+((this.name == null)? 0 :this.name.hashCode()));
+            result = ((result* 31)+((this.additionalProperties == null)? 0 :this.additionalProperties.hashCode()));
+            result = ((result* 31)+((this.isFork == null)? 0 :this.isFork.hashCode()));
+            return result;
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            if (other == this) {
+                return true;
+            }
+            if ((other instanceof PullRequestWithCommentsResponse.Repository2) == false) {
+                return false;
+            }
+            PullRequestWithCommentsResponse.Repository2 rhs = ((PullRequestWithCommentsResponse.Repository2) other);
+            return (((((this.owner == rhs.owner)||((this.owner!= null)&&this.owner.equals(rhs.owner)))&&((this.name == rhs.name)||((this.name!= null)&&this.name.equals(rhs.name))))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))))&&((this.isFork == rhs.isFork)||((this.isFork!= null)&&this.isFork.equals(rhs.isFork))));
+        }
+
+    }
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonPropertyOrder({
+        "state",
+        "contexts"
+    })
+    public static class Status {
+
+        @JsonProperty("state")
+        private String state;
+        @JsonProperty("contexts")
+        private List<PullRequestWithCommentsResponse.Context> contexts = new ArrayList<PullRequestWithCommentsResponse.Context>();
+        @JsonIgnore
+        private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+        /**
+         * No args constructor for use in serialization
+         * 
+         */
+        public Status() {
+        }
+
+        /**
+         * 
+         * @param state
+         * @param contexts
+         */
+        public Status(String state, List<PullRequestWithCommentsResponse.Context> contexts) {
+            super();
+            this.state = state;
+            this.contexts = contexts;
+        }
+
+        @JsonProperty("state")
+        public String getState() {
+            return state;
+        }
+
+        @JsonProperty("state")
+        public void setState(String state) {
+            this.state = state;
+        }
+
+        @JsonProperty("contexts")
+        public List<PullRequestWithCommentsResponse.Context> getContexts() {
+            return contexts;
+        }
+
+        @JsonProperty("contexts")
+        public void setContexts(List<PullRequestWithCommentsResponse.Context> contexts) {
+            this.contexts = contexts;
+        }
+
+        @JsonAnyGetter
+        public Map<String, Object> getAdditionalProperties() {
+            return this.additionalProperties;
+        }
+
+        @JsonAnySetter
+        public void setAdditionalProperty(String name, Object value) {
+            this.additionalProperties.put(name, value);
+        }
+
+        @Override
+        public String toString() {
+            StringBuilder sb = new StringBuilder();
+            sb.append(PullRequestWithCommentsResponse.Status.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append("state");
+            sb.append('=');
+            sb.append(((this.state == null)?"<null>":this.state));
+            sb.append(',');
+            sb.append("contexts");
+            sb.append('=');
+            sb.append(((this.contexts == null)?"<null>":this.contexts));
+            sb.append(',');
+            sb.append("additionalProperties");
+            sb.append('=');
+            sb.append(((this.additionalProperties == null)?"<null>":this.additionalProperties));
+            sb.append(',');
+            if (sb.charAt((sb.length()- 1)) == ',') {
+                sb.setCharAt((sb.length()- 1), ']');
+            } else {
+                sb.append(']');
+            }
+            return sb.toString();
+        }
+
+        @Override
+        public int hashCode() {
+            int result = 1;
+            result = ((result* 31)+((this.state == null)? 0 :this.state.hashCode()));
+            result = ((result* 31)+((this.contexts == null)? 0 :this.contexts.hashCode()));
+            result = ((result* 31)+((this.additionalProperties == null)? 0 :this.additionalProperties.hashCode()));
+            return result;
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            if (other == this) {
+                return true;
+            }
+            if ((other instanceof PullRequestWithCommentsResponse.Status) == false) {
+                return false;
+            }
+            PullRequestWithCommentsResponse.Status rhs = ((PullRequestWithCommentsResponse.Status) other);
+            return ((((this.state == rhs.state)||((this.state!= null)&&this.state.equals(rhs.state)))&&((this.contexts == rhs.contexts)||((this.contexts!= null)&&this.contexts.equals(rhs.contexts))))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))));
         }
 
     }

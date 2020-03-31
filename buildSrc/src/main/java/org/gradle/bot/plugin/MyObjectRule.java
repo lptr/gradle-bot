@@ -70,11 +70,13 @@ public class MyObjectRule implements Rule<JPackage, JType> {
     private final RuleFactory ruleFactory;
     private final ReflectionHelper reflectionHelper;
     private final ParcelableHelper parcelableHelper;
+    private final Map<String, Integer> typeNameToOccurence;
 
-    protected MyObjectRule(RuleFactory ruleFactory, ParcelableHelper parcelableHelper, ReflectionHelper reflectionHelper) {
+    protected MyObjectRule(RuleFactory ruleFactory, ParcelableHelper parcelableHelper, ReflectionHelper reflectionHelper, Map<String,Integer>typeNameToOccurence) {
         this.ruleFactory = ruleFactory;
         this.parcelableHelper = parcelableHelper;
         this.reflectionHelper = reflectionHelper;
+        this.typeNameToOccurence = typeNameToOccurence;
     }
 
     /**
@@ -191,6 +193,13 @@ public class MyObjectRule implements Rule<JPackage, JType> {
      *             current map of classes to be generated.
      */
     private JDefinedClass createClass(String nodeName, JsonNode node, JPackage _package) throws ClassAlreadyExistsException {
+
+        if(typeNameToOccurence.containsKey(nodeName)) {
+            nodeName+=typeNameToOccurence.get(nodeName);
+        }
+
+        typeNameToOccurence.put(nodeName, typeNameToOccurence.getOrDefault(nodeName,1)+1);
+
 
         JDefinedClass newType;
 

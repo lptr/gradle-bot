@@ -56,6 +56,7 @@ class WebHookIntegrationTest {
         Assertions.assertEquals(1, testGitHubEventHandler.receivedEvents.size)
     }
 
+    @Suppress("UNCHECKED_CAST")
     @Test
     fun `all handlers have been registered`() {
         val eventBus = vertx.eventBus() as EventBusImpl

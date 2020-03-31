@@ -7,8 +7,15 @@ import javax.inject.Singleton
 import org.gradle.bot.client.GitHubClient
 import org.gradle.bot.client.TeamCityClient
 import org.gradle.bot.eventhandlers.WebHookEventHandler
+import org.gradle.bot.eventhandlers.github.pullrequest.ciStatusContext
+import org.gradle.bot.eventhandlers.github.pullrequest.ciStatusDesc
+import org.gradle.bot.model.BuildStage
+import org.gradle.bot.model.CommitStatusState
+import org.gradle.bot.model.CommitStatusState.Companion.of
 import org.gradle.bot.model.ListOpenPullRequestsResponse
 import org.gradle.bot.objectMapper
+import org.jetbrains.teamcity.rest.Build
+import org.jetbrains.teamcity.rest.BuildStatus
 import org.slf4j.LoggerFactory
 
 interface TeamCityEventHandler : WebHookEventHandler {
@@ -30,7 +37,7 @@ enum class BuildEventStatus {
 
 val buildEventPattern = "(success|failure|running) - .*buildTypeId=(\\w+)&buildId=(\\d+)\\|.*".toRegex()
 
-class TeamCityBuildEvent(@JsonProperty("text") private val text: String) {
+class TeamCityBuildEvent(@JsonProperty("text") val text: String) {
     val buildStatus: BuildEventStatus
     val buildTypeId: String
     val buildId: String
@@ -68,13 +75,47 @@ class UpdateCIStatusForAllOpenPullRequests @Inject constructor(
     private val gitHubClient: GitHubClient,
     private val teamCityClient: TeamCityClient
 ) : AbstractTeamCityEventHandler() {
+    private val logger = LoggerFactory.getLogger(javaClass)
+    private val repoName = "gradle/gradle"
+    private val acceptedStatus = listOf(BuildStatus.SUCCESS.toString(), BuildStatus.FAILURE.toString())
+    private val acceptedBranches = listOf("master", "release")
+    private val acceptedBuildTypeId = BuildStage.READY_FOR_NIGHTLY.buildTypeId
     override fun handleEvent(event: TeamCityBuildEvent) {
-        gitHubClient.listOpenPullRequests("gradle/gradle").onSuccess {
-            updateCIStatusFor(it)
+        if (!acceptedStatus.contains(event.buildStatus.toString()) ||
+            event.buildTypeId != acceptedBuildTypeId) {
+            logger.debug("Skip teamcity event {}", event.text)
+            return
+        }
+        teamCityClient.findBuild(event.buildId).onSuccess { build ->
+            if (build!!.branch.name !in acceptedBranches) {
+                logger.debug("Skip teamcity build event on branch {}", build.branch.name)
+                return@onSuccess
+            }
+            gitHubClient.listOpenPullRequests(repoName).onSuccess {
+                it.data.repository.pullRequests.nodes.forEach { pr ->
+                    updateCIStatusFor(build, pr)
+                }
+            }
         }
     }
 
-    private fun updateCIStatusFor(response: ListOpenPullRequestsResponse) {
-        response.data.repository.pullRequests.nodes
+    private fun updateCIStatusFor(build: Build, pr: ListOpenPullRequestsResponse.Node) {
+        val latestCIStatus: CommitStatusState? = pr.commits?.nodes?.get(0)?.commit?.status?.contexts
+            ?.find { it.context == ciStatusContext }?.state?.let(::of)
+
+        val targetStatus = of(build.status.toString())
+        val headCommit = pr.headRef.target.oid
+
+        if (targetStatus != latestCIStatus) {
+            logger.debug("Update CI status {} to {} {}", targetStatus, pr.url, headCommit)
+            gitHubClient.createCommitStatus(
+                repoName,
+                headCommit,
+                targetStatus,
+                build.getHomeUrl(),
+                ciStatusContext,
+                ciStatusDesc(build, targetStatus)
+            )
+        }
     }
 }

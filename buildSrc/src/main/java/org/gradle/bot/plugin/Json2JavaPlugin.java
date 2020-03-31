@@ -22,7 +22,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Stream;
 
 // This is a workaround for https://github.com/joelittlejohn/jsonschema2pojo/pull/1008
@@ -36,8 +39,11 @@ public class Json2JavaPlugin implements Plugin<Project> {
     }
 
     public static class MyRuleFactory extends RuleFactory {
+        // There's a bug in current implementation, if a JSON node name occurs multiple times in JSON heriarchy, the previous one will be overwritten
+        // This map keeps name to ocurrence so we can have Node, Node2, Node3 to avoid overwritten
+        private Map<String, Integer> typeNameToOccurence = new HashMap<>();
         public Rule<JPackage, JType> getObjectRule() {
-            return new MyObjectRule(this, new ParcelableHelper(), getReflectionHelper());
+            return new MyObjectRule(this, new ParcelableHelper(), getReflectionHelper(), typeNameToOccurence);
         }
     }
 
@@ -53,6 +59,7 @@ public class Json2JavaPlugin implements Plugin<Project> {
                     .forEach(it -> generate(it, targetDir, targetPackage));
         }
 
+        // This only supports generating 1 class for 1 JSON in each generate call
         private void generate(File srcJson, File targetDir, String targetPackage) {
             GenerationConfig config = new DefaultGenerationConfig() {
                 @Override

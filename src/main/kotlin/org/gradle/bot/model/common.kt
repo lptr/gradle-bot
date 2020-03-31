@@ -26,28 +26,30 @@ enum class CommitStatusState {
 
     companion object {
         fun fromTeamCityBuildStatus(buildStatus: BuildStatus): CommitStatusState =
-                when (buildStatus) {
-                    BuildStatus.SUCCESS -> SUCCESS
-                    BuildStatus.ERROR -> ERROR
-                    BuildStatus.FAILURE -> FAILURE
-                    BuildStatus.UNKNOWN -> PENDING
-                }
+            when (buildStatus) {
+                BuildStatus.SUCCESS -> SUCCESS
+                BuildStatus.ERROR -> ERROR
+                BuildStatus.FAILURE -> FAILURE
+                BuildStatus.UNKNOWN -> PENDING
+            }
+
+        fun of(value: String) = valueOf(value.toUpperCase())
     }
 }
 
 val allBuildTypes = listOf(
-        "Compile All (Quick Feedback - Linux Only)",
-        "Sanity Check (Quick Feedback - Linux Only)",
-        "Quick Feedback - Linux Only (Trigger) (Check)",
-        "Quick Feedback (Trigger) (Check)",
-        "Gradleception - Java8 Linux (Ready for Merge)",
-        "Smoke Tests with 3rd Party Plugins (instantSmokeTest) - Java14 Linux (Ready for Merge)",
-        "Smoke Tests with 3rd Party Plugins (instantSmokeTest) - Java8 Linux (Ready for Merge)",
-        "Smoke Tests with 3rd Party Plugins (smokeTest) - Java14 Linux (Ready for Merge)",
-        "Build Distributions (Ready for Merge)",
-        "Performance Regression Test Coordinator - Linux (Ready for Merge)",
-        "Ready for Merge (Trigger) (Check)",
-        "Ready for Nightly (Trigger) (Check)"
+    "Compile All (Quick Feedback - Linux Only)",
+    "Sanity Check (Quick Feedback - Linux Only)",
+    "Quick Feedback - Linux Only (Trigger) (Check)",
+    "Quick Feedback (Trigger) (Check)",
+    "Gradleception - Java8 Linux (Ready for Merge)",
+    "Smoke Tests with 3rd Party Plugins (instantSmokeTest) - Java14 Linux (Ready for Merge)",
+    "Smoke Tests with 3rd Party Plugins (instantSmokeTest) - Java8 Linux (Ready for Merge)",
+    "Smoke Tests with 3rd Party Plugins (smokeTest) - Java14 Linux (Ready for Merge)",
+    "Build Distributions (Ready for Merge)",
+    "Performance Regression Test Coordinator - Linux (Ready for Merge)",
+    "Ready for Merge (Trigger) (Check)",
+    "Ready for Nightly (Trigger) (Check)"
 )
 
 enum class BuildStage(val fullName: String, val abbr: String, val buildTypeId: String, val dependencies: List<String>) {

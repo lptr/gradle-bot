@@ -8,9 +8,13 @@ import org.gradle.bot.client.TeamCityClient
 import org.gradle.bot.eventhandlers.github.AbstractGitHubEventHandler
 import org.gradle.bot.model.CommitStatusState
 import org.gradle.bot.model.PullRequestGitHubEvent
+import org.jetbrains.teamcity.rest.Build
 import org.slf4j.LoggerFactory
 
 val ciStatusContext = "CI Status"
+
+fun ciStatusDesc(build: Build, commitStatusState: CommitStatusState) =
+    "${build.branch.name} branch ${commitStatusState.name.toLowerCase()} since ${build.finishDateTime!!.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME)}"
 
 // https://developer.github.com/v3/activity/events/types/#pullrequestevent
 
@@ -39,7 +43,7 @@ class UpdateCIStatusUponPullRequestChange @Inject constructor(
     private val githubClient: GitHubClient,
     private val teamCityClient: TeamCityClient
 ) :
-        AbstractGitHubEventHandler<PullRequestGitHubEvent>() {
+    AbstractGitHubEventHandler<PullRequestGitHubEvent>() {
     private val logger = LoggerFactory.getLogger(javaClass)
     override fun handleEvent(event: PullRequestGitHubEvent) {
         if (PullRequestAction.of(event.action).let { it != PullRequestAction.OPENED && it != PullRequestAction.SYNCHRONIZE }) {
@@ -52,14 +56,13 @@ class UpdateCIStatusUponPullRequestChange @Inject constructor(
         }
 
         teamCityClient.getLatestFinishedBuild(event.getTargetBranch()).onSuccess {
-            val time = it.finishDateTime!!.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME)
             val commitStatusState = CommitStatusState.fromTeamCityBuildStatus(it.status!!)
             githubClient.createCommitStatus(event.getRepoFullName(),
-                    event.getHeadSha(),
-                    commitStatusState,
-                    it.getHomeUrl(),
-                    "${event.getTargetBranch()} branch ${commitStatusState.name.toLowerCase()} since $time",
-                    ciStatusContext)
+                event.getHeadSha(),
+                commitStatusState,
+                it.getHomeUrl(),
+                ciStatusDesc(it, commitStatusState),
+                ciStatusContext)
         }
     }
 }
