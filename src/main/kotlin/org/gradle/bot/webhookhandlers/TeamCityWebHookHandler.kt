@@ -16,7 +16,7 @@ class TeamCityWebHookHandler @Inject constructor() : Handler<RoutingContext> {
 
 private fun RoutingContext?.parseTeamCityPayload(): String? {
     return this?.let {
-        logger.debug("Get GitHub webhook {}", bodyAsString)
+        logger.debug("Get TeamCity webhook {}", bodyAsString)
         bodyAsString
     }
 }
