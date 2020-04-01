@@ -82,7 +82,6 @@ class UpdateCIStatusForAllOpenPullRequestsTest : AbstractMockKTest() {
         commitContexts.add(
             ListOpenPullRequestsResponse.Context("failure", "url1", "desc1", ciStatusContext)
         )
-
         every { build.branch.name } returns "master"
         every { build.status } returns BuildStatus.SUCCESS
 
