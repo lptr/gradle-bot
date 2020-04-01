@@ -1,8 +1,9 @@
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
-import java.net.URI
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     id("org.jetbrains.kotlin.jvm") version "1.3.70"
+    id("com.bnorm.power.kotlin-power-assert") version "0.3.0"
     id("application")
 }
 
@@ -33,6 +34,7 @@ dependencies {
     val guavaVersion = "28.2-jre"
     val mockitoJUnitVersion = "3.3.3"
     val ktlintVersion = "0.36.0"
+    val mockKVersion = "1.9.3"
 
     implementation("io.vertx:vertx-web-client:$vertxVersion")
     implementation("io.vertx:vertx-core:$vertxVersion")
@@ -58,6 +60,7 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-engine:$junit5Version")
     testImplementation("org.junit.jupiter:junit-jupiter-params:$junit5Version")
     testImplementation("org.mockito:mockito-junit-jupiter:$mockitoJUnitVersion")
+    testImplementation("io.mockk:mockk:$mockKVersion")
 
 
     "teamCityWorkaroundImplementation"(platform("org.jetbrains.kotlin:kotlin-bom"))
@@ -73,7 +76,7 @@ dependencies {
     configurations["implementation"].extendsFrom(configurations["teamCityWorkaroundImplementation"])
 }
 
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>() {
+tasks.withType<KotlinCompile>() {
     kotlinOptions.jvmTarget = "1.8"
 }
 
@@ -84,6 +87,13 @@ tasks.named("test", Test::class.java) {
 
 tasks.named("run", JavaExec::class.java) {
     main = "org.gradle.bot.AppKt"
+}
+
+tasks.named("compileTestKotlin", KotlinCompile::class.java) {
+    // https://github.com/bnorm/kotlin-power-assert
+    kotlinOptions {
+        useIR = true
+    }
 }
 
 application {

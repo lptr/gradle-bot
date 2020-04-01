@@ -2,8 +2,6 @@ package org.gradle.bot.eventhandlers.teamcity
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import io.vertx.core.eventbus.Message
-import javax.inject.Inject
-import javax.inject.Singleton
 import org.gradle.bot.client.GitHubClient
 import org.gradle.bot.client.TeamCityClient
 import org.gradle.bot.eventhandlers.WebHookEventHandler
@@ -17,6 +15,8 @@ import org.gradle.bot.objectMapper
 import org.jetbrains.teamcity.rest.Build
 import org.jetbrains.teamcity.rest.BuildStatus
 import org.slf4j.LoggerFactory
+import javax.inject.Inject
+import javax.inject.Singleton
 
 interface TeamCityEventHandler : WebHookEventHandler {
     override val eventPrefix: String
@@ -100,6 +100,11 @@ class UpdateCIStatusForAllOpenPullRequests @Inject constructor(
     }
 
     private fun updateCIStatusFor(build: Build, pr: ListOpenPullRequestsResponse.Node) {
+        if (pr.headRef.repository.isFork) {
+            logger.debug("Skip updating status for forked PR {}", pr.url)
+            return
+        }
+
         val latestCIStatus: CommitStatusState? = pr.commits?.nodes?.get(0)?.commit?.status?.contexts
             ?.find { it.context == ciStatusContext }?.state?.let(::of)
 
@@ -113,8 +118,8 @@ class UpdateCIStatusForAllOpenPullRequests @Inject constructor(
                 headCommit,
                 targetStatus,
                 build.getHomeUrl(),
-                ciStatusContext,
-                ciStatusDesc(build, targetStatus)
+                ciStatusDesc(build, targetStatus),
+                ciStatusContext
             )
         }
     }
