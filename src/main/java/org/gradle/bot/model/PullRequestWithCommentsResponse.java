@@ -1192,6 +1192,7 @@ public class PullRequestWithCommentsResponse {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonPropertyOrder({
         "id",
+        "number",
         "body",
         "url",
         "headRef",
@@ -1203,6 +1204,8 @@ public class PullRequestWithCommentsResponse {
 
         @JsonProperty("id")
         private String id;
+        @JsonProperty("number")
+        private Long number;
         @JsonProperty("body")
         private String body;
         @JsonProperty("url")
@@ -1227,6 +1230,7 @@ public class PullRequestWithCommentsResponse {
 
         /**
          * 
+         * @param number
          * @param baseRefName
          * @param comments
          * @param headRef
@@ -1235,9 +1239,10 @@ public class PullRequestWithCommentsResponse {
          * @param body
          * @param url
          */
-        public PullRequest(String id, String body, String url, PullRequestWithCommentsResponse.HeadRef headRef, String baseRefName, PullRequestWithCommentsResponse.Comments comments, PullRequestWithCommentsResponse.Commits commits) {
+        public PullRequest(String id, Long number, String body, String url, PullRequestWithCommentsResponse.HeadRef headRef, String baseRefName, PullRequestWithCommentsResponse.Comments comments, PullRequestWithCommentsResponse.Commits commits) {
             super();
             this.id = id;
+            this.number = number;
             this.body = body;
             this.url = url;
             this.headRef = headRef;
@@ -1254,6 +1259,16 @@ public class PullRequestWithCommentsResponse {
         @JsonProperty("id")
         public void setId(String id) {
             this.id = id;
+        }
+
+        @JsonProperty("number")
+        public Long getNumber() {
+            return number;
+        }
+
+        @JsonProperty("number")
+        public void setNumber(Long number) {
+            this.number = number;
         }
 
         @JsonProperty("body")
@@ -1334,6 +1349,10 @@ public class PullRequestWithCommentsResponse {
             sb.append('=');
             sb.append(((this.id == null)?"<null>":this.id));
             sb.append(',');
+            sb.append("number");
+            sb.append('=');
+            sb.append(((this.number == null)?"<null>":this.number));
+            sb.append(',');
             sb.append("body");
             sb.append('=');
             sb.append(((this.body == null)?"<null>":this.body));
@@ -1373,6 +1392,7 @@ public class PullRequestWithCommentsResponse {
         @Override
         public int hashCode() {
             int result = 1;
+            result = ((result* 31)+((this.number == null)? 0 :this.number.hashCode()));
             result = ((result* 31)+((this.baseRefName == null)? 0 :this.baseRefName.hashCode()));
             result = ((result* 31)+((this.comments == null)? 0 :this.comments.hashCode()));
             result = ((result* 31)+((this.headRef == null)? 0 :this.headRef.hashCode()));
@@ -1393,7 +1413,7 @@ public class PullRequestWithCommentsResponse {
                 return false;
             }
             PullRequestWithCommentsResponse.PullRequest rhs = ((PullRequestWithCommentsResponse.PullRequest) other);
-            return (((((((((this.baseRefName == rhs.baseRefName)||((this.baseRefName!= null)&&this.baseRefName.equals(rhs.baseRefName)))&&((this.comments == rhs.comments)||((this.comments!= null)&&this.comments.equals(rhs.comments))))&&((this.headRef == rhs.headRef)||((this.headRef!= null)&&this.headRef.equals(rhs.headRef))))&&((this.commits == rhs.commits)||((this.commits!= null)&&this.commits.equals(rhs.commits))))&&((this.id == rhs.id)||((this.id!= null)&&this.id.equals(rhs.id))))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))))&&((this.body == rhs.body)||((this.body!= null)&&this.body.equals(rhs.body))))&&((this.url == rhs.url)||((this.url!= null)&&this.url.equals(rhs.url))));
+            return ((((((((((this.number == rhs.number)||((this.number!= null)&&this.number.equals(rhs.number)))&&((this.baseRefName == rhs.baseRefName)||((this.baseRefName!= null)&&this.baseRefName.equals(rhs.baseRefName))))&&((this.comments == rhs.comments)||((this.comments!= null)&&this.comments.equals(rhs.comments))))&&((this.headRef == rhs.headRef)||((this.headRef!= null)&&this.headRef.equals(rhs.headRef))))&&((this.commits == rhs.commits)||((this.commits!= null)&&this.commits.equals(rhs.commits))))&&((this.id == rhs.id)||((this.id!= null)&&this.id.equals(rhs.id))))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))))&&((this.body == rhs.body)||((this.body!= null)&&this.body.equals(rhs.body))))&&((this.url == rhs.url)||((this.url!= null)&&this.url.equals(rhs.url))));
         }
 
     }

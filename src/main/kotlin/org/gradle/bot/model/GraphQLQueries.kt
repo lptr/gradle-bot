@@ -8,6 +8,7 @@ query {
     nameWithOwner
     pullRequest(number: 12595) {
       id
+      number
       body
       url
       headRef {

@@ -62,7 +62,12 @@ enum class BuildStage(val fullName: String, val abbr: String, val buildTypeId: S
     READY_FOR_RELEASE("ReadyForRelease", "RFR", "Gradle_Check_Stage_ReadyforRelease_Trigger", allBuildTypes);
 
     companion object {
-        fun parseTargetStage(target: String) = values().find { it.fullName.equals(target, true) || it.abbr.equals(target, true) }
+        fun parseTargetStage(target: String) =
+            if (target == "this") {
+                READY_FOR_MERGE
+            } else {
+                values().find { it.fullName.equals(target, true) || it.abbr.equals(target, true) }
+            }
     }
 
     fun toBuildConfigurationId() = BuildConfigurationId(buildTypeId)

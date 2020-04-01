@@ -125,7 +125,6 @@ class UpdateCIStatusForAllOpenPullRequestsTest : AbstractMockKTest() {
 
         // then
         verifyGitHubTeamCityClientsNotCalled()
-
     }
 
     @Test

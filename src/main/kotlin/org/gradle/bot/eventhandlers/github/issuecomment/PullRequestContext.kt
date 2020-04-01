@@ -12,17 +12,39 @@ import org.gradle.bot.model.PullRequestWithCommentsResponse
 import org.gradle.bot.objectMapper
 import org.jetbrains.teamcity.rest.Build
 
+fun PullRequestWithCommentsResponse.getRepoName() = data.repository.nameWithOwner
+
+fun PullRequestWithCommentsResponse.getBranchName() =
+    if (data.repository.pullRequest.headRef.repository.isFork) {
+        "pull/${data.repository.pullRequest.number}/head"
+    } else {
+        data.repository.pullRequest.headRef.name
+    }
+
+fun PullRequestWithCommentsResponse.getSubjectId() = data.repository.pullRequest.id
+fun PullRequestWithCommentsResponse.getHeadRefSha() = data.repository.pullRequest.headRef.target.oid
+
+fun PullRequestWithCommentsResponse.getComments(botName: String): List<PullRequestComment> {
+    return data.repository.pullRequest.comments.nodes
+        .map { comment ->
+            val metadata = CommentMetadata.parseComment(comment.body)
+            when {
+                comment.author.login == botName && metadata.replyTargetCommentId != null -> BotReplyCommandComment(comment.databaseId, comment.body, metadata)
+                comment.author.login == botName -> BotNotificationComment(comment.databaseId, comment.body, metadata)
+                comment.body.contains("@$botName") -> CommandComment(comment.databaseId, comment.body, metadata, AuthorAssociation.isAdmin(comment.authorAssociation))
+                else -> UnrelatedComment(comment.databaseId, comment.body, metadata)
+            }.also {
+                logger.info("Parse comment {} to {}", comment.body, it)
+            }
+        }
+}
+
 class PullRequestContext(
     private val gitHubClient: GitHubClient,
     private val teamCityClient: TeamCityClient,
-    pullRequestWithCommentsResponse: PullRequestWithCommentsResponse
+    private val pr: PullRequestWithCommentsResponse
 ) {
-    val comments: List<PullRequestComment> = pullRequestWithCommentsResponse.getComments(gitHubClient.whoAmI())
-    val repoName: String = pullRequestWithCommentsResponse.data.repository.nameWithOwner
-    val branchName: String = pullRequestWithCommentsResponse.data.repository.pullRequest.headRef.name
-    val subjectId: String = pullRequestWithCommentsResponse.data.repository.pullRequest.id
-    val headRefSha: String = pullRequestWithCommentsResponse.data.repository.pullRequest.headRef.target.oid
-
+    val comments: List<PullRequestComment> = pr.getComments(gitHubClient.whoAmI())
     fun processCommand(commentId: Long) {
         val targetComment = comments.find { it.id == commentId }
         if (targetComment == null) {
@@ -41,18 +63,18 @@ class PullRequestContext(
     }
 
     fun reply(targetComment: PullRequestComment, content: String, teamCityBuildId: String? = null) {
-        reply("""<!-- ${objectMapper.writeValueAsString(CommentMetadata(targetComment.id, teamCityBuildId, headRefSha))} -->
+        reply("""<!-- ${objectMapper.writeValueAsString(CommentMetadata(targetComment.id, teamCityBuildId, pr.getHeadRefSha()))} -->
             
 $content""")
     }
 
     private fun reply(content: String) {
-        gitHubClient.comment(subjectId, content).onSuccess {
-            logger.info("Successfully commented $content on $subjectId")
+        gitHubClient.comment(pr.getSubjectId(), content).onSuccess {
+            logger.info("Successfully commented $content on ${pr.getSubjectId()}")
         }
     }
 
-    fun triggerBuild(targetStage: BuildStage) = teamCityClient.triggerBuild(targetStage, branchName)
+    fun triggerBuild(targetStage: BuildStage) = teamCityClient.triggerBuild(targetStage, pr.getBranchName())
 
     fun findLatestTriggeredBuild(): Future<Build?> {
         val commentWithBuildId = comments.findLast { it.metadata.teamCityBuildId != null }
@@ -64,7 +86,7 @@ $content""")
     }
 
     fun publishPendingStatuses(dependencies: List<String>) {
-        gitHubClient.createCommitStatus(repoName, headRefSha, dependencies, CommitStatusState.PENDING)
+        gitHubClient.createCommitStatus(pr.getRepoName(), pr.getHeadRefSha(), dependencies, CommitStatusState.PENDING)
     }
 
     fun iDontUnderstandWhatYouSaid() = """
@@ -76,6 +98,7 @@ Sorry I don't understand what you said, please type `@${gitHubClient.whoAmI()} h
 - `@${gitHubClient.whoAmI()} test {BuildStage}` to trigger a build
   - e.g. `@${gitHubClient.whoAmI()} test SanityCheck plz`
   - `SanityCheck`/`CompileAll`/`QuickFeedbackLinux`/`QuickFeedback`/`ReadyForMerge`/`ReadyForNightly`/`ReadyForRelease` are supported
+  - `test this` means `test ReadyForMerge`
   - `SanityCheck` can be abbreviated as `SC`, `ReadyForMerge` as `RFM`, etc.
 - `@${gitHubClient.whoAmI()} help` to display this message
 """
@@ -155,18 +178,3 @@ class UnrelatedComment(override val id: Long, override val body: String, overrid
 class BotReplyCommandComment(override val id: Long, override val body: String, override val metadata: CommentMetadata) : PullRequestComment
 
 class BotNotificationComment(override val id: Long, override val body: String, override val metadata: CommentMetadata) : PullRequestComment
-
-fun PullRequestWithCommentsResponse.getComments(botName: String): List<PullRequestComment> {
-    return data.repository.pullRequest.comments.nodes
-            .map { comment ->
-                val metadata = CommentMetadata.parseComment(comment.body)
-                when {
-                    comment.author.login == botName && metadata.replyTargetCommentId != null -> BotReplyCommandComment(comment.databaseId, comment.body, metadata)
-                    comment.author.login == botName -> BotNotificationComment(comment.databaseId, comment.body, metadata)
-                    comment.body.contains("@$botName") -> CommandComment(comment.databaseId, comment.body, metadata, AuthorAssociation.isAdmin(comment.authorAssociation))
-                    else -> UnrelatedComment(comment.databaseId, comment.body, metadata)
-                }.also {
-                    logger.info("Parse comment {} to {}", comment.body, it)
-                }
-            }
-}

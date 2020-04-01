@@ -4,6 +4,7 @@
       "nameWithOwner": "gradle/gradle",
       "pullRequest": {
         "id": "MDExOlB1bGxSZXF1ZXN0MzkxNjM4MTkw",
+        "number": 12595,
         "body": "on a failing build caused by state serialization errors, state is discarded, error is detailled in build failure and summary of problems seen so far in build output\r\non a failing build caused by instant execution problems, state is discarded and problem summary in build failure\r\non a failing build *not* caused by instant execution problems, problem summary in build output\r\non a succeeding build, problem summary in build output\r\n\r\nin all cases, generate the HTML report if any problem\r\n\r\n----\r\n\r\nMost of the impact on annotated tests can be seen in https://github.com/gradle/gradle/pull/12505 which is based on this very PR.",
         "url": "https://github.com/gradle/gradle/pull/12595",
         "headRef": {
