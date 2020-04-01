@@ -100,6 +100,10 @@ class UpdateCIStatusForAllOpenPullRequests @Inject constructor(
     }
 
     private fun updateCIStatusFor(build: Build, pr: ListOpenPullRequestsResponse.Node) {
+        logger.info(pr.url)
+        if (!pr.url.contains("12556")) {
+            return
+        }
         val latestCIStatus: CommitStatusState? = pr.commits?.nodes?.get(0)?.commit?.status?.contexts
             ?.find { it.context == ciStatusContext }?.state?.let(::of)
 
