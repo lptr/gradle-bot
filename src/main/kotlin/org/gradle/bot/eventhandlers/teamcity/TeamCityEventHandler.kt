@@ -113,8 +113,8 @@ class UpdateCIStatusForAllOpenPullRequests @Inject constructor(
                 headCommit,
                 targetStatus,
                 build.getHomeUrl(),
-                ciStatusContext,
-                ciStatusDesc(build, targetStatus)
+                ciStatusDesc(build, targetStatus),
+                ciStatusContext
             )
         }
     }

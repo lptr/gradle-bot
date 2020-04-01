@@ -6,12 +6,15 @@ import javax.inject.Singleton
 import org.gradle.bot.client.GitHubClient
 import org.gradle.bot.client.TeamCityClient
 import org.gradle.bot.eventhandlers.github.AbstractGitHubEventHandler
+import org.gradle.bot.eventhandlers.github.pullrequest.PullRequestAction.OPENED
+import org.gradle.bot.eventhandlers.github.pullrequest.PullRequestAction.REOPENED
+import org.gradle.bot.eventhandlers.github.pullrequest.PullRequestAction.SYNCHRONIZE
 import org.gradle.bot.model.CommitStatusState
 import org.gradle.bot.model.PullRequestGitHubEvent
 import org.jetbrains.teamcity.rest.Build
 import org.slf4j.LoggerFactory
 
-val ciStatusContext = "CI Status"
+const val ciStatusContext = "CI Status"
 
 fun ciStatusDesc(build: Build, commitStatusState: CommitStatusState) =
     "${build.branch.name} branch ${commitStatusState.name.toLowerCase()} since ${build.finishDateTime!!.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME)}"
@@ -39,20 +42,24 @@ fun PullRequestGitHubEvent.getTargetBranch() = pullRequest.base.ref
  * so the developer can see the latest CI status directly from PR page.
  */
 @Singleton
-class UpdateCIStatusUponPullRequestChange @Inject constructor(
+class UpdateCIStatusUponPullRequestSync @Inject constructor(
     private val githubClient: GitHubClient,
     private val teamCityClient: TeamCityClient
 ) :
     AbstractGitHubEventHandler<PullRequestGitHubEvent>() {
     private val logger = LoggerFactory.getLogger(javaClass)
+    private val acceptedActions = listOf(OPENED, SYNCHRONIZE, REOPENED)
+    private val acceptedTargetBranches = listOf("master", "release")
     override fun handleEvent(event: PullRequestGitHubEvent) {
-        if (PullRequestAction.of(event.action).let { it != PullRequestAction.OPENED && it != PullRequestAction.SYNCHRONIZE }) {
+        if (PullRequestAction.of(event.action).let { it !in acceptedActions } ||
+            event.getTargetBranch() !in acceptedTargetBranches) {
             logger.debug("Skip pull request {} with action {}", event.getWebUrl(), event.action)
             return
         }
 
         if (event.pullRequest.head.repo.fork) {
             logger.debug("Skip publishing CI status for forked pull request {}", event.getWebUrl())
+            return
         }
 
         teamCityClient.getLatestFinishedBuild(event.getTargetBranch()).onSuccess {
