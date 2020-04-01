@@ -69,6 +69,6 @@ class WebHookIntegrationTest {
         // UpdateCIStatusUponPullRequestChange
         // TestGitHubEventHandler
         // UpdateCIStatusForAllOpenPullRequests
-        Assertions.assertEquals(4, handlerMap.values.flatMap { it }.size)
+        Assertions.assertEquals(6, handlerMap.values.flatMap { it }.size)
     }
 }

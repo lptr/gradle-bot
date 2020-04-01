@@ -33,6 +33,7 @@ import org.gradle.bot.security.GithubSignatureChecker
 import org.gradle.bot.security.LenientGitHubSignatureCheck
 import org.gradle.bot.security.Sha1GitHubSignatureChecker
 import org.gradle.bot.webhookhandlers.GitHubWebHookHandler
+import org.gradle.bot.webhookhandlers.SlackWebHookHandler
 import org.gradle.bot.webhookhandlers.TeamCityWebHookHandler
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -114,6 +115,7 @@ class GradleBotVerticle @Inject constructor(
     private val injector: Injector,
     private val gitHubWebHookHandler: GitHubWebHookHandler,
     private val teamCityWebHookHandler: TeamCityWebHookHandler,
+    private val slackWebHookEventHandler: SlackWebHookHandler,
     private val gitHubClient: GitHubClient
 ) : AbstractVerticle() {
     private val logger: Logger = LoggerFactory.getLogger(GradleBotVerticle::class.java.name)
@@ -165,6 +167,7 @@ class GradleBotVerticle @Inject constructor(
         route("/*").handler(BodyHandler.create())
         post("/github").handler(gitHubWebHookHandler)
         post("/teamcity").handler(teamCityWebHookHandler)
+        post("/slack").handler(slackWebHookEventHandler)
         errorHandler(500) { it?.failure()?.printStackTrace() }
     }
 

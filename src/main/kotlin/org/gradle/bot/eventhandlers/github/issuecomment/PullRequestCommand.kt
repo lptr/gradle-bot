@@ -57,6 +57,8 @@ class TestAndMergeCommand
 
 class StopCommand
 
+class CancelCommand
+
 class HelpCommand(override val sourceComment: CommandComment) : PullRequestCommand {
     override fun execute(context: PullRequestContext) {
         context.reply(sourceComment, context.helpMessage())
