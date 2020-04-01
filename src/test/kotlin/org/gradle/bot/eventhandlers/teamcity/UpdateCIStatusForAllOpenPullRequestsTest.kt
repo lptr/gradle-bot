@@ -111,10 +111,7 @@ class UpdateCIStatusForAllOpenPullRequestsTest : AbstractMockKTest() {
         handler.handleEvent(event)
 
         // then
-        verify {
-            teamCityClient wasNot Called
-            gitHubClient wasNot Called
-        }
+        verifyGitHubTeamCityClientsNotCalled()
     }
 
     @Test
@@ -127,10 +124,8 @@ class UpdateCIStatusForAllOpenPullRequestsTest : AbstractMockKTest() {
         handler.handleEvent(event)
 
         // then
-        verify {
-            gitHubClient wasNot Called
-            teamCityClient wasNot Called
-        }
+        verifyGitHubTeamCityClientsNotCalled()
+
     }
 
     @Test
