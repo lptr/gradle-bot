@@ -102,6 +102,7 @@ public class ListOpenPullRequestsResponse {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonPropertyOrder({
         "commitUrl",
+        "committedDate",
         "oid",
         "status"
     })
@@ -109,6 +110,8 @@ public class ListOpenPullRequestsResponse {
 
         @JsonProperty("commitUrl")
         private String commitUrl;
+        @JsonProperty("committedDate")
+        private String committedDate;
         @JsonProperty("oid")
         private String oid;
         @JsonProperty("status")
@@ -125,13 +128,15 @@ public class ListOpenPullRequestsResponse {
 
         /**
          * 
+         * @param committedDate
          * @param commitUrl
          * @param oid
          * @param status
          */
-        public Commit(String commitUrl, String oid, ListOpenPullRequestsResponse.Status status) {
+        public Commit(String commitUrl, String committedDate, String oid, ListOpenPullRequestsResponse.Status status) {
             super();
             this.commitUrl = commitUrl;
+            this.committedDate = committedDate;
             this.oid = oid;
             this.status = status;
         }
@@ -144,6 +149,16 @@ public class ListOpenPullRequestsResponse {
         @JsonProperty("commitUrl")
         public void setCommitUrl(String commitUrl) {
             this.commitUrl = commitUrl;
+        }
+
+        @JsonProperty("committedDate")
+        public String getCommittedDate() {
+            return committedDate;
+        }
+
+        @JsonProperty("committedDate")
+        public void setCommittedDate(String committedDate) {
+            this.committedDate = committedDate;
         }
 
         @JsonProperty("oid")
@@ -184,6 +199,10 @@ public class ListOpenPullRequestsResponse {
             sb.append('=');
             sb.append(((this.commitUrl == null)?"<null>":this.commitUrl));
             sb.append(',');
+            sb.append("committedDate");
+            sb.append('=');
+            sb.append(((this.committedDate == null)?"<null>":this.committedDate));
+            sb.append(',');
             sb.append("oid");
             sb.append('=');
             sb.append(((this.oid == null)?"<null>":this.oid));
@@ -209,6 +228,7 @@ public class ListOpenPullRequestsResponse {
             int result = 1;
             result = ((result* 31)+((this.oid == null)? 0 :this.oid.hashCode()));
             result = ((result* 31)+((this.additionalProperties == null)? 0 :this.additionalProperties.hashCode()));
+            result = ((result* 31)+((this.committedDate == null)? 0 :this.committedDate.hashCode()));
             result = ((result* 31)+((this.commitUrl == null)? 0 :this.commitUrl.hashCode()));
             result = ((result* 31)+((this.status == null)? 0 :this.status.hashCode()));
             return result;
@@ -223,7 +243,7 @@ public class ListOpenPullRequestsResponse {
                 return false;
             }
             ListOpenPullRequestsResponse.Commit rhs = ((ListOpenPullRequestsResponse.Commit) other);
-            return (((((this.oid == rhs.oid)||((this.oid!= null)&&this.oid.equals(rhs.oid)))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))))&&((this.commitUrl == rhs.commitUrl)||((this.commitUrl!= null)&&this.commitUrl.equals(rhs.commitUrl))))&&((this.status == rhs.status)||((this.status!= null)&&this.status.equals(rhs.status))));
+            return ((((((this.oid == rhs.oid)||((this.oid!= null)&&this.oid.equals(rhs.oid)))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))))&&((this.committedDate == rhs.committedDate)||((this.committedDate!= null)&&this.committedDate.equals(rhs.committedDate))))&&((this.commitUrl == rhs.commitUrl)||((this.commitUrl!= null)&&this.commitUrl.equals(rhs.commitUrl))))&&((this.status == rhs.status)||((this.status!= null)&&this.status.equals(rhs.status))));
         }
 
     }

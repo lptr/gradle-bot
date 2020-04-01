@@ -5,6 +5,11 @@ import io.mockk.every
 import io.mockk.impl.annotations.RelaxedMockK
 import io.mockk.verify
 import io.vertx.core.Future
+import java.time.Instant
+import java.time.ZoneId
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter.ISO_INSTANT
+import java.time.temporal.ChronoUnit
 import org.gradle.bot.eventhandlers.github.pullrequest.ciStatusContext
 import org.gradle.bot.fixtures.AbstractMockKTest
 import org.gradle.bot.model.BuildStage
@@ -43,6 +48,7 @@ class UpdateCIStatusForAllOpenPullRequestsTest : AbstractMockKTest() {
         every { listOpenPullRequestsResponse.data.repository.pullRequests.nodes } returns listOf(prNode)
         every { prNode.commits.nodes.get(0).commit.status.contexts } returns commitContexts
         every { prNode.headRef.target.oid } returns prHeadCommit
+        every { prNode.commits.nodes[0].commit.committedDate } returns ZonedDateTime.ofInstant(Instant.now(), ZoneId.systemDefault()).format(ISO_INSTANT)
     }
 
     @Test
@@ -151,6 +157,26 @@ class UpdateCIStatusForAllOpenPullRequestsTest : AbstractMockKTest() {
         )
         every { build.branch.name } returns "master"
         every { build.status } returns BuildStatus.SUCCESS
+
+        // when
+        handler.handleEvent(event)
+
+        // then
+        verify(exactly = 0) {
+            gitHubClient.createCommitStatus(any(), any(), any(), any(), any(), any())
+        }
+    }
+
+    @Test
+    fun `skip stale pr`() {
+        // given
+        val event = createTeamCityEvent("success", BuildStage.READY_FOR_NIGHTLY.buildTypeId, "1111")
+        commitContexts.add(
+            ListOpenPullRequestsResponse.Context("failure", "url1", "desc1", ciStatusContext)
+        )
+        every { build.branch.name } returns "master"
+        every { build.status } returns BuildStatus.SUCCESS
+        every { prNode.commits.nodes[0].commit.committedDate } returns ZonedDateTime.ofInstant(Instant.now().minus(31, ChronoUnit.DAYS), ZoneId.systemDefault()).format(ISO_INSTANT)
 
         // when
         handler.handleEvent(event)

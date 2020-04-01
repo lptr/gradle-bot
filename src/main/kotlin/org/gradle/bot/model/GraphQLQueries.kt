@@ -2,67 +2,13 @@ package org.gradle.bot.model
 
 import org.gradle.bot.objectMapper
 
-/*
-query {
-  repository(owner: "gradle", name: "gradle") {
-    nameWithOwner
-    pullRequest(number: 12595) {
-      id
-      number
-      body
-      url
-      headRef {
-        target {
-          oid
-        }
-        repository {
-          isFork
-          owner {
-            login
-          }
-          name
-        }
-        name
-      }
-      baseRefName
-      comments(first: 100) {
-        nodes {
-          databaseId
-          author {
-            login
-          }
-          authorAssociation
-          body
-        }
-      }
-      commits(last: 1) {
-        nodes {
-          commit {
-            commitUrl
-            oid
-            status {
-              state
-              contexts {
-                state
-                targetUrl
-                description
-                context
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
- */
 fun pullRequestsWithCommentsQuery(owner: String, name: String, number: Long, maxCommentNum: Int = 100) = """
 query {
   repository(owner: "$owner", name: "$name") {
     nameWithOwner
     pullRequest(number: $number) {
       id
+      number
       body
       url
       headRef {
@@ -93,6 +39,7 @@ query {
         nodes {
           commit {
             commitUrl
+            committedDate
             oid
             status {
               state
@@ -164,6 +111,7 @@ query {
           nodes {
             commit {
               commitUrl
+              committedDate
               oid
               status {
                 state

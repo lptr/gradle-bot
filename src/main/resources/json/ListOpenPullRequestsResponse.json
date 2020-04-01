@@ -27,6 +27,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/1eda3eea31a06ddf3a3a5a969f0d00d46638a7ed",
+                    "committedDate": "2018-02-22T03:20:23Z",
                     "oid": "1eda3eea31a06ddf3a3a5a969f0d00d46638a7ed",
                     "status": {
                       "state": "FAILURE",
@@ -48,6 +49,12 @@
                           "targetUrl": "https://github.com/apps/wip",
                           "description": "ready for review",
                           "context": "WIP"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -79,6 +86,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/d2883a91f6cbe230333de1a147265cc14aa527fd",
+                    "committedDate": "2018-11-26T22:23:45Z",
                     "oid": "d2883a91f6cbe230333de1a147265cc14aa527fd",
                     "status": {
                       "state": "FAILURE",
@@ -100,6 +108,12 @@
                           "targetUrl": "https://travis-ci.org/gradle/gradle/builds/459983113?utm_source=github_status&utm_medium=notification",
                           "description": "The Travis CI build passed",
                           "context": "continuous-integration/travis-ci/pr"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -131,6 +145,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/81c436ab81fb0f058397d348abbeb30f9abacb51",
+                    "committedDate": "2018-05-18T09:55:51Z",
                     "oid": "81c436ab81fb0f058397d348abbeb30f9abacb51",
                     "status": {
                       "state": "FAILURE",
@@ -152,6 +167,12 @@
                           "targetUrl": "https://github.com/probot/dco#how-it-works",
                           "description": "All commits have a DCO sign-off from the author",
                           "context": "DCO"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -183,6 +204,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/67c912a6df0b28761031a4ac693a7f79bc2f84c8",
+                    "committedDate": "2018-06-14T09:41:56Z",
                     "oid": "67c912a6df0b28761031a4ac693a7f79bc2f84c8",
                     "status": {
                       "state": "FAILURE",
@@ -222,6 +244,12 @@
                           "targetUrl": "https://github.com/apps/wip",
                           "description": "ready for review",
                           "context": "WIP"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -253,6 +281,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/2ef6ec5598583a93bb2e3d1c59cf391627da8fb2",
+                    "committedDate": "2018-08-09T16:40:05Z",
                     "oid": "2ef6ec5598583a93bb2e3d1c59cf391627da8fb2",
                     "status": {
                       "state": "FAILURE",
@@ -274,6 +303,12 @@
                           "targetUrl": "https://github.com/apps/wip",
                           "description": "ready for review",
                           "context": "WIP"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -305,6 +340,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/8eed4442cf26ce70f511cbee545c79a1e07d5556",
+                    "committedDate": "2018-10-05T08:59:40Z",
                     "oid": "8eed4442cf26ce70f511cbee545c79a1e07d5556",
                     "status": {
                       "state": "FAILURE",
@@ -320,6 +356,12 @@
                           "targetUrl": "https://github.com/wip/app/issues/124",
                           "description": "Legacy commit status override — see details",
                           "context": "WIP"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -351,6 +393,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/1955d515aa87606177aabe8fc4185f738b23c62d",
+                    "committedDate": "2018-12-30T08:30:10Z",
                     "oid": "1955d515aa87606177aabe8fc4185f738b23c62d",
                     "status": {
                       "state": "FAILURE",
@@ -366,6 +409,12 @@
                           "targetUrl": "https://github.com/wip/app/issues/124",
                           "description": "Legacy commit status override — see details",
                           "context": "WIP"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -397,6 +446,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/84fe8d182262883d06ee95cd474c9a29a166e264",
+                    "committedDate": "2019-02-10T16:05:56Z",
                     "oid": "84fe8d182262883d06ee95cd474c9a29a166e264",
                     "status": {
                       "state": "FAILURE",
@@ -418,6 +468,12 @@
                           "targetUrl": "https://travis-ci.org/gradle/gradle/builds/491301646?utm_source=github_status&utm_medium=notification",
                           "description": "The Travis CI build passed",
                           "context": "continuous-integration/travis-ci/pr"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -449,6 +505,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/db05912abae18d497efbd00f1bbda3b602b10dff",
+                    "committedDate": "2019-03-08T09:52:11Z",
                     "oid": "db05912abae18d497efbd00f1bbda3b602b10dff",
                     "status": {
                       "state": "PENDING",
@@ -464,6 +521,12 @@
                           "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=20770971&buildTypeId=Gradle_Check_CompileAll",
                           "description": "TeamCity build finished",
                           "context": "Compile All (Quick Feedback - Linux Only)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -495,6 +558,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/aa91791328bd08579da8699733ee2d197a9526b8",
+                    "committedDate": "2019-04-13T21:09:46Z",
                     "oid": "aa91791328bd08579da8699733ee2d197a9526b8",
                     "status": {
                       "state": "PENDING",
@@ -540,6 +604,12 @@
                           "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=21867857&buildTypeId=Gradle_Check_SanityCheck",
                           "description": "TeamCity build finished",
                           "context": "Sanity Check (Quick Feedback - Linux Only)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -571,6 +641,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/b869639e135d16c7854de4287e6acc151d0c7221",
+                    "committedDate": "2019-05-16T21:38:24Z",
                     "oid": "b869639e135d16c7854de4287e6acc151d0c7221",
                     "status": {
                       "state": "FAILURE",
@@ -580,6 +651,12 @@
                           "targetUrl": "https://builds.gradle.org/viewType.html?buildTypeId=Gradle_Check_Stage_ReadyforNightly_Trigger&branch_Gradle_Check=master&tab=buildTypeStatusDiv",
                           "description": "master branch failure since 2020-03-23T11:04:53.244Z",
                           "context": "CI Status"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -611,6 +688,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/e77564735dc599982b8c7fa12ea821e6f03a8db0",
+                    "committedDate": "2019-05-26T14:40:20Z",
                     "oid": "e77564735dc599982b8c7fa12ea821e6f03a8db0",
                     "status": {
                       "state": "FAILURE",
@@ -656,6 +734,12 @@
                           "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=23267673&buildTypeId=Gradle_Check_CompileAll",
                           "description": "TeamCity build finished",
                           "context": "Compile All (Quick Feedback - Linux Only)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -687,6 +771,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/e10f68d6d1f736f26010b0d0831083cf64022f85",
+                    "committedDate": "2019-06-21T15:42:12Z",
                     "oid": "e10f68d6d1f736f26010b0d0831083cf64022f85",
                     "status": {
                       "state": "FAILURE",
@@ -702,6 +787,12 @@
                           "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=24164234&buildTypeId=Gradle_Check_CompileAll",
                           "description": "TeamCity build finished",
                           "context": "Compile All (Quick Feedback - Linux Only)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -733,6 +824,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/0b844c1fed071e62be5cc8ef2096873243c5b17c",
+                    "committedDate": "2019-05-26T14:30:01Z",
                     "oid": "0b844c1fed071e62be5cc8ef2096873243c5b17c",
                     "status": {
                       "state": "FAILURE",
@@ -778,6 +870,12 @@
                           "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=23267339&buildTypeId=Gradle_Check_CompileAll",
                           "description": "TeamCity build finished",
                           "context": "Compile All (Quick Feedback - Linux Only)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -809,6 +907,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/901afdb4e8b031fef5287d8394ff44ab5e167755",
+                    "committedDate": "2019-05-23T16:19:32Z",
                     "oid": "901afdb4e8b031fef5287d8394ff44ab5e167755",
                     "status": {
                       "state": "PENDING",
@@ -854,6 +953,12 @@
                           "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=23174919&buildTypeId=Gradle_Check_SanityCheck",
                           "description": "TeamCity build finished",
                           "context": "Sanity Check (Quick Feedback - Linux Only)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -885,6 +990,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/474dc3f9df73d0cb5e555194737a4516777b1a41",
+                    "committedDate": "2019-06-13T13:12:10Z",
                     "oid": "474dc3f9df73d0cb5e555194737a4516777b1a41",
                     "status": {
                       "state": "FAILURE",
@@ -900,6 +1006,12 @@
                           "targetUrl": "https://travis-ci.org/gradle/gradle/builds/545242369?utm_source=github_status&utm_medium=notification",
                           "description": "The Travis CI build passed",
                           "context": "continuous-integration/travis-ci/pr"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -931,6 +1043,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/5265f2a127ed496b38e5c069e1abd13f09d88fd0",
+                    "committedDate": "2019-06-04T10:58:25Z",
                     "oid": "5265f2a127ed496b38e5c069e1abd13f09d88fd0",
                     "status": {
                       "state": "PENDING",
@@ -976,6 +1089,12 @@
                           "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=23584825&buildTypeId=Gradle_Check_SanityCheck",
                           "description": "TeamCity build finished",
                           "context": "Sanity Check (Quick Feedback - Linux Only)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -1007,6 +1126,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/209981d819699f28e01533b19179127d5a246fec",
+                    "committedDate": "2019-05-27T19:34:26Z",
                     "oid": "209981d819699f28e01533b19179127d5a246fec",
                     "status": {
                       "state": "FAILURE",
@@ -1064,6 +1184,12 @@
                           "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=23308175&buildTypeId=Gradle_Check_SanityCheck",
                           "description": "TeamCity build finished",
                           "context": "Sanity Check (Quick Feedback - Linux Only)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -1095,6 +1221,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/082a1e64f4a8d599d6eef22d1e37d07310c22fc3",
+                    "committedDate": "2019-12-04T05:44:31Z",
                     "oid": "082a1e64f4a8d599d6eef22d1e37d07310c22fc3",
                     "status": {
                       "state": "FAILURE",
@@ -1128,6 +1255,12 @@
                           "targetUrl": "https://travis-ci.org/gradle/gradle/builds/620471578?utm_source=github_status&utm_medium=notification",
                           "description": "The Travis CI build passed",
                           "context": "continuous-integration/travis-ci/pr"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -1159,6 +1292,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/eaa1a4f30213201e92f18b63cf6d12b18a977d7c",
+                    "committedDate": "2019-07-23T17:59:22Z",
                     "oid": "eaa1a4f30213201e92f18b63cf6d12b18a977d7c",
                     "status": {
                       "state": "FAILURE",
@@ -1168,6 +1302,12 @@
                           "targetUrl": "https://builds.gradle.org/viewType.html?buildTypeId=Gradle_Check_Stage_ReadyforNightly_Trigger&branch_Gradle_Check=master&tab=buildTypeStatusDiv",
                           "description": "master branch failure since 2020-03-23T11:04:44.240Z",
                           "context": "CI Status"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -1199,6 +1339,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/bf21f0b5729b64be44a5e9cafb3b762617a9e46b",
+                    "committedDate": "2019-09-26T04:21:50Z",
                     "oid": "bf21f0b5729b64be44a5e9cafb3b762617a9e46b",
                     "status": {
                       "state": "FAILURE",
@@ -1214,6 +1355,12 @@
                           "targetUrl": "https://travis-ci.org/gradle/gradle/builds/589760332?utm_source=github_status&utm_medium=notification",
                           "description": "The Travis CI build passed",
                           "context": "continuous-integration/travis-ci/pr"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -1245,6 +1392,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/1120721af597bcd4a654590b6205c205fed5e60d",
+                    "committedDate": "2019-08-08T21:05:25Z",
                     "oid": "1120721af597bcd4a654590b6205c205fed5e60d",
                     "status": {
                       "state": "FAILURE",
@@ -1290,6 +1438,12 @@
                           "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=25702192&buildTypeId=Gradle_Check_SanityCheck",
                           "description": "TeamCity build finished",
                           "context": "Sanity Check (Quick Feedback - Linux Only)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -1321,6 +1475,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/3c4bbe9fd0f69da2cce48c3986236bf70ef7c983",
+                    "committedDate": "2020-03-03T14:58:37Z",
                     "oid": "3c4bbe9fd0f69da2cce48c3986236bf70ef7c983",
                     "status": {
                       "state": "FAILURE",
@@ -1330,6 +1485,12 @@
                           "targetUrl": "https://builds.gradle.org/viewType.html?buildTypeId=Gradle_Check_Stage_ReadyforNightly_Trigger&branch_Gradle_Check=master&tab=buildTypeStatusDiv",
                           "description": "master branch failure since 2020-03-23T11:04:41.240Z",
                           "context": "CI Status"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -1361,6 +1522,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/1c89bf85246d9e9946bf94ddfa0623a209a19b93",
+                    "committedDate": "2019-10-02T19:22:08Z",
                     "oid": "1c89bf85246d9e9946bf94ddfa0623a209a19b93",
                     "status": {
                       "state": "FAILURE",
@@ -1436,6 +1598,12 @@
                           "targetUrl": "https://travis-ci.org/gradle/gradle/builds/592729659?utm_source=github_status&utm_medium=notification",
                           "description": "The Travis CI build passed",
                           "context": "continuous-integration/travis-ci/pr"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -1467,6 +1635,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/a54bdf343c34863799c248f903ac65b028c9a577",
+                    "committedDate": "2019-12-17T01:57:54Z",
                     "oid": "a54bdf343c34863799c248f903ac65b028c9a577",
                     "status": {
                       "state": "FAILURE",
@@ -1482,6 +1651,12 @@
                           "targetUrl": "https://travis-ci.org/gradle/gradle/builds/625983240?utm_source=github_status&utm_medium=notification",
                           "description": "The Travis CI build failed",
                           "context": "continuous-integration/travis-ci/pr"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -1513,6 +1688,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/bb4bdb9776ad1920090a0b6c99829baaee0134c1",
+                    "committedDate": "2019-09-30T09:59:39Z",
                     "oid": "bb4bdb9776ad1920090a0b6c99829baaee0134c1",
                     "status": {
                       "state": "FAILURE",
@@ -1528,6 +1704,12 @@
                           "targetUrl": "https://travis-ci.org/gradle/gradle/builds/591418906?utm_source=github_status&utm_medium=notification",
                           "description": "The Travis CI build passed",
                           "context": "continuous-integration/travis-ci/pr"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -1559,6 +1741,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/30cb13951ed0f89e3cff16f40a10e9b4151e6618",
+                    "committedDate": "2019-10-07T08:48:59Z",
                     "oid": "30cb13951ed0f89e3cff16f40a10e9b4151e6618",
                     "status": {
                       "state": "FAILURE",
@@ -1622,6 +1805,12 @@
                           "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=27484327&buildTypeId=Gradle_Check_SmokeTests",
                           "description": "TeamCity build finished",
                           "context": "Smoke Tests with 3rd Party Plugins - Java8 Linux (Ready for Merge)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -1653,6 +1842,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/007a014fb1bc44a61aadd3231b6cde24a1052a9c",
+                    "committedDate": "2019-11-05T13:11:05Z",
                     "oid": "007a014fb1bc44a61aadd3231b6cde24a1052a9c",
                     "status": {
                       "state": "SUCCESS",
@@ -1753,6 +1943,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/5c4fc73c93cc04db1d9202609ac145a8c0cc163b",
+                    "committedDate": "2019-11-19T16:44:36Z",
                     "oid": "5c4fc73c93cc04db1d9202609ac145a8c0cc163b",
                     "status": {
                       "state": "FAILURE",
@@ -1762,6 +1953,12 @@
                           "targetUrl": "https://builds.gradle.org/viewType.html?buildTypeId=Gradle_Check_Stage_ReadyforNightly_Trigger&branch_Gradle_Check=master&tab=buildTypeStatusDiv",
                           "description": "master branch failure since 2020-03-23T11:04:35.240Z",
                           "context": "CI Status"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -1793,6 +1990,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/f985f40f6cb2be06e6aebfa330c26e5db7d1e7eb",
+                    "committedDate": "2019-11-22T21:40:28Z",
                     "oid": "f985f40f6cb2be06e6aebfa330c26e5db7d1e7eb",
                     "status": {
                       "state": "FAILURE",
@@ -1802,6 +2000,12 @@
                           "targetUrl": "https://builds.gradle.org/viewType.html?buildTypeId=Gradle_Check_Stage_ReadyforNightly_Trigger&branch_Gradle_Check=master&tab=buildTypeStatusDiv",
                           "description": "master branch failure since 2020-03-23T11:04:34.497Z",
                           "context": "CI Status"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -1833,6 +2037,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/d3019d06047474c275f5c58394415122c5daa38f",
+                    "committedDate": "2019-11-08T11:29:52Z",
                     "oid": "d3019d06047474c275f5c58394415122c5daa38f",
                     "status": {
                       "state": "FAILURE",
@@ -1842,6 +2047,12 @@
                           "targetUrl": "https://builds.gradle.org/viewType.html?buildTypeId=Gradle_Check_Stage_ReadyforNightly_Trigger&branch_Gradle_Check=master&tab=buildTypeStatusDiv",
                           "description": "master branch failure since 2020-03-23T11:04:33.272Z",
                           "context": "CI Status"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -1873,6 +2084,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/3ac03c996026ce944bc6a8a0e1911e98ccb3ffad",
+                    "committedDate": "2019-11-13T08:38:46Z",
                     "oid": "3ac03c996026ce944bc6a8a0e1911e98ccb3ffad",
                     "status": {
                       "state": "FAILURE",
@@ -1882,6 +2094,12 @@
                           "targetUrl": "https://builds.gradle.org/viewType.html?buildTypeId=Gradle_Check_Stage_ReadyforNightly_Trigger&branch_Gradle_Check=master&tab=buildTypeStatusDiv",
                           "description": "master branch failure since 2020-03-23T11:04:32.464Z",
                           "context": "CI Status"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -1913,6 +2131,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/3e491802d7957150c3752a4187254dd79a786d8b",
+                    "committedDate": "2019-11-26T09:30:59Z",
                     "oid": "3e491802d7957150c3752a4187254dd79a786d8b",
                     "status": {
                       "state": "FAILURE",
@@ -1988,6 +2207,12 @@
                           "targetUrl": "https://travis-ci.org/gradle/gradle/builds/617114930?utm_source=github_status&utm_medium=notification",
                           "description": "The Travis CI build passed",
                           "context": "continuous-integration/travis-ci/pr"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -2019,6 +2244,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/7aaeaca8d3ee6c39ba3692c2e871c82dab2089ab",
+                    "committedDate": "2019-12-03T05:01:11Z",
                     "oid": "7aaeaca8d3ee6c39ba3692c2e871c82dab2089ab",
                     "status": {
                       "state": "FAILURE",
@@ -2028,6 +2254,12 @@
                           "targetUrl": "https://builds.gradle.org/viewType.html?buildTypeId=Gradle_Check_Stage_ReadyforNightly_Trigger&branch_Gradle_Check=master&tab=buildTypeStatusDiv",
                           "description": "master branch failure since 2020-03-23T11:04:30.274Z",
                           "context": "CI Status"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -2059,6 +2291,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/996501a0d671afbb5cfca79a9893005728bb6a10",
+                    "committedDate": "2020-01-05T14:09:08Z",
                     "oid": "996501a0d671afbb5cfca79a9893005728bb6a10",
                     "status": {
                       "state": "FAILURE",
@@ -2068,6 +2301,12 @@
                           "targetUrl": "https://builds.gradle.org/viewType.html?buildTypeId=Gradle_Check_Stage_ReadyforNightly_Trigger&branch_Gradle_Check=master&tab=buildTypeStatusDiv",
                           "description": "master branch failure since 2020-03-23T11:04:28.526Z",
                           "context": "CI Status"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -2099,6 +2338,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/71ba903be73df0179b4f0630e39a2e6617fb0780",
+                    "committedDate": "2019-12-16T15:31:23Z",
                     "oid": "71ba903be73df0179b4f0630e39a2e6617fb0780",
                     "status": {
                       "state": "FAILURE",
@@ -2114,6 +2354,12 @@
                           "targetUrl": "https://travis-ci.org/gradle/gradle/builds/625740611?utm_source=github_status&utm_medium=notification",
                           "description": "The Travis CI build passed",
                           "context": "continuous-integration/travis-ci/pr"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -2145,6 +2391,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/6bc0bda602f46c5da6b179c2ff78719935e86cf5",
+                    "committedDate": "2019-12-19T14:40:02Z",
                     "oid": "6bc0bda602f46c5da6b179c2ff78719935e86cf5",
                     "status": {
                       "state": "FAILURE",
@@ -2154,6 +2401,12 @@
                           "targetUrl": "https://builds.gradle.org/viewType.html?buildTypeId=Gradle_Check_Stage_ReadyforNightly_Trigger&branch_Gradle_Check=master&tab=buildTypeStatusDiv",
                           "description": "master branch failure since 2020-03-23T11:04:26.252Z",
                           "context": "CI Status"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -2185,6 +2438,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/398f65f0c326cfed334489480c0af2c9e50a1c08",
+                    "committedDate": "2019-12-27T08:53:01Z",
                     "oid": "398f65f0c326cfed334489480c0af2c9e50a1c08",
                     "status": {
                       "state": "FAILURE",
@@ -2200,6 +2454,12 @@
                           "targetUrl": "https://travis-ci.org/gradle/gradle/builds/629959436?utm_source=github_status&utm_medium=notification",
                           "description": "The Travis CI build passed",
                           "context": "continuous-integration/travis-ci/pr"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -2231,6 +2491,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/efdbdf6ff2c9ff9cf242e0bbf3db789e0523413a",
+                    "committedDate": "2020-01-06T20:20:04Z",
                     "oid": "efdbdf6ff2c9ff9cf242e0bbf3db789e0523413a",
                     "status": {
                       "state": "FAILURE",
@@ -2318,6 +2579,12 @@
                           "targetUrl": "https://travis-ci.org/gradle/gradle/builds/633453723?utm_source=github_status&utm_medium=notification",
                           "description": "The Travis CI build passed",
                           "context": "continuous-integration/travis-ci/pr"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -2349,6 +2616,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/56514dedf6b3152dd6de25015ee8823ca2a6cdcc",
+                    "committedDate": "2020-01-06T18:29:32Z",
                     "oid": "56514dedf6b3152dd6de25015ee8823ca2a6cdcc",
                     "status": {
                       "state": "FAILURE",
@@ -2388,6 +2656,12 @@
                           "targetUrl": "https://travis-ci.org/gradle/gradle/builds/633409754?utm_source=github_status&utm_medium=notification",
                           "description": "The Travis CI build passed",
                           "context": "continuous-integration/travis-ci/pr"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -2419,6 +2693,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/6f22c347abf9dea0e46aaafc43f4bf4938b2c9c9",
+                    "committedDate": "2020-01-21T05:40:56Z",
                     "oid": "6f22c347abf9dea0e46aaafc43f4bf4938b2c9c9",
                     "status": {
                       "state": "FAILURE",
@@ -2434,6 +2709,12 @@
                           "targetUrl": "https://travis-ci.org/gradle/gradle/builds/639792098?utm_source=github_status&utm_medium=notification",
                           "description": "The Travis CI build passed",
                           "context": "continuous-integration/travis-ci/pr"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -2465,6 +2746,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/8c78204f07cc03e6ebdbe945af9c833e17798e72",
+                    "committedDate": "2020-01-19T15:58:26Z",
                     "oid": "8c78204f07cc03e6ebdbe945af9c833e17798e72",
                     "status": {
                       "state": "FAILURE",
@@ -2480,6 +2762,12 @@
                           "targetUrl": "https://travis-ci.org/gradle/gradle/builds/639161661?utm_source=github_status&utm_medium=notification",
                           "description": "The Travis CI build failed",
                           "context": "continuous-integration/travis-ci/pr"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -2511,6 +2799,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/eb059ab0f09a8b0ac155a43247ebdf9499bdf823",
+                    "committedDate": "2020-03-30T16:42:21Z",
                     "oid": "eb059ab0f09a8b0ac155a43247ebdf9499bdf823",
                     "status": {
                       "state": "PENDING",
@@ -2520,6 +2809,12 @@
                           "targetUrl": "https://travis-ci.org/github/gradle/gradle/builds/668848363?utm_source=github_status&utm_medium=notification",
                           "description": "The Travis CI build is in progress",
                           "context": "continuous-integration/travis-ci/pr"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -2551,6 +2846,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/62614a0c98edd5584dbab0c62cc92f6ea8c33b0a",
+                    "committedDate": "2020-03-05T13:43:08Z",
                     "oid": "62614a0c98edd5584dbab0c62cc92f6ea8c33b0a",
                     "status": {
                       "state": "FAILURE",
@@ -2620,6 +2916,12 @@
                           "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=32193364&buildTypeId=Gradle_Check_SanityCheck",
                           "description": "TeamCity build finished",
                           "context": "Sanity Check (Quick Feedback - Linux Only)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -2651,6 +2953,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/b860e25e34ae4de357e8bceab97420ebc6388411",
+                    "committedDate": "2020-01-31T07:06:28Z",
                     "oid": "b860e25e34ae4de357e8bceab97420ebc6388411",
                     "status": {
                       "state": "FAILURE",
@@ -2666,6 +2969,12 @@
                           "targetUrl": "https://travis-ci.org/github/gradle/gradle/builds/666732060?utm_source=github_status&utm_medium=notification",
                           "description": "The Travis CI build passed",
                           "context": "continuous-integration/travis-ci/pr"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -2697,6 +3006,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/cb5ceaa826ecf1becb6de31d537622dafd2e2355",
+                    "committedDate": "2020-01-31T10:52:28Z",
                     "oid": "cb5ceaa826ecf1becb6de31d537622dafd2e2355",
                     "status": {
                       "state": "FAILURE",
@@ -2730,6 +3040,12 @@
                           "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=30857176&buildTypeId=Gradle_Check_SanityCheck",
                           "description": "TeamCity build finished",
                           "context": "Sanity Check (Quick Feedback - Linux Only)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -2761,6 +3077,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/0c6c9c17334d17ec9e8b4a2dcffc5da8399c1b53",
+                    "committedDate": "2020-02-26T00:47:44Z",
                     "oid": "0c6c9c17334d17ec9e8b4a2dcffc5da8399c1b53",
                     "status": {
                       "state": "FAILURE",
@@ -2776,6 +3093,12 @@
                           "targetUrl": "https://travis-ci.org/gradle/gradle/builds/655148078?utm_source=github_status&utm_medium=notification",
                           "description": "The Travis CI build passed",
                           "context": "continuous-integration/travis-ci/pr"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -2807,6 +3130,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/7682220f9f290f2e184c9546aa2d38bf485e9a84",
+                    "committedDate": "2020-03-20T07:22:29Z",
                     "oid": "7682220f9f290f2e184c9546aa2d38bf485e9a84",
                     "status": {
                       "state": "FAILURE",
@@ -2876,6 +3200,12 @@
                           "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=32762197&buildTypeId=Gradle_Check_SanityCheck",
                           "description": "TeamCity build finished",
                           "context": "Sanity Check (Quick Feedback - Linux Only)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -2907,6 +3237,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/f58e64a095deb1dc016a399dd264afbacc6b0705",
+                    "committedDate": "2020-03-09T21:31:30Z",
                     "oid": "f58e64a095deb1dc016a399dd264afbacc6b0705",
                     "status": {
                       "state": "FAILURE",
@@ -2922,6 +3253,12 @@
                           "targetUrl": "https://travis-ci.org/gradle/gradle/builds/660366751?utm_source=github_status&utm_medium=notification",
                           "description": "The Travis CI build passed",
                           "context": "continuous-integration/travis-ci/pr"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -2953,6 +3290,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/0f5f3a29f64c9de6d7e4d5802fca20ffed2611f9",
+                    "committedDate": "2020-03-09T23:13:29Z",
                     "oid": "0f5f3a29f64c9de6d7e4d5802fca20ffed2611f9",
                     "status": {
                       "state": "FAILURE",
@@ -2968,6 +3306,12 @@
                           "targetUrl": "https://travis-ci.org/gradle/gradle/builds/660396218?utm_source=github_status&utm_medium=notification",
                           "description": "The Travis CI build passed",
                           "context": "continuous-integration/travis-ci/pr"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -2999,6 +3343,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/f03146f0fc76062e1dd2c83fd9f7176d62d6f301",
+                    "committedDate": "2020-03-20T00:06:35Z",
                     "oid": "f03146f0fc76062e1dd2c83fd9f7176d62d6f301",
                     "status": {
                       "state": "FAILURE",
@@ -3014,6 +3359,12 @@
                           "targetUrl": "https://travis-ci.org/github/gradle/gradle/builds/664649581?utm_source=github_status&utm_medium=notification",
                           "description": "The Travis CI build passed",
                           "context": "continuous-integration/travis-ci/pr"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -3045,6 +3396,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/14d432b88259fd022348c8d2154415d738fa3e90",
+                    "committedDate": "2020-03-12T22:46:48Z",
                     "oid": "14d432b88259fd022348c8d2154415d738fa3e90",
                     "status": {
                       "state": "FAILURE",
@@ -3060,112 +3412,12 @@
                           "targetUrl": "https://travis-ci.org/github/gradle/gradle/builds/661741173?utm_source=github_status&utm_medium=notification",
                           "description": "The Travis CI build passed",
                           "context": "continuous-integration/travis-ci/pr"
-                        }
-                      ]
-                    }
-                  }
-                }
-              ]
-            }
-          },
-          {
-            "id": "MDExOlB1bGxSZXF1ZXN0Mzg2MzQ3Mjk2",
-            "body": "This enhance docs around `ivy-component-metadata-rule` to prevent breaking Maven based modules\r\n\r\nIf check for `IvyModuleDescriptor` is not in place, the rule will fail with maven based modules causing issues such as:\r\n\r\n```\r\nExecution failed for task ':compileJava'.\r\n> Could not resolve all files for configuration ':compileClasspath'.\r\n   > Could not resolve com.google.guava:guava:19.0.\r\n     Required by:\r\n         project : > foo:my-core:1.0.0\r\n      > Cannot choose between the following variants of com.google.guava:guava:19.0:\r\n          - apiElements\r\n          - compile\r\n          - runtime\r\n        All of them match the consumer attributes:\r\n          - Variant 'apiElements' capability com.google.guava:guava:19.0:\r\n              - Unmatched attributes:\r\n                  - Required org.gradle.dependency.bundling 'external' but no value provided.\r\n``` \r\n\r\n### Contributor Checklist\r\n- [x] [Review Contribution Guidelines](https://github.com/gradle/gradle/blob/master/CONTRIBUTING.md)\r\n- [x] Make sure that all commits are [signed off](https://git-scm.com/docs/git-commit#git-commit---signoff) to indicate that you agree to the terms of [Developer Certificate of Origin](https://developercertificate.org/).\r\n- [x] Check [\"Allow edit from maintainers\" option](https://help.github.com/articles/allowing-changes-to-a-pull-request-branch-created-from-a-fork/) in pull request so that additional changes can be pushed by Gradle team\r\n- [ ] Provide integration tests (under `<subproject>/src/integTest`) to verify changes from a user perspective\r\n- [ ] Provide unit tests (under `<subproject>/src/test`) to verify logic\r\n- [ ] Update User Guide, DSL Reference, and Javadoc for public-facing changes\r\n- [ ] Ensure that tests pass locally: `./gradlew <changed-subproject>:check`\r\n\r\n### Gradle Core Team Checklist\r\n- [ ] Verify design and implementation \r\n- [ ] Verify test coverage and CI build status\r\n- [ ] Verify documentation\r\n- [ ] Recognize contributor in release notes\r\n",
-            "url": "https://github.com/gradle/gradle/pull/12496",
-            "headRef": {
-              "target": {
-                "oid": "b1b94ef77d1b41565c29c1df2b8df2c1fab44aa4"
-              },
-              "repository": {
-                "isFork": true,
-                "owner": {
-                  "login": "rpalcolea"
-                },
-                "name": "gradle"
-              },
-              "name": "ivy-component-metadata-rule/check-for-IvyModuleDescriptor"
-            },
-            "baseRefName": "master",
-            "commits": {
-              "nodes": [
-                {
-                  "commit": {
-                    "commitUrl": "https://github.com/gradle/gradle/commit/b1b94ef77d1b41565c29c1df2b8df2c1fab44aa4",
-                    "oid": "b1b94ef77d1b41565c29c1df2b8df2c1fab44aa4",
-                    "status": {
-                      "state": "FAILURE",
-                      "contexts": [
-                        {
-                          "state": "ERROR",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33086797&buildTypeId=Gradle_Check_Gradleception",
-                          "description": "TeamCity build failed",
-                          "context": "Gradleception - Java8 Linux (Ready for Merge)"
-                        },
-                        {
-                          "state": "ERROR",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33086801&buildTypeId=Gradle_Check_PerformanceTestCoordinator",
-                          "description": "TeamCity build failed",
-                          "context": "Performance Regression Test Coordinator - Linux (Ready for Merge)"
-                        },
-                        {
-                          "state": "ERROR",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33086799&buildTypeId=Gradle_Check_InstantSmokeTestsJava14",
-                          "description": "TeamCity build failed",
-                          "context": "Smoke Tests with 3rd Party Plugins (instantSmokeTest) - Java14 Linux (Ready for Merge)"
-                        },
-                        {
-                          "state": "ERROR",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33086800&buildTypeId=Gradle_Check_InstantSmokeTestsJava8",
-                          "description": "TeamCity build failed",
-                          "context": "Smoke Tests with 3rd Party Plugins (instantSmokeTest) - Java8 Linux (Ready for Merge)"
-                        },
-                        {
-                          "state": "ERROR",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33086798&buildTypeId=Gradle_Check_SmokeTestsJava14",
-                          "description": "TeamCity build failed",
-                          "context": "Smoke Tests with 3rd Party Plugins (smokeTest) - Java14 Linux (Ready for Merge)"
-                        },
-                        {
-                          "state": "FAILURE",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33086795&buildTypeId=Gradle_Check_Stage_QuickFeedback_Trigger",
-                          "description": "TeamCity build failed",
-                          "context": "Quick Feedback (Trigger) (Check)"
-                        },
-                        {
-                          "state": "FAILURE",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33086744&buildTypeId=Gradle_Check_Stage_QuickFeedbackLinuxOnly_Trigger",
-                          "description": "TeamCity build failed",
-                          "context": "Quick Feedback - Linux Only (Trigger) (Check)"
-                        },
-                        {
-                          "state": "FAILURE",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33086952&buildTypeId=Gradle_Check_Stage_ReadyforMerge_Trigger",
-                          "description": "TeamCity build failed",
-                          "context": "Ready for Merge (Trigger) (Check)"
                         },
                         {
                           "state": "SUCCESS",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33086796&buildTypeId=Gradle_Check_BuildDistributions",
-                          "description": "TeamCity build finished",
-                          "context": "Build Distributions (Ready for Merge)"
-                        },
-                        {
-                          "state": "SUCCESS",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33086692&buildTypeId=Gradle_Check_CompileAll",
-                          "description": "TeamCity build finished",
-                          "context": "Compile All (Quick Feedback - Linux Only)"
-                        },
-                        {
-                          "state": "SUCCESS",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33086693&buildTypeId=Gradle_Check_SanityCheck",
-                          "description": "TeamCity build finished",
-                          "context": "Sanity Check (Quick Feedback - Linux Only)"
-                        },
-                        {
-                          "state": "SUCCESS",
-                          "targetUrl": "https://travis-ci.org/github/gradle/gradle/builds/666408116?utm_source=github_status&utm_medium=notification",
-                          "description": "The Travis CI build passed",
-                          "context": "continuous-integration/travis-ci/pr"
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -3176,11 +3428,11 @@
           },
           {
             "id": "MDExOlB1bGxSZXF1ZXN0Mzg2NzkyMTkz",
-            "body": "We didn't before, as a shortcut, but we now want to properly report those cases in order to fix core plugins and let build and plugin authors know about the problem.\r\n\r\n----\r\nThis PR is a draft on top of https://github.com/gradle/gradle/pull/12595, DO NOT MERGE YET",
+            "body": "We didn't before, as a shortcut, but we now want to properly report those cases in order to fix core plugins and let build and plugin authors know about the problem.\r\n",
             "url": "https://github.com/gradle/gradle/pull/12505",
             "headRef": {
               "target": {
-                "oid": "26660262d2246718bda5e37d88161d7a3885db24"
+                "oid": "efc49cc72011ad1cd1f4f83a9103f32586c818f5"
               },
               "repository": {
                 "isFork": false,
@@ -3196,82 +3448,89 @@
               "nodes": [
                 {
                   "commit": {
-                    "commitUrl": "https://github.com/gradle/gradle/commit/26660262d2246718bda5e37d88161d7a3885db24",
-                    "oid": "26660262d2246718bda5e37d88161d7a3885db24",
+                    "commitUrl": "https://github.com/gradle/gradle/commit/efc49cc72011ad1cd1f4f83a9103f32586c818f5",
+                    "committedDate": "2020-03-31T12:49:49Z",
+                    "oid": "efc49cc72011ad1cd1f4f83a9103f32586c818f5",
                     "status": {
                       "state": "SUCCESS",
                       "contexts": [
                         {
                           "state": "SUCCESS",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33049317&buildTypeId=Gradle_Check_BuildDistributions",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33136103&buildTypeId=Gradle_Check_BuildDistributions",
                           "description": "TeamCity build finished",
                           "context": "Build Distributions (Ready for Merge)"
                         },
                         {
                           "state": "SUCCESS",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33049211&buildTypeId=Gradle_Check_CompileAll",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33133323&buildTypeId=Gradle_Check_CompileAll",
                           "description": "TeamCity build finished",
                           "context": "Compile All (Quick Feedback - Linux Only)"
                         },
                         {
                           "state": "SUCCESS",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33049318&buildTypeId=Gradle_Check_Gradleception",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33133088&buildTypeId=Gradle_Check_Gradleception",
                           "description": "TeamCity build finished",
                           "context": "Gradleception - Java8 Linux (Ready for Merge)"
                         },
                         {
                           "state": "SUCCESS",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33049322&buildTypeId=Gradle_Check_PerformanceTestCoordinator",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33133092&buildTypeId=Gradle_Check_PerformanceTestCoordinator",
                           "description": "TeamCity build finished",
                           "context": "Performance Regression Test Coordinator - Linux (Ready for Merge)"
                         },
                         {
                           "state": "SUCCESS",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33049316&buildTypeId=Gradle_Check_Stage_QuickFeedback_Trigger",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33133086&buildTypeId=Gradle_Check_Stage_QuickFeedback_Trigger",
                           "description": "TeamCity build finished",
                           "context": "Quick Feedback (Trigger) (Check)"
                         },
                         {
                           "state": "SUCCESS",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33049265&buildTypeId=Gradle_Check_Stage_QuickFeedbackLinuxOnly_Trigger",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33133035&buildTypeId=Gradle_Check_Stage_QuickFeedbackLinuxOnly_Trigger",
                           "description": "TeamCity build finished",
                           "context": "Quick Feedback - Linux Only (Trigger) (Check)"
                         },
                         {
                           "state": "SUCCESS",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33049473&buildTypeId=Gradle_Check_Stage_ReadyforMerge_Trigger",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33133243&buildTypeId=Gradle_Check_Stage_ReadyforMerge_Trigger",
                           "description": "TeamCity build finished",
                           "context": "Ready for Merge (Trigger) (Check)"
                         },
                         {
                           "state": "SUCCESS",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33052716&buildTypeId=Gradle_Check_Stage_ReadyforNightly_Trigger",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33133322&buildTypeId=Gradle_Check_Stage_ReadyforNightly_Trigger",
                           "description": "TeamCity build finished",
                           "context": "Ready for Nightly (Trigger) (Check)"
                         },
                         {
                           "state": "SUCCESS",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33049214&buildTypeId=Gradle_Check_SanityCheck",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33132984&buildTypeId=Gradle_Check_SanityCheck",
                           "description": "TeamCity build finished",
                           "context": "Sanity Check (Quick Feedback - Linux Only)"
                         },
                         {
                           "state": "SUCCESS",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33049320&buildTypeId=Gradle_Check_InstantSmokeTestsJava14",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33133090&buildTypeId=Gradle_Check_InstantSmokeTestsJava14",
                           "description": "TeamCity build finished",
                           "context": "Smoke Tests with 3rd Party Plugins (instantSmokeTest) - Java14 Linux (Ready for Merge)"
                         },
                         {
                           "state": "SUCCESS",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33049321&buildTypeId=Gradle_Check_InstantSmokeTestsJava8",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33133091&buildTypeId=Gradle_Check_InstantSmokeTestsJava8",
                           "description": "TeamCity build finished",
                           "context": "Smoke Tests with 3rd Party Plugins (instantSmokeTest) - Java8 Linux (Ready for Merge)"
                         },
                         {
                           "state": "SUCCESS",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33049319&buildTypeId=Gradle_Check_SmokeTestsJava14",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33133089&buildTypeId=Gradle_Check_SmokeTestsJava14",
                           "description": "TeamCity build finished",
                           "context": "Smoke Tests with 3rd Party Plugins (smokeTest) - Java14 Linux (Ready for Merge)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -3303,6 +3562,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/7dfe24bf78aaf649d62b9e42117a98f180fcedac",
+                    "committedDate": "2020-03-11T23:13:29Z",
                     "oid": "7dfe24bf78aaf649d62b9e42117a98f180fcedac",
                     "status": {
                       "state": "FAILURE",
@@ -3318,6 +3578,12 @@
                           "targetUrl": "https://travis-ci.org/github/gradle/gradle/builds/661320824?utm_source=github_status&utm_medium=notification",
                           "description": "The Travis CI build passed",
                           "context": "continuous-integration/travis-ci/pr"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -3349,6 +3615,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/9ff7738b6e1548e46a39716309b0d17636083310",
+                    "committedDate": "2020-03-17T16:40:43Z",
                     "oid": "9ff7738b6e1548e46a39716309b0d17636083310",
                     "status": {
                       "state": "FAILURE",
@@ -3358,6 +3625,12 @@
                           "targetUrl": "https://builds.gradle.org/viewType.html?buildTypeId=Gradle_Check_Stage_ReadyforNightly_Trigger&branch_Gradle_Check=master&tab=buildTypeStatusDiv",
                           "description": "master branch failure since 2020-03-23T11:04:08.602Z",
                           "context": "CI Status"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -3389,6 +3662,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/1d331ad336a7a99f40e15ec048a65053a1be80d2",
+                    "committedDate": "2020-03-17T05:23:38Z",
                     "oid": "1d331ad336a7a99f40e15ec048a65053a1be80d2",
                     "status": {
                       "state": "FAILURE",
@@ -3404,6 +3678,12 @@
                           "targetUrl": "https://travis-ci.org/github/gradle/gradle/builds/663366532?utm_source=github_status&utm_medium=notification",
                           "description": "The Travis CI build passed",
                           "context": "continuous-integration/travis-ci/pr"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -3435,21 +3715,22 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/d32d0b7e33660dfb1a94ae9eea8238c793a4243e",
+                    "committedDate": "2020-03-18T09:33:19Z",
                     "oid": "d32d0b7e33660dfb1a94ae9eea8238c793a4243e",
                     "status": {
-                      "state": "FAILURE",
+                      "state": "SUCCESS",
                       "contexts": [
-                        {
-                          "state": "FAILURE",
-                          "targetUrl": "https://builds.gradle.org/viewType.html?buildTypeId=Gradle_Check_Stage_ReadyforNightly_Trigger&branch_Gradle_Check=master&tab=buildTypeStatusDiv",
-                          "description": "master branch failure since 2020-03-23T11:05:16.413Z",
-                          "context": "CI Status"
-                        },
                         {
                           "state": "SUCCESS",
                           "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=32662387&buildTypeId=Gradle_Check_BuildDistributions",
                           "description": "TeamCity build finished",
                           "context": "Build Distributions (Ready for Merge)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33153719",
+                          "description": "master branch success since 2020-04-01T03:25:01",
+                          "context": "CI Status"
                         },
                         {
                           "state": "SUCCESS",
@@ -3504,6 +3785,12 @@
                           "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=32662389&buildTypeId=Gradle_Check_SmokeTestsJava8",
                           "description": "TeamCity build finished",
                           "context": "Smoke Tests with 3rd Party Plugins (smokeTest) - Java8 Linux (Ready for Merge)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -3535,6 +3822,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/0a1c84f845423f0888b80d99b9baa36e697ea924",
+                    "committedDate": "2020-03-18T08:25:18Z",
                     "oid": "0a1c84f845423f0888b80d99b9baa36e697ea924",
                     "status": {
                       "state": "FAILURE",
@@ -3604,6 +3892,12 @@
                           "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=32662660&buildTypeId=Gradle_Check_SmokeTestsJava8",
                           "description": "TeamCity build finished",
                           "context": "Smoke Tests with 3rd Party Plugins (smokeTest) - Java8 Linux (Ready for Merge)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -3635,6 +3929,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/81a073aa2f46eda6f79c973a784be8b8f073c623",
+                    "committedDate": "2020-03-25T20:38:30Z",
                     "oid": "81a073aa2f46eda6f79c973a784be8b8f073c623",
                     "status": {
                       "state": "SUCCESS",
@@ -3644,112 +3939,12 @@
                           "targetUrl": "https://travis-ci.org/github/gradle/gradle/builds/666974224?utm_source=github_status&utm_medium=notification",
                           "description": "The Travis CI build passed",
                           "context": "continuous-integration/travis-ci/pr"
-                        }
-                      ]
-                    }
-                  }
-                }
-              ]
-            }
-          },
-          {
-            "id": "MDExOlB1bGxSZXF1ZXN0MzkxNjM4MTkw",
-            "body": "- on a failing build caused by state serialization errors, state is discarded, error is detailled in build failure and summary of problems seen so far in build output\r\n- on a failing build caused by instant execution problems, state is discarded and problem summary in build failure\r\n- on a failing build *not* caused by instant execution problems, problem summary in build output\r\n- on a succeeding build, problem summary in build output\r\n\r\nin all cases, generate the HTML report if any problem\r\n\r\n----\r\n\r\nMost of the impact on annotated tests can be seen in https://github.com/gradle/gradle/pull/12505 which is based on this very PR.",
-            "url": "https://github.com/gradle/gradle/pull/12595",
-            "headRef": {
-              "target": {
-                "oid": "63aaca68d485c76c4f9c11be9098348746cde04a"
-              },
-              "repository": {
-                "isFork": false,
-                "owner": {
-                  "login": "gradle"
-                },
-                "name": "gradle"
-              },
-              "name": "eskatos/ie/rework-error-problem-handling"
-            },
-            "baseRefName": "master",
-            "commits": {
-              "nodes": [
-                {
-                  "commit": {
-                    "commitUrl": "https://github.com/gradle/gradle/commit/63aaca68d485c76c4f9c11be9098348746cde04a",
-                    "oid": "63aaca68d485c76c4f9c11be9098348746cde04a",
-                    "status": {
-                      "state": "SUCCESS",
-                      "contexts": [
-                        {
-                          "state": "SUCCESS",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33016695&buildTypeId=Gradle_Check_BuildDistributions",
-                          "description": "TeamCity build finished",
-                          "context": "Build Distributions (Ready for Merge)"
                         },
                         {
                           "state": "SUCCESS",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33016245&buildTypeId=Gradle_Check_CompileAll",
-                          "description": "TeamCity build finished",
-                          "context": "Compile All (Quick Feedback - Linux Only)"
-                        },
-                        {
-                          "state": "SUCCESS",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33016696&buildTypeId=Gradle_Check_Gradleception",
-                          "description": "TeamCity build finished",
-                          "context": "Gradleception - Java8 Linux (Ready for Merge)"
-                        },
-                        {
-                          "state": "SUCCESS",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33045303&buildTypeId=Gradle_Check_PerformanceTestCoordinator",
-                          "description": "TeamCity build finished",
-                          "context": "Performance Regression Test Coordinator - Linux (Ready for Merge)"
-                        },
-                        {
-                          "state": "SUCCESS",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33016694&buildTypeId=Gradle_Check_Stage_QuickFeedback_Trigger",
-                          "description": "TeamCity build finished",
-                          "context": "Quick Feedback (Trigger) (Check)"
-                        },
-                        {
-                          "state": "SUCCESS",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33024504&buildTypeId=Gradle_Check_Stage_QuickFeedbackLinuxOnly_Trigger",
-                          "description": "TeamCity build finished",
-                          "context": "Quick Feedback - Linux Only (Trigger) (Check)"
-                        },
-                        {
-                          "state": "SUCCESS",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33045454&buildTypeId=Gradle_Check_Stage_ReadyforMerge_Trigger",
-                          "description": "TeamCity build finished",
-                          "context": "Ready for Merge (Trigger) (Check)"
-                        },
-                        {
-                          "state": "SUCCESS",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33045533&buildTypeId=Gradle_Check_Stage_ReadyforNightly_Trigger",
-                          "description": "TeamCity build finished",
-                          "context": "Ready for Nightly (Trigger) (Check)"
-                        },
-                        {
-                          "state": "SUCCESS",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33017418&buildTypeId=Gradle_Check_SanityCheck",
-                          "description": "TeamCity build finished",
-                          "context": "Sanity Check (Quick Feedback - Linux Only)"
-                        },
-                        {
-                          "state": "SUCCESS",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33016698&buildTypeId=Gradle_Check_InstantSmokeTestsJava14",
-                          "description": "TeamCity build finished",
-                          "context": "Smoke Tests with 3rd Party Plugins (instantSmokeTest) - Java14 Linux (Ready for Merge)"
-                        },
-                        {
-                          "state": "SUCCESS",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33016699&buildTypeId=Gradle_Check_InstantSmokeTestsJava8",
-                          "description": "TeamCity build finished",
-                          "context": "Smoke Tests with 3rd Party Plugins (instantSmokeTest) - Java8 Linux (Ready for Merge)"
-                        },
-                        {
-                          "state": "SUCCESS",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33016697&buildTypeId=Gradle_Check_SmokeTestsJava14",
-                          "description": "TeamCity build finished",
-                          "context": "Smoke Tests with 3rd Party Plugins (smokeTest) - Java14 Linux (Ready for Merge)"
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -3781,6 +3976,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/c06e8a2ed668e32be5d2b8dab4d5095e505e21b2",
+                    "committedDate": "2020-03-21T16:47:35Z",
                     "oid": "c06e8a2ed668e32be5d2b8dab4d5095e505e21b2",
                     "status": {
                       "state": "FAILURE",
@@ -3796,6 +3992,12 @@
                           "targetUrl": "https://travis-ci.org/github/gradle/gradle/builds/665235887?utm_source=github_status&utm_medium=notification",
                           "description": "The Travis CI build passed",
                           "context": "continuous-integration/travis-ci/pr"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -3827,6 +4029,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/80cc7c26c18715ff363c989be34159cd9478ea24",
+                    "committedDate": "2020-03-23T09:35:30Z",
                     "oid": "80cc7c26c18715ff363c989be34159cd9478ea24",
                     "status": {
                       "state": "FAILURE",
@@ -3866,6 +4069,12 @@
                           "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=32862022&buildTypeId=Gradle_Check_VfsRetention_31_Trigger",
                           "description": "TeamCity build finished",
                           "context": "Test Coverage - VfsRetention Java8 Oracle Macos (Trigger) (Ready for Release)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -3880,7 +4089,7 @@
             "url": "https://github.com/gradle/gradle/pull/12628",
             "headRef": {
               "target": {
-                "oid": "d98472e7cc0c60444e0acaf3ebcab3c6ffdc3f71"
+                "oid": "ee90027121ae8d40d7fd1691b944088ec9cc280d"
               },
               "repository": {
                 "isFork": false,
@@ -3896,34 +4105,41 @@
               "nodes": [
                 {
                   "commit": {
-                    "commitUrl": "https://github.com/gradle/gradle/commit/d98472e7cc0c60444e0acaf3ebcab3c6ffdc3f71",
-                    "oid": "d98472e7cc0c60444e0acaf3ebcab3c6ffdc3f71",
+                    "commitUrl": "https://github.com/gradle/gradle/commit/ee90027121ae8d40d7fd1691b944088ec9cc280d",
+                    "committedDate": "2020-03-31T14:20:40Z",
+                    "oid": "ee90027121ae8d40d7fd1691b944088ec9cc280d",
                     "status": {
                       "state": "FAILURE",
                       "contexts": [
                         {
                           "state": "FAILURE",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33101508&buildTypeId=Gradle_Check_VfsRetention_30_Trigger",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33138528&buildTypeId=Gradle_Check_VfsRetention_30_Trigger",
                           "description": "TeamCity build failed",
                           "context": "Test Coverage - VfsRetention Java14 Openjdk Windows (Trigger) (Ready for Release)"
                         },
                         {
                           "state": "SUCCESS",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33101301&buildTypeId=Gradle_Check_CompileAll",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33138321&buildTypeId=Gradle_Check_CompileAll",
                           "description": "TeamCity build finished",
                           "context": "Compile All (Quick Feedback - Linux Only)"
                         },
                         {
                           "state": "SUCCESS",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33101457&buildTypeId=Gradle_Check_Stage_QuickFeedbackLinuxOnly_Trigger",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33138477&buildTypeId=Gradle_Check_Stage_QuickFeedbackLinuxOnly_Trigger",
                           "description": "TeamCity build finished",
                           "context": "Quick Feedback - Linux Only (Trigger) (Check)"
                         },
                         {
                           "state": "SUCCESS",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33101406&buildTypeId=Gradle_Check_SanityCheck",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33138426&buildTypeId=Gradle_Check_SanityCheck",
                           "description": "TeamCity build finished",
                           "context": "Sanity Check (Quick Feedback - Linux Only)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -3955,6 +4171,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/6302ef6a7257b21ce918ed45708eb530b4a44c21",
+                    "committedDate": "2020-03-25T23:37:19Z",
                     "oid": "6302ef6a7257b21ce918ed45708eb530b4a44c21",
                     "status": {
                       "state": "SUCCESS",
@@ -3964,6 +4181,12 @@
                           "targetUrl": "https://travis-ci.org/github/gradle/gradle/builds/667034239?utm_source=github_status&utm_medium=notification",
                           "description": "The Travis CI build passed",
                           "context": "continuous-integration/travis-ci/pr"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -3995,8 +4218,19 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/ac6557b80c5f444e832f2777f50808b0b6dcdc22",
+                    "committedDate": "2020-03-26T09:00:32Z",
                     "oid": "ac6557b80c5f444e832f2777f50808b0b6dcdc22",
-                    "status": null
+                    "status": {
+                      "state": "SUCCESS",
+                      "contexts": [
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
+                        }
+                      ]
+                    }
                   }
                 }
               ]
@@ -4008,7 +4242,7 @@
             "url": "https://github.com/gradle/gradle/pull/12647",
             "headRef": {
               "target": {
-                "oid": "812e5030480c1d3803b6c947d7ec57533c4f11c1"
+                "oid": "38ee9c5ba155a774299b07882082ee929719907b"
               },
               "repository": {
                 "isFork": false,
@@ -4024,76 +4258,83 @@
               "nodes": [
                 {
                   "commit": {
-                    "commitUrl": "https://github.com/gradle/gradle/commit/812e5030480c1d3803b6c947d7ec57533c4f11c1",
-                    "oid": "812e5030480c1d3803b6c947d7ec57533c4f11c1",
+                    "commitUrl": "https://github.com/gradle/gradle/commit/38ee9c5ba155a774299b07882082ee929719907b",
+                    "committedDate": "2020-03-31T21:51:08Z",
+                    "oid": "38ee9c5ba155a774299b07882082ee929719907b",
                     "status": {
-                      "state": "SUCCESS",
+                      "state": "FAILURE",
                       "contexts": [
                         {
+                          "state": "FAILURE",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33150332&buildTypeId=Gradle_Check_Stage_QuickFeedback_Trigger",
+                          "description": "TeamCity build failed",
+                          "context": "Quick Feedback (Trigger) (Check)"
+                        },
+                        {
+                          "state": "FAILURE",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33150489&buildTypeId=Gradle_Check_Stage_ReadyforMerge_Trigger",
+                          "description": "TeamCity build failed",
+                          "context": "Ready for Merge (Trigger) (Check)"
+                        },
+                        {
                           "state": "SUCCESS",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33100832&buildTypeId=Gradle_Check_BuildDistributions",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33150333&buildTypeId=Gradle_Check_BuildDistributions",
                           "description": "TeamCity build finished",
                           "context": "Build Distributions (Ready for Merge)"
                         },
                         {
                           "state": "SUCCESS",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33100728&buildTypeId=Gradle_Check_CompileAll",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33150229&buildTypeId=Gradle_Check_CompileAll",
                           "description": "TeamCity build finished",
                           "context": "Compile All (Quick Feedback - Linux Only)"
                         },
                         {
                           "state": "SUCCESS",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33100833&buildTypeId=Gradle_Check_Gradleception",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33150334&buildTypeId=Gradle_Check_Gradleception",
                           "description": "TeamCity build finished",
                           "context": "Gradleception - Java8 Linux (Ready for Merge)"
                         },
                         {
                           "state": "SUCCESS",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33100837&buildTypeId=Gradle_Check_PerformanceTestCoordinator",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33150338&buildTypeId=Gradle_Check_PerformanceTestCoordinator",
                           "description": "TeamCity build finished",
                           "context": "Performance Regression Test Coordinator - Linux (Ready for Merge)"
                         },
                         {
                           "state": "SUCCESS",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33100831&buildTypeId=Gradle_Check_Stage_QuickFeedback_Trigger",
-                          "description": "TeamCity build finished",
-                          "context": "Quick Feedback (Trigger) (Check)"
-                        },
-                        {
-                          "state": "SUCCESS",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33100780&buildTypeId=Gradle_Check_Stage_QuickFeedbackLinuxOnly_Trigger",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33150281&buildTypeId=Gradle_Check_Stage_QuickFeedbackLinuxOnly_Trigger",
                           "description": "TeamCity build finished",
                           "context": "Quick Feedback - Linux Only (Trigger) (Check)"
                         },
                         {
                           "state": "SUCCESS",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33100988&buildTypeId=Gradle_Check_Stage_ReadyforMerge_Trigger",
-                          "description": "TeamCity build finished",
-                          "context": "Ready for Merge (Trigger) (Check)"
-                        },
-                        {
-                          "state": "SUCCESS",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33100729&buildTypeId=Gradle_Check_SanityCheck",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33150230&buildTypeId=Gradle_Check_SanityCheck",
                           "description": "TeamCity build finished",
                           "context": "Sanity Check (Quick Feedback - Linux Only)"
                         },
                         {
                           "state": "SUCCESS",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33100835&buildTypeId=Gradle_Check_InstantSmokeTestsJava14",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33150336&buildTypeId=Gradle_Check_InstantSmokeTestsJava14",
                           "description": "TeamCity build finished",
                           "context": "Smoke Tests with 3rd Party Plugins (instantSmokeTest) - Java14 Linux (Ready for Merge)"
                         },
                         {
                           "state": "SUCCESS",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33100836&buildTypeId=Gradle_Check_InstantSmokeTestsJava8",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33150337&buildTypeId=Gradle_Check_InstantSmokeTestsJava8",
                           "description": "TeamCity build finished",
                           "context": "Smoke Tests with 3rd Party Plugins (instantSmokeTest) - Java8 Linux (Ready for Merge)"
                         },
                         {
                           "state": "SUCCESS",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33100834&buildTypeId=Gradle_Check_SmokeTestsJava14",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33150335&buildTypeId=Gradle_Check_SmokeTestsJava14",
                           "description": "TeamCity build finished",
                           "context": "Smoke Tests with 3rd Party Plugins (smokeTest) - Java14 Linux (Ready for Merge)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -4108,7 +4349,7 @@
             "url": "https://github.com/gradle/gradle/pull/12655",
             "headRef": {
               "target": {
-                "oid": "8e0cf6d245bffd18123b791a8a7b546a3be8c999"
+                "oid": "f0fc782a429e50f78a3af1933be07e2232a59a7f"
               },
               "repository": {
                 "isFork": false,
@@ -4124,9 +4365,26 @@
               "nodes": [
                 {
                   "commit": {
-                    "commitUrl": "https://github.com/gradle/gradle/commit/8e0cf6d245bffd18123b791a8a7b546a3be8c999",
-                    "oid": "8e0cf6d245bffd18123b791a8a7b546a3be8c999",
-                    "status": null
+                    "commitUrl": "https://github.com/gradle/gradle/commit/f0fc782a429e50f78a3af1933be07e2232a59a7f",
+                    "committedDate": "2020-04-01T06:27:39Z",
+                    "oid": "f0fc782a429e50f78a3af1933be07e2232a59a7f",
+                    "status": {
+                      "state": "PENDING",
+                      "contexts": [
+                        {
+                          "state": "PENDING",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33158528&buildTypeId=Gradle_Check_SanityCheck",
+                          "description": "TeamCity build started",
+                          "context": "Sanity Check (Quick Feedback - Linux Only)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33158527&buildTypeId=Gradle_Check_CompileAll",
+                          "description": "TeamCity build finished",
+                          "context": "Compile All (Quick Feedback - Linux Only)"
+                        }
+                      ]
+                    }
                   }
                 }
               ]
@@ -4155,6 +4413,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/1ca26403b18a7154cbcf8d8742e65302d1b4b0ce",
+                    "committedDate": "2020-03-27T13:38:52Z",
                     "oid": "1ca26403b18a7154cbcf8d8742e65302d1b4b0ce",
                     "status": {
                       "state": "SUCCESS",
@@ -4176,6 +4435,12 @@
                           "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33021051&buildTypeId=Gradle_Check_SanityCheck",
                           "description": "TeamCity build finished",
                           "context": "Sanity Check (Quick Feedback - Linux Only)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -4190,7 +4455,7 @@
             "url": "https://github.com/gradle/gradle/pull/12659",
             "headRef": {
               "target": {
-                "oid": "9b6391181e72e5eec576a90755c3c24d4ad70830"
+                "oid": "37134a2b504b36b121b3509c30ca55ffa3818139"
               },
               "repository": {
                 "isFork": false,
@@ -4206,76 +4471,83 @@
               "nodes": [
                 {
                   "commit": {
-                    "commitUrl": "https://github.com/gradle/gradle/commit/9b6391181e72e5eec576a90755c3c24d4ad70830",
-                    "oid": "9b6391181e72e5eec576a90755c3c24d4ad70830",
+                    "commitUrl": "https://github.com/gradle/gradle/commit/37134a2b504b36b121b3509c30ca55ffa3818139",
+                    "committedDate": "2020-03-31T12:51:44Z",
+                    "oid": "37134a2b504b36b121b3509c30ca55ffa3818139",
                     "status": {
-                      "state": "FAILURE",
+                      "state": "SUCCESS",
                       "contexts": [
                         {
-                          "state": "ERROR",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33115661&buildTypeId=Gradle_Check_Gradleception",
-                          "description": "TeamCity build failed",
-                          "context": "Gradleception - Java8 Linux (Ready for Merge)"
-                        },
-                        {
-                          "state": "ERROR",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33115665&buildTypeId=Gradle_Check_PerformanceTestCoordinator",
-                          "description": "TeamCity build failed",
-                          "context": "Performance Regression Test Coordinator - Linux (Ready for Merge)"
-                        },
-                        {
-                          "state": "ERROR",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33115663&buildTypeId=Gradle_Check_InstantSmokeTestsJava14",
-                          "description": "TeamCity build failed",
-                          "context": "Smoke Tests with 3rd Party Plugins (instantSmokeTest) - Java14 Linux (Ready for Merge)"
-                        },
-                        {
-                          "state": "ERROR",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33115664&buildTypeId=Gradle_Check_InstantSmokeTestsJava8",
-                          "description": "TeamCity build failed",
-                          "context": "Smoke Tests with 3rd Party Plugins (instantSmokeTest) - Java8 Linux (Ready for Merge)"
-                        },
-                        {
-                          "state": "ERROR",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33115662&buildTypeId=Gradle_Check_SmokeTestsJava14",
-                          "description": "TeamCity build failed",
-                          "context": "Smoke Tests with 3rd Party Plugins (smokeTest) - Java14 Linux (Ready for Merge)"
-                        },
-                        {
-                          "state": "FAILURE",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33115659&buildTypeId=Gradle_Check_Stage_QuickFeedback_Trigger",
-                          "description": "TeamCity build failed",
-                          "context": "Quick Feedback (Trigger) (Check)"
-                        },
-                        {
-                          "state": "FAILURE",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33115608&buildTypeId=Gradle_Check_Stage_QuickFeedbackLinuxOnly_Trigger",
-                          "description": "TeamCity build failed",
-                          "context": "Quick Feedback - Linux Only (Trigger) (Check)"
-                        },
-                        {
-                          "state": "FAILURE",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33115816&buildTypeId=Gradle_Check_Stage_ReadyforMerge_Trigger",
-                          "description": "TeamCity build failed",
-                          "context": "Ready for Merge (Trigger) (Check)"
-                        },
-                        {
                           "state": "SUCCESS",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33115660&buildTypeId=Gradle_Check_BuildDistributions",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33136099&buildTypeId=Gradle_Check_BuildDistributions",
                           "description": "TeamCity build finished",
                           "context": "Build Distributions (Ready for Merge)"
                         },
                         {
                           "state": "SUCCESS",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33115034&buildTypeId=Gradle_Check_CompileAll",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33133327&buildTypeId=Gradle_Check_CompileAll",
                           "description": "TeamCity build finished",
                           "context": "Compile All (Quick Feedback - Linux Only)"
                         },
                         {
                           "state": "SUCCESS",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33115557&buildTypeId=Gradle_Check_SanityCheck",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33133432&buildTypeId=Gradle_Check_Gradleception",
+                          "description": "TeamCity build finished",
+                          "context": "Gradleception - Java8 Linux (Ready for Merge)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33133436&buildTypeId=Gradle_Check_PerformanceTestCoordinator",
+                          "description": "TeamCity build finished",
+                          "context": "Performance Regression Test Coordinator - Linux (Ready for Merge)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33133430&buildTypeId=Gradle_Check_Stage_QuickFeedback_Trigger",
+                          "description": "TeamCity build finished",
+                          "context": "Quick Feedback (Trigger) (Check)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33133379&buildTypeId=Gradle_Check_Stage_QuickFeedbackLinuxOnly_Trigger",
+                          "description": "TeamCity build finished",
+                          "context": "Quick Feedback - Linux Only (Trigger) (Check)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33133587&buildTypeId=Gradle_Check_Stage_ReadyforMerge_Trigger",
+                          "description": "TeamCity build finished",
+                          "context": "Ready for Merge (Trigger) (Check)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33133328&buildTypeId=Gradle_Check_SanityCheck",
                           "description": "TeamCity build finished",
                           "context": "Sanity Check (Quick Feedback - Linux Only)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33133434&buildTypeId=Gradle_Check_InstantSmokeTestsJava14",
+                          "description": "TeamCity build finished",
+                          "context": "Smoke Tests with 3rd Party Plugins (instantSmokeTest) - Java14 Linux (Ready for Merge)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33133435&buildTypeId=Gradle_Check_InstantSmokeTestsJava8",
+                          "description": "TeamCity build finished",
+                          "context": "Smoke Tests with 3rd Party Plugins (instantSmokeTest) - Java8 Linux (Ready for Merge)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33133433&buildTypeId=Gradle_Check_SmokeTestsJava14",
+                          "description": "TeamCity build finished",
+                          "context": "Smoke Tests with 3rd Party Plugins (smokeTest) - Java14 Linux (Ready for Merge)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -4307,6 +4579,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/d12173c35172980e7d1be925babd6092efdca99a",
+                    "committedDate": "2020-03-27T22:30:47Z",
                     "oid": "d12173c35172980e7d1be925babd6092efdca99a",
                     "status": {
                       "state": "SUCCESS",
@@ -4316,6 +4589,12 @@
                           "targetUrl": "https://travis-ci.org/github/gradle/gradle/builds/667905113?utm_source=github_status&utm_medium=notification",
                           "description": "The Travis CI build passed",
                           "context": "continuous-integration/travis-ci/pr"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -4330,7 +4609,7 @@
             "url": "https://github.com/gradle/gradle/pull/12669",
             "headRef": {
               "target": {
-                "oid": "b9717a30f4601e6d19269f803558ba254802c417"
+                "oid": "95f7e4d6dc1c5793913b774ac127a040b2d6ea23"
               },
               "repository": {
                 "isFork": false,
@@ -4346,194 +4625,83 @@
               "nodes": [
                 {
                   "commit": {
-                    "commitUrl": "https://github.com/gradle/gradle/commit/b9717a30f4601e6d19269f803558ba254802c417",
-                    "oid": "b9717a30f4601e6d19269f803558ba254802c417",
+                    "commitUrl": "https://github.com/gradle/gradle/commit/95f7e4d6dc1c5793913b774ac127a040b2d6ea23",
+                    "committedDate": "2020-03-31T14:11:02Z",
+                    "oid": "95f7e4d6dc1c5793913b774ac127a040b2d6ea23",
                     "status": {
-                      "state": "FAILURE",
+                      "state": "SUCCESS",
                       "contexts": [
                         {
-                          "state": "FAILURE",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33072834&buildTypeId=Gradle_Check_Stage_ReadyforRelease_Trigger",
-                          "description": "TeamCity build failed",
-                          "context": "Ready for Release (Trigger) (Check)"
-                        },
-                        {
-                          "state": "PENDING",
-                          "targetUrl": "https://builds.gradle.org",
-                          "description": "TeamCity build finished",
-                          "context": "Build Distributions (Ready for Merge)"
-                        },
-                        {
-                          "state": "PENDING",
-                          "targetUrl": "https://builds.gradle.org",
-                          "description": "TeamCity build finished",
-                          "context": "Compile All (Quick Feedback - Linux Only)"
-                        },
-                        {
-                          "state": "PENDING",
-                          "targetUrl": "https://builds.gradle.org",
-                          "description": "TeamCity build finished",
-                          "context": "Gradleception - Java8 Linux (Ready for Merge)"
-                        },
-                        {
-                          "state": "PENDING",
-                          "targetUrl": "https://builds.gradle.org",
-                          "description": "TeamCity build finished",
-                          "context": "Performance Regression Test Coordinator - Linux (Ready for Merge)"
-                        },
-                        {
-                          "state": "PENDING",
-                          "targetUrl": "https://builds.gradle.org",
-                          "description": "TeamCity build finished",
-                          "context": "Quick Feedback (Trigger) (Check)"
-                        },
-                        {
-                          "state": "PENDING",
-                          "targetUrl": "https://builds.gradle.org",
-                          "description": "TeamCity build finished",
-                          "context": "Quick Feedback - Linux Only (Trigger) (Check)"
-                        },
-                        {
-                          "state": "PENDING",
-                          "targetUrl": "https://builds.gradle.org",
-                          "description": "TeamCity build finished",
-                          "context": "Ready for Merge (Trigger) (Check)"
-                        },
-                        {
-                          "state": "PENDING",
-                          "targetUrl": "https://builds.gradle.org",
-                          "description": "TeamCity build finished",
-                          "context": "Sanity Check (Quick Feedback - Linux Only)"
-                        },
-                        {
-                          "state": "PENDING",
-                          "targetUrl": "https://builds.gradle.org",
-                          "description": "TeamCity build finished",
-                          "context": "Smoke Tests with 3rd Party Plugins (instantSmokeTest) - Java14 Linux (Ready for Merge)"
-                        },
-                        {
-                          "state": "PENDING",
-                          "targetUrl": "https://builds.gradle.org",
-                          "description": "TeamCity build finished",
-                          "context": "Smoke Tests with 3rd Party Plugins (instantSmokeTest) - Java8 Linux (Ready for Merge)"
-                        },
-                        {
-                          "state": "PENDING",
-                          "targetUrl": "https://builds.gradle.org",
-                          "description": "TeamCity build finished",
-                          "context": "Smoke Tests with 3rd Party Plugins (smokeTest) - Java14 Linux (Ready for Merge)"
-                        },
-                        {
                           "state": "SUCCESS",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33072467&buildTypeId=Gradle_Check_Stage_ReadyforNightly_Trigger",
-                          "description": "TeamCity build finished",
-                          "context": "Ready for Nightly (Trigger) (Check)"
-                        },
-                        {
-                          "state": "SUCCESS",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33072468&buildTypeId=Gradle_Check_PerformanceSlowCoordinator",
-                          "description": "TeamCity build finished",
-                          "context": "Slow Performance Regression Test Coordinator - Linux (Ready for Release)"
-                        }
-                      ]
-                    }
-                  }
-                }
-              ]
-            }
-          },
-          {
-            "id": "MDExOlB1bGxSZXF1ZXN0Mzk1NDM4ODYy",
-            "body": "This is needed for backwards compatibility with the tooling API and plugins that rely on the old API to get the Java version of a project/task.\r\n\r\nFollow up to: #12648 ",
-            "url": "https://github.com/gradle/gradle/pull/12670",
-            "headRef": {
-              "target": {
-                "oid": "0dd87de6975d25ce7597a22bf4a3d610818ce95b"
-              },
-              "repository": {
-                "isFork": false,
-                "owner": {
-                  "login": "gradle"
-                },
-                "name": "gradle"
-              },
-              "name": "jjohannes/jpms/release-property-3"
-            },
-            "baseRefName": "master",
-            "commits": {
-              "nodes": [
-                {
-                  "commit": {
-                    "commitUrl": "https://github.com/gradle/gradle/commit/0dd87de6975d25ce7597a22bf4a3d610818ce95b",
-                    "oid": "0dd87de6975d25ce7597a22bf4a3d610818ce95b",
-                    "status": {
-                      "state": "FAILURE",
-                      "contexts": [
-                        {
-                          "state": "FAILURE",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33115404&buildTypeId=Gradle_Check_PerformanceTestCoordinator",
-                          "description": "TeamCity build failed",
-                          "context": "Performance Regression Test Coordinator - Linux (Ready for Merge)"
-                        },
-                        {
-                          "state": "FAILURE",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33115555&buildTypeId=Gradle_Check_Stage_ReadyforMerge_Trigger",
-                          "description": "TeamCity build failed",
-                          "context": "Ready for Merge (Trigger) (Check)"
-                        },
-                        {
-                          "state": "SUCCESS",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33079724&buildTypeId=Gradle_Check_BuildDistributions",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33143131&buildTypeId=Gradle_Check_BuildDistributions",
                           "description": "TeamCity build finished",
                           "context": "Build Distributions (Ready for Merge)"
                         },
                         {
                           "state": "SUCCESS",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33079620&buildTypeId=Gradle_Check_CompileAll",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33137971&buildTypeId=Gradle_Check_CompileAll",
                           "description": "TeamCity build finished",
                           "context": "Compile All (Quick Feedback - Linux Only)"
                         },
                         {
                           "state": "SUCCESS",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33081198&buildTypeId=Gradle_Check_Gradleception",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33143132&buildTypeId=Gradle_Check_Gradleception",
                           "description": "TeamCity build finished",
                           "context": "Gradleception - Java8 Linux (Ready for Merge)"
                         },
                         {
                           "state": "SUCCESS",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33079723&buildTypeId=Gradle_Check_Stage_QuickFeedback_Trigger",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33143136&buildTypeId=Gradle_Check_PerformanceTestCoordinator",
+                          "description": "TeamCity build finished",
+                          "context": "Performance Regression Test Coordinator - Linux (Ready for Merge)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33143130&buildTypeId=Gradle_Check_Stage_QuickFeedback_Trigger",
                           "description": "TeamCity build finished",
                           "context": "Quick Feedback (Trigger) (Check)"
                         },
                         {
                           "state": "SUCCESS",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33079672&buildTypeId=Gradle_Check_Stage_QuickFeedbackLinuxOnly_Trigger",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33138024&buildTypeId=Gradle_Check_Stage_QuickFeedbackLinuxOnly_Trigger",
                           "description": "TeamCity build finished",
                           "context": "Quick Feedback - Linux Only (Trigger) (Check)"
                         },
                         {
                           "state": "SUCCESS",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33080189&buildTypeId=Gradle_Check_SanityCheck",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33143287&buildTypeId=Gradle_Check_Stage_ReadyforMerge_Trigger",
+                          "description": "TeamCity build finished",
+                          "context": "Ready for Merge (Trigger) (Check)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33137973&buildTypeId=Gradle_Check_SanityCheck",
                           "description": "TeamCity build finished",
                           "context": "Sanity Check (Quick Feedback - Linux Only)"
                         },
                         {
                           "state": "SUCCESS",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33079727&buildTypeId=Gradle_Check_InstantSmokeTestsJava14",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33143134&buildTypeId=Gradle_Check_InstantSmokeTestsJava14",
                           "description": "TeamCity build finished",
                           "context": "Smoke Tests with 3rd Party Plugins (instantSmokeTest) - Java14 Linux (Ready for Merge)"
                         },
                         {
                           "state": "SUCCESS",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33079728&buildTypeId=Gradle_Check_InstantSmokeTestsJava8",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33143135&buildTypeId=Gradle_Check_InstantSmokeTestsJava8",
                           "description": "TeamCity build finished",
                           "context": "Smoke Tests with 3rd Party Plugins (instantSmokeTest) - Java8 Linux (Ready for Merge)"
                         },
                         {
                           "state": "SUCCESS",
-                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33081200&buildTypeId=Gradle_Check_SmokeTestsJava14",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33143133&buildTypeId=Gradle_Check_SmokeTestsJava14",
                           "description": "TeamCity build finished",
                           "context": "Smoke Tests with 3rd Party Plugins (smokeTest) - Java14 Linux (Ready for Merge)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -4565,6 +4733,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/06cef06d25372c10d0ae4b6a7d05ee3bce808626",
+                    "committedDate": "2020-03-30T07:17:15Z",
                     "oid": "06cef06d25372c10d0ae4b6a7d05ee3bce808626",
                     "status": {
                       "state": "PENDING",
@@ -4640,6 +4809,12 @@
                           "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33079221&buildTypeId=Gradle_Check_SmokeTestsJava14",
                           "description": "TeamCity build finished",
                           "context": "Smoke Tests with 3rd Party Plugins (smokeTest) - Java14 Linux (Ready for Merge)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }
@@ -4671,8 +4846,19 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/3a1549f2f9cf63b4b485f978bfe00011396ba3ce",
+                    "committedDate": "2020-03-30T15:29:10Z",
                     "oid": "3a1549f2f9cf63b4b485f978bfe00011396ba3ce",
-                    "status": null
+                    "status": {
+                      "state": "SUCCESS",
+                      "contexts": [
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
+                        }
+                      ]
+                    }
                   }
                 }
               ]
@@ -4701,6 +4887,7 @@
                 {
                   "commit": {
                     "commitUrl": "https://github.com/gradle/gradle/commit/f552b633bd8696840271f75ed0800de0d4ddc291",
+                    "committedDate": "2020-03-30T20:47:49Z",
                     "oid": "f552b633bd8696840271f75ed0800de0d4ddc291",
                     "status": {
                       "state": "FAILURE",
@@ -4710,6 +4897,641 @@
                           "targetUrl": "https://travis-ci.org/github/gradle/gradle/builds/668949491?utm_source=github_status&utm_medium=notification",
                           "description": "The Travis CI build failed",
                           "context": "continuous-integration/travis-ci/pr"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "id": "MDExOlB1bGxSZXF1ZXN0Mzk2MzQxNTg2",
+            "body": "This is different than `unsupportedTypesCodecs` as we want to report on field *declared* types only, not on serialized instances, because we do support `Configuration` instances on fields declared as e.g. `FileCollection`.\r\n",
+            "url": "https://github.com/gradle/gradle/pull/12683",
+            "headRef": {
+              "target": {
+                "oid": "0f8e38abe63631ac8710b49a01ecdf5998d6a3f3"
+              },
+              "repository": {
+                "isFork": false,
+                "owner": {
+                  "login": "gradle"
+                },
+                "name": "gradle"
+              },
+              "name": "eskatos/ie/report-configuration-fields"
+            },
+            "baseRefName": "master",
+            "commits": {
+              "nodes": [
+                {
+                  "commit": {
+                    "commitUrl": "https://github.com/gradle/gradle/commit/0f8e38abe63631ac8710b49a01ecdf5998d6a3f3",
+                    "committedDate": "2020-03-31T12:53:35Z",
+                    "oid": "0f8e38abe63631ac8710b49a01ecdf5998d6a3f3",
+                    "status": {
+                      "state": "FAILURE",
+                      "contexts": [
+                        {
+                          "state": "FAILURE",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33134533&buildTypeId=Gradle_Check_Stage_ReadyforMerge_Trigger",
+                          "description": "TeamCity build failed",
+                          "context": "Ready for Merge (Trigger) (Check)"
+                        },
+                        {
+                          "state": "FAILURE",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33134612&buildTypeId=Gradle_Check_Stage_ReadyforNightly_Trigger",
+                          "description": "TeamCity build failed",
+                          "context": "Ready for Nightly (Trigger) (Check)"
+                        },
+                        {
+                          "state": "FAILURE",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33134380&buildTypeId=Gradle_Check_InstantSmokeTestsJava14",
+                          "description": "TeamCity build failed",
+                          "context": "Smoke Tests with 3rd Party Plugins (instantSmokeTest) - Java14 Linux (Ready for Merge)"
+                        },
+                        {
+                          "state": "FAILURE",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33134381&buildTypeId=Gradle_Check_InstantSmokeTestsJava8",
+                          "description": "TeamCity build failed",
+                          "context": "Smoke Tests with 3rd Party Plugins (instantSmokeTest) - Java8 Linux (Ready for Merge)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33136101&buildTypeId=Gradle_Check_BuildDistributions",
+                          "description": "TeamCity build finished",
+                          "context": "Build Distributions (Ready for Merge)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33134273&buildTypeId=Gradle_Check_CompileAll",
+                          "description": "TeamCity build finished",
+                          "context": "Compile All (Quick Feedback - Linux Only)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33134378&buildTypeId=Gradle_Check_Gradleception",
+                          "description": "TeamCity build finished",
+                          "context": "Gradleception - Java8 Linux (Ready for Merge)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33134382&buildTypeId=Gradle_Check_PerformanceTestCoordinator",
+                          "description": "TeamCity build finished",
+                          "context": "Performance Regression Test Coordinator - Linux (Ready for Merge)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33134376&buildTypeId=Gradle_Check_Stage_QuickFeedback_Trigger",
+                          "description": "TeamCity build finished",
+                          "context": "Quick Feedback (Trigger) (Check)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33134325&buildTypeId=Gradle_Check_Stage_QuickFeedbackLinuxOnly_Trigger",
+                          "description": "TeamCity build finished",
+                          "context": "Quick Feedback - Linux Only (Trigger) (Check)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33134274&buildTypeId=Gradle_Check_SanityCheck",
+                          "description": "TeamCity build finished",
+                          "context": "Sanity Check (Quick Feedback - Linux Only)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33134379&buildTypeId=Gradle_Check_SmokeTestsJava14",
+                          "description": "TeamCity build finished",
+                          "context": "Smoke Tests with 3rd Party Plugins (smokeTest) - Java14 Linux (Ready for Merge)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "id": "MDExOlB1bGxSZXF1ZXN0Mzk2MzQyNTM1",
+            "body": "This PR let's instant execution capture enough of the build scan plugin configuration so that it is possible to publish scans to declared GE instances. Remaining configuration to be captured is `publishAlways`, `publishOnFailure` and `publishIfAuthenticated` as the Build Scan Plugin doesn't allow querying that.\r\n\r\nIt still requires using `--scan` though. This will be addressed later.\r\n\r\n----\r\n\r\nThis PR also adds some custom values to build scans when both instant execution and build scans are enabled. Those values include the action (`store`/`load`) and the size of the cached state. This is for experimentation purpose for now.\r\n",
+            "url": "https://github.com/gradle/gradle/pull/12684",
+            "headRef": {
+              "target": {
+                "oid": "f60954943bf6a72baea5782611f710872493db75"
+              },
+              "repository": {
+                "isFork": false,
+                "owner": {
+                  "login": "gradle"
+                },
+                "name": "gradle"
+              },
+              "name": "eskatos/ie/build-scans"
+            },
+            "baseRefName": "master",
+            "commits": {
+              "nodes": [
+                {
+                  "commit": {
+                    "commitUrl": "https://github.com/gradle/gradle/commit/f60954943bf6a72baea5782611f710872493db75",
+                    "committedDate": "2020-03-31T17:39:20Z",
+                    "oid": "f60954943bf6a72baea5782611f710872493db75",
+                    "status": {
+                      "state": "SUCCESS",
+                      "contexts": [
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33145240&buildTypeId=Gradle_Check_BuildDistributions",
+                          "description": "TeamCity build finished",
+                          "context": "Build Distributions (Ready for Merge)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33145136&buildTypeId=Gradle_Check_CompileAll",
+                          "description": "TeamCity build finished",
+                          "context": "Compile All (Quick Feedback - Linux Only)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33145241&buildTypeId=Gradle_Check_Gradleception",
+                          "description": "TeamCity build finished",
+                          "context": "Gradleception - Java8 Linux (Ready for Merge)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33145245&buildTypeId=Gradle_Check_PerformanceTestCoordinator",
+                          "description": "TeamCity build finished",
+                          "context": "Performance Regression Test Coordinator - Linux (Ready for Merge)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33145239&buildTypeId=Gradle_Check_Stage_QuickFeedback_Trigger",
+                          "description": "TeamCity build finished",
+                          "context": "Quick Feedback (Trigger) (Check)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33145188&buildTypeId=Gradle_Check_Stage_QuickFeedbackLinuxOnly_Trigger",
+                          "description": "TeamCity build finished",
+                          "context": "Quick Feedback - Linux Only (Trigger) (Check)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33145396&buildTypeId=Gradle_Check_Stage_ReadyforMerge_Trigger",
+                          "description": "TeamCity build finished",
+                          "context": "Ready for Merge (Trigger) (Check)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33145137&buildTypeId=Gradle_Check_SanityCheck",
+                          "description": "TeamCity build finished",
+                          "context": "Sanity Check (Quick Feedback - Linux Only)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33145243&buildTypeId=Gradle_Check_InstantSmokeTestsJava14",
+                          "description": "TeamCity build finished",
+                          "context": "Smoke Tests with 3rd Party Plugins (instantSmokeTest) - Java14 Linux (Ready for Merge)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33145244&buildTypeId=Gradle_Check_InstantSmokeTestsJava8",
+                          "description": "TeamCity build finished",
+                          "context": "Smoke Tests with 3rd Party Plugins (instantSmokeTest) - Java8 Linux (Ready for Merge)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33145242&buildTypeId=Gradle_Check_SmokeTestsJava14",
+                          "description": "TeamCity build finished",
+                          "context": "Smoke Tests with 3rd Party Plugins (smokeTest) - Java14 Linux (Ready for Merge)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "id": "MDExOlB1bGxSZXF1ZXN0Mzk2MzQ5OTM4",
+            "body": "This way, the `JvmTestExecutionSpec` already carries the final classpath and module path. This makes is easier to create alternative test worker implementations based on the spec.\r\n",
+            "url": "https://github.com/gradle/gradle/pull/12685",
+            "headRef": {
+              "target": {
+                "oid": "83a3eb805312f6ddbd8d89e925058557b1fdeb20"
+              },
+              "repository": {
+                "isFork": false,
+                "owner": {
+                  "login": "gradle"
+                },
+                "name": "gradle"
+              },
+              "name": "jjohannes/jpms/test-exec-spec"
+            },
+            "baseRefName": "jjohannes/jpms/release-property-2",
+            "commits": {
+              "nodes": [
+                {
+                  "commit": {
+                    "commitUrl": "https://github.com/gradle/gradle/commit/83a3eb805312f6ddbd8d89e925058557b1fdeb20",
+                    "committedDate": "2020-03-31T14:43:04Z",
+                    "oid": "83a3eb805312f6ddbd8d89e925058557b1fdeb20",
+                    "status": {
+                      "state": "SUCCESS",
+                      "contexts": [
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33139996&buildTypeId=Gradle_Check_BuildDistributions",
+                          "description": "TeamCity build finished",
+                          "context": "Build Distributions (Ready for Merge)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33139892&buildTypeId=Gradle_Check_CompileAll",
+                          "description": "TeamCity build finished",
+                          "context": "Compile All (Quick Feedback - Linux Only)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33139997&buildTypeId=Gradle_Check_Gradleception",
+                          "description": "TeamCity build finished",
+                          "context": "Gradleception - Java8 Linux (Ready for Merge)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33140001&buildTypeId=Gradle_Check_PerformanceTestCoordinator",
+                          "description": "TeamCity build finished",
+                          "context": "Performance Regression Test Coordinator - Linux (Ready for Merge)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33139995&buildTypeId=Gradle_Check_Stage_QuickFeedback_Trigger",
+                          "description": "TeamCity build finished",
+                          "context": "Quick Feedback (Trigger) (Check)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33139944&buildTypeId=Gradle_Check_Stage_QuickFeedbackLinuxOnly_Trigger",
+                          "description": "TeamCity build finished",
+                          "context": "Quick Feedback - Linux Only (Trigger) (Check)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33140152&buildTypeId=Gradle_Check_Stage_ReadyforMerge_Trigger",
+                          "description": "TeamCity build finished",
+                          "context": "Ready for Merge (Trigger) (Check)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33139893&buildTypeId=Gradle_Check_SanityCheck",
+                          "description": "TeamCity build finished",
+                          "context": "Sanity Check (Quick Feedback - Linux Only)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33139999&buildTypeId=Gradle_Check_InstantSmokeTestsJava14",
+                          "description": "TeamCity build finished",
+                          "context": "Smoke Tests with 3rd Party Plugins (instantSmokeTest) - Java14 Linux (Ready for Merge)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33140000&buildTypeId=Gradle_Check_InstantSmokeTestsJava8",
+                          "description": "TeamCity build finished",
+                          "context": "Smoke Tests with 3rd Party Plugins (instantSmokeTest) - Java8 Linux (Ready for Merge)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33139998&buildTypeId=Gradle_Check_SmokeTestsJava14",
+                          "description": "TeamCity build finished",
+                          "context": "Smoke Tests with 3rd Party Plugins (smokeTest) - Java14 Linux (Ready for Merge)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "id": "MDExOlB1bGxSZXF1ZXN0Mzk2NDA4NDI2",
+            "body": "",
+            "url": "https://github.com/gradle/gradle/pull/12687",
+            "headRef": {
+              "target": {
+                "oid": "740bcc194430655ba5ad1617a2ecd211f0979282"
+              },
+              "repository": {
+                "isFork": false,
+                "owner": {
+                  "login": "gradle"
+                },
+                "name": "gradle"
+              },
+              "name": "donat/daemon-shutdown-api"
+            },
+            "baseRefName": "master",
+            "commits": {
+              "nodes": [
+                {
+                  "commit": {
+                    "commitUrl": "https://github.com/gradle/gradle/commit/740bcc194430655ba5ad1617a2ecd211f0979282",
+                    "committedDate": "2020-03-31T15:29:54Z",
+                    "oid": "740bcc194430655ba5ad1617a2ecd211f0979282",
+                    "status": {
+                      "state": "SUCCESS",
+                      "contexts": [
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "id": "MDExOlB1bGxSZXF1ZXN0Mzk2NDY2NDYx",
+            "body": "Gradle uses separate proxy settings for http vs https.\r\nThis is slightly different than the traditional JVM proxy settings which\r\nuse the same `http.nonProxyHosts` for both.\r\n[Regular JVM docs here](https://docs.oracle.com/javase/7/docs/api/java/net/doc-files/net-properties.html)\r\nNotice the line: The HTTPS protocol handler will use the same nonProxyHosts property as the HTTP protocol.\r\n\r\nGradle behaves differently!\r\n\r\n### Gradle Core Team Checklist\r\n- [ ] Verify design and implementation \r\n- [ ] Verify test coverage and CI build status\r\n- [ ] Verify documentation\r\n- [ ] Recognize contributor in release notes\r\n",
+            "url": "https://github.com/gradle/gradle/pull/12688",
+            "headRef": {
+              "target": {
+                "oid": "2a95c6ae26f016d144434de500e253110b7cfbd2"
+              },
+              "repository": {
+                "isFork": true,
+                "owner": {
+                  "login": "runningcode"
+                },
+                "name": "gradle"
+              },
+              "name": "no/separate-http-proxy"
+            },
+            "baseRefName": "master",
+            "commits": {
+              "nodes": [
+                {
+                  "commit": {
+                    "commitUrl": "https://github.com/gradle/gradle/commit/2a95c6ae26f016d144434de500e253110b7cfbd2",
+                    "committedDate": "2020-03-31T17:09:39Z",
+                    "oid": "2a95c6ae26f016d144434de500e253110b7cfbd2",
+                    "status": {
+                      "state": "FAILURE",
+                      "contexts": [
+                        {
+                          "state": "FAILURE",
+                          "targetUrl": "https://travis-ci.org/github/gradle/gradle/builds/669338102?utm_source=github_status&utm_medium=notification",
+                          "description": "The Travis CI build failed",
+                          "context": "continuous-integration/travis-ci/pr"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "id": "MDExOlB1bGxSZXF1ZXN0Mzk2NDgzMzEz",
+            "body": "This PR recovers the performance lost due to the inclusion of `buildSrc` task inputs in the instant execution cache fingerprint by:\r\n- unblocking `buildSrc` tasks while the fingerprint is being encoded/written to the file;\r\n- deduplicating strings;\r\n\r\nThe deduplication of strings reduces the fingerprint size and task graph state size quite significantly, for `gradle/gradle:compileJava` they go from `9.9MB` and `3.1MB` respectively to `1.6MB` and `1.4MB`.\r\n\r\nThe combined result is that `gradle/gradle:compileJava` loads faster than before `buildSrc` was part of the cache fingerprint and stores almost as fast as before:\r\n\r\n![buildSrc-cache-fingerprint-benchmarks](https://user-images.githubusercontent.com/51689/78056636-d9b5a600-735b-11ea-9b2f-6a80fe1c3279.png)\r\n",
+            "url": "https://github.com/gradle/gradle/pull/12689",
+            "headRef": {
+              "target": {
+                "oid": "34c86ac4a8b222ede5e471136034782b9f8ac04e"
+              },
+              "repository": {
+                "isFork": false,
+                "owner": {
+                  "login": "gradle"
+                },
+                "name": "gradle"
+              },
+              "name": "bamboo/master/ie/stream-cache-fingerprint-to-file"
+            },
+            "baseRefName": "master",
+            "commits": {
+              "nodes": [
+                {
+                  "commit": {
+                    "commitUrl": "https://github.com/gradle/gradle/commit/34c86ac4a8b222ede5e471136034782b9f8ac04e",
+                    "committedDate": "2020-03-31T22:30:52Z",
+                    "oid": "34c86ac4a8b222ede5e471136034782b9f8ac04e",
+                    "status": {
+                      "state": "FAILURE",
+                      "contexts": [
+                        {
+                          "state": "ERROR",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152874&buildTypeId=Gradle_Check_Gradleception",
+                          "description": "TeamCity build failed",
+                          "context": "Gradleception - Java8 Linux (Ready for Merge)"
+                        },
+                        {
+                          "state": "ERROR",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152878&buildTypeId=Gradle_Check_PerformanceTestCoordinator",
+                          "description": "TeamCity build failed",
+                          "context": "Performance Regression Test Coordinator - Linux (Ready for Merge)"
+                        },
+                        {
+                          "state": "ERROR",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152876&buildTypeId=Gradle_Check_InstantSmokeTestsJava14",
+                          "description": "TeamCity build failed",
+                          "context": "Smoke Tests with 3rd Party Plugins (instantSmokeTest) - Java14 Linux (Ready for Merge)"
+                        },
+                        {
+                          "state": "ERROR",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152877&buildTypeId=Gradle_Check_InstantSmokeTestsJava8",
+                          "description": "TeamCity build failed",
+                          "context": "Smoke Tests with 3rd Party Plugins (instantSmokeTest) - Java8 Linux (Ready for Merge)"
+                        },
+                        {
+                          "state": "ERROR",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152875&buildTypeId=Gradle_Check_SmokeTestsJava14",
+                          "description": "TeamCity build failed",
+                          "context": "Smoke Tests with 3rd Party Plugins (smokeTest) - Java14 Linux (Ready for Merge)"
+                        },
+                        {
+                          "state": "FAILURE",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152872&buildTypeId=Gradle_Check_Stage_QuickFeedback_Trigger",
+                          "description": "TeamCity build failed",
+                          "context": "Quick Feedback (Trigger) (Check)"
+                        },
+                        {
+                          "state": "FAILURE",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152821&buildTypeId=Gradle_Check_Stage_QuickFeedbackLinuxOnly_Trigger",
+                          "description": "TeamCity build failed",
+                          "context": "Quick Feedback - Linux Only (Trigger) (Check)"
+                        },
+                        {
+                          "state": "FAILURE",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33153029&buildTypeId=Gradle_Check_Stage_ReadyforMerge_Trigger",
+                          "description": "TeamCity build failed",
+                          "context": "Ready for Merge (Trigger) (Check)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152873&buildTypeId=Gradle_Check_BuildDistributions",
+                          "description": "TeamCity build finished",
+                          "context": "Build Distributions (Ready for Merge)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152696&buildTypeId=Gradle_Check_CompileAll",
+                          "description": "TeamCity build finished",
+                          "context": "Compile All (Quick Feedback - Linux Only)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152697&buildTypeId=Gradle_Check_SanityCheck",
+                          "description": "TeamCity build finished",
+                          "context": "Sanity Check (Quick Feedback - Linux Only)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "id": "MDExOlB1bGxSZXF1ZXN0Mzk2NjUyMTkz",
+            "body": "",
+            "url": "https://github.com/gradle/gradle/pull/12691",
+            "headRef": {
+              "target": {
+                "oid": "5459aee74807a3ef617c9b0c5de68ebf1dfa65c5"
+              },
+              "repository": {
+                "isFork": false,
+                "owner": {
+                  "login": "gradle"
+                },
+                "name": "gradle"
+              },
+              "name": "bamboo/master/ie/fingerprint/for-buildSrc-task-inputs"
+            },
+            "baseRefName": "master",
+            "commits": {
+              "nodes": [
+                {
+                  "commit": {
+                    "commitUrl": "https://github.com/gradle/gradle/commit/5459aee74807a3ef617c9b0c5de68ebf1dfa65c5",
+                    "committedDate": "2020-03-31T22:45:55Z",
+                    "oid": "5459aee74807a3ef617c9b0c5de68ebf1dfa65c5",
+                    "status": {
+                      "state": "FAILURE",
+                      "contexts": [
+                        {
+                          "state": "ERROR",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33153137&buildTypeId=Gradle_Check_Gradleception",
+                          "description": "TeamCity build failed",
+                          "context": "Gradleception - Java8 Linux (Ready for Merge)"
+                        },
+                        {
+                          "state": "ERROR",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33153141&buildTypeId=Gradle_Check_PerformanceTestCoordinator",
+                          "description": "TeamCity build failed",
+                          "context": "Performance Regression Test Coordinator - Linux (Ready for Merge)"
+                        },
+                        {
+                          "state": "ERROR",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33153139&buildTypeId=Gradle_Check_InstantSmokeTestsJava14",
+                          "description": "TeamCity build failed",
+                          "context": "Smoke Tests with 3rd Party Plugins (instantSmokeTest) - Java14 Linux (Ready for Merge)"
+                        },
+                        {
+                          "state": "ERROR",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33153140&buildTypeId=Gradle_Check_InstantSmokeTestsJava8",
+                          "description": "TeamCity build failed",
+                          "context": "Smoke Tests with 3rd Party Plugins (instantSmokeTest) - Java8 Linux (Ready for Merge)"
+                        },
+                        {
+                          "state": "ERROR",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33153138&buildTypeId=Gradle_Check_SmokeTestsJava14",
+                          "description": "TeamCity build failed",
+                          "context": "Smoke Tests with 3rd Party Plugins (smokeTest) - Java14 Linux (Ready for Merge)"
+                        },
+                        {
+                          "state": "FAILURE",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33153135&buildTypeId=Gradle_Check_Stage_QuickFeedback_Trigger",
+                          "description": "TeamCity build failed",
+                          "context": "Quick Feedback (Trigger) (Check)"
+                        },
+                        {
+                          "state": "FAILURE",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33153084&buildTypeId=Gradle_Check_Stage_QuickFeedbackLinuxOnly_Trigger",
+                          "description": "TeamCity build failed",
+                          "context": "Quick Feedback - Linux Only (Trigger) (Check)"
+                        },
+                        {
+                          "state": "FAILURE",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33153292&buildTypeId=Gradle_Check_Stage_ReadyforMerge_Trigger",
+                          "description": "TeamCity build failed",
+                          "context": "Ready for Merge (Trigger) (Check)"
+                        },
+                        {
+                          "state": "FAILURE",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33153033&buildTypeId=Gradle_Check_SanityCheck",
+                          "description": "TeamCity build failed",
+                          "context": "Sanity Check (Quick Feedback - Linux Only)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33153136&buildTypeId=Gradle_Check_BuildDistributions",
+                          "description": "TeamCity build finished",
+                          "context": "Build Distributions (Ready for Merge)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33153032&buildTypeId=Gradle_Check_CompileAll",
+                          "description": "TeamCity build finished",
+                          "context": "Compile All (Quick Feedback - Linux Only)"
+                        },
+                        {
+                          "state": "SUCCESS",
+                          "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
+                          "description": "CI Status",
+                          "context": "master branch success since 2020-04-01T00:43:28"
                         }
                       ]
                     }

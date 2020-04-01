@@ -2,6 +2,9 @@ package org.gradle.bot.eventhandlers.teamcity
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import io.vertx.core.eventbus.Message
+import java.time.Duration
+import java.time.Instant
+import java.time.ZonedDateTime
 import javax.inject.Inject
 import javax.inject.Singleton
 import org.gradle.bot.client.GitHubClient
@@ -67,6 +70,12 @@ abstract class AbstractTeamCityEventHandler : TeamCityEventHandler {
     abstract fun handleEvent(event: TeamCityBuildEvent)
 }
 
+fun ListOpenPullRequestsResponse.Node.getHeadCommit() = headRef.target.oid
+
+// 2018-11-26T22:23:45Z
+fun ListOpenPullRequestsResponse.Node.lastCommittedDate() = ZonedDateTime.parse(commits.nodes[0].commit.committedDate)
+fun ListOpenPullRequestsResponse.Node.isStale() = Duration.between(lastCommittedDate().toInstant(), Instant.now()).toDays() > 30
+
 /**
  * Upon Ready for Nightly builds finish, update all open pull request's head commit with the build status
  */
@@ -100,21 +109,20 @@ class UpdateCIStatusForAllOpenPullRequests @Inject constructor(
     }
 
     private fun updateCIStatusFor(build: Build, pr: ListOpenPullRequestsResponse.Node) {
-        logger.info(pr.url)
-        if (!pr.url.contains("12556")) {
+        if (pr.isStale()) {
+            logger.debug("Skip stale PR: {}", pr.url)
             return
         }
         val latestCIStatus: CommitStatusState? = pr.commits?.nodes?.get(0)?.commit?.status?.contexts
             ?.find { it.context == ciStatusContext }?.state?.let(::of)
 
         val targetStatus = of(build.status.toString())
-        val headCommit = pr.headRef.target.oid
 
         if (targetStatus != latestCIStatus) {
-            logger.debug("Update CI status {} to {} {}", targetStatus, pr.url, headCommit)
+            logger.debug("Update CI status {} to {} {}", targetStatus, pr.url, pr.getHeadCommit())
             gitHubClient.createCommitStatus(
                 repoName,
-                headCommit,
+                pr.getHeadCommit(),
                 targetStatus,
                 build.getHomeUrl(),
                 ciStatusDesc(build, targetStatus),
