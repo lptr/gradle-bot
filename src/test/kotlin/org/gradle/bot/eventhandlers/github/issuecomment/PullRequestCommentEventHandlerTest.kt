@@ -23,7 +23,7 @@ class PullRequestCommentEventHandlerTest {
     @Test
     fun `skips comments on issue`() {
         // given
-        val json = javaClass.classLoader.getResourceAsStream("eventjson/IssueCommentGitHubEvent/IssueCommentEvent_without_pullRequest.json").reader().readText()
+        val json = javaClass.classLoader.getResourceAsStream("modeljson/IssueCommentGitHubEvent/IssueCommentEvent_without_pullRequest.json").reader().readText()
         val event = objectMapper.readValue(json, IssueCommentGitHubEvent::class.java)
         // when
         PullRequestCommentEventHandler(gitHubClient, teamCityClient).handleEvent(event)
