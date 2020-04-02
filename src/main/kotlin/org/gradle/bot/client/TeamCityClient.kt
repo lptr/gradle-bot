@@ -9,7 +9,6 @@ import javax.inject.Singleton
 import org.gradle.bot.model.BuildStage
 import org.jetbrains.teamcity.rest.Build
 import org.jetbrains.teamcity.rest.BuildId
-import org.jetbrains.teamcity.rest.BuildState
 import org.jetbrains.teamcity.rest.TeamCityInstanceFactory
 import org.slf4j.LoggerFactory
 
@@ -52,11 +51,11 @@ class TeamCityClient @Inject constructor(
             try {
                 val buildConfigurationId = BuildStage.READY_FOR_NIGHTLY.toBuildConfigurationId()
                 val latestFinishedBuild = teamCityRestClient
-                        .builds()
-                        .fromConfiguration(buildConfigurationId)
-                        .withBranch(targetBranch)
-                        .all()
-                        .find { it.state == BuildState.FINISHED }
+                    .builds()
+                    .fromConfiguration(buildConfigurationId)
+                    .withBranch(targetBranch)
+                    .includeFailed()
+                    .latest()
                 it.complete(latestFinishedBuild!!)
             } catch (e: Throwable) {
                 logger.error("", e)
