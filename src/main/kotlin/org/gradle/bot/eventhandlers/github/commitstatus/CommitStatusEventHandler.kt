@@ -10,7 +10,7 @@ import org.gradle.bot.model.CommitStatusGitHubEvent
 import org.gradle.bot.model.CommitStatusState
 import org.slf4j.LoggerFactory
 
-fun CommitStatusGitHubEvent.state() = CommitStatusState.valueOf(state)
+fun CommitStatusGitHubEvent.state() = CommitStatusState.of(state)
 fun CommitStatusGitHubEvent.commit() = commit.sha
 
 @Singleton
