@@ -35,32 +35,28 @@ class TeamCityClient @Inject constructor(
         }
     }
 
-    fun findBuild(teamCityBuildId: String): Future<Build?> {
-        return vertx.executeBlocking {
-            try {
-                it.complete(teamCityRestClient.build(BuildId(teamCityBuildId)))
-            } catch (e: Throwable) {
-                logger.error("", e)
-                it.fail(e)
-            }
+    fun findBuild(teamCityBuildId: String): Future<Build?> = vertx.executeBlocking {
+        try {
+            it.complete(teamCityRestClient.build(BuildId(teamCityBuildId)))
+        } catch (e: Throwable) {
+            logger.error("", e)
+            it.fail(e)
         }
     }
 
-    fun getLatestFinishedBuild(targetBranch: String): Future<Build> {
-        return vertx.executeBlocking {
-            try {
-                val buildConfigurationId = BuildStage.READY_FOR_NIGHTLY.toBuildConfigurationId()
-                val latestFinishedBuild = teamCityRestClient
+fun getLatestFinishedBuild(targetBranch: String): Future<Build> = vertx.executeBlocking {
+        try {
+            val buildConfigurationId = BuildStage.READY_FOR_NIGHTLY.toBuildConfigurationId()
+            val latestFinishedBuild = teamCityRestClient
                     .builds()
                     .fromConfiguration(buildConfigurationId)
                     .withBranch(targetBranch)
                     .includeFailed()
                     .latest()
-                it.complete(latestFinishedBuild!!)
-            } catch (e: Throwable) {
-                logger.error("", e)
-                it.fail(e)
-            }
+            it.complete(latestFinishedBuild!!)
+        } catch (e: Throwable) {
+            logger.error("", e)
+            it.fail(e)
         }
     }
 }
