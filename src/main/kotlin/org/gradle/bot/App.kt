@@ -7,8 +7,11 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.google.common.reflect.ClassPath
 import com.google.inject.AbstractModule
 import com.google.inject.Guice
+import com.google.inject.Inject
 import com.google.inject.Injector
 import com.google.inject.Module
+import com.google.inject.matcher.AbstractMatcher
+import com.google.inject.matcher.Matchers
 import com.google.inject.name.Names
 import io.vertx.core.AbstractVerticle
 import io.vertx.core.Future
@@ -24,9 +27,11 @@ import io.vertx.ext.web.client.WebClient
 import io.vertx.ext.web.client.WebClientOptions
 import io.vertx.ext.web.handler.BodyHandler
 import io.vertx.kotlin.core.http.httpServerOptionsOf
+import java.lang.reflect.Method
 import java.lang.reflect.Modifier
 import java.util.concurrent.Callable
-import javax.inject.Inject
+import org.gradle.bot.aop.logging.Log
+import org.gradle.bot.aop.logging.LogMethodInterceptor
 import org.gradle.bot.client.GitHubClient
 import org.gradle.bot.eventhandlers.WebHookEventHandler
 import org.gradle.bot.security.GithubSignatureChecker
@@ -89,6 +94,7 @@ open class GradleBotAppModule(private val vertx: Vertx) : AbstractModule() {
         bind(WebClient::class.java).toInstance(client)
         bindAccessTokens()
         bindGitHubSignatureCheckerOnSecret()
+        bindAOP()
     }
 
     open fun bindAccessTokens() {
@@ -108,6 +114,14 @@ open class GradleBotAppModule(private val vertx: Vertx) : AbstractModule() {
     private fun bindEnv(envName: String) {
         val envValue = System.getenv(envName) ?: throw IllegalStateException("Env $envName must be set!")
         bind(String::class.java).annotatedWith(Names.named(envName)).toInstance(envValue)
+    }
+
+    private fun bindAOP() {
+        bindInterceptor(Matchers.any(), object : AbstractMatcher<Method>() {
+            override fun matches(t: Method): Boolean {
+                return t.isAnnotationPresent(Log::class.java) && !t.isSynthetic
+            }
+        }, LogMethodInterceptor())
     }
 }
 
