@@ -8,3 +8,7 @@
  */
 
 rootProject.name = "gradle-bot"
+
+include("app")
+include("teamcity-workaround")
+include("forest")
