@@ -33,6 +33,15 @@ project("teamcity-workaround") {
     }
 }
 
+project("forest") {
+    val vertxVersion = "4.0.0-milestone4"
+    val guiceVersion = "4.2.3"
+    dependencies {
+        api("io.vertx:vertx-core:$vertxVersion")
+        api("com.google.inject:guice:$guiceVersion")
+    }
+}
+
 project("app") {
     configureKtlint()
 
@@ -58,7 +67,6 @@ project("app") {
     dependencies {
         val vertxVersion = "4.0.0-milestone4"
         val jacksonVersion = "2.10.3"
-        val guiceVersion = "4.2.3"
         val logbackVersion = "1.2.3"
         val junit5Version = "5.6.1"
         val guavaVersion = "28.2-jre"
@@ -74,7 +82,6 @@ project("app") {
         implementation("io.vertx:vertx-lang-kotlin:$vertxVersion")
         implementation("io.vertx:vertx-lang-kotlin-coroutines:$vertxVersion")
 
-        implementation("com.google.inject:guice:$guiceVersion")
         implementation("javax.inject:javax.inject:1")
 
         implementation("com.fasterxml.jackson.core:jackson-core:$jacksonVersion")
