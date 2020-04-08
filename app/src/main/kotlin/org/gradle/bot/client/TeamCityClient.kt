@@ -22,41 +22,33 @@ class TeamCityClient @Inject constructor(
         TeamCityInstanceFactory.tokenAuth("https://builds.gradle.org", teamCityToken)
     }
 
-    fun triggerBuild(stage: BuildStage, branchName: String): Future<Build> {
-        return vertx.executeBlocking { promise: Promise<Build> ->
+    private fun <T> executeBlocking(function: () -> T): Future<T> {
+        return vertx.executeBlocking { promise: Promise<T> ->
             try {
-                val buildConfiguration = teamCityRestClient.buildConfiguration(stage.toBuildConfigurationId())
-                val build = buildConfiguration.runBuild(logicalBranchName = branchName)
-                promise.complete(build)
+                promise.complete(function())
             } catch (e: Throwable) {
-                logger.error("Error when triggering $stage on $branchName", e)
+                logger.error("", e)
                 promise.fail(e)
             }
         }
     }
 
-    fun findBuild(teamCityBuildId: String): Future<Build?> = vertx.executeBlocking {
-        try {
-            it.complete(teamCityRestClient.build(BuildId(teamCityBuildId)))
-        } catch (e: Throwable) {
-            logger.error("", e)
-            it.fail(e)
-        }
+    fun triggerBuild(stage: BuildStage, branchName: String) = executeBlocking {
+        val buildConfiguration = teamCityRestClient.buildConfiguration(stage.toBuildConfigurationId())
+        val build = buildConfiguration.runBuild(logicalBranchName = branchName)
+        build
     }
 
-fun getLatestFinishedBuild(targetBranch: String): Future<Build> = vertx.executeBlocking {
-        try {
-            val buildConfigurationId = BuildStage.READY_FOR_NIGHTLY.toBuildConfigurationId()
-            val latestFinishedBuild = teamCityRestClient
-                    .builds()
-                    .fromConfiguration(buildConfigurationId)
-                    .withBranch(targetBranch)
-                    .includeFailed()
-                    .latest()
-            it.complete(latestFinishedBuild!!)
-        } catch (e: Throwable) {
-            logger.error("", e)
-            it.fail(e)
-        }
+    fun findBuild(teamCityBuildId: String): Future<Build?> = executeBlocking { teamCityRestClient.build(BuildId(teamCityBuildId)) }
+
+    fun getLatestFinishedBuild(targetBranch: String) = executeBlocking {
+        val buildConfigurationId = BuildStage.READY_FOR_NIGHTLY.toBuildConfigurationId()
+        val latestFinishedBuild = teamCityRestClient
+            .builds()
+            .fromConfiguration(buildConfigurationId)
+            .withBranch(targetBranch)
+            .includeFailed()
+            .latest()
+        latestFinishedBuild!!
     }
 }
