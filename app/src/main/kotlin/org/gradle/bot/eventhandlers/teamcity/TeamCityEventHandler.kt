@@ -75,6 +75,7 @@ fun ListOpenPullRequestsResponse.Node.getHeadCommit() = headRef.target.oid
 // 2018-11-26T22:23:45Z
 fun ListOpenPullRequestsResponse.Node.lastCommittedDate() = ZonedDateTime.parse(commits.nodes[0].commit.committedDate)
 fun ListOpenPullRequestsResponse.Node.isStale() = Duration.between(lastCommittedDate().toInstant(), Instant.now()).toDays() > 30
+fun ListOpenPullRequestsResponse.Node.getTargetBranch() = baseRefName
 
 /**
  * Upon Ready for Nightly builds finish, update all open pull request's head commit with the build status
@@ -118,7 +119,7 @@ class UpdateCIStatusForAllOpenPullRequests @Inject constructor(
 
         val targetStatus = of(build.status.toString())
 
-        if (targetStatus != latestCIStatus) {
+        if (targetStatus != latestCIStatus && build.branch.name.equals(pr.getTargetBranch())) {
             logger.debug("Update CI status {} to {} {}", targetStatus, pr.url, pr.getHeadCommit())
             gitHubClient.createCommitStatus(
                 repoName,

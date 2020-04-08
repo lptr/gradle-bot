@@ -61,6 +61,8 @@ class UpdateCIStatusForAllOpenPullRequestsTest : AbstractMockKTest() {
 
         every { build.branch.name } returns "master"
         every { build.status } returns BuildStatus.SUCCESS
+        every { prNode.getTargetBranch() } returns "master"
+
 
         // when
         handler.handleEvent(event)
@@ -90,6 +92,7 @@ class UpdateCIStatusForAllOpenPullRequestsTest : AbstractMockKTest() {
         )
         every { build.branch.name } returns "master"
         every { build.status } returns BuildStatus.SUCCESS
+        every { prNode.getTargetBranch() } returns "master"
 
         // when
         handler.handleEvent(event)
@@ -145,6 +148,24 @@ class UpdateCIStatusForAllOpenPullRequestsTest : AbstractMockKTest() {
         // then
         verify {
             gitHubClient wasNot Called
+        }
+    }
+
+    @Test
+    fun `skip pr with different branch`() {
+        // given
+        val otherBranchReadyForNightlySuccessBuildId = "4444"
+        val event = createTeamCityEvent("success", BuildStage.READY_FOR_NIGHTLY.buildTypeId, otherBranchReadyForNightlySuccessBuildId)
+        every { build.branch.name } returns "release"
+        every { build.status } returns BuildStatus.SUCCESS
+        every { prNode.getTargetBranch() } returns "master"
+
+        // when
+        handler.handleEvent(event)
+
+        // then
+        verify(exactly = 0) {
+            gitHubClient.createCommitStatus(any(), any(), any(), any(), any(), any())
         }
     }
 
