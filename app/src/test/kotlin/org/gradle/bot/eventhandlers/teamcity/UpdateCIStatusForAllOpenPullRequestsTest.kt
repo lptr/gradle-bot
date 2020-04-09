@@ -63,7 +63,6 @@ class UpdateCIStatusForAllOpenPullRequestsTest : AbstractMockKTest() {
         every { build.status } returns BuildStatus.SUCCESS
         every { prNode.getTargetBranch() } returns "master"
 
-
         // when
         handler.handleEvent(event)
 
