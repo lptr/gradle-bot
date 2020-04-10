@@ -7,6 +7,7 @@ import org.gradle.bot.client.TeamCityClient
 import org.gradle.bot.logger
 import org.gradle.bot.model.AuthorAssociation
 import org.gradle.bot.model.BuildStage
+import org.gradle.bot.model.CommitStatusState.ERROR
 import org.gradle.bot.model.CommitStatusState.FAILURE
 import org.gradle.bot.model.CommitStatusState.PENDING
 import org.gradle.bot.model.PullRequestWithCommentsResponse
@@ -101,7 +102,7 @@ $content""")
         val currentNonFailureStatuses: List<String> = pr.data
             .repository.pullRequest.commits.nodes
             .getOrNull(0)?.commit?.status?.contexts
-            ?.filter { it.state != FAILURE.toString() }?.map { it.context } ?: emptyList()
+            ?.filter { it.state != FAILURE.toString() && it.state != ERROR.toString() }?.map { it.context } ?: emptyList()
 
         val dependencies = targetBuildStage.dependencies.toMutableList().also { it.removeAll(currentNonFailureStatuses) }
 

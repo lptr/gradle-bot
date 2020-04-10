@@ -313,46 +313,94 @@ class PullRequestContextTest : AbstractMockKTest() {
     }
 
     @Test
-    fun `only update failure statuses`() {
+    fun `only update failure and error statuses`() {
         // given
         every { pr.data.repository.pullRequest.commits.nodes } returns listOf(
             objectMapper.readValue("""
                 {
-                  "commit": {
-                    "commitUrl": "https://github.com/gradle/gradle/commit/1eda3eea31a06ddf3a3a5a969f0d00d46638a7ed",
-                    "committedDate": "2018-02-22T03:20:23Z",
-                    "oid": "1eda3eea31a06ddf3a3a5a969f0d00d46638a7ed",
-                    "status": {
+              "commit": {
+                "commitUrl": "https://github.com/gradle/gradle/commit/b901eafa83c0bf65caaad251f8b877216f7cfb42",
+                "committedDate": "2020-04-10T08:13:15Z",
+                "oid": "b901eafa83c0bf65caaad251f8b877216f7cfb42",
+                "status": {
+                  "state": "FAILURE",
+                  "contexts": [
+                    {
+                      "state": "ERROR",
+                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33553174&buildTypeId=Gradle_Check_Gradleception",
+                      "description": "TeamCity build failed",
+                      "context": "Gradleception - Java8 Linux (Ready for Merge)"
+                    },
+                    {
+                      "state": "ERROR",
+                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33553178&buildTypeId=Gradle_Check_PerformanceTestCoordinator",
+                      "description": "TeamCity build failed",
+                      "context": "Performance Regression Test Coordinator - Linux (Ready for Merge)"
+                    },
+                    {
+                      "state": "ERROR",
+                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33553176&buildTypeId=Gradle_Check_InstantSmokeTestsJava14",
+                      "description": "TeamCity build failed",
+                      "context": "Smoke Tests with 3rd Party Plugins (instantSmokeTest) - Java14 Linux (Ready for Merge)"
+                    },
+                    {
+                      "state": "ERROR",
+                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33553177&buildTypeId=Gradle_Check_InstantSmokeTestsJava8",
+                      "description": "TeamCity build failed",
+                      "context": "Smoke Tests with 3rd Party Plugins (instantSmokeTest) - Java8 Linux (Ready for Merge)"
+                    },
+                    {
+                      "state": "ERROR",
+                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33553175&buildTypeId=Gradle_Check_SmokeTestsJava14",
+                      "description": "TeamCity build failed",
+                      "context": "Smoke Tests with 3rd Party Plugins (smokeTest) - Java14 Linux (Ready for Merge)"
+                    },
+                    {
                       "state": "FAILURE",
-                      "contexts": [
-                        {
-                          "state": "FAILURE",
-                          "targetUrl": "https://builds.gradle.org/viewType.html?buildTypeId=Gradle_Check_Stage_ReadyforNightly_Trigger&branch_Gradle_Check=master&tab=buildTypeStatusDiv",
-                          "description": "master branch failure since 2020-03-23T11:07:26.297Z",
-                          "context": "CI Status"
-                        },
-                        {
-                          "state": "SUCCESS",
-                          "targetUrl": "https://url",
-                          "description": "",
-                          "context": "Compile All (Quick Feedback - Linux Only)"
-                        },
-                        {
-                          "state": "SUCCESS",
-                          "targetUrl": "https://url",
-                          "description": "",
-                          "context": "Sanity Check (Quick Feedback - Linux Only)"
-                        },
-                        {
-                          "state": "FAILURE",
-                          "targetUrl": "https://url",
-                          "description": "",
-                          "context": "Quick Feedback - Linux Only (Trigger) (Check)"
-                        }
-                      ]
+                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33553172&buildTypeId=Gradle_Check_Stage_QuickFeedback_Trigger",
+                      "description": "TeamCity build failed",
+                      "context": "Quick Feedback (Trigger) (Check)"
+                    },
+                    {
+                      "state": "FAILURE",
+                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33553121&buildTypeId=Gradle_Check_Stage_QuickFeedbackLinuxOnly_Trigger",
+                      "description": "TeamCity build failed",
+                      "context": "Quick Feedback - Linux Only (Trigger) (Check)"
+                    },
+                    {
+                      "state": "FAILURE",
+                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33553070&buildTypeId=Gradle_Check_SanityCheck",
+                      "description": "TeamCity build failed",
+                      "context": "Sanity Check (Quick Feedback - Linux Only)"
+                    },
+                    {
+                      "state": "PENDING",
+                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33553173&buildTypeId=Gradle_Check_BuildDistributions",
+                      "description": "TeamCity build started",
+                      "context": "Build Distributions (Ready for Merge)"
+                    },
+                    {
+                      "state": "PENDING",
+                      "targetUrl": "https://builds.gradle.org",
+                      "description": "TeamCity build finished",
+                      "context": "Ready for Merge (Trigger) (Check)"
+                    },
+                    {
+                      "state": "SUCCESS",
+                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33548644",
+                      "description": "master branch success since 2020-04-10T07:18:05",
+                      "context": "CI Status"
+                    },
+                    {
+                      "state": "SUCCESS",
+                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33551982&buildTypeId=Gradle_Check_CompileAll",
+                      "description": "TeamCity build finished",
+                      "context": "Compile All (Quick Feedback - Linux Only)"
                     }
-                  }
+                  ]
                 }
+              }
+            }
             """.trimIndent(), PullRequestWithCommentsResponse.Node2::class.java)
         )
         every { pr.data.repository.pullRequest.comments.nodes } returns listOf(
@@ -409,15 +457,14 @@ class PullRequestContextTest : AbstractMockKTest() {
                 withArg<Iterable<String>> {
                     assertEquals(it.toSet(),
                         setOf(
+                            "Sanity Check (Quick Feedback - Linux Only)",
                             "Quick Feedback - Linux Only (Trigger) (Check)",
                             "Quick Feedback (Trigger) (Check)",
                             "Gradleception - Java8 Linux (Ready for Merge)",
                             "Smoke Tests with 3rd Party Plugins (instantSmokeTest) - Java14 Linux (Ready for Merge)",
                             "Smoke Tests with 3rd Party Plugins (instantSmokeTest) - Java8 Linux (Ready for Merge)",
                             "Smoke Tests with 3rd Party Plugins (smokeTest) - Java14 Linux (Ready for Merge)",
-                            "Build Distributions (Ready for Merge)",
-                            "Performance Regression Test Coordinator - Linux (Ready for Merge)",
-                            "Ready for Merge (Trigger) (Check)"
+                            "Performance Regression Test Coordinator - Linux (Ready for Merge)"
                         )
                     )
                 },
