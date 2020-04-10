@@ -25,7 +25,7 @@ class PullRequestCommentEventHandler @Inject constructor(
             return
         }
         gitHubClient.getPullRequestWithComments(event.repository.fullName, event.issue.number).onSuccess {
-            PullRequestContext(gitHubClient, teamCityClient, it).processCommand(event.comment.id)
+            PullRequestContext(gitHubClient, teamCityClient, it).executeCommentCommand(event.comment.id)
         }
     }
 }

@@ -7,7 +7,8 @@ import org.gradle.bot.client.TeamCityClient
 import org.gradle.bot.logger
 import org.gradle.bot.model.AuthorAssociation
 import org.gradle.bot.model.BuildStage
-import org.gradle.bot.model.CommitStatusState
+import org.gradle.bot.model.CommitStatusState.FAILURE
+import org.gradle.bot.model.CommitStatusState.PENDING
 import org.gradle.bot.model.PullRequestWithCommentsResponse
 import org.gradle.bot.objectMapper
 import org.jetbrains.teamcity.rest.Build
@@ -45,7 +46,7 @@ class PullRequestContext(
     private val pr: PullRequestWithCommentsResponse
 ) {
     val comments: List<PullRequestComment> = pr.getComments(gitHubClient.whoAmI())
-    fun processCommand(commentId: Long) {
+    fun executeCommentCommand(commentId: Long) {
         val targetComment = comments.find { it.id == commentId }
         if (targetComment == null) {
             logger.warn("Comment with id {} not found, skip.", commentId)
@@ -54,7 +55,7 @@ class PullRequestContext(
         if (alreadyReplied(targetComment)) {
             logger.warn("Comment {} has already been replied, skip.", targetComment.body)
         } else {
-            targetComment.command.execute(this)
+            targetComment.executeCommand(this)
         }
     }
 
@@ -85,15 +86,34 @@ $content""")
         }
     }
 
-    fun publishPendingStatuses(dependencies: List<String>) {
-        gitHubClient.createCommitStatus(pr.getRepoName(), pr.getHeadRefSha(), dependencies, CommitStatusState.PENDING)
+    /**
+     * Only update pending statuses for failure statuses.
+     *
+     * For example, user triggers a build, all statuses will be updated to pending.
+     *
+     * Then early steps of the builds succeeds, late steps fails.
+     *
+     * User thinks it's not his fault, so he triggers a new build again.
+     *
+     * Now the early successful steps will not be rerun by TeamCity, so we should not update them.
+     */
+    fun updatePendingStatuses(targetBuildStage: BuildStage) {
+        val currentNonFailureStatuses: List<String> = pr.data
+            .repository.pullRequest.commits.nodes
+            .getOrNull(0)?.commit?.status?.contexts
+            ?.filter { it.state != FAILURE.toString() }?.map { it.context } ?: emptyList()
+
+        val dependencies = targetBuildStage.dependencies.toMutableList().also { it.removeAll(currentNonFailureStatuses) }
+
+        gitHubClient.createCommitStatus(pr.getRepoName(), pr.getHeadRefSha(), dependencies, PENDING)
     }
 
+    private
     fun iDontUnderstandWhatYouSaid() = """
 Sorry I don't understand what you said, please type `@${gitHubClient.whoAmI()} help` to get help.
 """
 
-    fun helpMessage() = """Currently I support the following commands:
+    private fun helpMessage() = """Currently I support the following commands:
         
 - `@${gitHubClient.whoAmI()} test {BuildStage}` to trigger a build
   - e.g. `@${gitHubClient.whoAmI()} test SanityCheck plz`
@@ -102,6 +122,20 @@ Sorry I don't understand what you said, please type `@${gitHubClient.whoAmI()} h
   - `SanityCheck` can be abbreviated as `SC`, `ReadyForMerge` as `RFM`, etc.
 - `@${gitHubClient.whoAmI()} help` to display this message
 """
+
+    private fun noPermissionMessage() = "Sorry but I'm afraid you're not allowed to do this."
+
+    fun replyNoPermission(comment: PullRequestComment) {
+        reply(comment, noPermissionMessage())
+    }
+
+    fun replyHelp(sourceComment: CommandComment) {
+        reply(sourceComment, helpMessage())
+    }
+
+    fun replyDontUnderstand(sourceComment: PullRequestComment) {
+        reply(sourceComment, iDontUnderstandWhatYouSaid())
+    }
 }
 
 data class CommentMetadata(
@@ -150,6 +184,10 @@ interface PullRequestComment {
      * The metadata of this comment, e.g. the replyTargetCommentId
      */
     val metadata: CommentMetadata
+
+    fun executeCommand(context: PullRequestContext) {
+        command.execute(context)
+    }
 }
 
 class CommandComment(override val id: Long, override val body: String, override val metadata: CommentMetadata, val isAdmin: Boolean) : PullRequestComment {
@@ -169,6 +207,14 @@ class CommandComment(override val id: Long, override val body: String, override 
             else -> TestCommand(BuildStage.parseTargetStage(words[testIndex + 1])!!, this)
         }.also {
             logger.info("Parsing comment {} to command {}", commentBody, it)
+        }
+    }
+
+    override fun executeCommand(context: PullRequestContext) {
+        if (isAdmin) {
+            command.execute(context)
+        } else {
+            context.replyNoPermission(this)
         }
     }
 }

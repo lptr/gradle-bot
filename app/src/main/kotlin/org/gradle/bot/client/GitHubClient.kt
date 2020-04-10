@@ -87,7 +87,7 @@ open class GitHubClient @Inject constructor(
             }
     }
 
-    fun createCommitStatus(repoName: String, sha: String, dependencies: List<String>, statusState: CommitStatusState) {
+    fun createCommitStatus(repoName: String, sha: String, dependencies: Iterable<String>, statusState: CommitStatusState) {
         // https://developer.github.com/v3/repos/statuses/
         val url = repoName.split('/').let { "https://api.github.com/repos/${it[0]}/${it[1]}/statuses/$sha" }
         dependencies.forEach {

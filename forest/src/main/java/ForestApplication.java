@@ -9,8 +9,6 @@ import io.vertx.core.Verticle;
 @Target({ElementType.TYPE})
 @Retention(RUNTIME)
 public @interface ForestApplication {
-    Class<? extends Module> [] modules() default {};
-
     Class<? extends Verticle> [] verticleClasses() default {};
 
     boolean autoScan() default true;

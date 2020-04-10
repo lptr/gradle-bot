@@ -21,6 +21,7 @@ class UpdateCIStatusUponPullRequestSyncTest : AbstractMockKTest() {
     lateinit var build: Build
 
     lateinit var handler: UpdateCIStatusUponPullRequestSync
+
     @BeforeEach
     fun setUp() {
         handler = UpdateCIStatusUponPullRequestSync(gitHubClient, teamCityClient)

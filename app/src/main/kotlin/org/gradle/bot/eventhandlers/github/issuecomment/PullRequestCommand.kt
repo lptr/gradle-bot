@@ -18,6 +18,8 @@ interface PullRequestCommand {
     val sourceComment: PullRequestComment
 }
 
+val contactAdminComment = "Sorry some internal error occurs, please contact the administrator @blindpirate"
+
 class TestCommand(private val targetStage: BuildStage, override val sourceComment: PullRequestComment) : PullRequestCommand {
     override fun execute(context: PullRequestContext) {
         context.findLatestTriggeredBuild().onSuccess {
@@ -25,31 +27,31 @@ class TestCommand(private val targetStage: BuildStage, override val sourceCommen
                 triggerBuild(context)
             } else if (it.state == BuildState.QUEUED || it.state == BuildState.RUNNING) {
                 context.reply(sourceComment,
-                        "Sorry [the build you've already triggered](${it.getHomeUrl()}) is still running, I will not trigger a new one."
+                    "Sorry [the build you've already triggered](${it.getHomeUrl()}) is still running, I will not trigger a new one."
                 )
             } else {
                 triggerBuild(context)
             }
         }.onFailure {
-            context.reply(sourceComment, "Sorry some internal error occurs, please contact the administrator @blindpirate")
+            context.reply(sourceComment, contactAdminComment)
         }
     }
 
     private fun triggerBuild(context: PullRequestContext) {
         context.triggerBuild(targetStage).onSuccess {
-            context.publishPendingStatuses(targetStage.dependencies)
+            context.updatePendingStatuses(targetStage)
             context.reply(sourceComment,
-                    "OK, I've already triggered [${targetStage.fullName} build](${it.getHomeUrl()}) for you.",
-                    it.id.stringId)
+                "OK, I've already triggered [${targetStage.fullName} build](${it.getHomeUrl()}) for you.",
+                it.id.stringId)
         }.onFailure {
-            context.reply(sourceComment, "Sorry some internal error occurs, please contact the administrator @blindpirate")
+            context.reply(sourceComment, contactAdminComment)
         }
     }
 }
 
 class UnknownCommand(override val sourceComment: PullRequestComment) : PullRequestCommand {
     override fun execute(context: PullRequestContext) {
-        context.reply(sourceComment, context.iDontUnderstandWhatYouSaid())
+        context.replyDontUnderstand(sourceComment)
     }
 }
 
@@ -61,7 +63,7 @@ class CancelCommand
 
 class HelpCommand(override val sourceComment: CommandComment) : PullRequestCommand {
     override fun execute(context: PullRequestContext) {
-        context.reply(sourceComment, context.helpMessage())
+        context.replyHelp(sourceComment)
     }
 }
 
