@@ -1,6 +1,7 @@
 package org.gradle.bot.eventhandlers.github.issuecomment
 
 import org.gradle.bot.model.BuildStage
+import org.jetbrains.teamcity.rest.Build
 import org.jetbrains.teamcity.rest.BuildState
 
 /**
@@ -26,9 +27,7 @@ class TestCommand(val targetStage: BuildStage, override val sourceComment: PullR
             if (it == null) {
                 triggerBuild(context)
             } else if (it.state == BuildState.QUEUED || it.state == BuildState.RUNNING) {
-                context.reply(sourceComment,
-                    "Sorry [the build you've already triggered](${it.getHomeUrl()}) is still running, I will not trigger a new one."
-                )
+                cancelPreviousRunningBuildAndTriggerNewBuild(it, context)
             } else {
                 triggerBuild(context)
             }
@@ -37,11 +36,27 @@ class TestCommand(val targetStage: BuildStage, override val sourceComment: PullR
         }
     }
 
+    private fun cancelPreviousRunningBuildAndTriggerNewBuild(oldBuild: Build, context: PullRequestContext) {
+        context.cancelPreviouslyTriggeredBuild(oldBuild).onSuccess {
+            triggerBuild(context) { newBuild ->
+                "OK, I've already cancelled the [old build](${oldBuild.getHomeUrl()}) and triggered a new [${targetStage.fullName} build](${newBuild.getHomeUrl()}) for you."
+            }
+        }.onFailure {
+            context.reply(sourceComment, contactAdminComment)
+        }
+    }
+
     private fun triggerBuild(context: PullRequestContext) {
+        triggerBuild(context) {
+            "OK, I've already triggered [${targetStage.fullName} build](${it.getHomeUrl()}) for you."
+        }
+    }
+
+    private fun triggerBuild(context: PullRequestContext, messageBuilder: (Build) -> String) {
         context.triggerBuild(targetStage).onSuccess {
             context.updatePendingStatuses(targetStage)
             context.reply(sourceComment,
-                "OK, I've already triggered [${targetStage.fullName} build](${it.getHomeUrl()}) for you.",
+                messageBuilder(it),
                 it.id.stringId)
         }.onFailure {
             context.reply(sourceComment, contactAdminComment)

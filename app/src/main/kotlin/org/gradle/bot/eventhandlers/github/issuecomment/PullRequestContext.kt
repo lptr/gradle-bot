@@ -1,6 +1,7 @@
 package org.gradle.bot.eventhandlers.github.issuecomment
 
 import com.fasterxml.jackson.annotation.JsonProperty
+import io.vertx.core.CompositeFuture
 import io.vertx.core.Future
 import org.gradle.bot.client.GitHubClient
 import org.gradle.bot.client.TeamCityClient
@@ -126,16 +127,17 @@ Sorry I don't understand what you said, please type `@${gitHubClient.whoAmI()} h
 
     private fun noPermissionMessage() = "Sorry but I'm afraid you're not allowed to do this."
 
-    fun replyNoPermission(comment: PullRequestComment) {
-        reply(comment, noPermissionMessage())
-    }
+    fun replyNoPermission(comment: PullRequestComment) = reply(comment, noPermissionMessage())
 
-    fun replyHelp(sourceComment: CommandComment) {
-        reply(sourceComment, helpMessage())
-    }
+    fun replyHelp(sourceComment: CommandComment) = reply(sourceComment, helpMessage())
 
-    fun replyDontUnderstand(sourceComment: PullRequestComment) {
-        reply(sourceComment, iDontUnderstandWhatYouSaid())
+    fun replyDontUnderstand(sourceComment: PullRequestComment) = reply(sourceComment, iDontUnderstandWhatYouSaid())
+
+    fun cancelPreviouslyTriggeredBuild(build: Build): CompositeFuture {
+        val allBuilds = build.snapshotDependencies.toMutableList().also { it.add(build) }
+        return CompositeFuture.all(allBuilds.map {
+            teamCityClient.cancelBuild(build, "The user triggered a new build.")
+        })
     }
 }
 

@@ -51,4 +51,9 @@ class TeamCityClient @Inject constructor(
             .latest()
         latestFinishedBuild!!
     }
+
+    fun cancelBuild(build: Build, reason: String) = executeBlocking {
+        logger.debug("Cancelling build {}", build.getHomeUrl())
+        build.cancel(reason)
+    }
 }
