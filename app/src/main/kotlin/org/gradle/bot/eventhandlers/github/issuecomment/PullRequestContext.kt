@@ -197,7 +197,7 @@ class CommandComment(override val id: Long, override val body: String, override 
     }
 
     private fun parseCommand(commentBody: String): PullRequestCommand {
-        val words = commentBody.split("\\s+".toRegex())
+        val words = commentBody.replace("[^-@\\w]".toRegex(), " ").split("\\s+".toRegex())
         val testIndex = words.indexOf("test")
         val helpIndex = words.indexOf("help")
         return when {

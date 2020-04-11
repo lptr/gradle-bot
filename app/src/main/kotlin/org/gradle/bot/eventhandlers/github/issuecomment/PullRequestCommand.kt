@@ -20,7 +20,7 @@ interface PullRequestCommand {
 
 val contactAdminComment = "Sorry some internal error occurs, please contact the administrator @blindpirate"
 
-class TestCommand(private val targetStage: BuildStage, override val sourceComment: PullRequestComment) : PullRequestCommand {
+class TestCommand(val targetStage: BuildStage, override val sourceComment: PullRequestComment) : PullRequestCommand {
     override fun execute(context: PullRequestContext) {
         context.findLatestTriggeredBuild().onSuccess {
             if (it == null) {
