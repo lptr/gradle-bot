@@ -11,6 +11,9 @@ query {
       number
       body
       url
+      author {
+        login
+      }
       headRef {
         target {
           oid
@@ -33,6 +36,16 @@ query {
           }
           authorAssociation
           body
+        }
+      }
+      reviews(first: 100) {
+        nodes {
+          databaseId
+          author {
+            login
+          }
+          body
+          state
         }
       }
       commits(last: 1) {
@@ -87,6 +100,7 @@ query {
 fun listOpenPullRequestsQuery(owner: String, name: String, maxPrNum: Int = 100) = """
 query {
   repository(owner: "$owner", name: "$name") {
+    owner
     name
     pullRequests(states: OPEN, first: $maxPrNum) {
       nodes {

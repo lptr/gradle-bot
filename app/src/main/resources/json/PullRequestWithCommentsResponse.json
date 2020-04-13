@@ -3,13 +3,16 @@
     "repository": {
       "nameWithOwner": "gradle/gradle",
       "pullRequest": {
-        "id": "MDExOlB1bGxSZXF1ZXN0MjgxNjg5NTQ1",
-        "number": 9527,
-        "body": "Ad hoc perf test:[ `clean assemble on largeMonolithicJavaProject with rich console `](https://builds.gradle.org/viewType.html?buildTypeId=Gradle_Util_Performance_AdHocPerformanceScenarioLinux&tab=buildTypeStatusDiv&branch_Gradle_Util_Performance=lorinc%2Fclass-extractor-pattern-optimization)",
-        "url": "https://github.com/gradle/gradle/pull/9527",
+        "id": "MDExOlB1bGxSZXF1ZXN0NDAxOTA3ODc5",
+        "number": 12784,
+        "body": "Replace intermediate `FieldProblemReporter` by direct function call.\r\n",
+        "url": "https://github.com/gradle/gradle/pull/12784",
+        "author": {
+          "login": "bamboo"
+        },
         "headRef": {
           "target": {
-            "oid": "901afdb4e8b031fef5287d8394ff44ab5e167755"
+            "oid": "67a3eadd963d33ae385545ddf56827e78d6f93f6"
           },
           "repository": {
             "isFork": false,
@@ -18,42 +21,30 @@
             },
             "name": "gradle"
           },
-          "name": "lorinc/class-extractor-pattern-optimization"
+          "name": "bamboo/review/eskatos/ie/report-deserialization-problems"
         },
-        "baseRefName": "master",
+        "baseRefName": "eskatos/ie/report-deserialization-problems",
         "comments": {
           "nodes": [
             {
-              "databaseId": 496261350,
+              "databaseId": 612027592,
               "author": {
-                "login": "paplorinc"
+                "login": "bamboo"
               },
               "authorAssociation": "MEMBER",
-              "body": "Yes, bumped into this multiple times during profiling of different flows.\r\nIt's not a relevant bottleneck, but the solution optimizes the general flow, i.e. non-inner classes to avoid heavy regexp use.\r\nWould you like me to create a perf test for it?"
-            },
+              "body": "@bot-gradle test this"
+            }
+          ]
+        },
+        "reviews": {
+          "nodes": [
             {
-              "databaseId": 496281007,
+              "databaseId": 391448984,
               "author": {
-                "login": "oehme"
+                "login": "eskatos"
               },
-              "authorAssociation": "CONTRIBUTOR",
-              "body": "I'd just like to see at least one flame graph where this is visible. It would be great if you could always attach one for before and after when opening performance related PRs. Makes reviewing so much easier."
-            },
-            {
-              "databaseId": 496457321,
-              "author": {
-                "login": "oehme"
-              },
-              "authorAssociation": "CONTRIBUTOR",
-              "body": "The flame graph linked above is for a native project, which doesn't use this code path at all. The results are inconclusive as expected."
-            },
-            {
-              "databaseId": 496473352,
-              "author": {
-                "login": "paplorinc"
-              },
-              "authorAssociation": "MEMBER",
-              "body": "Fixed the link. Don't see any relevant difference. I will get back to this one if I see this method in a stack again."
+              "body": "👍 thanks!",
+              "state": "APPROVED"
             }
           ]
         },
@@ -61,59 +52,77 @@
           "nodes": [
             {
               "commit": {
-                "commitUrl": "https://github.com/gradle/gradle/commit/901afdb4e8b031fef5287d8394ff44ab5e167755",
-                "committedDate": "2019-05-23T16:19:32Z",
-                "oid": "901afdb4e8b031fef5287d8394ff44ab5e167755",
+                "commitUrl": "https://github.com/gradle/gradle/commit/67a3eadd963d33ae385545ddf56827e78d6f93f6",
+                "committedDate": "2020-04-10T13:22:52Z",
+                "oid": "67a3eadd963d33ae385545ddf56827e78d6f93f6",
                 "status": {
-                  "state": "PENDING",
+                  "state": "SUCCESS",
                   "contexts": [
                     {
-                      "state": "PENDING",
-                      "targetUrl": "https://builds.gradle.org/viewType.html?buildTypeId=Gradle_Check_Stage_ReadyforNightly_Trigger&branch_Gradle_Check=master&tab=buildTypeStatusDiv",
-                      "description": "master branch status unknown since 2020-02-27T18:06:01.550Z due to status count limitation",
-                      "context": "CI Status"
+                      "state": "SUCCESS",
+                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33557804&buildTypeId=Gradle_Check_BuildDistributions",
+                      "description": "TeamCity build finished",
+                      "context": "Build Distributions (Ready for Merge)"
                     },
                     {
                       "state": "SUCCESS",
-                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=23174918&buildTypeId=Gradle_Check_CompileAll",
+                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33557700&buildTypeId=Gradle_Check_CompileAll",
                       "description": "TeamCity build finished",
                       "context": "Compile All (Quick Feedback - Linux Only)"
                     },
                     {
                       "state": "SUCCESS",
-                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=23175087&buildTypeId=Gradle_Check_PerformanceTestCoordinator",
+                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33557805&buildTypeId=Gradle_Check_Gradleception",
                       "description": "TeamCity build finished",
-                      "context": "Performance Test Coordinator - Linux (Ready for Merge)"
+                      "context": "Gradleception - Java8 Linux (Ready for Merge)"
                     },
                     {
                       "state": "SUCCESS",
-                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=23175083&buildTypeId=Gradle_Check_Stage_QuickFeedback_Trigger",
+                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33557809&buildTypeId=Gradle_Check_PerformanceTestCoordinator",
+                      "description": "TeamCity build finished",
+                      "context": "Performance Regression Test Coordinator - Linux (Ready for Merge)"
+                    },
+                    {
+                      "state": "SUCCESS",
+                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33557803&buildTypeId=Gradle_Check_Stage_QuickFeedback_Trigger",
                       "description": "TeamCity build finished",
                       "context": "Quick Feedback (Trigger) (Check)"
                     },
                     {
                       "state": "SUCCESS",
-                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=23175001&buildTypeId=Gradle_Check_Stage_QuickFeedbackLinuxOnly_Trigger",
+                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33557752&buildTypeId=Gradle_Check_Stage_QuickFeedbackLinuxOnly_Trigger",
                       "description": "TeamCity build finished",
                       "context": "Quick Feedback - Linux Only (Trigger) (Check)"
                     },
                     {
                       "state": "SUCCESS",
-                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=23231818&buildTypeId=Gradle_Check_Stage_ReadyforMerge_Trigger",
+                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33557960&buildTypeId=Gradle_Check_Stage_ReadyforMerge_Trigger",
                       "description": "TeamCity build finished",
                       "context": "Ready for Merge (Trigger) (Check)"
                     },
                     {
                       "state": "SUCCESS",
-                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=23174919&buildTypeId=Gradle_Check_SanityCheck",
+                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33557701&buildTypeId=Gradle_Check_SanityCheck",
                       "description": "TeamCity build finished",
                       "context": "Sanity Check (Quick Feedback - Linux Only)"
                     },
                     {
                       "state": "SUCCESS",
-                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33152327",
-                      "description": "CI Status",
-                      "context": "master branch success since 2020-04-01T00:43:28"
+                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33557807&buildTypeId=Gradle_Check_InstantSmokeTestsJava14",
+                      "description": "TeamCity build finished",
+                      "context": "Smoke Tests with 3rd Party Plugins (instantSmokeTest) - Java14 Linux (Ready for Merge)"
+                    },
+                    {
+                      "state": "SUCCESS",
+                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33557808&buildTypeId=Gradle_Check_InstantSmokeTestsJava8",
+                      "description": "TeamCity build finished",
+                      "context": "Smoke Tests with 3rd Party Plugins (instantSmokeTest) - Java8 Linux (Ready for Merge)"
+                    },
+                    {
+                      "state": "SUCCESS",
+                      "targetUrl": "https://builds.gradle.org/viewLog.html?buildId=33557806&buildTypeId=Gradle_Check_SmokeTestsJava14",
+                      "description": "TeamCity build finished",
+                      "context": "Smoke Tests with 3rd Party Plugins (smokeTest) - Java14 Linux (Ready for Merge)"
                     }
                   ]
                 }

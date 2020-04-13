@@ -948,7 +948,7 @@ public class CommitStatusGitHubEvent implements GitHubEvent {
         @JsonProperty("name")
         private String name;
         @JsonProperty("commit")
-        private CommitStatusGitHubEvent.Commit2 commit;
+        private CommitStatusGitHubEvent.Commit3 commit;
         @JsonProperty("protected")
         private Boolean _protected;
         @JsonIgnore
@@ -967,7 +967,7 @@ public class CommitStatusGitHubEvent implements GitHubEvent {
          * @param name
          * @param commit
          */
-        public Branch(String name, CommitStatusGitHubEvent.Commit2 commit, Boolean _protected) {
+        public Branch(String name, CommitStatusGitHubEvent.Commit3 commit, Boolean _protected) {
             super();
             this.name = name;
             this.commit = commit;
@@ -985,12 +985,12 @@ public class CommitStatusGitHubEvent implements GitHubEvent {
         }
 
         @JsonProperty("commit")
-        public CommitStatusGitHubEvent.Commit2 getCommit() {
+        public CommitStatusGitHubEvent.Commit3 getCommit() {
             return commit;
         }
 
         @JsonProperty("commit")
-        public void setCommit(CommitStatusGitHubEvent.Commit2 commit) {
+        public void setCommit(CommitStatusGitHubEvent.Commit3 commit) {
             this.commit = commit;
         }
 
@@ -1520,6 +1520,115 @@ public class CommitStatusGitHubEvent implements GitHubEvent {
             }
             CommitStatusGitHubEvent.Commit2 rhs = ((CommitStatusGitHubEvent.Commit2) other);
             return (((((((((this.committer == rhs.committer)||((this.committer!= null)&&this.committer.equals(rhs.committer)))&&((this.author == rhs.author)||((this.author!= null)&&this.author.equals(rhs.author))))&&((this.tree == rhs.tree)||((this.tree!= null)&&this.tree.equals(rhs.tree))))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))))&&((this.message == rhs.message)||((this.message!= null)&&this.message.equals(rhs.message))))&&((this.url == rhs.url)||((this.url!= null)&&this.url.equals(rhs.url))))&&((this.verification == rhs.verification)||((this.verification!= null)&&this.verification.equals(rhs.verification))))&&((this.commentCount == rhs.commentCount)||((this.commentCount!= null)&&this.commentCount.equals(rhs.commentCount))));
+        }
+
+    }
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonPropertyOrder({
+        "sha",
+        "url"
+    })
+    public static class Commit3 {
+
+        @JsonProperty("sha")
+        private String sha;
+        @JsonProperty("url")
+        private String url;
+        @JsonIgnore
+        private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+        /**
+         * No args constructor for use in serialization
+         * 
+         */
+        public Commit3() {
+        }
+
+        /**
+         * 
+         * @param sha
+         * @param url
+         */
+        public Commit3(String sha, String url) {
+            super();
+            this.sha = sha;
+            this.url = url;
+        }
+
+        @JsonProperty("sha")
+        public String getSha() {
+            return sha;
+        }
+
+        @JsonProperty("sha")
+        public void setSha(String sha) {
+            this.sha = sha;
+        }
+
+        @JsonProperty("url")
+        public String getUrl() {
+            return url;
+        }
+
+        @JsonProperty("url")
+        public void setUrl(String url) {
+            this.url = url;
+        }
+
+        @JsonAnyGetter
+        public Map<String, Object> getAdditionalProperties() {
+            return this.additionalProperties;
+        }
+
+        @JsonAnySetter
+        public void setAdditionalProperty(String name, Object value) {
+            this.additionalProperties.put(name, value);
+        }
+
+        @Override
+        public String toString() {
+            StringBuilder sb = new StringBuilder();
+            sb.append(CommitStatusGitHubEvent.Commit3 .class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append("sha");
+            sb.append('=');
+            sb.append(((this.sha == null)?"<null>":this.sha));
+            sb.append(',');
+            sb.append("url");
+            sb.append('=');
+            sb.append(((this.url == null)?"<null>":this.url));
+            sb.append(',');
+            sb.append("additionalProperties");
+            sb.append('=');
+            sb.append(((this.additionalProperties == null)?"<null>":this.additionalProperties));
+            sb.append(',');
+            if (sb.charAt((sb.length()- 1)) == ',') {
+                sb.setCharAt((sb.length()- 1), ']');
+            } else {
+                sb.append(']');
+            }
+            return sb.toString();
+        }
+
+        @Override
+        public int hashCode() {
+            int result = 1;
+            result = ((result* 31)+((this.additionalProperties == null)? 0 :this.additionalProperties.hashCode()));
+            result = ((result* 31)+((this.sha == null)? 0 :this.sha.hashCode()));
+            result = ((result* 31)+((this.url == null)? 0 :this.url.hashCode()));
+            return result;
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            if (other == this) {
+                return true;
+            }
+            if ((other instanceof CommitStatusGitHubEvent.Commit3) == false) {
+                return false;
+            }
+            CommitStatusGitHubEvent.Commit3 rhs = ((CommitStatusGitHubEvent.Commit3) other);
+            return ((((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties)))&&((this.sha == rhs.sha)||((this.sha!= null)&&this.sha.equals(rhs.sha))))&&((this.url == rhs.url)||((this.url!= null)&&this.url.equals(rhs.url))));
         }
 
     }

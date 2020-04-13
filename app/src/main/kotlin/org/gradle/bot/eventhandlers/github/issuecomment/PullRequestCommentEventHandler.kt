@@ -1,12 +1,13 @@
 package org.gradle.bot.eventhandlers.github.issuecomment
 
-import javax.inject.Inject
-import javax.inject.Singleton
 import org.gradle.bot.client.GitHubClient
-import org.gradle.bot.client.TeamCityClient
 import org.gradle.bot.eventhandlers.github.AbstractGitHubEventHandler
+import org.gradle.bot.eventhandlers.github.pullrequest.PullRequest
+import org.gradle.bot.eventhandlers.github.pullrequest.PullRequestManager
 import org.gradle.bot.model.IssueCommentGitHubEvent
 import org.slf4j.LoggerFactory
+import javax.inject.Inject
+import javax.inject.Singleton
 
 fun IssueCommentGitHubEvent.isPullRequest() = issue.pullRequest != null
 
@@ -15,7 +16,7 @@ fun IssueCommentGitHubEvent.getCommentWebUrl() = "https://github.com/${repositor
 @Singleton
 class PullRequestCommentEventHandler @Inject constructor(
     private val gitHubClient: GitHubClient,
-    private val teamCityClient: TeamCityClient
+    private val pullRequestManager: PullRequestManager
 ) : AbstractGitHubEventHandler<IssueCommentGitHubEvent>() {
     private val logger = LoggerFactory.getLogger(javaClass)
 
@@ -25,7 +26,19 @@ class PullRequestCommentEventHandler @Inject constructor(
             return
         }
         gitHubClient.getPullRequestWithComments(event.repository.fullName, event.issue.number).onSuccess {
-            PullRequestContext(gitHubClient, teamCityClient, it).executeCommentCommand(event.comment.id)
+            val pullRequest = PullRequest(gitHubClient.whoAmI(), it)
+            pullRequest.addCommentIfNotExist(event.comment.id,
+                event.comment.user.login,
+                event.comment.authorAssociation,
+                event.comment.body,
+                gitHubClient.whoAmI()
+            )
+
+            if (event.comment.id != pullRequest.comments.last().id) {
+                // In case of race condition
+                logger.warn("Current comment: {}, the last comment of pull request query response: {}", event.comment.id, pullRequest.comments.last().id)
+            }
+            pullRequestManager.update(pullRequest)
         }
     }
 }

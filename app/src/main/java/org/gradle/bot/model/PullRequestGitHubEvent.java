@@ -216,7 +216,7 @@ public class PullRequestGitHubEvent implements GitHubEvent {
         @JsonProperty("sha")
         private String sha;
         @JsonProperty("user")
-        private PullRequestGitHubEvent.User2 user;
+        private PullRequestGitHubEvent.User3 user;
         @JsonProperty("repo")
         private PullRequestGitHubEvent.Repo2 repo;
         @JsonIgnore
@@ -237,7 +237,7 @@ public class PullRequestGitHubEvent implements GitHubEvent {
          * @param sha
          * @param user
          */
-        public Base(String label, String ref, String sha, PullRequestGitHubEvent.User2 user, PullRequestGitHubEvent.Repo2 repo) {
+        public Base(String label, String ref, String sha, PullRequestGitHubEvent.User3 user, PullRequestGitHubEvent.Repo2 repo) {
             super();
             this.label = label;
             this.ref = ref;
@@ -277,12 +277,12 @@ public class PullRequestGitHubEvent implements GitHubEvent {
         }
 
         @JsonProperty("user")
-        public PullRequestGitHubEvent.User2 getUser() {
+        public PullRequestGitHubEvent.User3 getUser() {
             return user;
         }
 
         @JsonProperty("user")
-        public void setUser(PullRequestGitHubEvent.User2 user) {
+        public void setUser(PullRequestGitHubEvent.User3 user) {
             this.user = user;
         }
 
@@ -2922,6 +2922,435 @@ public class PullRequestGitHubEvent implements GitHubEvent {
                 return false;
             }
             PullRequestGitHubEvent.Owner2 rhs = ((PullRequestGitHubEvent.Owner2) other);
+            return ((((((((((((((((((((this.receivedEventsUrl == rhs.receivedEventsUrl)||((this.receivedEventsUrl!= null)&&this.receivedEventsUrl.equals(rhs.receivedEventsUrl)))&&((this.siteAdmin == rhs.siteAdmin)||((this.siteAdmin!= null)&&this.siteAdmin.equals(rhs.siteAdmin))))&&((this.followingUrl == rhs.followingUrl)||((this.followingUrl!= null)&&this.followingUrl.equals(rhs.followingUrl))))&&((this.gistsUrl == rhs.gistsUrl)||((this.gistsUrl!= null)&&this.gistsUrl.equals(rhs.gistsUrl))))&&((this.avatarUrl == rhs.avatarUrl)||((this.avatarUrl!= null)&&this.avatarUrl.equals(rhs.avatarUrl))))&&((this.organizationsUrl == rhs.organizationsUrl)||((this.organizationsUrl!= null)&&this.organizationsUrl.equals(rhs.organizationsUrl))))&&((this.reposUrl == rhs.reposUrl)||((this.reposUrl!= null)&&this.reposUrl.equals(rhs.reposUrl))))&&((this.htmlUrl == rhs.htmlUrl)||((this.htmlUrl!= null)&&this.htmlUrl.equals(rhs.htmlUrl))))&&((this.subscriptionsUrl == rhs.subscriptionsUrl)||((this.subscriptionsUrl!= null)&&this.subscriptionsUrl.equals(rhs.subscriptionsUrl))))&&((this.login == rhs.login)||((this.login!= null)&&this.login.equals(rhs.login))))&&((this.type == rhs.type)||((this.type!= null)&&this.type.equals(rhs.type))))&&((this.url == rhs.url)||((this.url!= null)&&this.url.equals(rhs.url))))&&((this.starredUrl == rhs.starredUrl)||((this.starredUrl!= null)&&this.starredUrl.equals(rhs.starredUrl))))&&((this.gravatarId == rhs.gravatarId)||((this.gravatarId!= null)&&this.gravatarId.equals(rhs.gravatarId))))&&((this.followersUrl == rhs.followersUrl)||((this.followersUrl!= null)&&this.followersUrl.equals(rhs.followersUrl))))&&((this.id == rhs.id)||((this.id!= null)&&this.id.equals(rhs.id))))&&((this.eventsUrl == rhs.eventsUrl)||((this.eventsUrl!= null)&&this.eventsUrl.equals(rhs.eventsUrl))))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))))&&((this.nodeId == rhs.nodeId)||((this.nodeId!= null)&&this.nodeId.equals(rhs.nodeId))));
+        }
+
+    }
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonPropertyOrder({
+        "login",
+        "id",
+        "node_id",
+        "avatar_url",
+        "gravatar_id",
+        "url",
+        "html_url",
+        "followers_url",
+        "following_url",
+        "gists_url",
+        "starred_url",
+        "subscriptions_url",
+        "organizations_url",
+        "repos_url",
+        "events_url",
+        "received_events_url",
+        "type",
+        "site_admin"
+    })
+    public static class Owner3 {
+
+        @JsonProperty("login")
+        private String login;
+        @JsonProperty("id")
+        private Long id;
+        @JsonProperty("node_id")
+        private String nodeId;
+        @JsonProperty("avatar_url")
+        private String avatarUrl;
+        @JsonProperty("gravatar_id")
+        private String gravatarId;
+        @JsonProperty("url")
+        private String url;
+        @JsonProperty("html_url")
+        private String htmlUrl;
+        @JsonProperty("followers_url")
+        private String followersUrl;
+        @JsonProperty("following_url")
+        private String followingUrl;
+        @JsonProperty("gists_url")
+        private String gistsUrl;
+        @JsonProperty("starred_url")
+        private String starredUrl;
+        @JsonProperty("subscriptions_url")
+        private String subscriptionsUrl;
+        @JsonProperty("organizations_url")
+        private String organizationsUrl;
+        @JsonProperty("repos_url")
+        private String reposUrl;
+        @JsonProperty("events_url")
+        private String eventsUrl;
+        @JsonProperty("received_events_url")
+        private String receivedEventsUrl;
+        @JsonProperty("type")
+        private String type;
+        @JsonProperty("site_admin")
+        private Boolean siteAdmin;
+        @JsonIgnore
+        private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+        /**
+         * No args constructor for use in serialization
+         * 
+         */
+        public Owner3() {
+        }
+
+        /**
+         * 
+         * @param receivedEventsUrl
+         * @param siteAdmin
+         * @param followingUrl
+         * @param gistsUrl
+         * @param avatarUrl
+         * @param organizationsUrl
+         * @param reposUrl
+         * @param htmlUrl
+         * @param subscriptionsUrl
+         * @param login
+         * @param type
+         * @param url
+         * @param starredUrl
+         * @param gravatarId
+         * @param followersUrl
+         * @param id
+         * @param eventsUrl
+         * @param nodeId
+         */
+        public Owner3(String login, Long id, String nodeId, String avatarUrl, String gravatarId, String url, String htmlUrl, String followersUrl, String followingUrl, String gistsUrl, String starredUrl, String subscriptionsUrl, String organizationsUrl, String reposUrl, String eventsUrl, String receivedEventsUrl, String type, Boolean siteAdmin) {
+            super();
+            this.login = login;
+            this.id = id;
+            this.nodeId = nodeId;
+            this.avatarUrl = avatarUrl;
+            this.gravatarId = gravatarId;
+            this.url = url;
+            this.htmlUrl = htmlUrl;
+            this.followersUrl = followersUrl;
+            this.followingUrl = followingUrl;
+            this.gistsUrl = gistsUrl;
+            this.starredUrl = starredUrl;
+            this.subscriptionsUrl = subscriptionsUrl;
+            this.organizationsUrl = organizationsUrl;
+            this.reposUrl = reposUrl;
+            this.eventsUrl = eventsUrl;
+            this.receivedEventsUrl = receivedEventsUrl;
+            this.type = type;
+            this.siteAdmin = siteAdmin;
+        }
+
+        @JsonProperty("login")
+        public String getLogin() {
+            return login;
+        }
+
+        @JsonProperty("login")
+        public void setLogin(String login) {
+            this.login = login;
+        }
+
+        @JsonProperty("id")
+        public Long getId() {
+            return id;
+        }
+
+        @JsonProperty("id")
+        public void setId(Long id) {
+            this.id = id;
+        }
+
+        @JsonProperty("node_id")
+        public String getNodeId() {
+            return nodeId;
+        }
+
+        @JsonProperty("node_id")
+        public void setNodeId(String nodeId) {
+            this.nodeId = nodeId;
+        }
+
+        @JsonProperty("avatar_url")
+        public String getAvatarUrl() {
+            return avatarUrl;
+        }
+
+        @JsonProperty("avatar_url")
+        public void setAvatarUrl(String avatarUrl) {
+            this.avatarUrl = avatarUrl;
+        }
+
+        @JsonProperty("gravatar_id")
+        public String getGravatarId() {
+            return gravatarId;
+        }
+
+        @JsonProperty("gravatar_id")
+        public void setGravatarId(String gravatarId) {
+            this.gravatarId = gravatarId;
+        }
+
+        @JsonProperty("url")
+        public String getUrl() {
+            return url;
+        }
+
+        @JsonProperty("url")
+        public void setUrl(String url) {
+            this.url = url;
+        }
+
+        @JsonProperty("html_url")
+        public String getHtmlUrl() {
+            return htmlUrl;
+        }
+
+        @JsonProperty("html_url")
+        public void setHtmlUrl(String htmlUrl) {
+            this.htmlUrl = htmlUrl;
+        }
+
+        @JsonProperty("followers_url")
+        public String getFollowersUrl() {
+            return followersUrl;
+        }
+
+        @JsonProperty("followers_url")
+        public void setFollowersUrl(String followersUrl) {
+            this.followersUrl = followersUrl;
+        }
+
+        @JsonProperty("following_url")
+        public String getFollowingUrl() {
+            return followingUrl;
+        }
+
+        @JsonProperty("following_url")
+        public void setFollowingUrl(String followingUrl) {
+            this.followingUrl = followingUrl;
+        }
+
+        @JsonProperty("gists_url")
+        public String getGistsUrl() {
+            return gistsUrl;
+        }
+
+        @JsonProperty("gists_url")
+        public void setGistsUrl(String gistsUrl) {
+            this.gistsUrl = gistsUrl;
+        }
+
+        @JsonProperty("starred_url")
+        public String getStarredUrl() {
+            return starredUrl;
+        }
+
+        @JsonProperty("starred_url")
+        public void setStarredUrl(String starredUrl) {
+            this.starredUrl = starredUrl;
+        }
+
+        @JsonProperty("subscriptions_url")
+        public String getSubscriptionsUrl() {
+            return subscriptionsUrl;
+        }
+
+        @JsonProperty("subscriptions_url")
+        public void setSubscriptionsUrl(String subscriptionsUrl) {
+            this.subscriptionsUrl = subscriptionsUrl;
+        }
+
+        @JsonProperty("organizations_url")
+        public String getOrganizationsUrl() {
+            return organizationsUrl;
+        }
+
+        @JsonProperty("organizations_url")
+        public void setOrganizationsUrl(String organizationsUrl) {
+            this.organizationsUrl = organizationsUrl;
+        }
+
+        @JsonProperty("repos_url")
+        public String getReposUrl() {
+            return reposUrl;
+        }
+
+        @JsonProperty("repos_url")
+        public void setReposUrl(String reposUrl) {
+            this.reposUrl = reposUrl;
+        }
+
+        @JsonProperty("events_url")
+        public String getEventsUrl() {
+            return eventsUrl;
+        }
+
+        @JsonProperty("events_url")
+        public void setEventsUrl(String eventsUrl) {
+            this.eventsUrl = eventsUrl;
+        }
+
+        @JsonProperty("received_events_url")
+        public String getReceivedEventsUrl() {
+            return receivedEventsUrl;
+        }
+
+        @JsonProperty("received_events_url")
+        public void setReceivedEventsUrl(String receivedEventsUrl) {
+            this.receivedEventsUrl = receivedEventsUrl;
+        }
+
+        @JsonProperty("type")
+        public String getType() {
+            return type;
+        }
+
+        @JsonProperty("type")
+        public void setType(String type) {
+            this.type = type;
+        }
+
+        @JsonProperty("site_admin")
+        public Boolean getSiteAdmin() {
+            return siteAdmin;
+        }
+
+        @JsonProperty("site_admin")
+        public void setSiteAdmin(Boolean siteAdmin) {
+            this.siteAdmin = siteAdmin;
+        }
+
+        @JsonAnyGetter
+        public Map<String, Object> getAdditionalProperties() {
+            return this.additionalProperties;
+        }
+
+        @JsonAnySetter
+        public void setAdditionalProperty(String name, Object value) {
+            this.additionalProperties.put(name, value);
+        }
+
+        @Override
+        public String toString() {
+            StringBuilder sb = new StringBuilder();
+            sb.append(PullRequestGitHubEvent.Owner3 .class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append("login");
+            sb.append('=');
+            sb.append(((this.login == null)?"<null>":this.login));
+            sb.append(',');
+            sb.append("id");
+            sb.append('=');
+            sb.append(((this.id == null)?"<null>":this.id));
+            sb.append(',');
+            sb.append("nodeId");
+            sb.append('=');
+            sb.append(((this.nodeId == null)?"<null>":this.nodeId));
+            sb.append(',');
+            sb.append("avatarUrl");
+            sb.append('=');
+            sb.append(((this.avatarUrl == null)?"<null>":this.avatarUrl));
+            sb.append(',');
+            sb.append("gravatarId");
+            sb.append('=');
+            sb.append(((this.gravatarId == null)?"<null>":this.gravatarId));
+            sb.append(',');
+            sb.append("url");
+            sb.append('=');
+            sb.append(((this.url == null)?"<null>":this.url));
+            sb.append(',');
+            sb.append("htmlUrl");
+            sb.append('=');
+            sb.append(((this.htmlUrl == null)?"<null>":this.htmlUrl));
+            sb.append(',');
+            sb.append("followersUrl");
+            sb.append('=');
+            sb.append(((this.followersUrl == null)?"<null>":this.followersUrl));
+            sb.append(',');
+            sb.append("followingUrl");
+            sb.append('=');
+            sb.append(((this.followingUrl == null)?"<null>":this.followingUrl));
+            sb.append(',');
+            sb.append("gistsUrl");
+            sb.append('=');
+            sb.append(((this.gistsUrl == null)?"<null>":this.gistsUrl));
+            sb.append(',');
+            sb.append("starredUrl");
+            sb.append('=');
+            sb.append(((this.starredUrl == null)?"<null>":this.starredUrl));
+            sb.append(',');
+            sb.append("subscriptionsUrl");
+            sb.append('=');
+            sb.append(((this.subscriptionsUrl == null)?"<null>":this.subscriptionsUrl));
+            sb.append(',');
+            sb.append("organizationsUrl");
+            sb.append('=');
+            sb.append(((this.organizationsUrl == null)?"<null>":this.organizationsUrl));
+            sb.append(',');
+            sb.append("reposUrl");
+            sb.append('=');
+            sb.append(((this.reposUrl == null)?"<null>":this.reposUrl));
+            sb.append(',');
+            sb.append("eventsUrl");
+            sb.append('=');
+            sb.append(((this.eventsUrl == null)?"<null>":this.eventsUrl));
+            sb.append(',');
+            sb.append("receivedEventsUrl");
+            sb.append('=');
+            sb.append(((this.receivedEventsUrl == null)?"<null>":this.receivedEventsUrl));
+            sb.append(',');
+            sb.append("type");
+            sb.append('=');
+            sb.append(((this.type == null)?"<null>":this.type));
+            sb.append(',');
+            sb.append("siteAdmin");
+            sb.append('=');
+            sb.append(((this.siteAdmin == null)?"<null>":this.siteAdmin));
+            sb.append(',');
+            sb.append("additionalProperties");
+            sb.append('=');
+            sb.append(((this.additionalProperties == null)?"<null>":this.additionalProperties));
+            sb.append(',');
+            if (sb.charAt((sb.length()- 1)) == ',') {
+                sb.setCharAt((sb.length()- 1), ']');
+            } else {
+                sb.append(']');
+            }
+            return sb.toString();
+        }
+
+        @Override
+        public int hashCode() {
+            int result = 1;
+            result = ((result* 31)+((this.receivedEventsUrl == null)? 0 :this.receivedEventsUrl.hashCode()));
+            result = ((result* 31)+((this.siteAdmin == null)? 0 :this.siteAdmin.hashCode()));
+            result = ((result* 31)+((this.followingUrl == null)? 0 :this.followingUrl.hashCode()));
+            result = ((result* 31)+((this.gistsUrl == null)? 0 :this.gistsUrl.hashCode()));
+            result = ((result* 31)+((this.avatarUrl == null)? 0 :this.avatarUrl.hashCode()));
+            result = ((result* 31)+((this.organizationsUrl == null)? 0 :this.organizationsUrl.hashCode()));
+            result = ((result* 31)+((this.reposUrl == null)? 0 :this.reposUrl.hashCode()));
+            result = ((result* 31)+((this.htmlUrl == null)? 0 :this.htmlUrl.hashCode()));
+            result = ((result* 31)+((this.subscriptionsUrl == null)? 0 :this.subscriptionsUrl.hashCode()));
+            result = ((result* 31)+((this.login == null)? 0 :this.login.hashCode()));
+            result = ((result* 31)+((this.type == null)? 0 :this.type.hashCode()));
+            result = ((result* 31)+((this.url == null)? 0 :this.url.hashCode()));
+            result = ((result* 31)+((this.starredUrl == null)? 0 :this.starredUrl.hashCode()));
+            result = ((result* 31)+((this.gravatarId == null)? 0 :this.gravatarId.hashCode()));
+            result = ((result* 31)+((this.followersUrl == null)? 0 :this.followersUrl.hashCode()));
+            result = ((result* 31)+((this.id == null)? 0 :this.id.hashCode()));
+            result = ((result* 31)+((this.eventsUrl == null)? 0 :this.eventsUrl.hashCode()));
+            result = ((result* 31)+((this.additionalProperties == null)? 0 :this.additionalProperties.hashCode()));
+            result = ((result* 31)+((this.nodeId == null)? 0 :this.nodeId.hashCode()));
+            return result;
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            if (other == this) {
+                return true;
+            }
+            if ((other instanceof PullRequestGitHubEvent.Owner3) == false) {
+                return false;
+            }
+            PullRequestGitHubEvent.Owner3 rhs = ((PullRequestGitHubEvent.Owner3) other);
             return ((((((((((((((((((((this.receivedEventsUrl == rhs.receivedEventsUrl)||((this.receivedEventsUrl!= null)&&this.receivedEventsUrl.equals(rhs.receivedEventsUrl)))&&((this.siteAdmin == rhs.siteAdmin)||((this.siteAdmin!= null)&&this.siteAdmin.equals(rhs.siteAdmin))))&&((this.followingUrl == rhs.followingUrl)||((this.followingUrl!= null)&&this.followingUrl.equals(rhs.followingUrl))))&&((this.gistsUrl == rhs.gistsUrl)||((this.gistsUrl!= null)&&this.gistsUrl.equals(rhs.gistsUrl))))&&((this.avatarUrl == rhs.avatarUrl)||((this.avatarUrl!= null)&&this.avatarUrl.equals(rhs.avatarUrl))))&&((this.organizationsUrl == rhs.organizationsUrl)||((this.organizationsUrl!= null)&&this.organizationsUrl.equals(rhs.organizationsUrl))))&&((this.reposUrl == rhs.reposUrl)||((this.reposUrl!= null)&&this.reposUrl.equals(rhs.reposUrl))))&&((this.htmlUrl == rhs.htmlUrl)||((this.htmlUrl!= null)&&this.htmlUrl.equals(rhs.htmlUrl))))&&((this.subscriptionsUrl == rhs.subscriptionsUrl)||((this.subscriptionsUrl!= null)&&this.subscriptionsUrl.equals(rhs.subscriptionsUrl))))&&((this.login == rhs.login)||((this.login!= null)&&this.login.equals(rhs.login))))&&((this.type == rhs.type)||((this.type!= null)&&this.type.equals(rhs.type))))&&((this.url == rhs.url)||((this.url!= null)&&this.url.equals(rhs.url))))&&((this.starredUrl == rhs.starredUrl)||((this.starredUrl!= null)&&this.starredUrl.equals(rhs.starredUrl))))&&((this.gravatarId == rhs.gravatarId)||((this.gravatarId!= null)&&this.gravatarId.equals(rhs.gravatarId))))&&((this.followersUrl == rhs.followersUrl)||((this.followersUrl!= null)&&this.followersUrl.equals(rhs.followersUrl))))&&((this.id == rhs.id)||((this.id!= null)&&this.id.equals(rhs.id))))&&((this.eventsUrl == rhs.eventsUrl)||((this.eventsUrl!= null)&&this.eventsUrl.equals(rhs.eventsUrl))))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))))&&((this.nodeId == rhs.nodeId)||((this.nodeId!= null)&&this.nodeId.equals(rhs.nodeId))));
         }
 
@@ -7063,7 +7492,7 @@ public class PullRequestGitHubEvent implements GitHubEvent {
         @JsonProperty("private")
         private Boolean _private;
         @JsonProperty("owner")
-        private PullRequestGitHubEvent.Owner2 owner;
+        private PullRequestGitHubEvent.Owner3 owner;
         @JsonProperty("html_url")
         private String htmlUrl;
         @JsonProperty("description")
@@ -7284,7 +7713,7 @@ public class PullRequestGitHubEvent implements GitHubEvent {
          * @param subscriptionUrl
          * @param homepage
          */
-        public Repository(Long id, String nodeId, String name, String fullName, Boolean _private, PullRequestGitHubEvent.Owner2 owner, String htmlUrl, String description, Boolean fork, String url, String forksUrl, String keysUrl, String collaboratorsUrl, String teamsUrl, String hooksUrl, String issueEventsUrl, String eventsUrl, String assigneesUrl, String branchesUrl, String tagsUrl, String blobsUrl, String gitTagsUrl, String gitRefsUrl, String treesUrl, String statusesUrl, String languagesUrl, String stargazersUrl, String contributorsUrl, String subscribersUrl, String subscriptionUrl, String commitsUrl, String gitCommitsUrl, String commentsUrl, String issueCommentUrl, String contentsUrl, String compareUrl, String mergesUrl, String archiveUrl, String downloadsUrl, String issuesUrl, String pullsUrl, String milestonesUrl, String notificationsUrl, String labelsUrl, String releasesUrl, String deploymentsUrl, String createdAt, String updatedAt, String pushedAt, String gitUrl, String sshUrl, String cloneUrl, String svnUrl, Object homepage, Long size, Long stargazersCount, Long watchersCount, String language, Boolean hasIssues, Boolean hasProjects, Boolean hasDownloads, Boolean hasWiki, Boolean hasPages, Long forksCount, Object mirrorUrl, Boolean archived, Boolean disabled, Long openIssuesCount, Object license, Long forks, Long openIssues, Long watchers, String defaultBranch) {
+        public Repository(Long id, String nodeId, String name, String fullName, Boolean _private, PullRequestGitHubEvent.Owner3 owner, String htmlUrl, String description, Boolean fork, String url, String forksUrl, String keysUrl, String collaboratorsUrl, String teamsUrl, String hooksUrl, String issueEventsUrl, String eventsUrl, String assigneesUrl, String branchesUrl, String tagsUrl, String blobsUrl, String gitTagsUrl, String gitRefsUrl, String treesUrl, String statusesUrl, String languagesUrl, String stargazersUrl, String contributorsUrl, String subscribersUrl, String subscriptionUrl, String commitsUrl, String gitCommitsUrl, String commentsUrl, String issueCommentUrl, String contentsUrl, String compareUrl, String mergesUrl, String archiveUrl, String downloadsUrl, String issuesUrl, String pullsUrl, String milestonesUrl, String notificationsUrl, String labelsUrl, String releasesUrl, String deploymentsUrl, String createdAt, String updatedAt, String pushedAt, String gitUrl, String sshUrl, String cloneUrl, String svnUrl, Object homepage, Long size, Long stargazersCount, Long watchersCount, String language, Boolean hasIssues, Boolean hasProjects, Boolean hasDownloads, Boolean hasWiki, Boolean hasPages, Long forksCount, Object mirrorUrl, Boolean archived, Boolean disabled, Long openIssuesCount, Object license, Long forks, Long openIssues, Long watchers, String defaultBranch) {
             super();
             this.id = id;
             this.nodeId = nodeId;
@@ -7412,12 +7841,12 @@ public class PullRequestGitHubEvent implements GitHubEvent {
         }
 
         @JsonProperty("owner")
-        public PullRequestGitHubEvent.Owner2 getOwner() {
+        public PullRequestGitHubEvent.Owner3 getOwner() {
             return owner;
         }
 
         @JsonProperty("owner")
-        public void setOwner(PullRequestGitHubEvent.Owner2 owner) {
+        public void setOwner(PullRequestGitHubEvent.Owner3 owner) {
             this.owner = owner;
         }
 
@@ -10141,6 +10570,435 @@ public class PullRequestGitHubEvent implements GitHubEvent {
                 return false;
             }
             PullRequestGitHubEvent.User2 rhs = ((PullRequestGitHubEvent.User2) other);
+            return ((((((((((((((((((((this.receivedEventsUrl == rhs.receivedEventsUrl)||((this.receivedEventsUrl!= null)&&this.receivedEventsUrl.equals(rhs.receivedEventsUrl)))&&((this.siteAdmin == rhs.siteAdmin)||((this.siteAdmin!= null)&&this.siteAdmin.equals(rhs.siteAdmin))))&&((this.followingUrl == rhs.followingUrl)||((this.followingUrl!= null)&&this.followingUrl.equals(rhs.followingUrl))))&&((this.gistsUrl == rhs.gistsUrl)||((this.gistsUrl!= null)&&this.gistsUrl.equals(rhs.gistsUrl))))&&((this.avatarUrl == rhs.avatarUrl)||((this.avatarUrl!= null)&&this.avatarUrl.equals(rhs.avatarUrl))))&&((this.organizationsUrl == rhs.organizationsUrl)||((this.organizationsUrl!= null)&&this.organizationsUrl.equals(rhs.organizationsUrl))))&&((this.reposUrl == rhs.reposUrl)||((this.reposUrl!= null)&&this.reposUrl.equals(rhs.reposUrl))))&&((this.htmlUrl == rhs.htmlUrl)||((this.htmlUrl!= null)&&this.htmlUrl.equals(rhs.htmlUrl))))&&((this.subscriptionsUrl == rhs.subscriptionsUrl)||((this.subscriptionsUrl!= null)&&this.subscriptionsUrl.equals(rhs.subscriptionsUrl))))&&((this.login == rhs.login)||((this.login!= null)&&this.login.equals(rhs.login))))&&((this.type == rhs.type)||((this.type!= null)&&this.type.equals(rhs.type))))&&((this.url == rhs.url)||((this.url!= null)&&this.url.equals(rhs.url))))&&((this.starredUrl == rhs.starredUrl)||((this.starredUrl!= null)&&this.starredUrl.equals(rhs.starredUrl))))&&((this.gravatarId == rhs.gravatarId)||((this.gravatarId!= null)&&this.gravatarId.equals(rhs.gravatarId))))&&((this.followersUrl == rhs.followersUrl)||((this.followersUrl!= null)&&this.followersUrl.equals(rhs.followersUrl))))&&((this.id == rhs.id)||((this.id!= null)&&this.id.equals(rhs.id))))&&((this.eventsUrl == rhs.eventsUrl)||((this.eventsUrl!= null)&&this.eventsUrl.equals(rhs.eventsUrl))))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))))&&((this.nodeId == rhs.nodeId)||((this.nodeId!= null)&&this.nodeId.equals(rhs.nodeId))));
+        }
+
+    }
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonPropertyOrder({
+        "login",
+        "id",
+        "node_id",
+        "avatar_url",
+        "gravatar_id",
+        "url",
+        "html_url",
+        "followers_url",
+        "following_url",
+        "gists_url",
+        "starred_url",
+        "subscriptions_url",
+        "organizations_url",
+        "repos_url",
+        "events_url",
+        "received_events_url",
+        "type",
+        "site_admin"
+    })
+    public static class User3 {
+
+        @JsonProperty("login")
+        private String login;
+        @JsonProperty("id")
+        private Long id;
+        @JsonProperty("node_id")
+        private String nodeId;
+        @JsonProperty("avatar_url")
+        private String avatarUrl;
+        @JsonProperty("gravatar_id")
+        private String gravatarId;
+        @JsonProperty("url")
+        private String url;
+        @JsonProperty("html_url")
+        private String htmlUrl;
+        @JsonProperty("followers_url")
+        private String followersUrl;
+        @JsonProperty("following_url")
+        private String followingUrl;
+        @JsonProperty("gists_url")
+        private String gistsUrl;
+        @JsonProperty("starred_url")
+        private String starredUrl;
+        @JsonProperty("subscriptions_url")
+        private String subscriptionsUrl;
+        @JsonProperty("organizations_url")
+        private String organizationsUrl;
+        @JsonProperty("repos_url")
+        private String reposUrl;
+        @JsonProperty("events_url")
+        private String eventsUrl;
+        @JsonProperty("received_events_url")
+        private String receivedEventsUrl;
+        @JsonProperty("type")
+        private String type;
+        @JsonProperty("site_admin")
+        private Boolean siteAdmin;
+        @JsonIgnore
+        private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+        /**
+         * No args constructor for use in serialization
+         * 
+         */
+        public User3() {
+        }
+
+        /**
+         * 
+         * @param receivedEventsUrl
+         * @param siteAdmin
+         * @param followingUrl
+         * @param gistsUrl
+         * @param avatarUrl
+         * @param organizationsUrl
+         * @param reposUrl
+         * @param htmlUrl
+         * @param subscriptionsUrl
+         * @param login
+         * @param type
+         * @param url
+         * @param starredUrl
+         * @param gravatarId
+         * @param followersUrl
+         * @param id
+         * @param eventsUrl
+         * @param nodeId
+         */
+        public User3(String login, Long id, String nodeId, String avatarUrl, String gravatarId, String url, String htmlUrl, String followersUrl, String followingUrl, String gistsUrl, String starredUrl, String subscriptionsUrl, String organizationsUrl, String reposUrl, String eventsUrl, String receivedEventsUrl, String type, Boolean siteAdmin) {
+            super();
+            this.login = login;
+            this.id = id;
+            this.nodeId = nodeId;
+            this.avatarUrl = avatarUrl;
+            this.gravatarId = gravatarId;
+            this.url = url;
+            this.htmlUrl = htmlUrl;
+            this.followersUrl = followersUrl;
+            this.followingUrl = followingUrl;
+            this.gistsUrl = gistsUrl;
+            this.starredUrl = starredUrl;
+            this.subscriptionsUrl = subscriptionsUrl;
+            this.organizationsUrl = organizationsUrl;
+            this.reposUrl = reposUrl;
+            this.eventsUrl = eventsUrl;
+            this.receivedEventsUrl = receivedEventsUrl;
+            this.type = type;
+            this.siteAdmin = siteAdmin;
+        }
+
+        @JsonProperty("login")
+        public String getLogin() {
+            return login;
+        }
+
+        @JsonProperty("login")
+        public void setLogin(String login) {
+            this.login = login;
+        }
+
+        @JsonProperty("id")
+        public Long getId() {
+            return id;
+        }
+
+        @JsonProperty("id")
+        public void setId(Long id) {
+            this.id = id;
+        }
+
+        @JsonProperty("node_id")
+        public String getNodeId() {
+            return nodeId;
+        }
+
+        @JsonProperty("node_id")
+        public void setNodeId(String nodeId) {
+            this.nodeId = nodeId;
+        }
+
+        @JsonProperty("avatar_url")
+        public String getAvatarUrl() {
+            return avatarUrl;
+        }
+
+        @JsonProperty("avatar_url")
+        public void setAvatarUrl(String avatarUrl) {
+            this.avatarUrl = avatarUrl;
+        }
+
+        @JsonProperty("gravatar_id")
+        public String getGravatarId() {
+            return gravatarId;
+        }
+
+        @JsonProperty("gravatar_id")
+        public void setGravatarId(String gravatarId) {
+            this.gravatarId = gravatarId;
+        }
+
+        @JsonProperty("url")
+        public String getUrl() {
+            return url;
+        }
+
+        @JsonProperty("url")
+        public void setUrl(String url) {
+            this.url = url;
+        }
+
+        @JsonProperty("html_url")
+        public String getHtmlUrl() {
+            return htmlUrl;
+        }
+
+        @JsonProperty("html_url")
+        public void setHtmlUrl(String htmlUrl) {
+            this.htmlUrl = htmlUrl;
+        }
+
+        @JsonProperty("followers_url")
+        public String getFollowersUrl() {
+            return followersUrl;
+        }
+
+        @JsonProperty("followers_url")
+        public void setFollowersUrl(String followersUrl) {
+            this.followersUrl = followersUrl;
+        }
+
+        @JsonProperty("following_url")
+        public String getFollowingUrl() {
+            return followingUrl;
+        }
+
+        @JsonProperty("following_url")
+        public void setFollowingUrl(String followingUrl) {
+            this.followingUrl = followingUrl;
+        }
+
+        @JsonProperty("gists_url")
+        public String getGistsUrl() {
+            return gistsUrl;
+        }
+
+        @JsonProperty("gists_url")
+        public void setGistsUrl(String gistsUrl) {
+            this.gistsUrl = gistsUrl;
+        }
+
+        @JsonProperty("starred_url")
+        public String getStarredUrl() {
+            return starredUrl;
+        }
+
+        @JsonProperty("starred_url")
+        public void setStarredUrl(String starredUrl) {
+            this.starredUrl = starredUrl;
+        }
+
+        @JsonProperty("subscriptions_url")
+        public String getSubscriptionsUrl() {
+            return subscriptionsUrl;
+        }
+
+        @JsonProperty("subscriptions_url")
+        public void setSubscriptionsUrl(String subscriptionsUrl) {
+            this.subscriptionsUrl = subscriptionsUrl;
+        }
+
+        @JsonProperty("organizations_url")
+        public String getOrganizationsUrl() {
+            return organizationsUrl;
+        }
+
+        @JsonProperty("organizations_url")
+        public void setOrganizationsUrl(String organizationsUrl) {
+            this.organizationsUrl = organizationsUrl;
+        }
+
+        @JsonProperty("repos_url")
+        public String getReposUrl() {
+            return reposUrl;
+        }
+
+        @JsonProperty("repos_url")
+        public void setReposUrl(String reposUrl) {
+            this.reposUrl = reposUrl;
+        }
+
+        @JsonProperty("events_url")
+        public String getEventsUrl() {
+            return eventsUrl;
+        }
+
+        @JsonProperty("events_url")
+        public void setEventsUrl(String eventsUrl) {
+            this.eventsUrl = eventsUrl;
+        }
+
+        @JsonProperty("received_events_url")
+        public String getReceivedEventsUrl() {
+            return receivedEventsUrl;
+        }
+
+        @JsonProperty("received_events_url")
+        public void setReceivedEventsUrl(String receivedEventsUrl) {
+            this.receivedEventsUrl = receivedEventsUrl;
+        }
+
+        @JsonProperty("type")
+        public String getType() {
+            return type;
+        }
+
+        @JsonProperty("type")
+        public void setType(String type) {
+            this.type = type;
+        }
+
+        @JsonProperty("site_admin")
+        public Boolean getSiteAdmin() {
+            return siteAdmin;
+        }
+
+        @JsonProperty("site_admin")
+        public void setSiteAdmin(Boolean siteAdmin) {
+            this.siteAdmin = siteAdmin;
+        }
+
+        @JsonAnyGetter
+        public Map<String, Object> getAdditionalProperties() {
+            return this.additionalProperties;
+        }
+
+        @JsonAnySetter
+        public void setAdditionalProperty(String name, Object value) {
+            this.additionalProperties.put(name, value);
+        }
+
+        @Override
+        public String toString() {
+            StringBuilder sb = new StringBuilder();
+            sb.append(PullRequestGitHubEvent.User3 .class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append("login");
+            sb.append('=');
+            sb.append(((this.login == null)?"<null>":this.login));
+            sb.append(',');
+            sb.append("id");
+            sb.append('=');
+            sb.append(((this.id == null)?"<null>":this.id));
+            sb.append(',');
+            sb.append("nodeId");
+            sb.append('=');
+            sb.append(((this.nodeId == null)?"<null>":this.nodeId));
+            sb.append(',');
+            sb.append("avatarUrl");
+            sb.append('=');
+            sb.append(((this.avatarUrl == null)?"<null>":this.avatarUrl));
+            sb.append(',');
+            sb.append("gravatarId");
+            sb.append('=');
+            sb.append(((this.gravatarId == null)?"<null>":this.gravatarId));
+            sb.append(',');
+            sb.append("url");
+            sb.append('=');
+            sb.append(((this.url == null)?"<null>":this.url));
+            sb.append(',');
+            sb.append("htmlUrl");
+            sb.append('=');
+            sb.append(((this.htmlUrl == null)?"<null>":this.htmlUrl));
+            sb.append(',');
+            sb.append("followersUrl");
+            sb.append('=');
+            sb.append(((this.followersUrl == null)?"<null>":this.followersUrl));
+            sb.append(',');
+            sb.append("followingUrl");
+            sb.append('=');
+            sb.append(((this.followingUrl == null)?"<null>":this.followingUrl));
+            sb.append(',');
+            sb.append("gistsUrl");
+            sb.append('=');
+            sb.append(((this.gistsUrl == null)?"<null>":this.gistsUrl));
+            sb.append(',');
+            sb.append("starredUrl");
+            sb.append('=');
+            sb.append(((this.starredUrl == null)?"<null>":this.starredUrl));
+            sb.append(',');
+            sb.append("subscriptionsUrl");
+            sb.append('=');
+            sb.append(((this.subscriptionsUrl == null)?"<null>":this.subscriptionsUrl));
+            sb.append(',');
+            sb.append("organizationsUrl");
+            sb.append('=');
+            sb.append(((this.organizationsUrl == null)?"<null>":this.organizationsUrl));
+            sb.append(',');
+            sb.append("reposUrl");
+            sb.append('=');
+            sb.append(((this.reposUrl == null)?"<null>":this.reposUrl));
+            sb.append(',');
+            sb.append("eventsUrl");
+            sb.append('=');
+            sb.append(((this.eventsUrl == null)?"<null>":this.eventsUrl));
+            sb.append(',');
+            sb.append("receivedEventsUrl");
+            sb.append('=');
+            sb.append(((this.receivedEventsUrl == null)?"<null>":this.receivedEventsUrl));
+            sb.append(',');
+            sb.append("type");
+            sb.append('=');
+            sb.append(((this.type == null)?"<null>":this.type));
+            sb.append(',');
+            sb.append("siteAdmin");
+            sb.append('=');
+            sb.append(((this.siteAdmin == null)?"<null>":this.siteAdmin));
+            sb.append(',');
+            sb.append("additionalProperties");
+            sb.append('=');
+            sb.append(((this.additionalProperties == null)?"<null>":this.additionalProperties));
+            sb.append(',');
+            if (sb.charAt((sb.length()- 1)) == ',') {
+                sb.setCharAt((sb.length()- 1), ']');
+            } else {
+                sb.append(']');
+            }
+            return sb.toString();
+        }
+
+        @Override
+        public int hashCode() {
+            int result = 1;
+            result = ((result* 31)+((this.receivedEventsUrl == null)? 0 :this.receivedEventsUrl.hashCode()));
+            result = ((result* 31)+((this.siteAdmin == null)? 0 :this.siteAdmin.hashCode()));
+            result = ((result* 31)+((this.followingUrl == null)? 0 :this.followingUrl.hashCode()));
+            result = ((result* 31)+((this.gistsUrl == null)? 0 :this.gistsUrl.hashCode()));
+            result = ((result* 31)+((this.avatarUrl == null)? 0 :this.avatarUrl.hashCode()));
+            result = ((result* 31)+((this.organizationsUrl == null)? 0 :this.organizationsUrl.hashCode()));
+            result = ((result* 31)+((this.reposUrl == null)? 0 :this.reposUrl.hashCode()));
+            result = ((result* 31)+((this.htmlUrl == null)? 0 :this.htmlUrl.hashCode()));
+            result = ((result* 31)+((this.subscriptionsUrl == null)? 0 :this.subscriptionsUrl.hashCode()));
+            result = ((result* 31)+((this.login == null)? 0 :this.login.hashCode()));
+            result = ((result* 31)+((this.type == null)? 0 :this.type.hashCode()));
+            result = ((result* 31)+((this.url == null)? 0 :this.url.hashCode()));
+            result = ((result* 31)+((this.starredUrl == null)? 0 :this.starredUrl.hashCode()));
+            result = ((result* 31)+((this.gravatarId == null)? 0 :this.gravatarId.hashCode()));
+            result = ((result* 31)+((this.followersUrl == null)? 0 :this.followersUrl.hashCode()));
+            result = ((result* 31)+((this.id == null)? 0 :this.id.hashCode()));
+            result = ((result* 31)+((this.eventsUrl == null)? 0 :this.eventsUrl.hashCode()));
+            result = ((result* 31)+((this.additionalProperties == null)? 0 :this.additionalProperties.hashCode()));
+            result = ((result* 31)+((this.nodeId == null)? 0 :this.nodeId.hashCode()));
+            return result;
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            if (other == this) {
+                return true;
+            }
+            if ((other instanceof PullRequestGitHubEvent.User3) == false) {
+                return false;
+            }
+            PullRequestGitHubEvent.User3 rhs = ((PullRequestGitHubEvent.User3) other);
             return ((((((((((((((((((((this.receivedEventsUrl == rhs.receivedEventsUrl)||((this.receivedEventsUrl!= null)&&this.receivedEventsUrl.equals(rhs.receivedEventsUrl)))&&((this.siteAdmin == rhs.siteAdmin)||((this.siteAdmin!= null)&&this.siteAdmin.equals(rhs.siteAdmin))))&&((this.followingUrl == rhs.followingUrl)||((this.followingUrl!= null)&&this.followingUrl.equals(rhs.followingUrl))))&&((this.gistsUrl == rhs.gistsUrl)||((this.gistsUrl!= null)&&this.gistsUrl.equals(rhs.gistsUrl))))&&((this.avatarUrl == rhs.avatarUrl)||((this.avatarUrl!= null)&&this.avatarUrl.equals(rhs.avatarUrl))))&&((this.organizationsUrl == rhs.organizationsUrl)||((this.organizationsUrl!= null)&&this.organizationsUrl.equals(rhs.organizationsUrl))))&&((this.reposUrl == rhs.reposUrl)||((this.reposUrl!= null)&&this.reposUrl.equals(rhs.reposUrl))))&&((this.htmlUrl == rhs.htmlUrl)||((this.htmlUrl!= null)&&this.htmlUrl.equals(rhs.htmlUrl))))&&((this.subscriptionsUrl == rhs.subscriptionsUrl)||((this.subscriptionsUrl!= null)&&this.subscriptionsUrl.equals(rhs.subscriptionsUrl))))&&((this.login == rhs.login)||((this.login!= null)&&this.login.equals(rhs.login))))&&((this.type == rhs.type)||((this.type!= null)&&this.type.equals(rhs.type))))&&((this.url == rhs.url)||((this.url!= null)&&this.url.equals(rhs.url))))&&((this.starredUrl == rhs.starredUrl)||((this.starredUrl!= null)&&this.starredUrl.equals(rhs.starredUrl))))&&((this.gravatarId == rhs.gravatarId)||((this.gravatarId!= null)&&this.gravatarId.equals(rhs.gravatarId))))&&((this.followersUrl == rhs.followersUrl)||((this.followersUrl!= null)&&this.followersUrl.equals(rhs.followersUrl))))&&((this.id == rhs.id)||((this.id!= null)&&this.id.equals(rhs.id))))&&((this.eventsUrl == rhs.eventsUrl)||((this.eventsUrl!= null)&&this.eventsUrl.equals(rhs.eventsUrl))))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))))&&((this.nodeId == rhs.nodeId)||((this.nodeId!= null)&&this.nodeId.equals(rhs.nodeId))));
         }
 

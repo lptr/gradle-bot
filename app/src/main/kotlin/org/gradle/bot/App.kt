@@ -32,6 +32,7 @@ import java.lang.reflect.Modifier
 import java.util.concurrent.Callable
 import org.gradle.bot.aop.logging.Log
 import org.gradle.bot.aop.logging.LogMethodInterceptor
+import org.gradle.bot.client.DefaultGitHubClient
 import org.gradle.bot.client.GitHubClient
 import org.gradle.bot.eventhandlers.WebHookEventHandler
 import org.gradle.bot.security.GithubSignatureChecker
@@ -130,7 +131,7 @@ class GradleBotVerticle @Inject constructor(
     private val gitHubWebHookHandler: GitHubWebHookHandler,
     private val teamCityWebHookHandler: TeamCityWebHookHandler,
     private val slackWebHookEventHandler: SlackWebHookHandler,
-    private val gitHubClient: GitHubClient
+    private val gitHubClient: DefaultGitHubClient
 ) : AbstractVerticle() {
     private val logger: Logger = LoggerFactory.getLogger(GradleBotVerticle::class.java.name)
     private val port by lazy {

@@ -190,6 +190,184 @@ public class PullRequestWithCommentsResponse {
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonPropertyOrder({
+        "login"
+    })
+    public static class Author2 {
+
+        @JsonProperty("login")
+        private String login;
+        @JsonIgnore
+        private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+        /**
+         * No args constructor for use in serialization
+         * 
+         */
+        public Author2() {
+        }
+
+        /**
+         * 
+         * @param login
+         */
+        public Author2(String login) {
+            super();
+            this.login = login;
+        }
+
+        @JsonProperty("login")
+        public String getLogin() {
+            return login;
+        }
+
+        @JsonProperty("login")
+        public void setLogin(String login) {
+            this.login = login;
+        }
+
+        @JsonAnyGetter
+        public Map<String, Object> getAdditionalProperties() {
+            return this.additionalProperties;
+        }
+
+        @JsonAnySetter
+        public void setAdditionalProperty(String name, Object value) {
+            this.additionalProperties.put(name, value);
+        }
+
+        @Override
+        public String toString() {
+            StringBuilder sb = new StringBuilder();
+            sb.append(PullRequestWithCommentsResponse.Author2 .class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append("login");
+            sb.append('=');
+            sb.append(((this.login == null)?"<null>":this.login));
+            sb.append(',');
+            sb.append("additionalProperties");
+            sb.append('=');
+            sb.append(((this.additionalProperties == null)?"<null>":this.additionalProperties));
+            sb.append(',');
+            if (sb.charAt((sb.length()- 1)) == ',') {
+                sb.setCharAt((sb.length()- 1), ']');
+            } else {
+                sb.append(']');
+            }
+            return sb.toString();
+        }
+
+        @Override
+        public int hashCode() {
+            int result = 1;
+            result = ((result* 31)+((this.login == null)? 0 :this.login.hashCode()));
+            result = ((result* 31)+((this.additionalProperties == null)? 0 :this.additionalProperties.hashCode()));
+            return result;
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            if (other == this) {
+                return true;
+            }
+            if ((other instanceof PullRequestWithCommentsResponse.Author2) == false) {
+                return false;
+            }
+            PullRequestWithCommentsResponse.Author2 rhs = ((PullRequestWithCommentsResponse.Author2) other);
+            return (((this.login == rhs.login)||((this.login!= null)&&this.login.equals(rhs.login)))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))));
+        }
+
+    }
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonPropertyOrder({
+        "login"
+    })
+    public static class Author3 {
+
+        @JsonProperty("login")
+        private String login;
+        @JsonIgnore
+        private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+        /**
+         * No args constructor for use in serialization
+         * 
+         */
+        public Author3() {
+        }
+
+        /**
+         * 
+         * @param login
+         */
+        public Author3(String login) {
+            super();
+            this.login = login;
+        }
+
+        @JsonProperty("login")
+        public String getLogin() {
+            return login;
+        }
+
+        @JsonProperty("login")
+        public void setLogin(String login) {
+            this.login = login;
+        }
+
+        @JsonAnyGetter
+        public Map<String, Object> getAdditionalProperties() {
+            return this.additionalProperties;
+        }
+
+        @JsonAnySetter
+        public void setAdditionalProperty(String name, Object value) {
+            this.additionalProperties.put(name, value);
+        }
+
+        @Override
+        public String toString() {
+            StringBuilder sb = new StringBuilder();
+            sb.append(PullRequestWithCommentsResponse.Author3 .class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append("login");
+            sb.append('=');
+            sb.append(((this.login == null)?"<null>":this.login));
+            sb.append(',');
+            sb.append("additionalProperties");
+            sb.append('=');
+            sb.append(((this.additionalProperties == null)?"<null>":this.additionalProperties));
+            sb.append(',');
+            if (sb.charAt((sb.length()- 1)) == ',') {
+                sb.setCharAt((sb.length()- 1), ']');
+            } else {
+                sb.append(']');
+            }
+            return sb.toString();
+        }
+
+        @Override
+        public int hashCode() {
+            int result = 1;
+            result = ((result* 31)+((this.login == null)? 0 :this.login.hashCode()));
+            result = ((result* 31)+((this.additionalProperties == null)? 0 :this.additionalProperties.hashCode()));
+            return result;
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            if (other == this) {
+                return true;
+            }
+            if ((other instanceof PullRequestWithCommentsResponse.Author3) == false) {
+                return false;
+            }
+            PullRequestWithCommentsResponse.Author3 rhs = ((PullRequestWithCommentsResponse.Author3) other);
+            return (((this.login == rhs.login)||((this.login!= null)&&this.login.equals(rhs.login)))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))));
+        }
+
+    }
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonPropertyOrder({
         "nodes"
     })
     public static class Comments {
@@ -433,7 +611,7 @@ public class PullRequestWithCommentsResponse {
     public static class Commits {
 
         @JsonProperty("nodes")
-        private List<PullRequestWithCommentsResponse.Node2> nodes = new ArrayList<PullRequestWithCommentsResponse.Node2>();
+        private List<PullRequestWithCommentsResponse.Node3> nodes = new ArrayList<PullRequestWithCommentsResponse.Node3>();
         @JsonIgnore
         private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -448,18 +626,18 @@ public class PullRequestWithCommentsResponse {
          * 
          * @param nodes
          */
-        public Commits(List<PullRequestWithCommentsResponse.Node2> nodes) {
+        public Commits(List<PullRequestWithCommentsResponse.Node3> nodes) {
             super();
             this.nodes = nodes;
         }
 
         @JsonProperty("nodes")
-        public List<PullRequestWithCommentsResponse.Node2> getNodes() {
+        public List<PullRequestWithCommentsResponse.Node3> getNodes() {
             return nodes;
         }
 
         @JsonProperty("nodes")
-        public void setNodes(List<PullRequestWithCommentsResponse.Node2> nodes) {
+        public void setNodes(List<PullRequestWithCommentsResponse.Node3> nodes) {
             this.nodes = nodes;
         }
 
@@ -894,7 +1072,7 @@ public class PullRequestWithCommentsResponse {
         @JsonProperty("databaseId")
         private Long databaseId;
         @JsonProperty("author")
-        private PullRequestWithCommentsResponse.Author author;
+        private PullRequestWithCommentsResponse.Author2 author;
         @JsonProperty("authorAssociation")
         private String authorAssociation;
         @JsonProperty("body")
@@ -916,7 +1094,7 @@ public class PullRequestWithCommentsResponse {
          * @param body
          * @param authorAssociation
          */
-        public Node(Long databaseId, PullRequestWithCommentsResponse.Author author, String authorAssociation, String body) {
+        public Node(Long databaseId, PullRequestWithCommentsResponse.Author2 author, String authorAssociation, String body) {
             super();
             this.databaseId = databaseId;
             this.author = author;
@@ -935,12 +1113,12 @@ public class PullRequestWithCommentsResponse {
         }
 
         @JsonProperty("author")
-        public PullRequestWithCommentsResponse.Author getAuthor() {
+        public PullRequestWithCommentsResponse.Author2 getAuthor() {
             return author;
         }
 
         @JsonProperty("author")
-        public void setAuthor(PullRequestWithCommentsResponse.Author author) {
+        public void setAuthor(PullRequestWithCommentsResponse.Author2 author) {
             this.author = author;
         }
 
@@ -1033,12 +1211,21 @@ public class PullRequestWithCommentsResponse {
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonPropertyOrder({
-        "commit"
+        "databaseId",
+        "author",
+        "body",
+        "state"
     })
     public static class Node2 {
 
-        @JsonProperty("commit")
-        private PullRequestWithCommentsResponse.Commit commit;
+        @JsonProperty("databaseId")
+        private Long databaseId;
+        @JsonProperty("author")
+        private PullRequestWithCommentsResponse.Author3 author;
+        @JsonProperty("body")
+        private String body;
+        @JsonProperty("state")
+        private String state;
         @JsonIgnore
         private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -1051,9 +1238,149 @@ public class PullRequestWithCommentsResponse {
 
         /**
          * 
+         * @param author
+         * @param state
+         * @param databaseId
+         * @param body
+         */
+        public Node2(Long databaseId, PullRequestWithCommentsResponse.Author3 author, String body, String state) {
+            super();
+            this.databaseId = databaseId;
+            this.author = author;
+            this.body = body;
+            this.state = state;
+        }
+
+        @JsonProperty("databaseId")
+        public Long getDatabaseId() {
+            return databaseId;
+        }
+
+        @JsonProperty("databaseId")
+        public void setDatabaseId(Long databaseId) {
+            this.databaseId = databaseId;
+        }
+
+        @JsonProperty("author")
+        public PullRequestWithCommentsResponse.Author3 getAuthor() {
+            return author;
+        }
+
+        @JsonProperty("author")
+        public void setAuthor(PullRequestWithCommentsResponse.Author3 author) {
+            this.author = author;
+        }
+
+        @JsonProperty("body")
+        public String getBody() {
+            return body;
+        }
+
+        @JsonProperty("body")
+        public void setBody(String body) {
+            this.body = body;
+        }
+
+        @JsonProperty("state")
+        public String getState() {
+            return state;
+        }
+
+        @JsonProperty("state")
+        public void setState(String state) {
+            this.state = state;
+        }
+
+        @JsonAnyGetter
+        public Map<String, Object> getAdditionalProperties() {
+            return this.additionalProperties;
+        }
+
+        @JsonAnySetter
+        public void setAdditionalProperty(String name, Object value) {
+            this.additionalProperties.put(name, value);
+        }
+
+        @Override
+        public String toString() {
+            StringBuilder sb = new StringBuilder();
+            sb.append(PullRequestWithCommentsResponse.Node2 .class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append("databaseId");
+            sb.append('=');
+            sb.append(((this.databaseId == null)?"<null>":this.databaseId));
+            sb.append(',');
+            sb.append("author");
+            sb.append('=');
+            sb.append(((this.author == null)?"<null>":this.author));
+            sb.append(',');
+            sb.append("body");
+            sb.append('=');
+            sb.append(((this.body == null)?"<null>":this.body));
+            sb.append(',');
+            sb.append("state");
+            sb.append('=');
+            sb.append(((this.state == null)?"<null>":this.state));
+            sb.append(',');
+            sb.append("additionalProperties");
+            sb.append('=');
+            sb.append(((this.additionalProperties == null)?"<null>":this.additionalProperties));
+            sb.append(',');
+            if (sb.charAt((sb.length()- 1)) == ',') {
+                sb.setCharAt((sb.length()- 1), ']');
+            } else {
+                sb.append(']');
+            }
+            return sb.toString();
+        }
+
+        @Override
+        public int hashCode() {
+            int result = 1;
+            result = ((result* 31)+((this.state == null)? 0 :this.state.hashCode()));
+            result = ((result* 31)+((this.additionalProperties == null)? 0 :this.additionalProperties.hashCode()));
+            result = ((result* 31)+((this.databaseId == null)? 0 :this.databaseId.hashCode()));
+            result = ((result* 31)+((this.body == null)? 0 :this.body.hashCode()));
+            result = ((result* 31)+((this.author == null)? 0 :this.author.hashCode()));
+            return result;
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            if (other == this) {
+                return true;
+            }
+            if ((other instanceof PullRequestWithCommentsResponse.Node2) == false) {
+                return false;
+            }
+            PullRequestWithCommentsResponse.Node2 rhs = ((PullRequestWithCommentsResponse.Node2) other);
+            return ((((((this.state == rhs.state)||((this.state!= null)&&this.state.equals(rhs.state)))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))))&&((this.databaseId == rhs.databaseId)||((this.databaseId!= null)&&this.databaseId.equals(rhs.databaseId))))&&((this.body == rhs.body)||((this.body!= null)&&this.body.equals(rhs.body))))&&((this.author == rhs.author)||((this.author!= null)&&this.author.equals(rhs.author))));
+        }
+
+    }
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonPropertyOrder({
+        "commit"
+    })
+    public static class Node3 {
+
+        @JsonProperty("commit")
+        private PullRequestWithCommentsResponse.Commit commit;
+        @JsonIgnore
+        private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+        /**
+         * No args constructor for use in serialization
+         * 
+         */
+        public Node3() {
+        }
+
+        /**
+         * 
          * @param commit
          */
-        public Node2(PullRequestWithCommentsResponse.Commit commit) {
+        public Node3(PullRequestWithCommentsResponse.Commit commit) {
             super();
             this.commit = commit;
         }
@@ -1081,7 +1408,7 @@ public class PullRequestWithCommentsResponse {
         @Override
         public String toString() {
             StringBuilder sb = new StringBuilder();
-            sb.append(PullRequestWithCommentsResponse.Node2 .class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append(PullRequestWithCommentsResponse.Node3 .class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
             sb.append("commit");
             sb.append('=');
             sb.append(((this.commit == null)?"<null>":this.commit));
@@ -1111,10 +1438,10 @@ public class PullRequestWithCommentsResponse {
             if (other == this) {
                 return true;
             }
-            if ((other instanceof PullRequestWithCommentsResponse.Node2) == false) {
+            if ((other instanceof PullRequestWithCommentsResponse.Node3) == false) {
                 return false;
             }
-            PullRequestWithCommentsResponse.Node2 rhs = ((PullRequestWithCommentsResponse.Node2) other);
+            PullRequestWithCommentsResponse.Node3 rhs = ((PullRequestWithCommentsResponse.Node3) other);
             return (((this.commit == rhs.commit)||((this.commit!= null)&&this.commit.equals(rhs.commit)))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))));
         }
 
@@ -1215,9 +1542,11 @@ public class PullRequestWithCommentsResponse {
         "number",
         "body",
         "url",
+        "author",
         "headRef",
         "baseRefName",
         "comments",
+        "reviews",
         "commits"
     })
     public static class PullRequest {
@@ -1230,12 +1559,16 @@ public class PullRequestWithCommentsResponse {
         private String body;
         @JsonProperty("url")
         private String url;
+        @JsonProperty("author")
+        private PullRequestWithCommentsResponse.Author author;
         @JsonProperty("headRef")
         private PullRequestWithCommentsResponse.HeadRef headRef;
         @JsonProperty("baseRefName")
         private String baseRefName;
         @JsonProperty("comments")
         private PullRequestWithCommentsResponse.Comments comments;
+        @JsonProperty("reviews")
+        private PullRequestWithCommentsResponse.Reviews reviews;
         @JsonProperty("commits")
         private PullRequestWithCommentsResponse.Commits commits;
         @JsonIgnore
@@ -1254,20 +1587,24 @@ public class PullRequestWithCommentsResponse {
          * @param baseRefName
          * @param comments
          * @param headRef
+         * @param reviews
+         * @param author
          * @param commits
          * @param id
          * @param body
          * @param url
          */
-        public PullRequest(String id, Long number, String body, String url, PullRequestWithCommentsResponse.HeadRef headRef, String baseRefName, PullRequestWithCommentsResponse.Comments comments, PullRequestWithCommentsResponse.Commits commits) {
+        public PullRequest(String id, Long number, String body, String url, PullRequestWithCommentsResponse.Author author, PullRequestWithCommentsResponse.HeadRef headRef, String baseRefName, PullRequestWithCommentsResponse.Comments comments, PullRequestWithCommentsResponse.Reviews reviews, PullRequestWithCommentsResponse.Commits commits) {
             super();
             this.id = id;
             this.number = number;
             this.body = body;
             this.url = url;
+            this.author = author;
             this.headRef = headRef;
             this.baseRefName = baseRefName;
             this.comments = comments;
+            this.reviews = reviews;
             this.commits = commits;
         }
 
@@ -1311,6 +1648,16 @@ public class PullRequestWithCommentsResponse {
             this.url = url;
         }
 
+        @JsonProperty("author")
+        public PullRequestWithCommentsResponse.Author getAuthor() {
+            return author;
+        }
+
+        @JsonProperty("author")
+        public void setAuthor(PullRequestWithCommentsResponse.Author author) {
+            this.author = author;
+        }
+
         @JsonProperty("headRef")
         public PullRequestWithCommentsResponse.HeadRef getHeadRef() {
             return headRef;
@@ -1339,6 +1686,16 @@ public class PullRequestWithCommentsResponse {
         @JsonProperty("comments")
         public void setComments(PullRequestWithCommentsResponse.Comments comments) {
             this.comments = comments;
+        }
+
+        @JsonProperty("reviews")
+        public PullRequestWithCommentsResponse.Reviews getReviews() {
+            return reviews;
+        }
+
+        @JsonProperty("reviews")
+        public void setReviews(PullRequestWithCommentsResponse.Reviews reviews) {
+            this.reviews = reviews;
         }
 
         @JsonProperty("commits")
@@ -1381,6 +1738,10 @@ public class PullRequestWithCommentsResponse {
             sb.append('=');
             sb.append(((this.url == null)?"<null>":this.url));
             sb.append(',');
+            sb.append("author");
+            sb.append('=');
+            sb.append(((this.author == null)?"<null>":this.author));
+            sb.append(',');
             sb.append("headRef");
             sb.append('=');
             sb.append(((this.headRef == null)?"<null>":this.headRef));
@@ -1392,6 +1753,10 @@ public class PullRequestWithCommentsResponse {
             sb.append("comments");
             sb.append('=');
             sb.append(((this.comments == null)?"<null>":this.comments));
+            sb.append(',');
+            sb.append("reviews");
+            sb.append('=');
+            sb.append(((this.reviews == null)?"<null>":this.reviews));
             sb.append(',');
             sb.append("commits");
             sb.append('=');
@@ -1416,6 +1781,8 @@ public class PullRequestWithCommentsResponse {
             result = ((result* 31)+((this.baseRefName == null)? 0 :this.baseRefName.hashCode()));
             result = ((result* 31)+((this.comments == null)? 0 :this.comments.hashCode()));
             result = ((result* 31)+((this.headRef == null)? 0 :this.headRef.hashCode()));
+            result = ((result* 31)+((this.reviews == null)? 0 :this.reviews.hashCode()));
+            result = ((result* 31)+((this.author == null)? 0 :this.author.hashCode()));
             result = ((result* 31)+((this.commits == null)? 0 :this.commits.hashCode()));
             result = ((result* 31)+((this.id == null)? 0 :this.id.hashCode()));
             result = ((result* 31)+((this.additionalProperties == null)? 0 :this.additionalProperties.hashCode()));
@@ -1433,7 +1800,7 @@ public class PullRequestWithCommentsResponse {
                 return false;
             }
             PullRequestWithCommentsResponse.PullRequest rhs = ((PullRequestWithCommentsResponse.PullRequest) other);
-            return ((((((((((this.number == rhs.number)||((this.number!= null)&&this.number.equals(rhs.number)))&&((this.baseRefName == rhs.baseRefName)||((this.baseRefName!= null)&&this.baseRefName.equals(rhs.baseRefName))))&&((this.comments == rhs.comments)||((this.comments!= null)&&this.comments.equals(rhs.comments))))&&((this.headRef == rhs.headRef)||((this.headRef!= null)&&this.headRef.equals(rhs.headRef))))&&((this.commits == rhs.commits)||((this.commits!= null)&&this.commits.equals(rhs.commits))))&&((this.id == rhs.id)||((this.id!= null)&&this.id.equals(rhs.id))))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))))&&((this.body == rhs.body)||((this.body!= null)&&this.body.equals(rhs.body))))&&((this.url == rhs.url)||((this.url!= null)&&this.url.equals(rhs.url))));
+            return ((((((((((((this.number == rhs.number)||((this.number!= null)&&this.number.equals(rhs.number)))&&((this.baseRefName == rhs.baseRefName)||((this.baseRefName!= null)&&this.baseRefName.equals(rhs.baseRefName))))&&((this.comments == rhs.comments)||((this.comments!= null)&&this.comments.equals(rhs.comments))))&&((this.headRef == rhs.headRef)||((this.headRef!= null)&&this.headRef.equals(rhs.headRef))))&&((this.reviews == rhs.reviews)||((this.reviews!= null)&&this.reviews.equals(rhs.reviews))))&&((this.author == rhs.author)||((this.author!= null)&&this.author.equals(rhs.author))))&&((this.commits == rhs.commits)||((this.commits!= null)&&this.commits.equals(rhs.commits))))&&((this.id == rhs.id)||((this.id!= null)&&this.id.equals(rhs.id))))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))))&&((this.body == rhs.body)||((this.body!= null)&&this.body.equals(rhs.body))))&&((this.url == rhs.url)||((this.url!= null)&&this.url.equals(rhs.url))));
         }
 
     }
@@ -1672,6 +2039,95 @@ public class PullRequestWithCommentsResponse {
             }
             PullRequestWithCommentsResponse.Repository2 rhs = ((PullRequestWithCommentsResponse.Repository2) other);
             return (((((this.owner == rhs.owner)||((this.owner!= null)&&this.owner.equals(rhs.owner)))&&((this.name == rhs.name)||((this.name!= null)&&this.name.equals(rhs.name))))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))))&&((this.isFork == rhs.isFork)||((this.isFork!= null)&&this.isFork.equals(rhs.isFork))));
+        }
+
+    }
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonPropertyOrder({
+        "nodes"
+    })
+    public static class Reviews {
+
+        @JsonProperty("nodes")
+        private List<PullRequestWithCommentsResponse.Node2> nodes = new ArrayList<PullRequestWithCommentsResponse.Node2>();
+        @JsonIgnore
+        private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+        /**
+         * No args constructor for use in serialization
+         * 
+         */
+        public Reviews() {
+        }
+
+        /**
+         * 
+         * @param nodes
+         */
+        public Reviews(List<PullRequestWithCommentsResponse.Node2> nodes) {
+            super();
+            this.nodes = nodes;
+        }
+
+        @JsonProperty("nodes")
+        public List<PullRequestWithCommentsResponse.Node2> getNodes() {
+            return nodes;
+        }
+
+        @JsonProperty("nodes")
+        public void setNodes(List<PullRequestWithCommentsResponse.Node2> nodes) {
+            this.nodes = nodes;
+        }
+
+        @JsonAnyGetter
+        public Map<String, Object> getAdditionalProperties() {
+            return this.additionalProperties;
+        }
+
+        @JsonAnySetter
+        public void setAdditionalProperty(String name, Object value) {
+            this.additionalProperties.put(name, value);
+        }
+
+        @Override
+        public String toString() {
+            StringBuilder sb = new StringBuilder();
+            sb.append(PullRequestWithCommentsResponse.Reviews.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append("nodes");
+            sb.append('=');
+            sb.append(((this.nodes == null)?"<null>":this.nodes));
+            sb.append(',');
+            sb.append("additionalProperties");
+            sb.append('=');
+            sb.append(((this.additionalProperties == null)?"<null>":this.additionalProperties));
+            sb.append(',');
+            if (sb.charAt((sb.length()- 1)) == ',') {
+                sb.setCharAt((sb.length()- 1), ']');
+            } else {
+                sb.append(']');
+            }
+            return sb.toString();
+        }
+
+        @Override
+        public int hashCode() {
+            int result = 1;
+            result = ((result* 31)+((this.nodes == null)? 0 :this.nodes.hashCode()));
+            result = ((result* 31)+((this.additionalProperties == null)? 0 :this.additionalProperties.hashCode()));
+            return result;
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            if (other == this) {
+                return true;
+            }
+            if ((other instanceof PullRequestWithCommentsResponse.Reviews) == false) {
+                return false;
+            }
+            PullRequestWithCommentsResponse.Reviews rhs = ((PullRequestWithCommentsResponse.Reviews) other);
+            return (((this.nodes == rhs.nodes)||((this.nodes!= null)&&this.nodes.equals(rhs.nodes)))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))));
         }
 
     }

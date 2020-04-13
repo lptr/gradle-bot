@@ -1,6 +1,7 @@
 {
   "data": {
     "repository": {
+      "owner": "gradle",
       "name": "gradle",
       "pullRequests": {
         "nodes": [

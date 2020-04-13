@@ -17,7 +17,7 @@ class GitHubWebHookHandler @Inject constructor(
 ) : Handler<RoutingContext> {
     private val logger = LoggerFactory.getLogger(javaClass)
     override fun handle(context: RoutingContext?) {
-        logger.info("Received webhook to ${GitHubWebHookHandler::class.java.simpleName}")
+        logger.debug("Received webhook to ${GitHubWebHookHandler::class.java.simpleName}")
 
         context.parsePayloadEvent(githubSignatureChecker)?.apply {
             logger.debug("Start handling $this")

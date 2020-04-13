@@ -194,11 +194,15 @@ public class MyObjectRule implements Rule<JPackage, JType> {
      */
     private JDefinedClass createClass(String nodeName, JsonNode node, JPackage _package) throws ClassAlreadyExistsException {
 
+        String newNodeName = nodeName;
+
         if(typeNameToOccurence.containsKey(nodeName)) {
-            nodeName+=typeNameToOccurence.get(nodeName);
+            newNodeName+=typeNameToOccurence.get(nodeName);
         }
 
         typeNameToOccurence.put(nodeName, typeNameToOccurence.getOrDefault(nodeName,1)+1);
+
+        nodeName = newNodeName;
 
 
         JDefinedClass newType;

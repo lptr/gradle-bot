@@ -1162,11 +1162,14 @@ public class ListOpenPullRequestsResponse {
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonPropertyOrder({
+        "owner",
         "name",
         "pullRequests"
     })
     public static class Repository {
 
+        @JsonProperty("owner")
+        private String owner;
         @JsonProperty("name")
         private String name;
         @JsonProperty("pullRequests")
@@ -1183,13 +1186,25 @@ public class ListOpenPullRequestsResponse {
 
         /**
          * 
+         * @param owner
          * @param name
          * @param pullRequests
          */
-        public Repository(String name, ListOpenPullRequestsResponse.PullRequests pullRequests) {
+        public Repository(String owner, String name, ListOpenPullRequestsResponse.PullRequests pullRequests) {
             super();
+            this.owner = owner;
             this.name = name;
             this.pullRequests = pullRequests;
+        }
+
+        @JsonProperty("owner")
+        public String getOwner() {
+            return owner;
+        }
+
+        @JsonProperty("owner")
+        public void setOwner(String owner) {
+            this.owner = owner;
         }
 
         @JsonProperty("name")
@@ -1226,6 +1241,10 @@ public class ListOpenPullRequestsResponse {
         public String toString() {
             StringBuilder sb = new StringBuilder();
             sb.append(ListOpenPullRequestsResponse.Repository.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append("owner");
+            sb.append('=');
+            sb.append(((this.owner == null)?"<null>":this.owner));
+            sb.append(',');
             sb.append("name");
             sb.append('=');
             sb.append(((this.name == null)?"<null>":this.name));
@@ -1249,6 +1268,7 @@ public class ListOpenPullRequestsResponse {
         @Override
         public int hashCode() {
             int result = 1;
+            result = ((result* 31)+((this.owner == null)? 0 :this.owner.hashCode()));
             result = ((result* 31)+((this.name == null)? 0 :this.name.hashCode()));
             result = ((result* 31)+((this.pullRequests == null)? 0 :this.pullRequests.hashCode()));
             result = ((result* 31)+((this.additionalProperties == null)? 0 :this.additionalProperties.hashCode()));
@@ -1264,7 +1284,7 @@ public class ListOpenPullRequestsResponse {
                 return false;
             }
             ListOpenPullRequestsResponse.Repository rhs = ((ListOpenPullRequestsResponse.Repository) other);
-            return ((((this.name == rhs.name)||((this.name!= null)&&this.name.equals(rhs.name)))&&((this.pullRequests == rhs.pullRequests)||((this.pullRequests!= null)&&this.pullRequests.equals(rhs.pullRequests))))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))));
+            return (((((this.owner == rhs.owner)||((this.owner!= null)&&this.owner.equals(rhs.owner)))&&((this.name == rhs.name)||((this.name!= null)&&this.name.equals(rhs.name))))&&((this.pullRequests == rhs.pullRequests)||((this.pullRequests!= null)&&this.pullRequests.equals(rhs.pullRequests))))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))));
         }
 
     }
