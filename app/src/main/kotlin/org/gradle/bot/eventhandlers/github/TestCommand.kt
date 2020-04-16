@@ -59,7 +59,7 @@ class TestCommand(val targetStage: BuildStage, private val sourceComment: PullRe
      */
     private fun updatePendingStatuses(context: PullRequestContext, build: Build, targetBuildStage: BuildStage): Future<*> {
         logger.warn("Get build dependencies")
-        context.getAllDependencies(build).compose { buildDependencies ->
+        return context.getAllDependencies(build).compose { buildDependencies ->
             logger.warn("Finish get build dependencies {}", buildDependencies.size)
             val buildConfigurationIdToBuildMap = buildDependencies.map { it.buildConfigurationId.stringId to it }.toMap()
 
