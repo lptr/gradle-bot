@@ -46,7 +46,7 @@ enum class CommitStatusState {
 enum class BuildConfiguration(val id: String, val configName: String, val directDependencies: List<BuildConfiguration>) {
     COMPILE_ALL("Gradle_Check_CompileAll", "Compile All (Quick Feedback - Linux Only)", emptyList()),
     SANITY_CHECK("Gradle_Check_SanityCheck", "Sanity Check (Quick Feedback - Linux Only)", listOf(COMPILE_ALL)),
-    QUICK_FEEDBACK_LINUX_TRIGGER("Gradle_Check_Stage_QuickFeedbackLinuxOnly_Trigger", "Quick Feedback - Linux Only (Trigger) (Check)", listOf(COMPILE_ALL)),
+    QUICK_FEEDBACK_LINUX_TRIGGER("Gradle_Check_Stage_QuickFeedbackLinuxOnly_Trigger", "Quick Feedback - Linux Only (Trigger) (Check)", listOf(SANITY_CHECK, COMPILE_ALL)),
     QUICK_FEEDBACK_TRIGGER("Gradle_Check_Stage_QuickFeedback_Trigger", "Quick Feedback (Trigger) (Check)", listOf(COMPILE_ALL, QUICK_FEEDBACK_LINUX_TRIGGER)),
     GRADLECEPTION("Gradle_Check_Gradleception", "Gradleception - Java8 Linux (Ready for Merge)", listOf(QUICK_FEEDBACK_LINUX_TRIGGER)),
     INSTANT_SMOKE_TEST_JDK14("Gradle_Check_InstantSmokeTestsJava14", "Smoke Tests with 3rd Party Plugins (instantSmokeTest) - Java14 Linux (Ready for Merge)", listOf(QUICK_FEEDBACK_LINUX_TRIGGER)),
