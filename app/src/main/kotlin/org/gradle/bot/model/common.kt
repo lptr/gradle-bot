@@ -5,6 +5,7 @@ import org.gradle.bot.model.BuildConfiguration.QUICK_FEEDBACK_TRIGGER
 import org.gradle.bot.model.BuildConfiguration.READY_FOR_MERGE_TRIGGER
 import org.gradle.bot.model.BuildConfiguration.READY_FOR_NIGHTLY_TRIGGER
 import org.gradle.bot.model.BuildConfiguration.READY_FOR_RELEASE_TRIGGER
+import org.jetbrains.teamcity.rest.Build
 import org.jetbrains.teamcity.rest.BuildConfigurationId
 import org.jetbrains.teamcity.rest.BuildStatus
 
@@ -58,6 +59,10 @@ enum class BuildConfiguration(val id: String, val configName: String, val direct
             SMOKE_TEST_JDK14, BUILD_DISTRIBUTIONS, PERFORMANCE_COORDINATOR)),
     READY_FOR_NIGHTLY_TRIGGER("Gradle_Check_Stage_ReadyforNightly_Trigger", "Ready for Nightly (Trigger) (Check)", listOf(READY_FOR_MERGE_TRIGGER)),
     READY_FOR_RELEASE_TRIGGER("Gradle_Check_Stage_ReadyforRelease_Trigger", "Ready for Release (Trigger) (Check)", listOf(READY_FOR_NIGHTLY_TRIGGER));
+
+    companion object {
+        fun containsBuild(build: Build) = values().any { it.id == build.buildConfigurationId.stringId }
+    }
 }
 
 enum class BuildStage(val fullName: String, val abbr: String, private val buildConfiguration: BuildConfiguration) {
@@ -104,7 +109,7 @@ enum class BuildStage(val fullName: String, val abbr: String, private val buildC
         return getDependencies(this.buildConfiguration)
     }
 
-    private fun getDependencies(buildConfiguration: BuildConfiguration):Set<BuildConfiguration> {
+    private fun getDependencies(buildConfiguration: BuildConfiguration): Set<BuildConfiguration> {
         val ret = mutableSetOf(buildConfiguration)
         buildConfiguration.directDependencies.forEach {
             ret.addAll(getDependencies(it))

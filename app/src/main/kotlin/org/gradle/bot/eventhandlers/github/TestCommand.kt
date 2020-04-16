@@ -6,6 +6,7 @@ import org.gradle.bot.eventhandlers.github.pullrequest.PullRequest
 import org.gradle.bot.eventhandlers.github.pullrequest.PullRequestCommand
 import org.gradle.bot.eventhandlers.github.pullrequest.PullRequestComment
 import org.gradle.bot.eventhandlers.github.pullrequest.PullRequestContext
+import org.gradle.bot.model.BuildConfiguration
 import org.gradle.bot.model.BuildStage
 import org.gradle.bot.model.CommitStatusObject
 import org.gradle.bot.model.CommitStatusState
@@ -74,6 +75,12 @@ class TestCommand(val targetStage: BuildStage, private val sourceComment: PullRe
                     it.configName
                 )
             }
+
+            logger.debug("Builds: {}, current statuses: {}, updated statuses: {}",
+                buildDependencies.filter { BuildConfiguration.containsBuild(it) },
+                pullRequest.commitStatuses,
+                commitStatuses
+            )
 
             context.createCommitStatus(pullRequest.repoName, pullRequest.headCommitSha, commitStatuses)
         }
