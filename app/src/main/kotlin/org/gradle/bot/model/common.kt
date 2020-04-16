@@ -55,7 +55,7 @@ enum class BuildConfiguration(val id: String, val configName: String, val direct
     BUILD_DISTRIBUTIONS("Gradle_Check_BuildDistributions", "Build Distributions (Ready for Merge)", listOf(QUICK_FEEDBACK_LINUX_TRIGGER)),
     PERFORMANCE_COORDINATOR("Gradle_Check_PerformanceTestCoordinator", "Performance Regression Test Coordinator - Linux (Ready for Merge)", listOf(QUICK_FEEDBACK_LINUX_TRIGGER)),
     READY_FOR_MERGE_TRIGGER("Gradle_Check_Stage_ReadyforMerge_Trigger", "Ready for Merge (Trigger) (Check)",
-        listOf(GRADLECEPTION, INSTANT_SMOKE_TEST_JDK14, SMOKE_TEST_JDK8,
+        listOf(GRADLECEPTION, INSTANT_SMOKE_TEST_JDK14, SMOKE_TEST_JDK8, QUICK_FEEDBACK_TRIGGER,
             SMOKE_TEST_JDK14, BUILD_DISTRIBUTIONS, PERFORMANCE_COORDINATOR)),
     READY_FOR_NIGHTLY_TRIGGER("Gradle_Check_Stage_ReadyforNightly_Trigger", "Ready for Nightly (Trigger) (Check)", listOf(READY_FOR_MERGE_TRIGGER)),
     READY_FOR_RELEASE_TRIGGER("Gradle_Check_Stage_ReadyforRelease_Trigger", "Ready for Release (Trigger) (Check)", listOf(READY_FOR_NIGHTLY_TRIGGER));
