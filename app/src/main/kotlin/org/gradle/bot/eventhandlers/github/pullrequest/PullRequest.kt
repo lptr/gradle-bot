@@ -42,6 +42,7 @@ fun parseComment(commentId: Long,
                  botName: String): PullRequestComment {
     val metadata = CommentMetadata.parseComment(commentBody)
     return when {
+        commentBody.contains("`@$botName") -> UnrelatedComment(commentId, commentBody, pullRequest, metadata)
         commentBody.contains("@$botName") -> CommandComment(commentId, commentBody, pullRequest, metadata, AuthorAssociation.isAdmin(commentAuthorAssociation))
         commentAuthor == botName && metadata.replyTargetCommentId != null -> BotReplyCommandComment(commentId, commentBody, pullRequest, metadata)
         commentAuthor == botName -> BotNotificationComment(commentId, commentBody, pullRequest, metadata)
@@ -273,7 +274,8 @@ class PullRequest(
     }
 
     val teamCityBranchName = if (isFork) {
-        "pull/${pr.data.repository.pullRequest.number}/head"
+        pr.data.repository.pullRequest.headRef.name
+//        "pull/${pr.data.repository.pullRequest.number}/head"
     } else {
         pr.data.repository.pullRequest.headRef.name
     }
@@ -286,7 +288,7 @@ class PullRequest(
 }
 
 enum class PullRequestReviewState {
-    APPROVE, REQUEST_CHANGES, COMMENT
+    APPROVE, REQUEST_CHANGES, COMMENTED
 }
 
 class PullRequestReview(val id: Long, val author: String, val body: String, val state: PullRequestReviewState, val pullRequest: PullRequest)

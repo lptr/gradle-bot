@@ -1,5 +1,10 @@
 package org.gradle.bot.model
 
+import org.gradle.bot.model.BuildConfiguration.QUICK_FEEDBACK_LINUX_TRIGGER
+import org.gradle.bot.model.BuildConfiguration.QUICK_FEEDBACK_TRIGGER
+import org.gradle.bot.model.BuildConfiguration.READY_FOR_MERGE_TRIGGER
+import org.gradle.bot.model.BuildConfiguration.READY_FOR_NIGHTLY_TRIGGER
+import org.gradle.bot.model.BuildConfiguration.READY_FOR_RELEASE_TRIGGER
 import org.jetbrains.teamcity.rest.BuildConfigurationId
 import org.jetbrains.teamcity.rest.BuildStatus
 
@@ -37,69 +42,75 @@ enum class CommitStatusState {
     }
 }
 
-enum class BuildConfiguration(val id: String, val configName: String) {
-    COMPILE_ALL("Gradle_Check_CompileAll", "Compile All (Quick Feedback - Linux Only)"),
-    SANITY_CHECK("Gradle_Check_SanityCheck", "Sanity Check (Quick Feedback - Linux Only)"),
-    QUICK_FEEDBACK_LINUX("Gradle_Check_Stage_QuickFeedbackLinuxOnly_Trigger", "Quick Feedback - Linux Only (Trigger) (Check)"),
-    QUICK_FEEDBACK("Gradle_Check_Stage_QuickFeedback_Trigger", "Quick Feedback (Trigger) (Check)"),
-    GRADLECEPTION("Gradle_Check_Gradleception", "Gradleception - Java8 Linux (Ready for Merge)"),
-    INSTANT_SMOKE_TEST_JDK14("Gradle_Check_InstantSmokeTestsJava14", "Smoke Tests with 3rd Party Plugins (instantSmokeTest) - Java14 Linux (Ready for Merge)"),
-    SMOKE_TEST_JDK8("Gradle_Check_InstantSmokeTestsJava8", "Smoke Tests with 3rd Party Plugins (instantSmokeTest) - Java8 Linux (Ready for Merge)"),
-    SMOKE_TEST_JDK14("Gradle_Check_SmokeTestsJava14", "Smoke Tests with 3rd Party Plugins (smokeTest) - Java14 Linux (Ready for Merge)"),
-    BUILD_DISTRIBUTIONS("Gradle_Check_BuildDistributions", "Build Distributions (Ready for Merge)"),
-    PERFORMANCE_COORDINATOR("Gradle_Check_PerformanceTestCoordinator", "Performance Regression Test Coordinator - Linux (Ready for Merge)"),
-    READY_FOR_MERGE("Gradle_Check_Stage_ReadyforMerge_Trigger", "Ready for Merge (Trigger) (Check)"),
-    READY_FOR_NIGHTLY("Gradle_Check_Stage_ReadyforNightly_Trigger", "Ready for Nightly (Trigger) (Check)")
+enum class BuildConfiguration(val id: String, val configName: String, val directDependencies: List<BuildConfiguration>) {
+    COMPILE_ALL("Gradle_Check_CompileAll", "Compile All (Quick Feedback - Linux Only)", emptyList()),
+    SANITY_CHECK("Gradle_Check_SanityCheck", "Sanity Check (Quick Feedback - Linux Only)", listOf(COMPILE_ALL)),
+    QUICK_FEEDBACK_LINUX_TRIGGER("Gradle_Check_Stage_QuickFeedbackLinuxOnly_Trigger", "Quick Feedback - Linux Only (Trigger) (Check)", listOf(COMPILE_ALL)),
+    QUICK_FEEDBACK_TRIGGER("Gradle_Check_Stage_QuickFeedback_Trigger", "Quick Feedback (Trigger) (Check)", listOf(COMPILE_ALL, QUICK_FEEDBACK_TRIGGER)),
+    GRADLECEPTION("Gradle_Check_Gradleception", "Gradleception - Java8 Linux (Ready for Merge)", listOf(QUICK_FEEDBACK_LINUX_TRIGGER)),
+    INSTANT_SMOKE_TEST_JDK14("Gradle_Check_InstantSmokeTestsJava14", "Smoke Tests with 3rd Party Plugins (instantSmokeTest) - Java14 Linux (Ready for Merge)", listOf(QUICK_FEEDBACK_LINUX_TRIGGER)),
+    SMOKE_TEST_JDK8("Gradle_Check_InstantSmokeTestsJava8", "Smoke Tests with 3rd Party Plugins (instantSmokeTest) - Java8 Linux (Ready for Merge)", listOf(QUICK_FEEDBACK_LINUX_TRIGGER)),
+    SMOKE_TEST_JDK14("Gradle_Check_SmokeTestsJava14", "Smoke Tests with 3rd Party Plugins (smokeTest) - Java14 Linux (Ready for Merge)", listOf(QUICK_FEEDBACK_LINUX_TRIGGER)),
+    BUILD_DISTRIBUTIONS("Gradle_Check_BuildDistributions", "Build Distributions (Ready for Merge)", listOf(QUICK_FEEDBACK_LINUX_TRIGGER)),
+    PERFORMANCE_COORDINATOR("Gradle_Check_PerformanceTestCoordinator", "Performance Regression Test Coordinator - Linux (Ready for Merge)", listOf(QUICK_FEEDBACK_LINUX_TRIGGER)),
+    READY_FOR_MERGE_TRIGGER("Gradle_Check_Stage_ReadyforMerge_Trigger", "Ready for Merge (Trigger) (Check)",
+        listOf(GRADLECEPTION, INSTANT_SMOKE_TEST_JDK14, SMOKE_TEST_JDK8,
+            SMOKE_TEST_JDK14, BUILD_DISTRIBUTIONS, PERFORMANCE_COORDINATOR)),
+    READY_FOR_NIGHTLY_TRIGGER("Gradle_Check_Stage_ReadyforNightly_Trigger", "Ready for Nightly (Trigger) (Check)", listOf(READY_FOR_MERGE_TRIGGER)),
+    READY_FOR_RELEASE_TRIGGER("Gradle_Check_Stage_ReadyforRelease_Trigger", "Ready for Release (Trigger) (Check)", listOf(READY_FOR_NIGHTLY_TRIGGER));
 }
 
-enum class BuildStage(val fullName: String, val abbr: String, val buildTypeId: String, val dependencies: List<BuildConfiguration>) {
+enum class BuildStage(val fullName: String, val abbr: String, private val buildConfiguration: BuildConfiguration) {
     COMPILE_ALL(
         "CompileAll",
         "CA",
-        "Gradle_Check_CompileAll",
-        listOf(BuildConfiguration.COMPILE_ALL)
+        BuildConfiguration.COMPILE_ALL
     ),
     SANITY_CHECK(
         "SanityCheck",
         "SC",
-        "Gradle_Check_SanityCheck",
-        COMPILE_ALL.dependencies.toMutableList().also { it.add(BuildConfiguration.SANITY_CHECK) }
+        BuildConfiguration.SANITY_CHECK
     ),
     QUICK_FEEDBACK_LINUX(
         "QuickFeedbackLinux",
         "QFL",
-        "Gradle_Check_Stage_QuickFeedbackLinuxOnly_Trigger",
-        SANITY_CHECK.dependencies.toMutableList().also { it.add(BuildConfiguration.QUICK_FEEDBACK_LINUX) }
+        QUICK_FEEDBACK_LINUX_TRIGGER
     ),
     QUICK_FEEDBACK(
         "QuickFeedback",
         "QF",
-        "Gradle_Check_Stage_QuickFeedback_Trigger",
-        QUICK_FEEDBACK_LINUX.dependencies.toMutableList().also { it.add(BuildConfiguration.QUICK_FEEDBACK) }
+        QUICK_FEEDBACK_TRIGGER
     ),
     READY_FOR_MERGE(
         "ReadyForMerge",
         "RFM",
-        "Gradle_Check_Stage_ReadyforMerge_Trigger",
-        QUICK_FEEDBACK.dependencies.toMutableList().also {
-            it.addAll(listOf(BuildConfiguration.GRADLECEPTION, BuildConfiguration.INSTANT_SMOKE_TEST_JDK14, BuildConfiguration.SMOKE_TEST_JDK8,
-                BuildConfiguration.SMOKE_TEST_JDK14, BuildConfiguration.BUILD_DISTRIBUTIONS, BuildConfiguration.PERFORMANCE_COORDINATOR,
-                BuildConfiguration.READY_FOR_MERGE)
-            )
-        }
+        READY_FOR_MERGE_TRIGGER
     ),
     READY_FOR_NIGHTLY(
         "ReadyForNightly",
         "RFN",
-        "Gradle_Check_Stage_ReadyforNightly_Trigger",
-        BuildConfiguration.values().toList()
+        READY_FOR_NIGHTLY_TRIGGER
     ),
     READY_FOR_RELEASE(
         "ReadyForRelease",
         "RFR",
-        "Gradle_Check_Stage_ReadyforRelease_Trigger",
-        BuildConfiguration.values().toList()
+        READY_FOR_RELEASE_TRIGGER
     );
+
+    val buildTypeId: String
+        get() = buildConfiguration.id
+
+    fun getAllBuildConfigurationDependencies(): Collection<BuildConfiguration> {
+        return getDependencies(this.buildConfiguration)
+    }
+
+    private fun getDependencies(buildConfiguration: BuildConfiguration):Set<BuildConfiguration> {
+        val ret = mutableSetOf(buildConfiguration)
+        buildConfiguration.directDependencies.forEach {
+            ret.addAll(getDependencies(it))
+        }
+        return ret
+    }
 
     companion object {
         fun parseTargetStage(target: String) =

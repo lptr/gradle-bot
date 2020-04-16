@@ -2,7 +2,6 @@ package org.gradle.bot.eventhandlers.github
 
 import io.vertx.core.CompositeFuture
 import io.vertx.core.Future
-import org.gradle.bot.client.getAllDependencies
 import org.gradle.bot.eventhandlers.github.pullrequest.PullRequest
 import org.gradle.bot.eventhandlers.github.pullrequest.PullRequestCommand
 import org.gradle.bot.eventhandlers.github.pullrequest.PullRequestComment
@@ -12,40 +11,39 @@ import org.gradle.bot.model.CommitStatusObject
 import org.gradle.bot.model.CommitStatusState
 import org.jetbrains.teamcity.rest.Build
 import org.jetbrains.teamcity.rest.BuildState
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 class TestCommand(val targetStage: BuildStage, private val sourceComment: PullRequestComment) : PullRequestCommand {
+    val logger: Logger = LoggerFactory.getLogger(javaClass)
     val pullRequest: PullRequest
         get() = sourceComment.pullRequest
 
     override fun execute(context: PullRequestContext) {
-        findLatestTriggeredBuild(context).onSuccess {
-            if (it == null) {
-                triggerBuild(context)
-            } else if (it.state == BuildState.QUEUED || it.state == BuildState.RUNNING) {
-                cancelPreviousRunningBuildAndTriggerNewBuild(context, it)
-            } else {
-                triggerBuild(context)
-            }
+        findLatestTriggeredBuild(context).compose {
+            triggerBuild(context, it) as Future<Any>
         }.onFailure {
+            logger.error("", it)
             context.gitHubClient.reply(sourceComment, contactAdminComment)
         }
     }
 
-    private fun triggerBuild(context: PullRequestContext, messageBuilder: (Build) -> String) {
-        context.teamCityClient.triggerBuild(targetStage, pullRequest.teamCityBranchName).onSuccess {build ->
+    private fun triggerBuild(context: PullRequestContext, build: Build?): Future<*> =
+        if (build == null) {
+            doTriggerBuild(context)
+        } else if (build.state == BuildState.QUEUED || build.state == BuildState.RUNNING) {
+            cancelPreviousRunningBuildAndTriggerNewBuild(context, build)
+        } else {
+            doTriggerBuild(context)
+        }
+
+    private fun doTriggerBuild(context: PullRequestContext, messageBuilder: (Build) -> String) =
+        context.teamCityClient.triggerBuild(targetStage, pullRequest.teamCityBranchName).onSuccess { build ->
             updatePendingStatuses(context, build, targetStage)
             context.reply(sourceComment,
                 messageBuilder(build),
                 build.id.stringId)
-        }.onFailure {
-            context.gitHubClient.reply(sourceComment, contactAdminComment)
         }
-    }
-
-    private fun cancelPreviouslyTriggeredBuild(context: PullRequestContext, build: Build): CompositeFuture =
-        CompositeFuture.all(build.getAllDependencies().map {
-            context.cancelBuild(build, "The user triggered a new build.")
-        })
 
     /**
      * Only update pending statuses for failure statuses.
@@ -58,25 +56,27 @@ class TestCommand(val targetStage: BuildStage, private val sourceComment: PullRe
      *
      * Now the early successful steps will not be rerun by TeamCity, so we should not update them.
      */
-    private fun updatePendingStatuses(context: PullRequestContext, build: Build, targetBuildStage: BuildStage) {
-        val buildConfigurationIdToBuildMap = build.getAllDependencies().map { it.buildConfigurationId.stringId to it }.toMap()
-        val currentSuccessStatuses: List<String> = pullRequest.commitStatuses
-            .filter { it.state == CommitStatusState.SUCCESS.toString() }.map { it.context }
+    private fun updatePendingStatuses(context: PullRequestContext, build: Build, targetBuildStage: BuildStage): Future<*> =
+        context.getAllDependencies(build).compose { buildDependencies ->
+            val buildConfigurationIdToBuildMap = buildDependencies.map { it.buildConfigurationId.stringId to it }.toMap()
 
-        val dependencies = targetBuildStage.dependencies.toMutableList()
-        dependencies.removeIf { currentSuccessStatuses.contains(it.configName) }
+            val currentSuccessStatuses: List<String> = pullRequest.commitStatuses
+                .filter { it.state == CommitStatusState.SUCCESS.toString() }.map { it.context }
 
-        val commitStatuses: List<CommitStatusObject> = dependencies.map {
-            CommitStatusObject(
-                CommitStatusState.PENDING.name.toLowerCase(),
-                buildConfigurationIdToBuildMap[it.id]?.getHomeUrl(),
-                "TeamCity build running",
-                it.configName
-            )
+            val dependenciesToBeUpdated = targetBuildStage.getAllBuildConfigurationDependencies().toMutableList()
+            dependenciesToBeUpdated.removeIf { currentSuccessStatuses.contains(it.configName) }
+
+            val commitStatuses: List<CommitStatusObject> = dependenciesToBeUpdated.map {
+                CommitStatusObject(
+                    CommitStatusState.PENDING.name.toLowerCase(),
+                    buildConfigurationIdToBuildMap[it.id]?.getHomeUrl(),
+                    "TeamCity build running",
+                    it.configName
+                )
+            }
+
+            context.createCommitStatus(pullRequest.repoName, pullRequest.headCommitSha, commitStatuses)
         }
-
-        context.createCommitStatus(pullRequest.repoName, pullRequest.headCommitSha, commitStatuses)
-    }
 
     private fun findLatestTriggeredBuild(context: PullRequestContext): Future<Build?> {
         val commentWithBuildId = sourceComment.pullRequest.comments.findLast { it.metadata.teamCityBuildId != null }
@@ -87,19 +87,17 @@ class TestCommand(val targetStage: BuildStage, private val sourceComment: PullRe
         }
     }
 
-    private fun cancelPreviousRunningBuildAndTriggerNewBuild(context: PullRequestContext, oldBuild: Build) {
-        cancelPreviouslyTriggeredBuild(context, oldBuild).onSuccess {
-            triggerBuild(context) { newBuild ->
+    private fun cancelPreviousRunningBuildAndTriggerNewBuild(context: PullRequestContext, oldBuild: Build) =
+        context.getAllDependencies(oldBuild).compose { builds ->
+            CompositeFuture.join(builds.map { context.cancelBuild(it, "The user triggered a new build.") })
+        }.onComplete {
+            doTriggerBuild(context) { newBuild ->
                 "OK, I've already cancelled the [old build](${oldBuild.getHomeUrl()}) and triggered a new [${targetStage.fullName} build](${newBuild.getHomeUrl()}) for you."
             }
-        }.onFailure {
-            context.reply(sourceComment, contactAdminComment)
         }
-    }
 
-    private fun triggerBuild(context: PullRequestContext) {
-        triggerBuild(context) {
+    private fun doTriggerBuild(context: PullRequestContext) =
+        doTriggerBuild(context) {
             "OK, I've already triggered [${targetStage.fullName} build](${it.getHomeUrl()}) for you."
         }
-    }
 }
