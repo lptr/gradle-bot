@@ -84,7 +84,7 @@ class TestCommand(val targetStage: BuildStage, private val sourceComment: PullRe
 
             context.createCommitStatus(pullRequest.repoName, pullRequest.headCommitSha, commitStatuses)
         }.onFailure {
-            logger.error("", )
+            logger.error("", it)
         }
 
     private fun findLatestTriggeredBuild(context: PullRequestContext): Future<Build?> {
