@@ -4,12 +4,13 @@ RUN java -version
 
 RUN mkdir /gradle-bot
 
-COPY build/install/gradle-bot /gradle-bot
+COPY app/build/install/app /gradle-bot
 
 ENV GITHUB_ACCESS_TOKEN="" \
-    GITHUB_WEBHOOK_SECRET="" \
-    TEAMCITY_ACCESS_TOKEN=""
+     TEAMCITY_ACCESS_TOKEN=""
 
 WORKDIR /gradle-bot
 
-CMD ["bin/gradle-bot"]
+EXPOSE 8080
+
+CMD ["bin/app"]
