@@ -57,15 +57,19 @@ class TestCommand(val targetStage: BuildStage, private val sourceComment: PullRe
      *
      * Now the early successful steps will not be rerun by TeamCity, so we should not update them.
      */
-    private fun updatePendingStatuses(context: PullRequestContext, build: Build, targetBuildStage: BuildStage): Future<*> =
+    private fun updatePendingStatuses(context: PullRequestContext, build: Build, targetBuildStage: BuildStage): Future<*> {
+        logger.warn("Get build dependencies")
         context.getAllDependencies(build).compose { buildDependencies ->
+            logger.warn("Finish get build dependencies {}", buildDependencies.size)
             val buildConfigurationIdToBuildMap = buildDependencies.map { it.buildConfigurationId.stringId to it }.toMap()
 
             val currentSuccessStatuses: List<String> = pullRequest.commitStatuses
                 .filter { it.state == CommitStatusState.SUCCESS.toString() }.map { it.context }
 
             val dependenciesToBeUpdated = targetBuildStage.getAllBuildConfigurationDependencies().toMutableList()
+            logger.warn("dependencies {}", dependenciesToBeUpdated)
             dependenciesToBeUpdated.removeIf { currentSuccessStatuses.contains(it.configName) }
+            logger.warn("dependencies {}", dependenciesToBeUpdated)
 
             val commitStatuses: List<CommitStatusObject> = dependenciesToBeUpdated.map {
                 CommitStatusObject(
@@ -76,7 +80,7 @@ class TestCommand(val targetStage: BuildStage, private val sourceComment: PullRe
                 )
             }
 
-            logger.debug("Builds: {}, current statuses: {}, updated statuses: {}",
+            logger.warn("Builds: {}, current statuses: {}, updated statuses: {}",
                 buildDependencies.filter { BuildConfiguration.containsBuild(it) },
                 pullRequest.commitStatuses,
                 commitStatuses
@@ -86,6 +90,7 @@ class TestCommand(val targetStage: BuildStage, private val sourceComment: PullRe
         }.onFailure {
             logger.error("", it)
         }
+    }
 
     private fun findLatestTriggeredBuild(context: PullRequestContext): Future<Build?> {
         val commentWithBuildId = sourceComment.pullRequest.comments.findLast { it.metadata.teamCityBuildId != null }
