@@ -1,28 +1,28 @@
 package org.gradle.bot.integration
 
-//import com.google.inject.Injector
-//import io.vertx.core.Future
-//import io.vertx.core.Verticle
-//import io.vertx.core.Vertx
-//import java.util.concurrent.CountDownLatch
-//import kotlin.reflect.KClass
-//import org.gradle.bot.GradleBotAppModule
-//import org.gradle.bot.client.GitHubClient
-//import org.gradle.bot.client.TeamCityClient
-//import org.gradle.bot.start
-//import org.junit.jupiter.api.extension.AfterAllCallback
-//import org.junit.jupiter.api.extension.BeforeAllCallback
-//import org.junit.jupiter.api.extension.BeforeEachCallback
-//import org.junit.jupiter.api.extension.ExtensionContext
-//import org.junit.jupiter.api.extension.TestInstancePostProcessor
-//import org.mockito.Mock
-//import org.mockito.Mockito
+// import com.google.inject.Injector
+// import io.vertx.core.Future
+// import io.vertx.core.Verticle
+// import io.vertx.core.Vertx
+// import java.util.concurrent.CountDownLatch
+// import kotlin.reflect.KClass
+// import org.gradle.bot.GradleBotAppModule
+// import org.gradle.bot.client.GitHubClient
+// import org.gradle.bot.client.TeamCityClient
+// import org.gradle.bot.start
+// import org.junit.jupiter.api.extension.AfterAllCallback
+// import org.junit.jupiter.api.extension.BeforeAllCallback
+// import org.junit.jupiter.api.extension.BeforeEachCallback
+// import org.junit.jupiter.api.extension.ExtensionContext
+// import org.junit.jupiter.api.extension.TestInstancePostProcessor
+// import org.mockito.Mock
+// import org.mockito.Mockito
 //
-//@Target(AnnotationTarget.CLASS)
-//@Retention(AnnotationRetention.RUNTIME)
-//annotation class VertxGuiceIntegrationTest(val verticleClass: KClass<out Verticle>)
+// @Target(AnnotationTarget.CLASS)
+// @Retention(AnnotationRetention.RUNTIME)
+// annotation class VertxGuiceIntegrationTest(val verticleClass: KClass<out Verticle>)
 //
-//fun <T> Future<T>.await(): T {
+// fun <T> Future<T>.await(): T {
 //    val countDownLatch = CountDownLatch(1)
 //    onComplete {
 //        countDownLatch.countDown()
@@ -31,9 +31,9 @@ package org.gradle.bot.integration
 //    countDownLatch.await()
 //
 //    return result() ?: throw cause()
-//}
+// }
 //
-//class TestGradleBotModule(vertx: Vertx) : GradleBotAppModule(vertx) {
+// class TestGradleBotModule(vertx: Vertx) : GradleBotAppModule(vertx) {
 //    val mockGitHubClient = Mockito.mock(GitHubClient::class.java)
 //    val mockTeamCityClient = Mockito.mock(TeamCityClient::class.java)
 //    override fun bindAccessTokens() {
@@ -45,9 +45,9 @@ package org.gradle.bot.integration
 //        bind(GitHubClient::class.java).toInstance(mockGitHubClient)
 //        bind(TeamCityClient::class.java).toInstance(mockTeamCityClient)
 //    }
-//}
+// }
 //
-//class VertxGuiceIntegrationTestExtension :
+// class VertxGuiceIntegrationTestExtension :
 //        BeforeAllCallback,
 //        AfterAllCallback,
 //        TestInstancePostProcessor,
@@ -96,4 +96,4 @@ package org.gradle.bot.integration
 //            }
 //        }
 //    }
-//}
+// }

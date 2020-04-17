@@ -1,28 +1,14 @@
 package org.gradle.bot.eventhandlers.github.issuecomment
 
 import com.fasterxml.jackson.annotation.JsonProperty
-import io.vertx.core.CompositeFuture
-import io.vertx.core.Future
-import org.gradle.bot.client.GitHubClient
-import org.gradle.bot.client.TeamCityClient
-import org.gradle.bot.eventhandlers.github.pullrequest.PullRequestManager
-import org.gradle.bot.logger
-import org.gradle.bot.model.AuthorAssociation
-import org.gradle.bot.model.BuildStage
-import org.gradle.bot.model.CommitStatusObject
-import org.gradle.bot.model.CommitStatusState.ERROR
-import org.gradle.bot.model.CommitStatusState.FAILURE
-import org.gradle.bot.model.CommitStatusState.PENDING
-import org.gradle.bot.model.PullRequestWithCommentsResponse
+import org.gradle.bot.model.CommitStatusState
 import org.gradle.bot.objectMapper
-import org.jetbrains.teamcity.rest.Build
 
-
-//class PullRequestContext(
+// class PullRequestContext(
 //    private val gitHubClient: GitHubClient,
 //    private val teamCityClient: TeamCityClient,
 //    private val pr: PullRequestWithCommentsResponse
-//) {
+// ) {
 //    val comments: List<PullRequestComment> = pr.getComments(gitHubClient.whoAmI())
 //    fun executeCommentCommand(commentId: Long) {
 //        val targetComment = comments.find { it.id == commentId }
@@ -44,7 +30,7 @@ import org.jetbrains.teamcity.rest.Build
 //    fun reply(targetComment: PullRequestComment, content: String, teamCityBuildId: String? = null) {
 //        reply("""<!-- ${objectMapper.writeValueAsString(CommentMetadata(targetComment.id, teamCityBuildId, pr.getHeadRefSha()))} -->
 //
-//$content""")
+// $content""")
 //    }
 //
 //    private fun reply(content: String) {
@@ -100,18 +86,18 @@ import org.jetbrains.teamcity.rest.Build
 //
 //    private
 //    fun iDontUnderstandWhatYouSaid() = """
-//Sorry I don't understand what you said, please type `@${gitHubClient.whoAmI()} help` to get help.
-//"""
+// Sorry I don't understand what you said, please type `@${gitHubClient.whoAmI()} help` to get help.
+// """
 //
 //    private fun helpMessage() = """Currently I support the following commands:
 //
-//- `@${gitHubClient.whoAmI()} test {BuildStage}` to trigger a build
+// - `@${gitHubClient.whoAmI()} test {BuildStage}` to trigger a build
 //  - e.g. `@${gitHubClient.whoAmI()} test SanityCheck plz`
 //  - `SanityCheck`/`CompileAll`/`QuickFeedbackLinux`/`QuickFeedback`/`ReadyForMerge`/`ReadyForNightly`/`ReadyForRelease` are supported
 //  - `test this` means `test ReadyForMerge`
 //  - `SanityCheck` can be abbreviated as `SC`, `ReadyForMerge` as `RFM`, etc.
-//- `@${gitHubClient.whoAmI()} help` to display this message
-//"""
+// - `@${gitHubClient.whoAmI()} help` to display this message
+// """
 //
 //    private fun noPermissionMessage() = "Sorry but I'm afraid you're not allowed to do this."
 //
@@ -125,7 +111,7 @@ import org.jetbrains.teamcity.rest.Build
 //        CompositeFuture.all(build.getAllDependencies().map {
 //            teamCityClient.cancelBuild(build, "The user triggered a new build.")
 //        })
-//}
+// }
 //
 data class CommentMetadata(
     // The id of target comment which this comment replies
@@ -134,6 +120,8 @@ data class CommentMetadata(
     @JsonProperty("teamCityBuildId") val teamCityBuildId: String?,
     // The PR head commit when this comment triggers build
     @JsonProperty("teamCityBuildHeadRef") val teamCityBuildHeadRef: String?,
+    // The build status. Will be updated by TeamCity webhook
+    @JsonProperty("teamCityBuildStatus") val teamCityBuildStatus: CommitStatusState?,
     // The approval review id which this comment replies
     @JsonProperty("replyApprovalReviewId") val replyApproveReviewId: Long?
 ) {
@@ -141,7 +129,7 @@ data class CommentMetadata(
         // The comment metadata are hidden tag in the comment, for example
         // <!-- {"replyTargetCommentId":604882513,"teamCityBuildId":null,"teamCityBuildHeadRef":"d32d0b7e33660dfb1a94ae9eea8238c793a4243e"} -->
         private val commentMetadataPattern = "<!-- (.*) -->".toPattern()
-        private val nullMetadata = CommentMetadata(null, null, null, null)
+        private val nullMetadata = CommentMetadata(null, null, null, null, null)
 
         fun parseComment(commentBody: String): CommentMetadata {
             val matcher = commentMetadataPattern.matcher(commentBody)
@@ -154,5 +142,3 @@ data class CommentMetadata(
     }
 }
 //
-
-

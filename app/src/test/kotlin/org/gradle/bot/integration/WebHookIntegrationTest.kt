@@ -1,37 +1,37 @@
 package org.gradle.bot.integration
 
-//import io.vertx.core.Vertx
-//import io.vertx.core.buffer.Buffer
-//import io.vertx.core.eventbus.Message
-//import io.vertx.core.eventbus.impl.EventBusImpl
-//import io.vertx.core.eventbus.impl.HandlerHolder
-//import io.vertx.core.impl.utils.ConcurrentCyclicSequence
-//import io.vertx.ext.web.client.WebClient
-//import java.util.concurrent.ConcurrentMap
-//import javax.inject.Inject
-//import javax.inject.Singleton
-//import org.gradle.bot.GradleBotVerticle
-//import org.gradle.bot.client.TeamCityClient
-//import org.gradle.bot.eventhandlers.github.GitHubEventHandler
-//import org.junit.jupiter.api.Assertions
-//import org.junit.jupiter.api.Test
-//import org.junit.jupiter.api.extension.ExtendWith
-//import org.mockito.Mock
+// import io.vertx.core.Vertx
+// import io.vertx.core.buffer.Buffer
+// import io.vertx.core.eventbus.Message
+// import io.vertx.core.eventbus.impl.EventBusImpl
+// import io.vertx.core.eventbus.impl.HandlerHolder
+// import io.vertx.core.impl.utils.ConcurrentCyclicSequence
+// import io.vertx.ext.web.client.WebClient
+// import java.util.concurrent.ConcurrentMap
+// import javax.inject.Inject
+// import javax.inject.Singleton
+// import org.gradle.bot.GradleBotVerticle
+// import org.gradle.bot.client.TeamCityClient
+// import org.gradle.bot.eventhandlers.github.GitHubEventHandler
+// import org.junit.jupiter.api.Assertions
+// import org.junit.jupiter.api.Test
+// import org.junit.jupiter.api.extension.ExtendWith
+// import org.mockito.Mock
 //
-//val testEventType = "TestEvent"
+// val testEventType = "TestEvent"
 //
-//@Singleton
-//class TestGitHubEventHandler : GitHubEventHandler {
+// @Singleton
+// class TestGitHubEventHandler : GitHubEventHandler {
 //    override val eventType = "TestEvent"
 //    val receivedEvents = mutableListOf<String>()
 //    override fun handle(event: Message<String>?) {
 //        event?.let { receivedEvents.add(it.body()) }
 //    }
-//}
+// }
 //
-//@ExtendWith(VertxGuiceIntegrationTestExtension::class)
-//@VertxGuiceIntegrationTest(GradleBotVerticle::class)
-//class WebHookIntegrationTest {
+// @ExtendWith(VertxGuiceIntegrationTestExtension::class)
+// @VertxGuiceIntegrationTest(GradleBotVerticle::class)
+// class WebHookIntegrationTest {
 //    @Mock
 //    lateinit var githubClient: TeamCityClient
 //    @Mock
@@ -71,4 +71,4 @@ package org.gradle.bot.integration
 //        // UpdateCIStatusForAllOpenPullRequests
 //        Assertions.assertEquals(6, handlerMap.values.flatMap { it }.size)
 //    }
-//}
+// }

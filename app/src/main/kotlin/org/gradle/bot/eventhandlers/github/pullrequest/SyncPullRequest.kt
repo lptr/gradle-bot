@@ -1,5 +1,8 @@
 package org.gradle.bot.eventhandlers.github.pullrequest
 
+import java.time.format.DateTimeFormatter
+import javax.inject.Inject
+import javax.inject.Singleton
 import org.gradle.bot.client.GitHubClient
 import org.gradle.bot.eventhandlers.github.AbstractGitHubEventHandler
 import org.gradle.bot.eventhandlers.github.pullrequest.PullRequestAction.OPENED
@@ -9,9 +12,6 @@ import org.gradle.bot.model.CommitStatusState
 import org.gradle.bot.model.PullRequestGitHubEvent
 import org.jetbrains.teamcity.rest.Build
 import org.slf4j.LoggerFactory
-import java.time.format.DateTimeFormatter
-import javax.inject.Inject
-import javax.inject.Singleton
 
 const val ciStatusContext = "CI Status"
 

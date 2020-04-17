@@ -1,28 +1,28 @@
 package org.gradle.bot.eventhandlers.github.issuecomment
 //
-//import io.mockk.every
-//import io.mockk.excludeRecords
-//import io.mockk.impl.annotations.MockK
-//import io.mockk.junit5.MockKExtension
-//import io.mockk.mockk
-//import io.mockk.verify
-//import io.vertx.core.Future
-//import org.gradle.bot.fixtures.AbstractMockKTest
-//import org.gradle.bot.model.BuildStage.READY_FOR_MERGE
-//import org.gradle.bot.model.CommitStatusState.PENDING
-//import org.gradle.bot.model.PullRequestWithCommentsResponse
-//import org.gradle.bot.objectMapper
-//import org.jetbrains.teamcity.rest.Build
-//import org.jetbrains.teamcity.rest.BuildState
-//import org.junit.jupiter.api.Assertions.assertEquals
-//import org.junit.jupiter.api.Assertions.assertFalse
-//import org.junit.jupiter.api.Assertions.assertTrue
-//import org.junit.jupiter.api.BeforeEach
-//import org.junit.jupiter.api.Test
-//import org.junit.jupiter.api.extension.ExtendWith
+// import io.mockk.every
+// import io.mockk.excludeRecords
+// import io.mockk.impl.annotations.MockK
+// import io.mockk.junit5.MockKExtension
+// import io.mockk.mockk
+// import io.mockk.verify
+// import io.vertx.core.Future
+// import org.gradle.bot.fixtures.AbstractMockKTest
+// import org.gradle.bot.model.BuildStage.READY_FOR_MERGE
+// import org.gradle.bot.model.CommitStatusState.PENDING
+// import org.gradle.bot.model.PullRequestWithCommentsResponse
+// import org.gradle.bot.objectMapper
+// import org.jetbrains.teamcity.rest.Build
+// import org.jetbrains.teamcity.rest.BuildState
+// import org.junit.jupiter.api.Assertions.assertEquals
+// import org.junit.jupiter.api.Assertions.assertFalse
+// import org.junit.jupiter.api.Assertions.assertTrue
+// import org.junit.jupiter.api.BeforeEach
+// import org.junit.jupiter.api.Test
+// import org.junit.jupiter.api.extension.ExtendWith
 //
-//@ExtendWith(MockKExtension::class)
-//class PullRequestContextTest : AbstractMockKTest() {
+// @ExtendWith(MockKExtension::class)
+// class PullRequestContextTest : AbstractMockKTest() {
 //    @MockK
 //    lateinit var pr: PullRequestWithCommentsResponse
 //    private val botName = "bot-gradle"
@@ -480,4 +480,4 @@ package org.gradle.bot.eventhandlers.github.issuecomment
 //                })
 //        }
 //    }
-//}
+// }

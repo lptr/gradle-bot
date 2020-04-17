@@ -1,13 +1,13 @@
 package org.gradle.bot.eventhandlers.github.issuecomment
 
+import javax.inject.Inject
+import javax.inject.Singleton
 import org.gradle.bot.client.GitHubClient
 import org.gradle.bot.eventhandlers.github.AbstractGitHubEventHandler
 import org.gradle.bot.eventhandlers.github.pullrequest.PullRequest
 import org.gradle.bot.eventhandlers.github.pullrequest.PullRequestManager
 import org.gradle.bot.model.IssueCommentGitHubEvent
 import org.slf4j.LoggerFactory
-import javax.inject.Inject
-import javax.inject.Singleton
 
 fun IssueCommentGitHubEvent.isPullRequest() = issue.pullRequest != null
 

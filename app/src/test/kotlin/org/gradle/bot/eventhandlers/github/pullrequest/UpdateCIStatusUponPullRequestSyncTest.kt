@@ -1,20 +1,20 @@
 package org.gradle.bot.eventhandlers.github.pullrequest
 
-//import io.mockk.every
-//import io.mockk.impl.annotations.MockK
-//import io.mockk.verify
-//import io.vertx.core.Future
-//import org.gradle.bot.fixtures.AbstractMockKTest
-//import org.gradle.bot.model.CommitStatusState
-//import org.gradle.bot.model.PullRequestGitHubEvent
-//import org.jetbrains.teamcity.rest.Build
-//import org.jetbrains.teamcity.rest.BuildStatus
-//import org.junit.jupiter.api.BeforeEach
-//import org.junit.jupiter.api.Test
-//import org.junit.jupiter.params.ParameterizedTest
-//import org.junit.jupiter.params.provider.CsvSource
+// import io.mockk.every
+// import io.mockk.impl.annotations.MockK
+// import io.mockk.verify
+// import io.vertx.core.Future
+// import org.gradle.bot.fixtures.AbstractMockKTest
+// import org.gradle.bot.model.CommitStatusState
+// import org.gradle.bot.model.PullRequestGitHubEvent
+// import org.jetbrains.teamcity.rest.Build
+// import org.jetbrains.teamcity.rest.BuildStatus
+// import org.junit.jupiter.api.BeforeEach
+// import org.junit.jupiter.api.Test
+// import org.junit.jupiter.params.ParameterizedTest
+// import org.junit.jupiter.params.provider.CsvSource
 //
-//class UpdateCIStatusUponPullRequestSyncTest : AbstractMockKTest() {
+// class UpdateCIStatusUponPullRequestSyncTest : AbstractMockKTest() {
 //    @MockK(relaxed = true)
 //    lateinit var event: PullRequestGitHubEvent
 //    @MockK(relaxed = true)
@@ -108,4 +108,4 @@ package org.gradle.bot.eventhandlers.github.pullrequest
 //            )
 //        }
 //    }
-//}
+// }

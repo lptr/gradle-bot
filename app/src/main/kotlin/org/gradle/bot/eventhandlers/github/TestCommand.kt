@@ -60,16 +60,13 @@ class TestCommand(val targetStage: BuildStage, private val sourceComment: PullRe
     private fun updatePendingStatuses(context: PullRequestContext, build: Build, targetBuildStage: BuildStage): Future<*> {
         logger.warn("Get build dependencies")
         return context.getAllDependencies(build).compose { buildDependencies ->
-            logger.warn("Finish get build dependencies {}", buildDependencies.size)
             val buildConfigurationIdToBuildMap = buildDependencies.map { it.buildConfigurationId.stringId to it }.toMap()
 
             val currentSuccessStatuses: List<String> = pullRequest.commitStatuses
                 .filter { it.state == CommitStatusState.SUCCESS.toString() }.map { it.context }
 
             val dependenciesToBeUpdated = targetBuildStage.getAllBuildConfigurationDependencies().toMutableList()
-            logger.warn("dependencies {}", dependenciesToBeUpdated)
             dependenciesToBeUpdated.removeIf { currentSuccessStatuses.contains(it.configName) }
-            logger.warn("dependencies {}", dependenciesToBeUpdated)
 
             val commitStatuses: List<CommitStatusObject> = dependenciesToBeUpdated.map {
                 CommitStatusObject(

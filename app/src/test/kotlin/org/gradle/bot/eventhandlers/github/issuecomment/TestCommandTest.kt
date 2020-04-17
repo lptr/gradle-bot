@@ -1,19 +1,19 @@
 package org.gradle.bot.eventhandlers.github.issuecomment
 
-//import io.mockk.every
-//import io.mockk.impl.annotations.MockK
-//import io.mockk.junit5.MockKExtension
-//import io.mockk.verify
-//import io.vertx.core.Future
-//import org.gradle.bot.model.BuildStage
-//import org.jetbrains.teamcity.rest.Build
-//import org.jetbrains.teamcity.rest.BuildState
-//import org.junit.jupiter.api.BeforeEach
-//import org.junit.jupiter.api.Test
-//import org.junit.jupiter.api.extension.ExtendWith
+// import io.mockk.every
+// import io.mockk.impl.annotations.MockK
+// import io.mockk.junit5.MockKExtension
+// import io.mockk.verify
+// import io.vertx.core.Future
+// import org.gradle.bot.model.BuildStage
+// import org.jetbrains.teamcity.rest.Build
+// import org.jetbrains.teamcity.rest.BuildState
+// import org.junit.jupiter.api.BeforeEach
+// import org.junit.jupiter.api.Test
+// import org.junit.jupiter.api.extension.ExtendWith
 //
-//@ExtendWith(MockKExtension::class)
-//class TestCommandTest {
+// @ExtendWith(MockKExtension::class)
+// class TestCommandTest {
 //    @MockK
 //    lateinit var comment: PullRequestComment
 //
@@ -100,4 +100,4 @@ package org.gradle.bot.eventhandlers.github.issuecomment
 //                "buildId")
 //        }
 //    }
-//}
+// }

@@ -4,6 +4,10 @@ import com.google.inject.ImplementedBy
 import io.vertx.core.Future
 import io.vertx.core.Promise
 import io.vertx.core.Vertx
+import java.util.TreeSet
+import javax.inject.Inject
+import javax.inject.Named
+import javax.inject.Singleton
 import org.gradle.bot.model.BuildConfiguration
 import org.gradle.bot.model.BuildStage
 import org.jetbrains.teamcity.rest.Build
@@ -11,21 +15,6 @@ import org.jetbrains.teamcity.rest.BuildId
 import org.jetbrains.teamcity.rest.BuildState
 import org.jetbrains.teamcity.rest.TeamCityInstanceFactory
 import org.slf4j.LoggerFactory
-import java.util.*
-import javax.inject.Inject
-import javax.inject.Named
-import javax.inject.Singleton
-
-fun main() {
-    val client = DefaultTeamCityClient(Vertx.vertx(), System.getenv("TEAMCITY_ACCESS_TOKEN"))
-
-    client.findBuild("33611492").onSuccess {
-        client.getAllDependencies(it!!).onSuccess {
-            println(it.size)
-        }
-    }
-}
-//    = snapshotDependencies.toMutableList().also { it.add(this) }
 
 @ImplementedBy(DefaultTeamCityClient::class)
 interface TeamCityClient {
@@ -116,5 +105,4 @@ class DefaultTeamCityClient @Inject constructor(
                 }
             }
     }
-
 }

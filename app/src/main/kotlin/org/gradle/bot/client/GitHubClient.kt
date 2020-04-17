@@ -6,6 +6,9 @@ import io.vertx.core.Future
 import io.vertx.core.buffer.Buffer
 import io.vertx.ext.web.client.HttpResponse
 import io.vertx.ext.web.client.WebClient
+import javax.inject.Inject
+import javax.inject.Named
+import javax.inject.Singleton
 import org.gradle.bot.eventhandlers.github.issuecomment.CommentMetadata
 import org.gradle.bot.eventhandlers.github.pullrequest.PullRequestComment
 import org.gradle.bot.eventhandlers.github.pullrequest.PullRequestReview
@@ -20,9 +23,6 @@ import org.gradle.bot.model.pullRequestsWithCommentsQuery
 import org.gradle.bot.model.whoAmIQuery
 import org.gradle.bot.objectMapper
 import org.slf4j.LoggerFactory
-import javax.inject.Inject
-import javax.inject.Named
-import javax.inject.Singleton
 
 @ImplementedBy(DefaultGitHubClient::class)
 interface GitHubClient {
@@ -135,14 +135,14 @@ open class DefaultGitHubClient @Inject constructor(
     }
 
     override fun reply(targetReview: PullRequestReview, content: String) {
-        val contentWithMetadata = """<!-- ${objectMapper.writeValueAsString(CommentMetadata(null, null, null, targetReview.id))} -->
+        val contentWithMetadata = """<!-- ${objectMapper.writeValueAsString(CommentMetadata(null, null, null, null, targetReview.id))} -->
             
 $content"""
         comment(targetReview.pullRequest.subjectId, contentWithMetadata)
     }
 
     override fun reply(targetComment: PullRequestComment, content: String, teamCityBuildId: String?) {
-        val contentWithMetadata = """<!-- ${objectMapper.writeValueAsString(CommentMetadata(targetComment.id, teamCityBuildId, targetComment.pullRequest.headCommitSha, null))} -->
+        val contentWithMetadata = """<!-- ${objectMapper.writeValueAsString(CommentMetadata(targetComment.id, teamCityBuildId, targetComment.pullRequest.headCommitSha, CommitStatusState.PENDING, null))} -->
             
 $content"""
         comment(targetComment.pullRequest.subjectId, contentWithMetadata)

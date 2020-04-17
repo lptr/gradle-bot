@@ -1,19 +1,19 @@
 package org.gradle.bot.eventhandlers.github.issuecomment
 
-//import org.gradle.bot.client.GitHubClient
-//import org.gradle.bot.client.TeamCityClient
-//import org.gradle.bot.model.IssueCommentGitHubEvent
-//import org.gradle.bot.objectMapper
-//import org.junit.jupiter.api.Test
-//import org.junit.jupiter.api.extension.ExtendWith
-//import org.mockito.ArgumentMatchers.anyLong
-//import org.mockito.ArgumentMatchers.anyString
-//import org.mockito.Mock
-//import org.mockito.Mockito
-//import org.mockito.junit.jupiter.MockitoExtension
+// import org.gradle.bot.client.GitHubClient
+// import org.gradle.bot.client.TeamCityClient
+// import org.gradle.bot.model.IssueCommentGitHubEvent
+// import org.gradle.bot.objectMapper
+// import org.junit.jupiter.api.Test
+// import org.junit.jupiter.api.extension.ExtendWith
+// import org.mockito.ArgumentMatchers.anyLong
+// import org.mockito.ArgumentMatchers.anyString
+// import org.mockito.Mock
+// import org.mockito.Mockito
+// import org.mockito.junit.jupiter.MockitoExtension
 //
-//@ExtendWith(MockitoExtension::class)
-//class PullRequestCommentEventHandlerTest {
+// @ExtendWith(MockitoExtension::class)
+// class PullRequestCommentEventHandlerTest {
 //    @Mock
 //    lateinit var gitHubClient: GitHubClient
 //    @Mock
@@ -30,4 +30,4 @@ package org.gradle.bot.eventhandlers.github.issuecomment
 //        // then
 //        Mockito.verify(gitHubClient, Mockito.times(0)).getPullRequestWithComments(anyString(), anyLong())
 //    }
-//}
+// }

@@ -33,7 +33,6 @@ import java.util.concurrent.Callable
 import org.gradle.bot.aop.logging.Log
 import org.gradle.bot.aop.logging.LogMethodInterceptor
 import org.gradle.bot.client.DefaultGitHubClient
-import org.gradle.bot.client.GitHubClient
 import org.gradle.bot.eventhandlers.WebHookEventHandler
 import org.gradle.bot.security.GithubSignatureChecker
 import org.gradle.bot.security.LenientGitHubSignatureCheck

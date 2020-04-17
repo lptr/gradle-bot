@@ -77,6 +77,12 @@ fun ListOpenPullRequestsResponse.Node.lastCommittedDate() = ZonedDateTime.parse(
 fun ListOpenPullRequestsResponse.Node.isStale() = Duration.between(lastCommittedDate().toInstant(), Instant.now()).toDays() > 30
 fun ListOpenPullRequestsResponse.Node.getTargetBranch() = baseRefName
 
+@Singleton
+class AutoRetryFlakyBuild : AbstractTeamCityEventHandler() {
+    override fun handleEvent(event: TeamCityBuildEvent) {
+    }
+}
+
 /**
  * Upon Ready for Nightly builds finish, update all open pull request's head commit with the build status
  */

@@ -1,5 +1,9 @@
 package org.gradle.bot.eventhandlers.github.pullrequest
 
+import java.util.concurrent.ConcurrentHashMap
+import java.util.concurrent.ConcurrentMap
+import javax.inject.Inject
+import javax.inject.Singleton
 import org.gradle.bot.client.GitHubClient
 import org.gradle.bot.client.TeamCityClient
 import org.gradle.bot.eventhandlers.github.TestCommand
@@ -14,32 +18,29 @@ import org.gradle.bot.model.BuildStage
 import org.gradle.bot.model.CommitStatusObject
 import org.gradle.bot.model.CommitStatusState
 import org.gradle.bot.model.PullRequestWithCommentsResponse
-import java.util.concurrent.ConcurrentHashMap
-import java.util.concurrent.ConcurrentMap
-import javax.inject.Inject
-import javax.inject.Singleton
 
-//fun PullRequestWithCommentsResponse.getRepoName() = data.repository.nameWithOwner
+// fun PullRequestWithCommentsResponse.getRepoName() = data.repository.nameWithOwner
 //
-//fun PullRequestWithCommentsResponse.isFork() = data.repository.pullRequest.headRef.repository.isFork
+// fun PullRequestWithCommentsResponse.isFork() = data.repository.pullRequest.headRef.repository.isFork
 //
-//fun PullRequestWithCommentsResponse.getBranchName() =
+// fun PullRequestWithCommentsResponse.getBranchName() =
 //    if (data.repository.pullRequest.headRef.repository.isFork) {
 //        "pull/${data.repository.pullRequest.number}/head"
 //    } else {
 //        data.repository.pullRequest.headRef.name
 //    }
 //
-//fun PullRequestWithCommentsResponse.getSubjectId() = data.repository.pullRequest.id
-//fun PullRequestWithCommentsResponse.getHeadRefSha() = data.repository.pullRequest.headRef.target.oid
+// fun PullRequestWithCommentsResponse.getSubjectId() = data.repository.pullRequest.id
+// fun PullRequestWithCommentsResponse.getHeadRefSha() = data.repository.pullRequest.headRef.target.oid
 
-
-fun parseComment(commentId: Long,
-                 commentAuthor: String,
-                 pullRequest: PullRequest,
-                 commentAuthorAssociation: String,
-                 commentBody: String,
-                 botName: String): PullRequestComment {
+fun parseComment(
+    commentId: Long,
+    commentAuthor: String,
+    pullRequest: PullRequest,
+    commentAuthorAssociation: String,
+    commentBody: String,
+    botName: String
+): PullRequestComment {
     val metadata = CommentMetadata.parseComment(commentBody)
     return when {
         commentBody.contains("`@$botName") -> UnrelatedComment(commentId, commentBody, pullRequest, metadata)
@@ -52,10 +53,10 @@ fun parseComment(commentId: Long,
     }
 }
 
-//fun PullRequestWithCommentsResponse.getComments(botName: String): List<PullRequestComment> {
+// fun PullRequestWithCommentsResponse.getComments(botName: String): List<PullRequestComment> {
 //    return data.repository.pullRequest.comments.nodes
 //        .map { toComment(it.databaseId, it.author.login, it.authorAssociation, it.body, botName) }
-//}
+// }
 
 data class PullRequestKey(val repoName: String, val number: Long)
 
@@ -73,6 +74,7 @@ class PullRequestManager @Inject constructor(
      */
     fun update(newPr: PullRequest) {
         val oldPr = pullRequests.put(newPr.key, newPr)
+        // This is not accurate: user may delete some comment.
         if (oldPr == null || newPr.comments.size > oldPr.comments.size) {
             executeCommentCommand(newPr)
         }
@@ -113,9 +115,9 @@ class PullRequestManager @Inject constructor(
             pr.commitStatuses.add(commitStatus)
         } else {
             val oldCommitStatus = pr.commitStatuses[oldCommitStatusIndex]
-            if (stateChangedToReadyForMerge(oldCommitStatus, commitStatus, pr)
-                && !approvalReviewHasNotBeenReplied(pr)
-                && authorLikesBot(pr)) {
+            if (stateChangedToReadyForMerge(oldCommitStatus, commitStatus, pr) &&
+                !approvalReviewHasNotBeenReplied(pr) &&
+                authorLikesBot(pr)) {
                 gitHubClient.reply(pr.reviews.last(), readyForMergeComment(pr.author))
             }
         }
@@ -156,7 +158,7 @@ class PullRequestManager @Inject constructor(
 //    fun reply(pr: PullRequest, targetComment: PullRequestComment, content: String, teamCityBuildId: String? = null) {
 //        reply(pr, """<!-- ${objectMapper.writeValueAsString(CommentMetadata(targetComment.id, teamCityBuildId, pr.headCommitSha))} -->
 //
-//$content""")
+// $content""")
 //    }
 //
 //    private fun reply(pr: PullRequest, content: String) {
@@ -168,12 +170,10 @@ class PullRequestManager @Inject constructor(
 //    fun triggerBuild(pr: PullRequest, targetStage: BuildStage) = teamCityClient.triggerBuild(targetStage, pr.teamCityBranchName)
 //
 
-
     private
     fun iDontUnderstandWhatYouSaid() = """
 Sorry I don't understand what you said, please type `@${gitHubClient.whoAmI()} help` to get help.
 """
-
 
     private fun noPermissionMessage() = "Sorry but I'm afraid you're not allowed to do this."
 
@@ -202,13 +202,11 @@ interface PullRequestCommand {
     fun execute(context: PullRequestContext)
 }
 
-
 class UnknownCommand(val sourceComment: PullRequestComment) : PullRequestCommand {
     override fun execute(context: PullRequestContext) {
         context.reply(sourceComment, iDontUnderstandWhatYouSaid(context.whoAmI()))
     }
 }
-
 
 class HelpCommand(val sourceComment: CommandComment) : PullRequestCommand {
     override fun execute(context: PullRequestContext) {
@@ -220,7 +218,6 @@ class NullCommand(val sourceComment: PullRequestComment) : PullRequestCommand {
     override fun execute(context: PullRequestContext) {}
 }
 
-
 class PullRequest(
     botName: String,
     pr: PullRequestWithCommentsResponse
@@ -229,11 +226,13 @@ class PullRequest(
     // Sometimes when you open a pull request and immediately comment,
     // the comment is not visible in query response
     // In this case, we manually add it.
-    fun addCommentIfNotExist(commentId: Long,
-                             commentAuthor: String,
-                             commentAuthorAssociation: String,
-                             commentBody: String,
-                             botName: String) {
+    fun addCommentIfNotExist(
+        commentId: Long,
+        commentAuthor: String,
+        commentAuthorAssociation: String,
+        commentBody: String,
+        botName: String
+    ) {
         if (comments.find { it.id == commentId } == null) {
             comments.add(parseComment(commentId, commentAuthor, this, commentAuthorAssociation, commentBody, botName))
         }
@@ -326,12 +325,13 @@ class PullRequestContext(
     val pullRequestManager: PullRequestManager
 ) : GitHubClient by gitHubClient, TeamCityClient by teamCityClient
 
-
-class CommandComment(override val id: Long,
-                     override val body: String,
-                     override val pullRequest: PullRequest,
-                     override val metadata: CommentMetadata,
-                     val isAdmin: Boolean) : PullRequestComment {
+class CommandComment(
+    override val id: Long,
+    override val body: String,
+    override val pullRequest: PullRequest,
+    override val metadata: CommentMetadata,
+    val isAdmin: Boolean
+) : PullRequestComment {
     val command by lazy {
         parseCommand(body)
     }
@@ -360,17 +360,23 @@ class CommandComment(override val id: Long,
     }
 }
 
-class UnrelatedComment(override val id: Long,
-                       override val body: String,
-                       override val pullRequest: PullRequest,
-                       override val metadata: CommentMetadata) : PullRequestComment
+class UnrelatedComment(
+    override val id: Long,
+    override val body: String,
+    override val pullRequest: PullRequest,
+    override val metadata: CommentMetadata
+) : PullRequestComment
 
-class BotReplyCommandComment(override val id: Long,
-                             override val body: String,
-                             override val pullRequest: PullRequest,
-                             override val metadata: CommentMetadata) : PullRequestComment
+class BotReplyCommandComment(
+    override val id: Long,
+    override val body: String,
+    override val pullRequest: PullRequest,
+    override val metadata: CommentMetadata
+) : PullRequestComment
 
-class BotNotificationComment(override val id: Long,
-                             override val body: String,
-                             override val pullRequest: PullRequest,
-                             override val metadata: CommentMetadata) : PullRequestComment
+class BotNotificationComment(
+    override val id: Long,
+    override val body: String,
+    override val pullRequest: PullRequest,
+    override val metadata: CommentMetadata
+) : PullRequestComment
