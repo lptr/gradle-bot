@@ -100,7 +100,9 @@ query {
 fun listOpenPullRequestsQuery(owner: String, name: String, maxPrNum: Int = 100) = """
 query {
   repository(owner: "$owner", name: "$name") {
-    owner
+    owner {
+      login
+    }
     name
     pullRequests(states: OPEN, first: $maxPrNum) {
       nodes {
