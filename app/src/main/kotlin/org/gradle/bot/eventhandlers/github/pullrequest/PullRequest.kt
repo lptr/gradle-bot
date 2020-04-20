@@ -259,7 +259,7 @@ class PullRequest(
     val isFork = pr.data.repository.pullRequest.headRef.repository.isFork
 
     val isApproved
-        get() = reviews.any { it.state == PullRequestReviewState.APPROVE }
+        get() = reviews.any { it.state == PullRequestReviewState.APPROVED }
 
     val reviews: MutableList<PullRequestReview> = pr.data.repository.pullRequest.reviews.nodes
         .map { PullRequestReview(it.databaseId, it.author.login, it.body, PullRequestReviewState.valueOf(it.state), this) }.toMutableList()
@@ -289,7 +289,7 @@ class PullRequest(
 }
 
 enum class PullRequestReviewState {
-    APPROVE, REQUEST_CHANGES, COMMENTED
+    APPROVED, REQUEST_CHANGES, COMMENTED
 }
 
 class PullRequestReview(val id: Long, val author: String, val body: String, val state: PullRequestReviewState, val pullRequest: PullRequest)
