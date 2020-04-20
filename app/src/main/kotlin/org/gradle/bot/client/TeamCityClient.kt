@@ -29,7 +29,11 @@ interface TeamCityClient {
      */
     fun cancelBuild(build: Build, reason: String): Future<Unit>
 
+    fun searchFlakyBuildInDependencies(build: Build, predicate: (Build) -> Boolean): Future<Build?>
+
     fun getAllDependencies(build: Build): Future<Set<Build>>
+
+    fun isFirstFlakyBuild(build: Build, predicate: (Build) -> Boolean): Future<Boolean>
 }
 
 @Singleton
@@ -55,8 +59,7 @@ class DefaultTeamCityClient @Inject constructor(
 
     override fun triggerBuild(stage: BuildStage, branchName: String) = executeBlocking {
         val buildConfiguration = teamCityRestClient.buildConfiguration(stage.toBuildConfigurationId())
-        val build = buildConfiguration.runBuild(logicalBranchName = branchName)
-        build
+        buildConfiguration.runBuild(logicalBranchName = branchName)
     }
 
     override fun findBuild(teamCityBuildId: String): Future<Build?> = executeBlocking { teamCityRestClient.build(BuildId(teamCityBuildId)) }
@@ -81,6 +84,25 @@ class DefaultTeamCityClient @Inject constructor(
         }
     }
 
+    override fun searchFlakyBuildInDependencies(build: Build, predicate: (Build) -> Boolean): Future<Build?> = executeBlocking {
+        doSearchFlakyBuildInDependencies(build, predicate)
+    }
+
+    private fun doSearchFlakyBuildInDependencies(build: Build, predicate: (Build) -> Boolean): Build? {
+        build.snapshotDependencies.forEach {
+            if (predicate(it)) {
+                return it
+            }
+            if (it.hasDependencies()) {
+                val result = doSearchFlakyBuildInDependencies(it, predicate)
+                if (result != null) {
+                    return result
+                }
+            }
+        }
+        return null
+    }
+
     /**
      * Including the build itself
      */
@@ -88,6 +110,29 @@ class DefaultTeamCityClient @Inject constructor(
         val ret: TreeSet<Build> = TreeSet { x, y -> x.id.stringId.compareTo(y.id.stringId) }
         putDependenciesInto(build, ret)
         ret
+    }
+
+    override fun isFirstFlakyBuild(build: Build, predicate: (Build) -> Boolean): Future<Boolean> = executeBlocking {
+        val last5Builds = teamCityRestClient.builds()
+            .fromConfiguration(build.buildConfigurationId)
+            .withBranch(build.branch.name!!)
+            .includeFailed()
+            .includeCanceled()
+            .limitResults(5)
+            .all()
+            .toList()
+            .sortedByDescending { it.startDateTime }
+        isFirstTime(build, last5Builds, predicate)
+    }
+
+    private fun isFirstTime(build: Build, builds: List<Build>, predicate: (Build) -> Boolean): Boolean {
+        logger.debug("Current build {}, last 5 builds: {}", build.id.stringId, builds.map { it.id.stringId })
+        val index = builds.indexOfFirst { it.id == build.id }
+        return when {
+            builds.size == 1 -> true
+            index == -1 -> false
+            else -> !predicate(builds[index + 1])
+        }
     }
 
     private fun Build.hasDependencies() = BuildConfiguration.values().any { it.id == buildConfigurationId.stringId }

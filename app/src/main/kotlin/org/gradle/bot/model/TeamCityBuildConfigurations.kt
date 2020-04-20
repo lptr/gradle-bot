@@ -89,6 +89,8 @@ enum class BuildStage(val fullName: String, val abbr: String, private val buildC
             } else {
                 values().find { it.fullName.equals(target, true) || it.abbr.equals(target, true) }
             }
+
+        fun fromBuildTypeId(buildTypeId: String): BuildStage? = values().find { it.buildConfiguration.id.equals(buildTypeId, false) }
     }
 
     fun toBuildConfigurationId() = BuildConfigurationId(buildTypeId)

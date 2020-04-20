@@ -53,11 +53,6 @@ fun parseComment(
     }
 }
 
-// fun PullRequestWithCommentsResponse.getComments(botName: String): List<PullRequestComment> {
-//    return data.repository.pullRequest.comments.nodes
-//        .map { toComment(it.databaseId, it.author.login, it.authorAssociation, it.body, botName) }
-// }
-
 data class PullRequestKey(val repoName: String, val number: Long)
 
 @Singleton
@@ -81,6 +76,13 @@ class PullRequestManager @Inject constructor(
         if (!hasCIStatus(newPr)) {
             updateCIStatusIfNecessary(newPr)
         }
+    }
+
+    /**
+     * Whether this build was triggered by the bot
+     */
+    fun findPullRequestByBuildId(buildId: String): PullRequest? = pullRequests.values.find { pr ->
+        pr.comments.any { it.metadata.teamCityBuildId == buildId }
     }
 
     private fun updateCIStatusIfNecessary(pr: PullRequest) {

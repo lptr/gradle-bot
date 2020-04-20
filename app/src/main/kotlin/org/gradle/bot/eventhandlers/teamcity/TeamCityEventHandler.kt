@@ -1,6 +1,7 @@
 package org.gradle.bot.eventhandlers.teamcity
 
 import com.fasterxml.jackson.annotation.JsonProperty
+import io.vertx.core.Future
 import io.vertx.core.eventbus.Message
 import java.time.Duration
 import java.time.Instant
@@ -10,6 +11,7 @@ import javax.inject.Singleton
 import org.gradle.bot.client.GitHubClient
 import org.gradle.bot.client.TeamCityClient
 import org.gradle.bot.eventhandlers.WebHookEventHandler
+import org.gradle.bot.eventhandlers.github.pullrequest.PullRequestManager
 import org.gradle.bot.eventhandlers.github.pullrequest.ciStatusContext
 import org.gradle.bot.eventhandlers.github.pullrequest.ciStatusDesc
 import org.gradle.bot.model.BuildStage
@@ -19,6 +21,7 @@ import org.gradle.bot.model.ListOpenPullRequestsResponse
 import org.gradle.bot.objectMapper
 import org.jetbrains.teamcity.rest.Build
 import org.jetbrains.teamcity.rest.BuildStatus
+import org.jetbrains.teamcity.rest.TestStatus
 import org.slf4j.LoggerFactory
 
 interface TeamCityEventHandler : WebHookEventHandler {
@@ -77,9 +80,73 @@ fun ListOpenPullRequestsResponse.Node.lastCommittedDate() = ZonedDateTime.parse(
 fun ListOpenPullRequestsResponse.Node.isStale() = Duration.between(lastCommittedDate().toInstant(), Instant.now()).toDays() > 30
 fun ListOpenPullRequestsResponse.Node.getTargetBranch() = baseRefName
 
+/**
+ * Upon receiving failure TeamCity build stage webhooks, we first try to find out the target PR.
+ * If found, check if any of its dependencies is flaky. If so, rerun the stage build.
+ */
 @Singleton
-class AutoRetryFlakyBuild : AbstractTeamCityEventHandler() {
+class AutoRetryFlakyBuild @Inject constructor(
+    private val pullRequestManager: PullRequestManager,
+    private val teamCityClient: TeamCityClient
+) : AbstractTeamCityEventHandler() {
+    private val logger = LoggerFactory.getLogger(AutoRetryFlakyBuild::class.java)
     override fun handleEvent(event: TeamCityBuildEvent) {
+        val stage = BuildStage.fromBuildTypeId(event.buildTypeId)
+        if (stage == null) {
+            logger.debug("Skip non-stage build {}", event.buildId)
+            return
+        }
+        if (event.buildStatus != BuildEventStatus.FAILURE) {
+            logger.debug("Skip build {} since it's not found in any pull requests")
+        } else {
+            val pr = pullRequestManager.findPullRequestByBuildId(event.buildId)
+            if (pr == null) {
+                logger.debug("No pull request found with build id {}, skip.", event.buildId)
+            } else {
+                maybeRerunBuild(stage, pr.teamCityBranchName, event)
+            }
+//            maybeRerunBuild(stage, "blindpirate/test-bot", event)
+        }
+    }
+
+    private fun maybeRerunBuild(stage: BuildStage, branchName: String, event: TeamCityBuildEvent) =
+        teamCityClient.findBuild(event.buildId).compose { it ->
+            teamCityClient.searchFlakyBuildInDependencies(it!!, this::isFlakyBuild)
+        }.compose { flakyBuild ->
+            if (flakyBuild == null) {
+                logger.debug("No flaky tests found, skip.")
+                Future.succeededFuture()
+            } else {
+                rerunBuildIfFirstTime(stage, branchName, flakyBuild) as Future<Any>
+            }
+        }.onFailure {
+            logger.error("", it)
+        }
+
+    private fun rerunBuildIfFirstTime(stage: BuildStage, branch: String, flakyBuild: Build): Future<*> =
+        teamCityClient.isFirstFlakyBuild(flakyBuild, this::isFlakyBuild).compose {
+            // Check if the flaky build is first time
+            if (it) {
+                teamCityClient.triggerBuild(stage, branch)
+            } else {
+                Future.succeededFuture()
+            }
+        }
+
+    // Note: this method is blocking. You'd better populate
+    private fun isFlakyBuild(build: Build): Boolean {
+        if (build.status != BuildStatus.FAILURE) {
+            return false
+        } else {
+            val testErrors = build.testRuns(TestStatus.FAILED).toList()
+            if (testErrors.size > 10) {
+                return false
+            }
+
+            val problems = build.buildProblems.joinToString("\n") { it.details } + testErrors.joinToString("\n") { it.details }
+            logger.debug("problems of {}:\n{}", problems)
+            return problems.contains("This is flaky")
+        }
     }
 }
 

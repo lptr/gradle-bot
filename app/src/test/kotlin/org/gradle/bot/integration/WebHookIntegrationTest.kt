@@ -1,56 +1,60 @@
 package org.gradle.bot.integration
 
- import io.vertx.core.Vertx
- import io.vertx.core.buffer.Buffer
- import io.vertx.core.eventbus.Message
- import io.vertx.core.eventbus.impl.EventBusImpl
- import io.vertx.core.eventbus.impl.HandlerHolder
- import io.vertx.core.impl.utils.ConcurrentCyclicSequence
- import io.vertx.ext.web.client.WebClient
- import java.util.concurrent.ConcurrentMap
- import javax.inject.Inject
- import javax.inject.Singleton
- import org.gradle.bot.GradleBotVerticle
- import org.gradle.bot.client.TeamCityClient
- import org.gradle.bot.eventhandlers.github.GitHubEventHandler
- import org.junit.jupiter.api.Assertions
- import org.junit.jupiter.api.Test
- import org.junit.jupiter.api.extension.ExtendWith
- import org.mockito.Mock
+import io.vertx.core.Vertx
+import io.vertx.core.buffer.Buffer
+import io.vertx.core.eventbus.Message
+import io.vertx.core.eventbus.impl.EventBusImpl
+import io.vertx.core.eventbus.impl.HandlerHolder
+import io.vertx.core.impl.utils.ConcurrentCyclicSequence
+import io.vertx.ext.web.client.WebClient
+import java.util.concurrent.ConcurrentMap
+import javax.inject.Inject
+import javax.inject.Singleton
+import org.gradle.bot.GradleBotVerticle
+import org.gradle.bot.client.TeamCityClient
+import org.gradle.bot.eventhandlers.github.GitHubEventHandler
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
+import org.mockito.Mock
 
- val testEventType = "TestEvent"
+val testEventType = "TestEvent"
 
- @Singleton
- class TestGitHubEventHandler : GitHubEventHandler {
+@Singleton
+class TestGitHubEventHandler : GitHubEventHandler {
     override val eventType = "TestEvent"
     val receivedEvents = mutableListOf<String>()
     override fun handle(event: Message<String>?) {
         event?.let { receivedEvents.add(it.body()) }
     }
- }
+}
 
- @ExtendWith(VertxGuiceIntegrationTestExtension::class)
- @VertxGuiceIntegrationTest(GradleBotVerticle::class)
- class WebHookIntegrationTest {
+@ExtendWith(VertxGuiceIntegrationTestExtension::class)
+@VertxGuiceIntegrationTest(GradleBotVerticle::class)
+class WebHookIntegrationTest {
     @Mock
     lateinit var githubClient: TeamCityClient
+
     @Mock
     lateinit var teamCityClient: TeamCityClient
+
     @Inject
     lateinit var webClient: WebClient
+
     @Inject
     lateinit var testGitHubEventHandler: TestGitHubEventHandler
+
     @Inject
     lateinit var vertx: Vertx
 
     @Test
     fun `can process webhook events`() {
         webClient.postAbs("http://localhost:8080/github")
-                .putHeader("Accept", "application/json")
-                .putHeader("Content-Type", "application/json")
-                .putHeader("X-GitHub-Event", testEventType)
-                .sendBuffer(Buffer.buffer("{}"))
-                .await()
+            .putHeader("Accept", "application/json")
+            .putHeader("Content-Type", "application/json")
+            .putHeader("X-GitHub-Event", testEventType)
+            .sendBuffer(Buffer.buffer("{}"))
+            .await()
 
         Thread.sleep(1000)
         Assertions.assertEquals(1, testGitHubEventHandler.receivedEvents.size)
@@ -69,6 +73,6 @@ package org.gradle.bot.integration
         // UpdateCIStatusUponPullRequestChange
         // TestGitHubEventHandler
         // UpdateCIStatusForAllOpenPullRequests
-        Assertions.assertEquals(7, handlerMap.values.flatMap { it }.size)
+        Assertions.assertEquals(7, handlerMap.values.flatten().size)
     }
- }
+}
