@@ -21,7 +21,7 @@ fun ciStatusDesc(build: Build, commitStatusState: CommitStatusState) =
 // https://developer.github.com/v3/activity/events/types/#pullrequestevent
 
 enum class PullRequestAction {
-    ASSIGNED, UNASSIGNED, LABELED, UNLABELED, OPENED, EDITED, CLOSED, REOPENED, SYNCHRONIZE, READY_FOR_REVIEW, LOCKED, UNLOCKED;
+    ASSIGNED, UNASSIGNED, LABELED, UNLABELED, OPENED, EDITED, CLOSED, REOPENED, SYNCHRONIZE, READY_FOR_REVIEW, LOCKED, UNLOCKED, REVIEW_REQUESTED;
 
     companion object {
         fun of(value: String) = valueOf(value.toUpperCase())
