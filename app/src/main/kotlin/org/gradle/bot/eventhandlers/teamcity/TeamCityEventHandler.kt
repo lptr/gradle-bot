@@ -21,7 +21,6 @@ import org.gradle.bot.model.ListOpenPullRequestsResponse
 import org.gradle.bot.objectMapper
 import org.jetbrains.teamcity.rest.Build
 import org.jetbrains.teamcity.rest.BuildStatus
-import org.jetbrains.teamcity.rest.TestStatus
 import org.slf4j.LoggerFactory
 
 interface TeamCityEventHandler : WebHookEventHandler {
@@ -105,13 +104,13 @@ class AutoRetryFlakyBuild @Inject constructor(
             } else {
                 maybeRerunBuild(stage, pr.teamCityBranchName, event)
             }
-//            maybeRerunBuild(stage, "blindpirate/test-bot", event)
         }
     }
 
+    @Suppress("UNCHECKED_CAST")
     private fun maybeRerunBuild(stage: BuildStage, branchName: String, event: TeamCityBuildEvent) =
         teamCityClient.findBuild(event.buildId).compose { it ->
-            teamCityClient.searchFlakyBuildInDependencies(it!!, this::isFlakyBuild)
+            teamCityClient.searchFlakyBuildInDependencies(it!!)
         }.compose { flakyBuild ->
             if (flakyBuild == null) {
                 logger.debug("No flaky tests found, skip.")
@@ -124,7 +123,7 @@ class AutoRetryFlakyBuild @Inject constructor(
         }
 
     private fun rerunBuildIfFirstTime(stage: BuildStage, branch: String, flakyBuild: Build): Future<*> =
-        teamCityClient.isFirstFlakyBuild(flakyBuild, this::isFlakyBuild).compose {
+        teamCityClient.isFirstFlakyBuild(flakyBuild).compose {
             // Check if the flaky build is first time
             if (it) {
                 teamCityClient.triggerBuild(stage, branch)
@@ -132,22 +131,6 @@ class AutoRetryFlakyBuild @Inject constructor(
                 Future.succeededFuture()
             }
         }
-
-    // Note: this method is blocking. You'd better populate
-    private fun isFlakyBuild(build: Build): Boolean {
-        if (build.status != BuildStatus.FAILURE) {
-            return false
-        } else {
-            val testErrors = build.testRuns(TestStatus.FAILED).toList()
-            if (testErrors.size > 10) {
-                return false
-            }
-
-            val problems = build.buildProblems.joinToString("\n") { it.details } + testErrors.joinToString("\n") { it.details }
-            logger.debug("problems of {}:\n{}", problems)
-            return problems.contains("This is flaky")
-        }
-    }
 }
 
 /**

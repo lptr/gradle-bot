@@ -16,6 +16,7 @@ class DefaultGithubSignatureCheckerTest {
         "fake sha1,     sha1=iamfakesha1aaaaaaaaaaaaaaaaaaaaaaaaaaaaa, gradle-bot, false",
         "null signature,                                             , gradle-bot, false"
     ])
+    @Suppress("UNUSED_PARAMETER")
     fun testVerifySignature(desc: String, signature: String?, secret: String, expected: Boolean) {
         val githubSignatureChecker = Sha1GitHubSignatureChecker(secret)
         assertEquals(expected, githubSignatureChecker.verifySignature(payload, signature))

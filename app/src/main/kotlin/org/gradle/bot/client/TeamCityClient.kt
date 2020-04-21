@@ -8,6 +8,8 @@ import java.util.TreeSet
 import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Singleton
+import org.gradle.bot.eventhandlers.teamcity.CachingBuild
+import org.gradle.bot.eventhandlers.teamcity.FlakyBuildPattern
 import org.gradle.bot.model.BuildConfiguration
 import org.gradle.bot.model.BuildStage
 import org.jetbrains.teamcity.rest.Build
@@ -29,17 +31,18 @@ interface TeamCityClient {
      */
     fun cancelBuild(build: Build, reason: String): Future<Unit>
 
-    fun searchFlakyBuildInDependencies(build: Build, predicate: (Build) -> Boolean): Future<Build?>
+    fun searchFlakyBuildInDependencies(build: Build): Future<Build?>
 
     fun getAllDependencies(build: Build): Future<Set<Build>>
 
-    fun isFirstFlakyBuild(build: Build, predicate: (Build) -> Boolean): Future<Boolean>
+    fun isFirstFlakyBuild(build: Build): Future<Boolean>
 }
 
 @Singleton
 class DefaultTeamCityClient @Inject constructor(
     private val vertx: Vertx,
-    @Named("TEAMCITY_ACCESS_TOKEN") teamCityToken: String
+    @Named("TEAMCITY_ACCESS_TOKEN") teamCityToken: String,
+    private val flakyBuildPattern: FlakyBuildPattern
 ) : TeamCityClient {
     private val logger = LoggerFactory.getLogger(javaClass)
     private val teamCityRestClient by lazy {
@@ -84,17 +87,18 @@ class DefaultTeamCityClient @Inject constructor(
         }
     }
 
-    override fun searchFlakyBuildInDependencies(build: Build, predicate: (Build) -> Boolean): Future<Build?> = executeBlocking {
-        doSearchFlakyBuildInDependencies(build, predicate)
+    override fun searchFlakyBuildInDependencies(build: Build): Future<Build?> = executeBlocking {
+        doSearchFlakyBuildInDependencies(CachingBuild(build))
     }
 
-    private fun doSearchFlakyBuildInDependencies(build: Build, predicate: (Build) -> Boolean): Build? {
+    private fun doSearchFlakyBuildInDependencies(build: CachingBuild): Build? {
         build.snapshotDependencies.forEach {
-            if (predicate(it)) {
+            val cachingBuild = CachingBuild(it)
+            if (flakyBuildPattern.isFlakyBuild(cachingBuild)) {
                 return it
             }
             if (it.hasDependencies()) {
-                val result = doSearchFlakyBuildInDependencies(it, predicate)
+                val result = doSearchFlakyBuildInDependencies(cachingBuild)
                 if (result != null) {
                     return result
                 }
@@ -112,7 +116,7 @@ class DefaultTeamCityClient @Inject constructor(
         ret
     }
 
-    override fun isFirstFlakyBuild(build: Build, predicate: (Build) -> Boolean): Future<Boolean> = executeBlocking {
+    override fun isFirstFlakyBuild(build: Build): Future<Boolean> = executeBlocking {
         val last5Builds = teamCityRestClient.builds()
             .fromConfiguration(build.buildConfigurationId)
             .withBranch(build.branch.name!!)
@@ -122,16 +126,17 @@ class DefaultTeamCityClient @Inject constructor(
             .all()
             .toList()
             .sortedByDescending { it.startDateTime }
-        isFirstTime(build, last5Builds, predicate)
+            .map { CachingBuild(it) }
+        isFirstTime(build, last5Builds)
     }
 
-    private fun isFirstTime(build: Build, builds: List<Build>, predicate: (Build) -> Boolean): Boolean {
+    private fun isFirstTime(build: Build, builds: List<CachingBuild>): Boolean {
         logger.debug("Current build {}, last 5 builds: {}", build.id.stringId, builds.map { it.id.stringId })
         val index = builds.indexOfFirst { it.id == build.id }
         return when {
             builds.size == 1 -> true
             index == -1 -> false
-            else -> !predicate(builds[index + 1])
+            else -> !flakyBuildPattern.isFlakyBuild(builds[index + 1])
         }
     }
 
