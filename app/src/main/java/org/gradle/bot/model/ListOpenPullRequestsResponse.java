@@ -1073,6 +1073,95 @@ public class ListOpenPullRequestsResponse {
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonPropertyOrder({
+        "login"
+    })
+    public static class Owner2 {
+
+        @JsonProperty("login")
+        private String login;
+        @JsonIgnore
+        private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+        /**
+         * No args constructor for use in serialization
+         * 
+         */
+        public Owner2() {
+        }
+
+        /**
+         * 
+         * @param login
+         */
+        public Owner2(String login) {
+            super();
+            this.login = login;
+        }
+
+        @JsonProperty("login")
+        public String getLogin() {
+            return login;
+        }
+
+        @JsonProperty("login")
+        public void setLogin(String login) {
+            this.login = login;
+        }
+
+        @JsonAnyGetter
+        public Map<String, Object> getAdditionalProperties() {
+            return this.additionalProperties;
+        }
+
+        @JsonAnySetter
+        public void setAdditionalProperty(String name, Object value) {
+            this.additionalProperties.put(name, value);
+        }
+
+        @Override
+        public String toString() {
+            StringBuilder sb = new StringBuilder();
+            sb.append(ListOpenPullRequestsResponse.Owner2 .class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+            sb.append("login");
+            sb.append('=');
+            sb.append(((this.login == null)?"<null>":this.login));
+            sb.append(',');
+            sb.append("additionalProperties");
+            sb.append('=');
+            sb.append(((this.additionalProperties == null)?"<null>":this.additionalProperties));
+            sb.append(',');
+            if (sb.charAt((sb.length()- 1)) == ',') {
+                sb.setCharAt((sb.length()- 1), ']');
+            } else {
+                sb.append(']');
+            }
+            return sb.toString();
+        }
+
+        @Override
+        public int hashCode() {
+            int result = 1;
+            result = ((result* 31)+((this.login == null)? 0 :this.login.hashCode()));
+            result = ((result* 31)+((this.additionalProperties == null)? 0 :this.additionalProperties.hashCode()));
+            return result;
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            if (other == this) {
+                return true;
+            }
+            if ((other instanceof ListOpenPullRequestsResponse.Owner2) == false) {
+                return false;
+            }
+            ListOpenPullRequestsResponse.Owner2 rhs = ((ListOpenPullRequestsResponse.Owner2) other);
+            return (((this.login == rhs.login)||((this.login!= null)&&this.login.equals(rhs.login)))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))));
+        }
+
+    }
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonPropertyOrder({
         "nodes"
     })
     public static class PullRequests {
@@ -1169,7 +1258,7 @@ public class ListOpenPullRequestsResponse {
     public static class Repository {
 
         @JsonProperty("owner")
-        private String owner;
+        private ListOpenPullRequestsResponse.Owner owner;
         @JsonProperty("name")
         private String name;
         @JsonProperty("pullRequests")
@@ -1190,7 +1279,7 @@ public class ListOpenPullRequestsResponse {
          * @param name
          * @param pullRequests
          */
-        public Repository(String owner, String name, ListOpenPullRequestsResponse.PullRequests pullRequests) {
+        public Repository(ListOpenPullRequestsResponse.Owner owner, String name, ListOpenPullRequestsResponse.PullRequests pullRequests) {
             super();
             this.owner = owner;
             this.name = name;
@@ -1198,12 +1287,12 @@ public class ListOpenPullRequestsResponse {
         }
 
         @JsonProperty("owner")
-        public String getOwner() {
+        public ListOpenPullRequestsResponse.Owner getOwner() {
             return owner;
         }
 
         @JsonProperty("owner")
-        public void setOwner(String owner) {
+        public void setOwner(ListOpenPullRequestsResponse.Owner owner) {
             this.owner = owner;
         }
 
@@ -1300,7 +1389,7 @@ public class ListOpenPullRequestsResponse {
         @JsonProperty("isFork")
         private Boolean isFork;
         @JsonProperty("owner")
-        private ListOpenPullRequestsResponse.Owner owner;
+        private ListOpenPullRequestsResponse.Owner2 owner;
         @JsonProperty("name")
         private String name;
         @JsonIgnore
@@ -1319,7 +1408,7 @@ public class ListOpenPullRequestsResponse {
          * @param name
          * @param isFork
          */
-        public Repository2(Boolean isFork, ListOpenPullRequestsResponse.Owner owner, String name) {
+        public Repository2(Boolean isFork, ListOpenPullRequestsResponse.Owner2 owner, String name) {
             super();
             this.isFork = isFork;
             this.owner = owner;
@@ -1337,12 +1426,12 @@ public class ListOpenPullRequestsResponse {
         }
 
         @JsonProperty("owner")
-        public ListOpenPullRequestsResponse.Owner getOwner() {
+        public ListOpenPullRequestsResponse.Owner2 getOwner() {
             return owner;
         }
 
         @JsonProperty("owner")
-        public void setOwner(ListOpenPullRequestsResponse.Owner owner) {
+        public void setOwner(ListOpenPullRequestsResponse.Owner2 owner) {
             this.owner = owner;
         }
 

@@ -276,7 +276,6 @@ class PullRequest(
 
     val teamCityBranchName = if (isFork) {
         pr.data.repository.pullRequest.headRef.name
-//        "pull/${pr.data.repository.pullRequest.number}/head"
     } else {
         pr.data.repository.pullRequest.headRef.name
     }
@@ -288,8 +287,9 @@ class PullRequest(
         .map { parseComment(it.databaseId, it.author.login, this, it.authorAssociation, it.body, botName) }.toMutableList()
 }
 
+// https://developer.github.com/v4/enum/pullrequestreviewstate/
 enum class PullRequestReviewState {
-    APPROVED, REQUEST_CHANGES, COMMENTED
+    APPROVED, CHANGES_REQUESTED, COMMENTED, DISMISSED, PENDING
 }
 
 class PullRequestReview(val id: Long, val author: String, val body: String, val state: PullRequestReviewState, val pullRequest: PullRequest)
