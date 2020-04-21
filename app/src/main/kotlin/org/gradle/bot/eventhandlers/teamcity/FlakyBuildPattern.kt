@@ -50,7 +50,13 @@ class FlakyBuildPatternComposite() : FlakyBuildPattern {
         }
 
         logger.debug("problems of {}:\n{}", build.getErrorMessage())
-        return patterns.any { it.isFlakyBuild(build) }
+        return patterns.any { pattern ->
+            pattern.isFlakyBuild(build).also {
+                if (it) {
+                    logger.debug("Build {} matches flaky pattern {}", build.id, pattern.javaClass.simpleName)
+                }
+            }
+        }
     }
 }
 

@@ -35,7 +35,7 @@ interface TeamCityClient {
 
     fun getAllDependencies(build: Build): Future<Set<Build>>
 
-    fun isFirstFlakyBuild(build: Build): Future<Boolean>
+    fun needsToRerunFlakyBuild(build: Build): Future<Boolean>
 }
 
 @Singleton
@@ -116,7 +116,7 @@ class DefaultTeamCityClient @Inject constructor(
         ret
     }
 
-    override fun isFirstFlakyBuild(build: Build): Future<Boolean> = executeBlocking {
+    override fun needsToRerunFlakyBuild(build: Build): Future<Boolean> = executeBlocking {
         val last5Builds = teamCityRestClient.builds()
             .fromConfiguration(build.buildConfigurationId)
             .withBranch(build.branch.name!!)
@@ -134,9 +134,10 @@ class DefaultTeamCityClient @Inject constructor(
         logger.debug("Current build {}, last 5 builds: {}", build.id.stringId, builds.map { it.id.stringId })
         val index = builds.indexOfFirst { it.id == build.id }
         return when {
-            builds.size == 1 -> true
+            index != 0 -> false // Other build is already run
+            builds.size == 1 -> true // this is the first time it occurs
             index == -1 -> false
-            else -> !flakyBuildPattern.isFlakyBuild(builds[index + 1])
+            else -> !flakyBuildPattern.isFlakyBuild(builds[index + 1]) // only rerun when current is flaky and previous one is not
         }
     }
 

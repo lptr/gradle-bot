@@ -123,9 +123,10 @@ class AutoRetryFlakyBuild @Inject constructor(
         }
 
     private fun rerunBuildIfFirstTime(stage: BuildStage, branch: String, flakyBuild: Build): Future<*> =
-        teamCityClient.isFirstFlakyBuild(flakyBuild).compose {
-            // Check if the flaky build is first time
+        teamCityClient.needsToRerunFlakyBuild(flakyBuild).compose {
+            // Check if the flaky build needs to be rerun
             if (it) {
+                logger.info("Rerunning stage {} because of flaky build {}", stage, flakyBuild.id.stringId)
                 teamCityClient.triggerBuild(stage, branch)
             } else {
                 Future.succeededFuture()
