@@ -1,13 +1,13 @@
 package org.gradle.bot.eventhandlers.teamcity
 
 import com.google.inject.ImplementedBy
+import javax.inject.Singleton
 import org.jetbrains.teamcity.rest.Build
 import org.jetbrains.teamcity.rest.BuildProblemOccurrence
 import org.jetbrains.teamcity.rest.BuildStatus
 import org.jetbrains.teamcity.rest.TestRun
 import org.jetbrains.teamcity.rest.TestStatus
 import org.slf4j.LoggerFactory
-import javax.inject.Singleton
 
 /**
  * Determines if a build is flaky. Usually blocking because it needs to access build.problems/build.testRuns() blocking API
