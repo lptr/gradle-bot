@@ -3,11 +3,6 @@ package org.gradle.bot.eventhandlers.teamcity
 import com.fasterxml.jackson.annotation.JsonProperty
 import io.vertx.core.Future
 import io.vertx.core.eventbus.Message
-import java.time.Duration
-import java.time.Instant
-import java.time.ZonedDateTime
-import javax.inject.Inject
-import javax.inject.Singleton
 import org.gradle.bot.client.GitHubClient
 import org.gradle.bot.client.TeamCityClient
 import org.gradle.bot.eventhandlers.WebHookEventHandler
@@ -22,6 +17,11 @@ import org.gradle.bot.objectMapper
 import org.jetbrains.teamcity.rest.Build
 import org.jetbrains.teamcity.rest.BuildStatus
 import org.slf4j.LoggerFactory
+import java.time.Duration
+import java.time.Instant
+import java.time.ZonedDateTime
+import javax.inject.Inject
+import javax.inject.Singleton
 
 interface TeamCityEventHandler : WebHookEventHandler {
     override val eventPrefix: String
@@ -129,6 +129,7 @@ class AutoRetryFlakyBuild @Inject constructor(
                 logger.info("Rerunning stage {} because of flaky build {}", stage, flakyBuild.id.stringId)
                 teamCityClient.triggerBuild(stage, branch)
             } else {
+                logger.info("No need to rerun flaky build {} because this is not the first time.", flakyBuild.id.stringId)
                 Future.succeededFuture()
             }
         }
