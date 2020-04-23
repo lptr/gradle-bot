@@ -55,7 +55,10 @@ class SyncPullRequest @Inject constructor(
             logger.debug("Skip pull request {} with action {}", event.getWebUrl(), event.action)
         } else {
             gitHubClient.getPullRequestWithComments(event.repository.fullName, event.pullRequest.number).onSuccess {
-                pullRequestManager.update(PullRequest(gitHubClient.whoAmI(), it))
+                PullRequest(gitHubClient.whoAmI(), it).apply {
+                    pullRequestManager.update(this)
+                    pullRequestManager.updateCIStatusIfNecessary(this)
+                }
             }
         }
     }

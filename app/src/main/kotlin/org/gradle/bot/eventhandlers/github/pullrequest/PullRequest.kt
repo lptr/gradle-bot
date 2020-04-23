@@ -67,16 +67,7 @@ class PullRequestManager @Inject constructor(
      *
      * Necessary actions will be triggered, e.g. trigger build, reply comment, merge PR, etc.
      */
-    fun update(newPr: PullRequest) {
-        val oldPr = pullRequests.put(newPr.key, newPr)
-        // This is not accurate: user may delete some comment.
-        if (oldPr == null || newPr.comments.size > oldPr.comments.size) {
-            executeCommentCommand(newPr)
-        }
-        if (!hasCIStatus(newPr)) {
-            updateCIStatusIfNecessary(newPr)
-        }
-    }
+    fun update(newPr: PullRequest) = pullRequests.put(newPr.key, newPr)
 
     /**
      * Whether this build was triggered by the bot
@@ -85,23 +76,19 @@ class PullRequestManager @Inject constructor(
         pr.comments.any { it.metadata.teamCityBuildId == buildId }
     }
 
-    private fun updateCIStatusIfNecessary(pr: PullRequest) {
-        teamCityClient.getLatestFinishedBuild(pr.targetBranch).onSuccess {
+    fun updateCIStatusIfNecessary(pr: PullRequest) {
+        teamCityClient.getLatestFinishedBuild(pr.targetBranch).onSuccess { lastSuccessfulBuild ->
             val oldStatus = pr.commitStatuses.find { it.context == ciStatusContext }
-            val commitStatusState = CommitStatusState.fromTeamCityBuildStatus(it.status!!)
+            val commitStatusState = CommitStatusState.fromTeamCityBuildStatus(lastSuccessfulBuild.status!!)
             if (commitStatusState.toString() != oldStatus?.state) {
                 gitHubClient.createCommitStatus(pr.repoName,
                     pr.headCommitSha,
                     commitStatusState,
-                    it.getHomeUrl(),
-                    ciStatusDesc(it, commitStatusState),
+                    lastSuccessfulBuild.getHomeUrl(),
+                    ciStatusDesc(lastSuccessfulBuild, commitStatusState),
                     ciStatusContext)
             }
         }
-    }
-
-    private fun hasCIStatus(pr: PullRequest): Boolean {
-        return pr.commitStatuses.any { it.context == ciStatusContext }
     }
 
     fun updateCommitStatus(repoName: String, commitSha: String, commitStatus: CommitStatusObject) {
@@ -144,51 +131,18 @@ class PullRequestManager @Inject constructor(
             pr.isApproved
     }
 
-    private fun executeCommentCommand(pr: PullRequest) {
-        val targetComment = pr.comments.lastOrNull() ?: return
-        if (alreadyReplied(pr, targetComment)) {
+    private fun alreadyReplied(pr: PullRequest, targetComment: PullRequestComment): Boolean {
+        return pr.comments.any { targetComment.id == it.metadata.replyTargetCommentId }
+    }
+
+    fun onPullRequestCommentCreated(pullRequest: PullRequest, targetCommentId: Long) {
+        val targetComment = pullRequest.comments.find { it.id == targetCommentId } ?: return
+        if (alreadyReplied(pullRequest, targetComment)) {
             logger.warn("Comment {} has already been replied, skip.", targetComment.body)
         } else {
             targetComment.execute(PullRequestContext(gitHubClient, teamCityClient, this))
         }
     }
-
-    private fun alreadyReplied(pr: PullRequest, targetComment: PullRequestComment): Boolean {
-        return pr.comments.any { targetComment.id == it.metadata.replyTargetCommentId }
-    }
-
-//    fun reply(pr: PullRequest, targetComment: PullRequestComment, content: String, teamCityBuildId: String? = null) {
-//        reply(pr, """<!-- ${objectMapper.writeValueAsString(CommentMetadata(targetComment.id, teamCityBuildId, pr.headCommitSha))} -->
-//
-// $content""")
-//    }
-//
-//    private fun reply(pr: PullRequest, content: String) {
-//        gitHubClient.comment(pr.subjectId, content).onSuccess {
-//            logger.info("Successfully commented $content on ${pr.subjectId}")
-//        }
-//    }
-
-//    fun triggerBuild(pr: PullRequest, targetStage: BuildStage) = teamCityClient.triggerBuild(targetStage, pr.teamCityBranchName)
-//
-
-    private
-    fun iDontUnderstandWhatYouSaid() = """
-Sorry I don't understand what you said, please type `@${gitHubClient.whoAmI()} help` to get help.
-"""
-
-    private fun noPermissionMessage() = "Sorry but I'm afraid you're not allowed to do this."
-
-//    fun replyNoPermission(comment: PullRequestComment) = reply(comment, noPermissionMessage())
-//
-//    fun replyHelp(sourceComment: CommandComment) = reply(sourceComment, helpMessage())
-//
-//    fun replyDontUnderstand(sourceComment: PullRequestComment) = reply(sourceComment, iDontUnderstandWhatYouSaid())
-//
-//    fun cancelPreviouslyTriggeredBuild(build: Build): CompositeFuture =
-//        CompositeFuture.all(build.getAllDependencies().map {
-//            teamCityClient.cancelBuild(build, "The user triggered a new build.")
-//        })
 }
 
 /**

@@ -13,6 +13,13 @@ fun IssueCommentGitHubEvent.isPullRequest() = issue.pullRequest != null
 
 fun IssueCommentGitHubEvent.getCommentWebUrl() = "https://github.com/${repository.fullName}/issues/${issue.number}#issuecomment-${comment.id}"
 
+fun IssueCommentGitHubEvent.getEventAction() = IssueCommentGitHubEventAction.valueOf(action.toUpperCase())
+
+// https://developer.github.com/v3/activity/events/types/#issuecommentevent
+enum class IssueCommentGitHubEventAction {
+    CREATED, EDITED, DELETED;
+}
+
 @Singleton
 class PullRequestCommentEventHandler @Inject constructor(
     private val gitHubClient: GitHubClient,
@@ -39,6 +46,10 @@ class PullRequestCommentEventHandler @Inject constructor(
                 logger.warn("Current comment: {}, the last comment of pull request query response: {}", event.comment.id, pullRequest.comments.last().id)
             }
             pullRequestManager.update(pullRequest)
+
+            if (event.getEventAction() == IssueCommentGitHubEventAction.CREATED) {
+                pullRequestManager.onPullRequestCommentCreated(pullRequest, event.comment.id)
+            }
         }
     }
 }
