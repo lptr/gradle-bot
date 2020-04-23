@@ -1,13 +1,13 @@
 package org.gradle.bot.eventhandlers.teamcity
 
 import com.google.inject.ImplementedBy
-import javax.inject.Singleton
 import org.jetbrains.teamcity.rest.Build
 import org.jetbrains.teamcity.rest.BuildProblemOccurrence
 import org.jetbrains.teamcity.rest.BuildStatus
 import org.jetbrains.teamcity.rest.TestRun
 import org.jetbrains.teamcity.rest.TestStatus
 import org.slf4j.LoggerFactory
+import javax.inject.Singleton
 
 /**
  * Determines if a build is flaky. Usually blocking because it needs to access build.problems/build.testRuns() blocking API
@@ -38,7 +38,8 @@ class FlakyBuildPatternComposite() : FlakyBuildPattern {
     private val patterns: List<FlakyBuildPattern> = listOf(
         BuildTimeoutPattern(),
         Ec2AgentShutDownPattern(),
-        ErrorWhenApplyingPatchPattern()
+        ErrorWhenApplyingPatchPattern(),
+        ExistingConnectionForciblyClosedPattern()
     )
     private val logger = LoggerFactory.getLogger(javaClass)
     override fun isFlakyBuild(build: CachingBuild): Boolean {
@@ -58,6 +59,11 @@ class FlakyBuildPatternComposite() : FlakyBuildPattern {
             }
         }
     }
+}
+
+// https://github.com/gradle/gradle-private/issues/2956
+class ExistingConnectionForciblyClosedPattern : FlakyBuildPattern {
+    override fun isFlakyBuild(build: CachingBuild) = build.getErrorMessage().contains("An existing connection was forcibly closed by the remote host")
 }
 
 // https://github.com/gradle/gradle-private/issues/2174
