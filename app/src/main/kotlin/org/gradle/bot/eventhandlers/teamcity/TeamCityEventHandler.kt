@@ -90,6 +90,7 @@ class AutoRetryFlakyBuild @Inject constructor(
 ) : AbstractTeamCityEventHandler() {
     private val logger = LoggerFactory.getLogger(AutoRetryFlakyBuild::class.java)
     override fun handleEvent(event: TeamCityBuildEvent) {
+        logger.debug("Handle build event: {}", event.text)
         val stage = BuildStage.fromBuildTypeId(event.buildTypeId)
         if (stage == null) {
             logger.debug("Skip non-stage build {}", event.buildId)

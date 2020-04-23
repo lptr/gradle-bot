@@ -19,7 +19,7 @@ class TeamCityWebHookHandler @Inject constructor(private val vertx: Vertx) : Han
 
 private fun RoutingContext?.parseTeamCityPayload(): String? {
     return this?.let {
-        logger.debug("Get TeamCity webhook {}", bodyAsString)
+        logger.info("Get TeamCity webhook {}", bodyAsString)
         bodyAsString
     }
 }
