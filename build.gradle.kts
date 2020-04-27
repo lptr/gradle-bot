@@ -33,15 +33,6 @@ project("teamcity-workaround") {
     }
 }
 
-project("forest") {
-    val vertxVersion = "4.0.0-milestone4"
-    val guiceVersion = "4.2.3"
-    dependencies {
-        api("io.vertx:vertx-core:$vertxVersion")
-        api("com.google.inject:guice:$guiceVersion")
-    }
-}
-
 project("app") {
     configureKtlint()
 
@@ -72,9 +63,12 @@ project("app") {
         val guavaVersion = "28.2-jre"
         val mockitoJUnitVersion = "3.3.3"
         val mockKVersion = "1.9.3"
+        val guiceVersion = "4.2.3"
 
         implementation(project(":teamcity-workaround"))
-        implementation(project(":forest"))
+
+        api("io.vertx:vertx-core:$vertxVersion")
+        api("com.google.inject:guice:$guiceVersion")
 
         implementation("io.vertx:vertx-web-client:$vertxVersion")
         implementation("io.vertx:vertx-core:$vertxVersion")
