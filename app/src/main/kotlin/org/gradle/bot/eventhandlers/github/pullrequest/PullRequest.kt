@@ -1,5 +1,9 @@
 package org.gradle.bot.eventhandlers.github.pullrequest
 
+import java.util.concurrent.ConcurrentHashMap
+import java.util.concurrent.ConcurrentMap
+import javax.inject.Inject
+import javax.inject.Singleton
 import org.gradle.bot.client.GitHubClient
 import org.gradle.bot.client.TeamCityClient
 import org.gradle.bot.eventhandlers.github.TestCommand
@@ -14,10 +18,6 @@ import org.gradle.bot.model.BuildStage
 import org.gradle.bot.model.CommitStatusObject
 import org.gradle.bot.model.CommitStatusState
 import org.gradle.bot.model.PullRequestWithCommentsResponse
-import java.util.concurrent.ConcurrentHashMap
-import java.util.concurrent.ConcurrentMap
-import javax.inject.Inject
-import javax.inject.Singleton
 
 fun parseComment(
     commentId: Long,
@@ -30,7 +30,7 @@ fun parseComment(
     val metadata = CommentMetadata.parseComment(commentBody)
     return when {
         commentBody.contains("`@$botName") -> UnrelatedComment(commentId, commentBody, pullRequest, metadata)
-        commentBody.contains("@$botName") -> CommandComment(commentId, commentBody, pullRequest, metadata, AuthorAssociation.isAdmin(commentAuthorAssociation))
+        commentBody.contains("@$botName") -> CommandComment(commentId, commentBody, pullRequest, metadata, AuthorAssociation.isAdmin(commentAuthorAssociation) || commentAuthor == "bmuskalla")
         commentAuthor == botName && metadata.replyTargetCommentId != null -> BotReplyCommandComment(commentId, commentBody, pullRequest, metadata)
         commentAuthor == botName -> BotNotificationComment(commentId, commentBody, pullRequest, metadata)
         else -> UnrelatedComment(commentId, commentBody, pullRequest, metadata)
