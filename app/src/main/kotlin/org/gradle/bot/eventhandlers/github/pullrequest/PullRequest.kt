@@ -1,9 +1,5 @@
 package org.gradle.bot.eventhandlers.github.pullrequest
 
-import java.util.concurrent.ConcurrentHashMap
-import java.util.concurrent.ConcurrentMap
-import javax.inject.Inject
-import javax.inject.Singleton
 import org.gradle.bot.client.GitHubClient
 import org.gradle.bot.client.TeamCityClient
 import org.gradle.bot.eventhandlers.github.TestCommand
@@ -18,20 +14,10 @@ import org.gradle.bot.model.BuildStage
 import org.gradle.bot.model.CommitStatusObject
 import org.gradle.bot.model.CommitStatusState
 import org.gradle.bot.model.PullRequestWithCommentsResponse
-
-// fun PullRequestWithCommentsResponse.getRepoName() = data.repository.nameWithOwner
-//
-// fun PullRequestWithCommentsResponse.isFork() = data.repository.pullRequest.headRef.repository.isFork
-//
-// fun PullRequestWithCommentsResponse.getBranchName() =
-//    if (data.repository.pullRequest.headRef.repository.isFork) {
-//        "pull/${data.repository.pullRequest.number}/head"
-//    } else {
-//        data.repository.pullRequest.headRef.name
-//    }
-//
-// fun PullRequestWithCommentsResponse.getSubjectId() = data.repository.pullRequest.id
-// fun PullRequestWithCommentsResponse.getHeadRefSha() = data.repository.pullRequest.headRef.target.oid
+import java.util.concurrent.ConcurrentHashMap
+import java.util.concurrent.ConcurrentMap
+import javax.inject.Inject
+import javax.inject.Singleton
 
 fun parseComment(
     commentId: Long,
@@ -229,7 +215,7 @@ class PullRequest(
     }
 
     val teamCityBranchName = if (isFork) {
-        pr.data.repository.pullRequest.headRef.name
+        "pull/${pr.data.repository.pullRequest.number}/head"
     } else {
         pr.data.repository.pullRequest.headRef.name
     }
