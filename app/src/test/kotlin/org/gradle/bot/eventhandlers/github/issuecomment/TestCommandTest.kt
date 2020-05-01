@@ -58,7 +58,7 @@ package org.gradle.bot.eventhandlers.github.issuecomment
 //        verify { context.updatePendingStatuses(BuildStage.READY_FOR_MERGE) }
 //        verify {
 //            context.reply(comment,
-//                "OK, I've already triggered [ReadyForMerge build](http://buildUrl) for you.",
+//                "OK, I've triggered [ReadyForMerge build](http://buildUrl) for you.",
 //                "buildId")
 //        }
 //    }
